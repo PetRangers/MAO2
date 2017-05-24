@@ -11,6 +11,7 @@
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <ProjectView>ShowAllFiles</ProjectView>
     <NameOfLastUsedPublishProfile>CaptainMao</NameOfLastUsedPublishProfile>
+    <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
