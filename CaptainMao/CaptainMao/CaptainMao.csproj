@@ -111,8 +111,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\reset.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\StyleSheet_Master.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\StyleSheet_Master.css">
+      <DependentUpon>StyleSheet_Master.less</DependentUpon>
+    </Content>
+    <Content Include="Content\StyleSheet_Master.min.css">
+      <DependentUpon>StyleSheet_Master.css</DependentUpon>
+    </Content>
+    <Content Include="Content\StyleSheet_Master2.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\0DQPb7DHZM.png" />
@@ -141,6 +147,7 @@
     <Content Include="fonts\catsvsdogsLT.ttf" />
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
+    <Content Include="Content\StyleSheet_Master.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -168,6 +175,7 @@
     <Content Include="Views\CaptainMao\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\CaptainMao\Aside.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
