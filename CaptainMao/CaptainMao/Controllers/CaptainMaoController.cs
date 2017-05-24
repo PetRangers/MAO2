@@ -14,6 +14,12 @@ namespace CaptainMao.Controllers
             return View();
         }
 
+        public ActionResult Main()
+        {
+            return View();
+        }
+
+
         [ChildActionOnly]
         public ActionResult Aside()
         {

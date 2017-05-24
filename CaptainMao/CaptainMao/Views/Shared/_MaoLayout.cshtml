@@ -12,10 +12,9 @@
     <title>@ViewBag.Title - CaptainMao</title>
 
 
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/Content/StyleSheet_Master.css" rel="stylesheet" />
-    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/css/main.css" rel="stylesheet" />
     @RenderSection("style", false)
 
 </head>
@@ -145,18 +144,7 @@
 
         <main class="container-fluid">
             <div class="row">
-
-                <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
-                    <!-------------------asideOpen------------------->
-                    @Html.Partial("Aside")
-                    <!-------------------asideEnd------------------->
-                </aside>
-                <article class="col-lg-9 col-sm-11">
-                    <!-------------------articleOpen------------------->
-                    @RenderBody()
-                    <!-------------------articleEnd------------------->
-                </article>
-
+               @RenderBody()
             </div>
         </main>
         <footer>

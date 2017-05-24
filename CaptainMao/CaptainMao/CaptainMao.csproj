@@ -110,15 +110,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\reset.css" />
-    <Content Include="Content\main.css" />
-    <Content Include="Content\StyleSheet_Master.css">
+    <Content Include="css\reset.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\StyleSheet_Master.css">
       <DependentUpon>StyleSheet_Master.less</DependentUpon>
     </Content>
-    <Content Include="Content\StyleSheet_Master.min.css">
+    <Content Include="css\StyleSheet_Master.min.css">
       <DependentUpon>StyleSheet_Master.css</DependentUpon>
     </Content>
-    <Content Include="Content\StyleSheet_Master2.css" />
+    <Content Include="css\StyleSheet_Master2.css" />
+    <Content Include="css\video.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\0DQPb7DHZM.png" />
@@ -133,9 +134,10 @@
     <Content Include="images\navbar.png" />
     <Content Include="images\texture.png" />
     <Content Include="images\wrip.jpg" />
+    <Content Include="js\video.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\JavaScript.js" />
+    <Content Include="js\JavaScript.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -147,7 +149,7 @@
     <Content Include="fonts\catsvsdogsLT.ttf" />
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
-    <Content Include="Content\StyleSheet_Master.less" />
+    <Content Include="css\StyleSheet_Master.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -155,6 +157,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="images\Dog-Lovers.jpg" />
+    <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
@@ -176,6 +180,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\CaptainMao\Aside.cshtml" />
+    <Content Include="Views\CaptainMao\Main.cshtml" />
+    <Content Include="video\Dog-Lovers.webm" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
