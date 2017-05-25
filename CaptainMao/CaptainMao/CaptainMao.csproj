@@ -150,6 +150,8 @@
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
     <Content Include="css\StyleSheet_Master.less" />
+    <Content Include="Areas\Login\Views\web.config" />
+    <Content Include="Areas\Adoption\Views\web.config" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -165,6 +167,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
+    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Adoption\Controllers\" />
+    <Folder Include="Areas\Adoption\Models\" />
+    <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
