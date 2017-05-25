@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="毛牌隊長官方購物網站，針對以貓狗為主的寵物飼主提供包括寵物相關活動、
+    寵物服務查詢、寵物醫療資訊、寵物話題討論區以及寵物用品購物商城等功能。我們希望藉由透明的使用者評價
+    機制與管理者的審查機制，協助飼主們選擇最優良的服務與商品，以及獲得正確的寵物飼養照顧資訊。我們也期
+    待透過討論平台與活動訊息，能讓飼主們建立起更緊密聯結的寵物交流社群。" />
+    <meta name="keywords" content="寵物,毛小孩,狗,狗狗,汪,喵,貓,貓咪,領養,討論,寵物美容" />
+    <title>@ViewBag.Title - CaptainMao</title>
+
+
+    @Styles.Render("~/Content/css")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/StyleSheet_Master.css" rel="stylesheet" />
+    @RenderSection("style", false)
+
+</head>
+<body>
+    <div id="page">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <!-- NAV -->
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="btn btn-lg pull-left btn-dark accordion-toggle" title="關於我們" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <span class="sr-only">關於我們所有粉絲團</span>
+                    </a>
+                    <a class="navbar-brand" href="#">CaptainMao</a>
+                    <a id="menu-toggle" href="#" class="btn btn-lg btn-dark">
+                        <span class="sr-only">開啟所有選單按鈕</span>
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <a id="to-top" class="btn btn-lg btn-inverse" href="#top">
+                        <span class="sr-only">回TOP按鈕</span>
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+
+                </div>
+                <!-- nav下拉選單 -->
+                <div class="collapse navbar-collapse ">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown mega-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="購物">拍打餵食<span class="caret"></span><br><br>購物專區<span class="caret"></span></a>
+                            <ul class="dropdown-menu mega-dropdown-menu">
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">寵物用品分類</li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">汪星人所需<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                        <li><a href="#">喵星人所需<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">新品&好康</li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">特價活動</a></li>
+                                        <li><a href="#">最新上架</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">汪星人零食</li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">冷凍鮮主食</a></li>
+                                        <li><a href="#">乾主食</a></li>
+                                        <li><a href="#">濕主食</a></li>
+                                        <li><a href="#">罐頭拌料</a></li>
+                                        <li><a href="#">營養保健</a></li>
+                                        <li><a href="#">零食點心</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">汪星人配備</li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">玩具娛樂</a></li>
+                                        <li><a href="#">居家用品</a></li>
+                                        <li><a href="#">沐浴美容</a></li>
+                                        <li><a href="#">外出遊玩</a></li>
+                                        <li><a href="#">溝通教育</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-2"></li>
+                                <li class="col-sm-2"></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown mega-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="毛孩活動">快樂跳舞<br /><br />活動專區</a>
+                            <ul class="dropdown-menu mega-dropdown-menu">
+                                <li class="col-sm-3">
+                                    <ul>
+                                        <li class="dropdown-header">Features</li>
+                                        <li><a href="#">Auto Carousel</a></li>
+                                        <li><a href="#">Carousel Control</a></li>
+                                        <li><a href="#">Left & Right Navigation</a></li>
+                                        <li><a href="#">Four Columns Grid</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">Fonts</li>
+                                        <li><a href="#">Glyphicon</a></li>
+                                        <li><a href="#">Google Fonts</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <ul>
+                                        <li class="dropdown-header">Plus</li>
+                                        <li><a href="#">Navbar Inverse</a></li>
+                                        <li><a href="#">Pull Right Elements</a></li>
+                                        <li><a href="#">Coloured Headers</a></li>
+                                        <li><a href="#">Primary Buttons & Default</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <ul>
+                                        <li class="dropdown-header">Much more</li>
+                                        <li><a href="#">Easy to Customize</a></li>
+                                        <li><a href="#">Calls to action</a></li>
+                                        <li><a href="#">Custom Fonts</a></li>
+                                        <li><a href="#">Slide down on Hover</a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <ul>
+                                        <li class="dropdown-header">123</li>
+
+                                        <li class="divider"></li>
+                                        <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-left pull-right"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-toggle" href="#" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
+                        <li><a class="dropdown-toggle" href="#" title="毛孩地圖">美食醫院<br /><br />購物專區</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-toggle" href="#" title="毛孩地圖"><span class="glyphicon glyphicon-user"></span><br /><br />user </a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <!-- 右邊側欄-->
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>
+                <li class="sidebar-brand">
+                    <a href="#top"><strong>毛孩隊長</strong></a>
+                </li>
+                <li>
+                    <a href="/" title="Go to Top">回首頁</a>
+                </li>
+                <li>
+                    <a href="/about" title="Go to About Us section">關於我們</a>
+                </li>
+
+                <li>
+                    <a href="/resume" title="Navigate to Jonathan Adcox IT Resume">拍打餵食</a>
+                </li>
+
+                <li>
+                    <a href="/resume" title="Navigate to Jonathan Adcox IT Resume">快樂跳舞</a>
+                </li>
+
+                <li>
+                    <a href="/portfolio" title="Navigate to 'Our Services' section">砸七砸八</a>
+                </li>
+                <!-- Future Development
+                <li>
+                    <a href="#portfolio">Portfolio</a>
+                </li> -->
+                <li>
+                    <a href="/blog" title="Our Blog">寵物地圖</a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- 左邊側欄-->
+        <div id="accordion" class="social">
+            <div class="accordion-social">
+<!--class加in會打開--><ul class="panel-collapse in collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
+                    <li><a href="https://www.facebook.com/soldierupdesigns" target="_blank" class="fa fa-lg fa-facebook"></a></li>
+                    <li><a href="https://twitter.com/soldierupdesign" target="_blank" class="fa fa-lg fa-twitter"></a></li>
+                    <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank" class="fa fa-lg fa-google-plus"></a></li>
+                    <li><a href="https://github.com/blayderunner123" target="_blank" class="fa fa-lg fa-github"></a></li>
+                    <li><a href="https://linkedin.com/in/blayderunner123" target="_blank" class="fa fa-lg fa-linkedin"></a></li>
+                    <li><a href="skype:live:soldierupdesigns?call" class="fa fa-lg fa-skype" target="_blank"></a></li>
+                    <li><a href="http://stackexchange.com/users/4992378/blayderunner123" target="_blank" class="fa fa-lg fa-stack-exchange"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+                    <!-------------------asideOpen------------------->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"> 購買流程</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="#">汪星人專賣</a></li>
+                            <li class="list-group-item"><a href="#">汪星人專賣</a></li>
+                            <li class="list-group-item"><a href="#">汪星人專賣</a></li>
+                            <li class="list-group-item"><a href="#">汪星人專賣</a></li>
+                            <li class="list-group-item"><a href="#">汪星人專賣</a></li>
+                        </ul>
+                    </div>
+                    <!-------------------asideEnd------------------->
+                </aside>
+                <article class="col-lg-9 col-sm-11">
+                    <!-------------------articleOpen------------------->
+                    @RenderBody()
+                    <!-------------------articleEnd------------------->
+                </article>
+
+            </div>
+        </main>
+        <footer>
+            @Scripts.Render("~/bundles/modernizr")
+            @RenderSection("script", false)
+        </footer>
+    </div>
+</body>
+</html>
