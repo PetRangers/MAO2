@@ -151,8 +151,12 @@
     <Content Include="fonts\fc_.ttf" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Login\Views\web.config" />
+<<<<<<< HEAD
+    <Content Include="Areas\Area\Views\web.config" />
+=======
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
+>>>>>>> d130ab41d922e049019fdcfe0045311ee14072fc
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -169,7 +173,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+<<<<<<< HEAD
+    <Compile Include="Areas\Area\AreaAreaRegistration.cs" />
+=======
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
+>>>>>>> d130ab41d922e049019fdcfe0045311ee14072fc
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
@@ -198,8 +206,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+    <Folder Include="Areas\Area\Controllers\" />
+    <Folder Include="Areas\Area\Models\" />
+    <Folder Include="Areas\Area\Views\Shared\" />
+=======
+    <Folder Include="Areas\Adoption\Controllers\" />
     <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
+>>>>>>> d130ab41d922e049019fdcfe0045311ee14072fc
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
