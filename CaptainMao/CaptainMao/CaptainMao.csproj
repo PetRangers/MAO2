@@ -203,15 +203,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-
     <Folder Include="Areas\Area\Controllers\" />
     <Folder Include="Areas\Area\Models\" />
     <Folder Include="Areas\Area\Views\Shared\" />
-
+=======
     <Folder Include="Areas\Adoption\Controllers\" />
     <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
-
+>>>>>>> d130ab41d922e049019fdcfe0045311ee14072fc
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
