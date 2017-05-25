@@ -163,6 +163,8 @@
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\web.config" />
+    <Content Include="Areas\Login\Views\web.config" />
+    <Content Include="Areas\Article\Views\web.config" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -180,6 +182,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
+    <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
+    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,6 +212,12 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
+    <Folder Include="Areas\Article\Controllers\" />
+    <Folder Include="Areas\Article\Models\" />
+    <Folder Include="Areas\Article\Views\Shared\" />
+    <Folder Include="Areas\Login\Controllers\" />
+    <Folder Include="Areas\Login\Models\" />
+    <Folder Include="Areas\Login\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
