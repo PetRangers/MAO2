@@ -161,11 +161,9 @@
     <Content Include="fonts\fc_.ttf" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Login\Views\web.config" />
-
-    <Content Include="Areas\Area\Views\web.config" />
-
+    <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\web.config" />
-
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -181,14 +179,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
+    <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
-
-    <Compile Include="Areas\Area\AreaAreaRegistration.cs" />
-
-    <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
-
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,16 +210,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Article\Models\" />
-    <Folder Include="Areas\Article\Views\Shared\" />
-    <Folder Include="Areas\Area\Controllers\" />
-    <Folder Include="Areas\Area\Models\" />
-    <Folder Include="Areas\Area\Views\Shared\" />
-=======
-    <Folder Include="Areas\Adoption\Controllers\" />
     <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
->>>>>>> d130ab41d922e049019fdcfe0045311ee14072fc
+    <Folder Include="Areas\Article\Models\" />
+    <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
