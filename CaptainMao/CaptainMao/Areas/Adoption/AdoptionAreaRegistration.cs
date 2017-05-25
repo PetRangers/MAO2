@@ -17,7 +17,7 @@ namespace CaptainMao.Areas.Adoption
             context.MapRoute(
                 "Adoption_default",
                 "Adoption/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller="Action", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
