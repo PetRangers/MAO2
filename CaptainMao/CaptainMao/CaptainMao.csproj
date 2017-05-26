@@ -165,6 +165,7 @@
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
