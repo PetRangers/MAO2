@@ -159,6 +159,7 @@
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Article\Views\Default\Index.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
