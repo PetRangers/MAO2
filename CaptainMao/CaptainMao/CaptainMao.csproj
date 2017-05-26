@@ -165,6 +165,7 @@
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -183,6 +184,7 @@
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
+    <Compile Include="Areas\Article\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -212,7 +214,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
-    <Folder Include="Areas\Article\Controllers\" />
     <Folder Include="Areas\Article\Models\" />
     <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Areas\Login\Controllers\" />
