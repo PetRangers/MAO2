@@ -171,6 +171,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="images\Dog-Lovers.jpg" />
+    <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
     <Content Include="Web.config" />
@@ -197,6 +198,13 @@
     </Compile>
     <Compile Include="Areas\WebForm\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST.aspx.cs">
+      <DependentUpon>TEST.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST.aspx.designer.cs">
+      <DependentUpon>TEST.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
