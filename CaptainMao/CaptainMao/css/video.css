@@ -9,7 +9,13 @@
     z-index: 100;
     position: absolute;
     background: rgba(0, 0, 0, 0.4);
-    width: 100%;
+    min-height:400px;
+    width:400px;
+    left:3%;
+    top:20%;
+
+    border-radius: 20px;
+    padding:20px;
 }
 .homepage-hero-module video {
     position: absolute;
