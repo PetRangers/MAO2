@@ -13,5 +13,10 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             return View();
         }
+
+        public ActionResult QQQ()
+        {
+            return View();
+        }
     }
 }
