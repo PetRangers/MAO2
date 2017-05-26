@@ -25,5 +25,7 @@ namespace CaptainMao.Controllers
         {
             return View();
         }
+
+
     }
 }

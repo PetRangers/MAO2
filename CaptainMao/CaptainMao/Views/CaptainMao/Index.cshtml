@@ -4,17 +4,19 @@
 }
 @section style{
     <link href='@Url.Action("video.css","css")' rel="stylesheet" />
-    }
+}
 @section script{
 }
 
-    <div class="homepage-hero-module ">
-            <div class="filter">123456</div>
-            <video autoplay loop>
-                <source src='@Url.Action("Dog-Lovers.mp4","video")' type="video/mp4" />
-            </video>
-        
-    </div>
-<article>
+<div class="homepage-hero-module">
+    <div class="filter">第一組</div>
+    <video autoplay loop>
+        <source src='@Url.Action("Dog-Lovers.mp4","video")' type="video/mp4" />
+    </video>
+</div>
 
+<article >
+    <div >
+        <iframe src='@Url.Action("WebForm1.aspx","Areas/WebForm")' width="550" height="600" frameborder=0 scrolling="no"></iframe>
+    </div>
 </article>
