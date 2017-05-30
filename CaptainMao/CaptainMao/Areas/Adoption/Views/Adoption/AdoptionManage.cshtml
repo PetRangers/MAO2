@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CaptainMao.Areas.Adoption.Models.Adoption>
+@{
+    ViewBag.Title = "AdoptionManage";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section style{
+    <style>
+        #search {
+            background-color: yellow;
+        }
+
+        .search label {
+            font-size: 20px;
+        }
+
+        .srchselect {
+            width: 100px;
+            font-size: 20px;
+        }
+
+        #display {
+            background-color: yellow;
+            padding-top: 50px;
+        }
+
+            #display > .row > div > div {
+                height: 430px;
+            }
+
+            #display img {
+                height: 250px;
+            }
+    </style>
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <div id="search" class="drawingpin">
+            <div class="col-md-4 search"><label>寵物類別：</label><select class="srchselect"><option selected>狗</option><option>貓</option></select></div>
+            <div class="col-md-4 search"><label>　　性別：</label><select class="srchselect"><option selected>公</option><option>母</option></select></div>
+            <div class="col-md-4 search"><label>　　體型：</label><select class="srchselect"><option selected>小型</option><option>中型</option><option>大型</option></select></div>
+            <div class="col-md-4 search"><label>　　年紀：</label><select class="srchselect"><option selected>幼年</option><option>成年</option></select></div>
+            <div class="col-md-4 search"><label>所在地區：</label><select class="srchselect"><option selected>台北市</option><option>新北市</option><option>基隆市</option></select></div>
+            <div class="col-md-4 search"><label>　　毛色：</label><select class="srchselect"><option selected>黑色</option><option>黃色</option></select></div>
+            <div class="text-right"><button class="btn btn-default">搜尋</button></div>
+
+        </div>
+        <br />
+        <div id="display" class="drawingpin">
+            <div class="row">
+                @foreach (var adoption in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
+                            <div class="caption">
+                                <h2>@adoption.Name</h2>
+                                <p>@adoption.Sex</p>
+                                <p>@adoption.Build</p>
+                                <p>@Html.ActionLink("詳細資料", "Edit", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
