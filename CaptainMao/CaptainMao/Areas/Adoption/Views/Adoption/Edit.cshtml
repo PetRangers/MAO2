@@ -89,10 +89,10 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-8">
                             <button type="submit" class="btn btn-primary">修改</button>
-                            @Html.ActionLink("取消", "AdoptionManage","Adoption", new { }, new { @class = "btn btn-default" });
+                            @Html.ActionLink("取消", "AdoptionManage","Adoption", new { }, new { @class = "btn btn-default" })
                         </div>
                         <div class="col-sm-2">
-                            @Html.ActionLink("刪除", "AdoptionManage", "Adoption", new { }, new { @class = "btn btn-danger" });
+                            @Html.ActionLink("刪除", "Delete", "Adoption", new { id = Model.AdoptionID }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
                                 }

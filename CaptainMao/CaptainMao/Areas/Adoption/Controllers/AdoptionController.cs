@@ -117,23 +117,13 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var adoption = db.Adoption.Find(id);
+            db.Adoption.Remove(adoption);
+            db.SaveChanges();
+            //dbContext.Delete(adoption);
+            return RedirectToAction("Index");
         }
 
-        // POST: Adoption/Adoption/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

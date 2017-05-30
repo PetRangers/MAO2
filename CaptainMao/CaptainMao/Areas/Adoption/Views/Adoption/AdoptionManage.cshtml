@@ -59,17 +59,26 @@
             <div class="row">
                 @foreach (var adoption in Model)
                 {
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
-                            <div class="caption">
-                                <h2>@adoption.Name</h2>
-                                <p>@adoption.Sex</p>
-                                <p>@adoption.Build</p>
-                                <p>@Html.ActionLink("詳細資料", "Edit", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })</p>
+                    @*if (Model == null)
+                    {
+                        <div>
+                            測試
+                        </div>
+                    }
+                    else
+                    {*@
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
+                                <div class="caption">
+                                    <h2>@adoption.Name</h2>
+                                    <p>@adoption.Sex</p>
+                                    <p>@adoption.Build</p>
+                                    <p>@Html.ActionLink("修改/刪除", "Edit", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    //}
                 }
 
             </div>
