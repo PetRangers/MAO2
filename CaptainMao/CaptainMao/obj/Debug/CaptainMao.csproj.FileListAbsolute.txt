@@ -207,3 +207,4 @@ C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\bin\Microsoft.Owin.Secu
 C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.InitialCreate.resources
 C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.csproj.GenerateResource.Cache
 C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init.resources
+C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init1.resources

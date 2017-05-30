@@ -239,7 +239,6 @@
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -251,6 +250,10 @@
     <Compile Include="Migrations\201705291859312_Init.cs" />
     <Compile Include="Migrations\201705291859312_Init.Designer.cs">
       <DependentUpon>201705291859312_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301454381_Init1.cs" />
+    <Compile Include="Migrations\201705301454381_Init1.Designer.cs">
+      <DependentUpon>201705301454381_Init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -296,9 +299,6 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -327,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705291859312_Init.resx">
       <DependentUpon>201705291859312_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301454381_Init1.resx">
+      <DependentUpon>201705301454381_Init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

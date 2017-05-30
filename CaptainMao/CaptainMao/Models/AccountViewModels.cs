@@ -81,8 +81,20 @@ namespace CaptainMao.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Display(Name = "姓")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "名")]
+        public string FirstName { get; set; }
+
+        [Required]
         [Display(Name = "暱稱")]
         public string NickName { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "電話")]
+        public string Phone { get; set; }
     }
 
     public class ResetPasswordViewModel

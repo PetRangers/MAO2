@@ -155,7 +155,10 @@ namespace CaptainMao.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    NickName = model.NickName
+                    LastName = model.LastName,
+                    FirstName = model.FirstName,
+                    NickName = model.NickName,
+                    Phone = model.Phone
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -166,12 +169,12 @@ namespace CaptainMao.Controllers
                     // 傳送包含此連結的電子郵件
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    string emailContent = "<h3>您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" + 
+                    string emailContent = "<h3>" + user.LastName + " " + user.FirstName + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" + 
                         "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
                         "'>確認電子郵件</a></p>";
                     await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "CaptainMao");
                 }
                 AddErrors(result);
             }
@@ -400,7 +403,7 @@ namespace CaptainMao.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "CaptainMao");
         }
 
         //
@@ -457,7 +460,7 @@ namespace CaptainMao.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "CaptainMao");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
