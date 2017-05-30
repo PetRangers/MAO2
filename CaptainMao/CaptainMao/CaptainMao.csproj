@@ -48,6 +48,14 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -57,6 +65,8 @@
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -106,6 +116,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Adoption\Models\MAOModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+      <LastGenOutput>MAOModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Adoption\Models\MAOModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+      <LastGenOutput>MAOModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -160,6 +180,16 @@
     <Content Include="Areas\Article\Views\Default\Index.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
     <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
+    <EntityDeploy Include="Areas\Adoption\Models\MAOModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MAOModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\Adoption\Models\MAOModel.edmx.diagram">
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -183,6 +213,39 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
+    <Compile Include="Areas\Adoption\Models\Adoption.cs">
+      <DependentUpon>MAOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\AdpWish.cs">
+      <DependentUpon>MAOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\Categories.cs">
+      <DependentUpon>MAOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\Citys.cs">
+      <DependentUpon>MAOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\IRepository.cs" />
+    <Compile Include="Areas\Adoption\Models\MAOModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MAOModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\MAOModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MAOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\MAOModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Adoption\Models\Partial\Adoption.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\Categories.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\Citys.cs" />
+    <Compile Include="Areas\Adoption\Models\Repository.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\DefaultController.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
@@ -228,13 +291,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Adoption\Models\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\Article\Models\" />
     <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Areas\buy\Models\" />
     <Folder Include="Areas\buy\Views\Shared\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
