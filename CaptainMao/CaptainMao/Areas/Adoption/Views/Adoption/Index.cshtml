@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<CaptainMao.Areas.Adoption.Models.Adoption>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -6,9 +6,9 @@
 
 @section style{
     <style>
-        /*.search{
-            margin-bottom:10px;
-        }*/
+        #search{
+            background-color:yellow;
+        }
 
         .search label {
             font-size: 20px;
@@ -19,8 +19,13 @@
             font-size: 20px;
         }
 
+        #display{
+            background-color:yellow;
+            padding-top:50px;
+        }
+
         #display > .row > div > div {
-            height: 400px;
+            height: 430px;
         }
 
         #display img {
@@ -39,7 +44,7 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
-        <div id="search" style="background-color:yellow">
+        <div id="search"  class="drawingpin">
             <div class="col-md-4 search"><label>寵物類別：</label><select class="srchselect"><option selected>狗</option><option>貓</option></select></div>
             <div class="col-md-4 search"><label>　　性別：</label><select class="srchselect"><option selected>公</option><option>母</option></select></div>
             <div class="col-md-4 search"><label>　　體型：</label><select class="srchselect"><option selected>小型</option><option>中型</option><option>大型</option></select></div>
@@ -50,91 +55,103 @@
 
         </div>
         <br />
-        <div id="display" style="background-color:yellow;padding-top:50px">
+        <div id="display" class="drawingpin">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/B1.jpg">
-                        <div class="caption">
-                            <h2>貓頭鷹</h2>
-                            <p>性別:母</p>
-                            <p>體型:小型</p>
+                @foreach (var adoption in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
+                            <div class="caption">
+                                <h2>@adoption.Name</h2>
+                                <p>@adoption.Sex</p>
+                                <p>@adoption.Build</p>
+                                <p>@Html.ActionLink("詳細資料","Details",new { id = adoption.AdoptionID}, new { @class = "btn btn-primary" })</p>
+                            </div>
                         </div>
                     </div>
+                }
 
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/B1.jpg">
+                                    <div class="caption">
+                                        <h2>貓頭鷹</h2>
+                                        <p>性別:母</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/C5.JPG">
+                                    <div class="caption">
+                                        <h2>貓</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                </div>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/D2.jpg">
+                                    <div class="caption">
+                                        <h2>狗</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:中型</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/C5.JPG">
-                        <div class="caption">
-                            <h2>貓</h2>
-                            <p>性別:公</p>
-                            <p>體型:小型</p>
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/D6.jpg">
+                                    <div class="caption">
+                                        <h2>狗</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/C5.JPG">
+                                    <div class="caption">
+                                        <h2>貓</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/C5.JPG">
+                                    <div class="caption">
+                                        <h2>貓</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="/images/Adoption/C5.JPG">
+                                    <div class="caption">
+                                        <h2>貓</h2>
+                                        <p>性別:公</p>
+                                        <p>體型:小型</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/D2.jpg">
-                        <div class="caption">
-                            <h2>狗</h2>
-                            <p>性別:公</p>
-                            <p>體型:中型</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/D6.jpg">
-                        <div class="caption">
-                            <h2>狗</h2>
-                            <p>性別:公</p>
-                            <p>體型:小型</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/C5.JPG">
-                        <div class="caption">
-                            <h2>貓</h2>
-                            <p>性別:公</p>
-                            <p>體型:小型</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/C5.JPG">
-                        <div class="caption">
-                            <h2>貓</h2>
-                            <p>性別:公</p>
-                            <p>體型:小型</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src="/images/Adoption/C5.JPG">
-                        <div class="caption">
-                            <h2>貓</h2>
-                            <p>性別:公</p>
-                            <p>體型:小型</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>

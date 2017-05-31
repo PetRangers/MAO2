@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "確認電子郵件";
+}
+
+<div class="container col-md-4 col-md-offset-4" style="background-color:lightgoldenrodyellow;padding:40px;margin-bottom:50px;border:solid 10px #704e09;border-radius:10px;">
+    <h2 style="text-align:center"><span class="fa fa-lg fa-user-plus"></span></h2>
+    <h2 style="text-align:center">@ViewBag.Title</h2>
+    <div>
+        <p>
+            感謝您確認電子郵件。請
+            @Html.ActionLink("按這裡登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class="btn btn-success" })
+        </p>
+    </div>
+</div>
+
