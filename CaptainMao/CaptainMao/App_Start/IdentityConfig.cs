@@ -20,25 +20,27 @@ namespace CaptainMao
         public Task SendAsync(IdentityMessage message)
         {
             // 將您的電子郵件服務外掛到這裡以傳送電子郵件。
-            WebMail.SmtpPort = 587;
             WebMail.SmtpServer = "smtp.gmail.com";
+            WebMail.SmtpPort = 587;
             WebMail.UserName = "captainmao114@gmail.com";
             WebMail.Password = "gogoP@ssw0rd";
             WebMail.EnableSsl = true;
+            WebMail.From = "captainmao114@gmail.com";
+
             WebMail.Send(message.Destination, message.Subject, message.Body);
 
             return Task.FromResult(0);
         }
     }
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // 將您的 SMS 服務外掛到這裡以傳送簡訊。
-            return Task.FromResult(0);
-        }
-    }
+    //public class SmsService : IIdentityMessageService
+    //{
+    //    public Task SendAsync(IdentityMessage message)
+    //    {
+    //        // 將您的 SMS 服務外掛到這裡以傳送簡訊。
+    //        return Task.FromResult(0);
+    //    }
+    //}
 
     // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -75,17 +77,17 @@ namespace CaptainMao
 
             // 註冊雙因素驗證提供者。此應用程式使用手機和電子郵件接收驗證碼以驗證使用者
             // 您可以撰寫專屬提供者，並將它外掛到這裡。
-            manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "您的安全碼為 {0}"
-            });
+            //manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser>
+            //{
+            //    MessageFormat = "您的安全碼為 {0}"
+            //});
             manager.RegisterTwoFactorProvider("電子郵件代碼", new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "安全碼",
                 BodyFormat = "您的安全碼為 {0}"
             });
             manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

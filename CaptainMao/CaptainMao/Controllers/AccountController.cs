@@ -13,10 +13,11 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using CaptainMao.Filters;
 
 namespace CaptainMao.Controllers
 {
-    [Authorize]
+    [AuthorizeMao]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -99,7 +100,7 @@ namespace CaptainMao.Controllers
                 }
             }
 
-            // validate the response from Google reCaptcha
+            //Google reCaptcha機器人驗證
             //先註解掉，以方便登入
             //var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
             //if (!captChaesponse.Success)
@@ -121,6 +122,11 @@ namespace CaptainMao.Controllers
             switch (loginResult)
             {
                 case SignInStatus.Success:
+                    //var user = await UserManager.FindByNameAsync(model.Email);
+                    //if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                    //{
+                    //    return RedirectToAction("VerifyEmail", "Account");
+                    //}
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -216,13 +222,42 @@ namespace CaptainMao.Controllers
                         "'>確認電子郵件</a></p>";
                     await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
 
-                    return RedirectToAction("Index", "CaptainMao");
+                    return RedirectToAction("VerifyEmail", "Account");
                 }
                 AddErrors(result);
             }
 
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
             return View(model);
+        }
+
+
+        //GET: /Account/VerifyEmail
+        public ActionResult VerifyEmail()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Login");
+        }
+
+        //POST: /Account/VerifyEmail
+        [HttpPost]
+        public async Task<ActionResult> VerifyEmail(FormCollection fc)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new{ userId = userId, code = code}, protocol: Request.Url.Scheme);
+                string emailContent = "<h3>" + User.Identity.Name + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" +
+                        "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
+                        "'>確認電子郵件</a></p>";
+                await UserManager.SendEmailAsync(userId, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
+            }
+            return RedirectToAction("Index", "CaptainMao");
+            
         }
 
         //

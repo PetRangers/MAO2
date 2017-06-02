@@ -7,10 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CaptainMao.Models;
+using CaptainMao.Filters;
 
 namespace CaptainMao.Controllers
 {
-    [Authorize]
+    [AuthorizeMao]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
