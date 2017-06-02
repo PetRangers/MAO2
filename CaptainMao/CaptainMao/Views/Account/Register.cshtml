@@ -3,7 +3,7 @@
     ViewBag.Title = "註冊";
 }
 
-<div class="container col-md-4 col-md-offset-4" style="background-color:lightgoldenrodyellow;padding:40px;margin-bottom:50px;border:solid 10px #704e09;border-radius:10px;">
+
     <h2 style="text-align:center"><span class="fa fa-lg fa-user-plus"></span></h2>
     <h2 style="text-align:center">@ViewBag.Title</h2>
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -60,7 +60,7 @@
             </div>
         </div>
     }
-</div>
+
 
     @section Script {
         @Scripts.Render("~/bundles/jqueryval")

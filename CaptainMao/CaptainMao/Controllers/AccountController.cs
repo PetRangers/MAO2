@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CaptainMao.Models;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CaptainMao.Controllers
 {
@@ -66,8 +70,46 @@ namespace CaptainMao.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(FormCollection form, LoginViewModel model, string returnUrl)
         {
+            string urlToPost = "https://www.google.com/recaptcha/api/siteverify"; //reCaptcha驗證網址，要用POST送必要資訊
+            string secretKey = "	6LcbsiMUAAAAAEVHEbs0VAmcTA2EJd6pylZvgXcu"; // 我申請的私密金鑰
+            string gRecaptchaResponse = form["g-recaptcha-response"];
+
+            var postData = "secret=" + secretKey + "&response=" + gRecaptchaResponse;
+
+            // send post data
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlToPost);
+            request.Method = "POST";
+            request.ContentLength = postData.Length;
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(postData);
+            }
+
+            // receive the response now
+            string result = string.Empty;
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+
+            // validate the response from Google reCaptcha
+            //先註解掉，以方便登入
+            //var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
+            //if (!captChaesponse.Success)
+            //{
+            //    ViewBag.CaptchaErrorMessage = "您未通過reCAPTCHA驗證";
+            //    return View();
+            //}
+
+            // go ahead and write code to validate username password against database
+            //原本Login方法中的帳號驗證
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -75,8 +117,8 @@ namespace CaptainMao.Controllers
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var loginResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (loginResult)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
@@ -217,15 +259,16 @@ namespace CaptainMao.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // 不顯示使用者不存在或未受確認
-                    return View("ForgotPasswordConfirmation");
+                    ViewBag.UserVerify = "查無此使用者";
+                    return View();
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // 傳送包含此連結的電子郵件
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "重設密碼", "請按 <a href=\"" + callbackUrl + "\">這裏</a> 重設密碼");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "重設密碼", "請按 <a href=\"" + callbackUrl + "\">這裏</a> 重設密碼");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
@@ -412,6 +455,24 @@ namespace CaptainMao.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+
+        
+
+        private class reCaptchaResponse
+        {
+            [JsonProperty("success")]
+            public bool Success { get; set; }
+
+            [JsonProperty("challenge_ts")]
+            public string ValidatedDateTime { get; set; }
+
+            [JsonProperty("hostname")]
+            public string HostName { get; set; }
+
+            [JsonProperty("error-codes")]
+            public List<string> ErrorCodes { get; set; }
         }
 
         protected override void Dispose(bool disposing)
