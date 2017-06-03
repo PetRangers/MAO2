@@ -17,6 +17,7 @@ namespace CaptainMao
             // 設定資料庫內容、使用者管理員和登入管理員，以針對每個要求使用單一執行個體
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
             // 讓應用程式使用 Cookie 儲存已登入使用者的資訊

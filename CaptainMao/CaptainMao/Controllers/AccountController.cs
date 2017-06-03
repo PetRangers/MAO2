@@ -14,6 +14,8 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using CaptainMao.Filters;
+using CaptainMao;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CaptainMao.Controllers
 {
@@ -208,10 +210,20 @@ namespace CaptainMao.Controllers
                     NickName = model.NickName,
                     Phone = model.Phone
                 };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    //要將使用者加入角色所需要的程式碼
+                    var roleName = "Normal";
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                    if (!roleManager.RoleExists(roleName))
+                    {
+                        var role = new IdentityRole(roleName);
+                        await roleManager.CreateAsync(role);
+                    }
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // 傳送包含此連結的電子郵件
@@ -222,7 +234,7 @@ namespace CaptainMao.Controllers
                         "'>確認電子郵件</a></p>";
                     await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
 
-                    return RedirectToAction("VerifyEmail", "Account");
+                    return View("DisplayEmail");
                 }
                 AddErrors(result);
             }

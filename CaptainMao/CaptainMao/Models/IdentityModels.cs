@@ -13,6 +13,10 @@ namespace CaptainMao.Models
         public string FirstName { get; set; }
         public string NickName { get; set; }
         public string Phone { get; set; }
+        //public byte[] Photo { get; set; }
+        //public int LoginCount { get; set; }
+        //public int Experience { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -366,6 +366,7 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Manage\_ViewStart.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
