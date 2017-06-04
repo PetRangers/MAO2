@@ -278,6 +278,58 @@ namespace CaptainMao.Controllers
         }
 
         //
+        // GET: /Manage/UpdateProfile
+        public ActionResult UpdateProfile()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            UpdateProfileViewModel model = new UpdateProfileViewModel();
+            
+            model.Email = user.Email ;
+            model.Email = user.UserName;
+            model.LastName = user.LastName;
+            model.FirstName = user.FirstName;
+            model.NickName = user.NickName;
+            model.PhoneNumber = user.PhoneNumber;
+            
+            return View(model);
+        }
+
+        //
+        // POST: /Manage/UpdateProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateProfile(UpdateProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            //ToDo: 將上傳檔案轉為byte[]，以便存回DB
+            HttpPostedFileBase file = Request.Files["UserPhoto"];
+            byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserId = User.Identity.GetUserId();
+            var user = db.Users.Where(u=>u.Id == currentUserId).First();
+
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            user.LastName = model.LastName;
+            user.FirstName = model.FirstName;
+            user.NickName = model.NickName;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Photo = (_photo == null)? user.Photo : _photo;
+            
+            await db.SaveChangesAsync();
+
+            ViewBag.ResultMsg = "個人資料修改成功!";
+            return View(model);
+            
+        }
+
+        //
         // GET: /Manage/ManageLogins
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {

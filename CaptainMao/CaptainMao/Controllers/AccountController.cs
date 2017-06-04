@@ -203,7 +203,7 @@ namespace CaptainMao.Controllers
             {
                 //ToDo: 將上傳檔案轉為byte[]，以便存回DB
                 HttpPostedFileBase file = Request.Files["UserPhoto"];
-                byte[] _photo = LoadUploadedFile(file);
+                byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
 
                 var user = new ApplicationUser
                 {
@@ -607,13 +607,6 @@ namespace CaptainMao.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
-        }
-
-        public byte[] LoadUploadedFile(HttpPostedFileBase uploadedFile)
-        {
-            var buf = new byte[uploadedFile.InputStream.Length];
-            uploadedFile.InputStream.Read(buf, 0, (int)uploadedFile.InputStream.Length);
-            return buf;
         }
         #endregion
     }

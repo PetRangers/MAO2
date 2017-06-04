@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Web;
 
 namespace CaptainMao.Models
 {
@@ -56,6 +57,35 @@ namespace CaptainMao.Models
         [Display(Name = "確認新密碼")]
         [Compare("NewPassword", ErrorMessage = "新密碼與確認密碼不相符。")]
         public string ConfirmPassword { get; set; }
+    }
+
+    //用戶修改個人資訊用
+    public class UpdateProfileViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "電子郵件")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "姓")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "名")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "暱稱")]
+        public string NickName { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "手機")]
+        public string PhoneNumber { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "照片")]
+        public HttpPostedFileBase Photo { get; set; }
     }
 
     public class AddPhoneNumberViewModel

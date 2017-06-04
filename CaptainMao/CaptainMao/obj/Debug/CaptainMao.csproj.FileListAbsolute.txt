@@ -282,3 +282,5 @@ D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.dll
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.pdb
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init2.resources
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init3.resources
+C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init2.resources
+C:\Users\Ta-Chun\Source\Repos\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init3.resources
