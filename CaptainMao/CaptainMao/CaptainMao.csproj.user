@@ -13,6 +13,7 @@
     <NameOfLastUsedPublishProfile>CaptainMao</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
     <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <WebStackScaffolding_DbContextTypeFullName>CaptainMao.Models.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

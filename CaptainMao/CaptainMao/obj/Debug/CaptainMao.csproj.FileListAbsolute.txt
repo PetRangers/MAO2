@@ -280,3 +280,5 @@ D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migratio
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.csproj.GenerateResource.Cache
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.dll
 D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.pdb
+D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init2.resources
+D:\專題\CaptionMaoWeb\MAO2\CaptainMao\CaptainMao\obj\Debug\CaptainMao.Migrations.Init3.resources

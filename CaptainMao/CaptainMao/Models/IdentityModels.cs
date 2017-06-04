@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Web;
 
 namespace CaptainMao.Models
 {
@@ -12,10 +14,10 @@ namespace CaptainMao.Models
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string NickName { get; set; }
-        public string Phone { get; set; }
-        //public byte[] Photo { get; set; }
-        //public int LoginCount { get; set; }
-        //public int Experience { get; set; }
+        public byte[] Photo { get; set; }
+        public int LoginCount { get; set; }
+        public int Experience { get; set; }
+        public DateTime DateRegistered { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -38,5 +40,7 @@ namespace CaptainMao.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CaptainMao.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

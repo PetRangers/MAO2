@@ -201,6 +201,10 @@ namespace CaptainMao.Controllers
         {
             if (ModelState.IsValid)
             {
+                //ToDo: 將上傳檔案轉為byte[]，以便存回DB
+                HttpPostedFileBase file = Request.Files["UserPhoto"];
+                byte[] _photo = LoadUploadedFile(file);
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -208,11 +212,16 @@ namespace CaptainMao.Controllers
                     LastName = model.LastName,
                     FirstName = model.FirstName,
                     NickName = model.NickName,
-                    Phone = model.Phone
+                    PhoneNumber = model.PhoneNumber,
+                    Photo = _photo,
+                    DateRegistered = DateTime.UtcNow,
+                    LoginCount = 0,
+                    Experience = 0,
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //先將下面一行的登入流程取消，才不會註冊完馬上登入。(因為要先等電子郵件認證)
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     //要將使用者加入角色所需要的程式碼
@@ -598,6 +607,13 @@ namespace CaptainMao.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+
+        public byte[] LoadUploadedFile(HttpPostedFileBase uploadedFile)
+        {
+            var buf = new byte[uploadedFile.InputStream.Length];
+            uploadedFile.InputStream.Read(buf, 0, (int)uploadedFile.InputStream.Length);
+            return buf;
         }
         #endregion
     }

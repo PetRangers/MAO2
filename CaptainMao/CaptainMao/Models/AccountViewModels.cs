@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace CaptainMao.Models
 {
@@ -93,8 +95,12 @@ namespace CaptainMao.Models
         public string NickName { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "電話")]
-        public string Phone { get; set; }
+        [Display(Name = "手機")]
+        public string PhoneNumber { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "照片")]
+        public HttpPostedFileBase Photo { get; set; }
     }
 
     public class ResetPasswordViewModel
