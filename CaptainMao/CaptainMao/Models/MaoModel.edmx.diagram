@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59f5562fb2fb4dc3868e38a7c503de2b" Name="Diagram1">
+        <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="13.5" />
+        <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="17.875" />
+        <EntityTypeShape EntityType="MaoModel.Article" Width="1.5" PointX="7.5" PointY="22.375" />
+        <EntityTypeShape EntityType="MaoModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUserClaims" Width="1.5" PointX="1.625" PointY="30" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUserLogins" Width="1.5" PointX="5.875" PointY="27.125" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUsers" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="MaoModel.Board" Width="1.5" PointX="5.875" PointY="29.625" />
+        <EntityTypeShape EntityType="MaoModel.Categories" Width="1.5" PointX="6" PointY="10.5" />
+        <EntityTypeShape EntityType="MaoModel.Citys" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="MaoModel.Comment" Width="1.5" PointX="10.75" PointY="18" />
+        <EntityTypeShape EntityType="MaoModel.Hospital" Width="1.5" PointX="6" PointY="5.5" />
+        <EntityTypeShape EntityType="MaoModel.TitleCategories" Width="1.5" PointX="5.25" PointY="23.375" />
+        <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="8.25" PointY="10.125" />
+        <EntityTypeShape EntityType="MaoModel.Scorce" Width="1.5" PointX="8.25" PointY="14.375" />
+        <AssociationConnector Association="MaoModel.FK_Adoption_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Adoption_Categories" />
+        <AssociationConnector Association="MaoModel.FK_Adoption_Citys" />
+        <AssociationConnector Association="MaoModel.FK_AdpWish_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_AdpWish_Categories" />
+        <AssociationConnector Association="MaoModel.FK_AdpWish_Citys" />
+        <AssociationConnector Association="MaoModel.FK_Article_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Article_Board" />
+        <AssociationConnector Association="MaoModel.FK_Article_TitleCategories" />
+        <AssociationConnector Association="MaoModel.FK_Comment_Article" />
+        <AssociationConnector Association="MaoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MaoModel.FK_Board_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Comment_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Scorce_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_UserPet_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_UserPet_Categories" />
+        <AssociationConnector Association="MaoModel.FK_Hospital_Citys" />
+        <AssociationConnector Association="MaoModel.FK_Scorce_Hospital" />
+        <AssociationConnector Association="MaoModel.AspNetUserRoles" />
+        <AssociationConnector Association="MaoModel.HospitalCategoryDetails" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

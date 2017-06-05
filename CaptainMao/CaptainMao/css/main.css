@@ -19,6 +19,9 @@ article {
   background-color: rgba(49, 44, 38, 0.38);
   background-image: url("../images/texture.png");
 }
+article>div{
+    min-height:800px;
+}
 .drawingpin {
   margin-top: 20px;
   border-radius: 0px 20px 20px 20px;

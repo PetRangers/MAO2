@@ -11,8 +11,8 @@
     <meta name="keywords" content="寵物,毛小孩,狗,狗狗,汪,喵,貓,貓咪,領養,討論,寵物美容" />
     <title>@ViewBag.Title - CaptainMao</title>
 
-
     @Styles.Render("~/css")
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet" />
     @RenderSection("style", false)
@@ -75,7 +75,7 @@
                         </li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
+                        <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩地圖">美食醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

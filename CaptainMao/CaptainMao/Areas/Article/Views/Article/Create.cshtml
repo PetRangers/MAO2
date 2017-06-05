@@ -1,0 +1,106 @@
+﻿@model CaptainMao.Models.Article
+
+@{
+    ViewBag.Title = "討論區";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section script{
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/CKFinderScripts/ckfinder.js"></script>
+    <script>
+            var editor= CKEDITOR.replace('content', {
+                toolbar: 'Custom',
+                skin: "bootstrapck",
+                filebrowserImageUploadUrl: "@Url.Action("Upload")"
+            });
+        CKEDITOR.on('dialogDefinition', function (e) {
+            if (e.data.name == 'image') {
+                var dialog = e.data.definition;
+                oldOnShow = dialog.onShow;
+                dialog.onShow = function () {
+                    oldOnShow.apply(this, arguments);
+                    this.selectPage('Upload');
+                };
+            }
+        });
+    </script>
+    }
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:70px;background-color:#fff266" class="drawingpin">
+            <div class="list-group navbar-left">
+                @Html.ActionLink("主版", "Board", null, new { @class = "btn btn-info" })
+                @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+        <div style="background-color:burlywood" class="drawingpin">
+            @using (Html.BeginForm("Create","Article",FormMethod.Post,new { }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                           @Html.LabelFor(model => model.BoardID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                var boardcategories = new SelectList(ViewBag.datas2, "BoardID", "BoardName");
+                            }
+                            @Html.DropDownListFor(c => c.BoardID, boardcategories, "請選擇", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BoardID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TitleCategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                var titlecategories = new SelectList(ViewBag.datas, "TitleCategoryID", "TitleCategoryName");
+                            }
+                            @Html.DropDownListFor(c => c.TitleCategoryID, titlecategories, "請選擇", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TitleCategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control",autocomplete="off" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContentText, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ContentText, new { htmlAttributes = new { @class = "form-control", autocomplete = "off",id="content" ,@name="content"} })
+                            @Html.ValidationMessageFor(model => model.ContentText, "", new { @class = "text-danger" })
+                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="送出" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                </div>
+              }
+            <div>
+                <a href="#" onclick="javascript:history.back()" class="btn btn-primary glyphicon glyphicon-arrow-left">回上一頁</a>
+            </div>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
