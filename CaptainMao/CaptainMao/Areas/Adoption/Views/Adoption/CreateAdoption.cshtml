@@ -1,0 +1,97 @@
+﻿@model CaptainMao.Areas.Adoption.Models.Adoption
+@{
+    ViewBag.Title = "CreateAdoption";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div class="thumbnail drawingpin">
+        <h2>新增收養單</h2>
+        <div class="row">
+            <div class="col-md-7">
+                @using (Html.BeginForm("CreateAdoption", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Name, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Name, new { HtmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Sex, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Sex, new { HtmlAttributes = new { @class = "form-control", placeholder = "Sex" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.CategoryID, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @{
+                                var categories = new SelectList(ViewBag.Category, "CategoryID", "CategoryName");
+                            }
+                            @Html.DropDownListFor(a => a.CategoryID, categories, "請選擇", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Build, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Build, new { HtmlAttributes = new { @class = "form-control", placeholder = "Build" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Age, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Age, new { HtmlAttributes = new { @class = "form-control", placeholder = "Age" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.CityID, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @{
+                                var cities = new SelectList(ViewBag.City, "CityID", "CityName");
+                            }
+                            @Html.DropDownListFor(a => a.CityID, cities, "請選擇", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Hair, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Hair, new { HtmlAttributes = new { @class = "form-control", placeholder = "Hair" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Description, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Description, new { HtmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.PetImage, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.PetImage, new { HtmlAttributes = new { type = "file", @class = "form-control", placeholder = "Product Image" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">新增</button>
+                        </div>
+                    </div>
+                                }
+
+            </div>
+            <div class="col-md-5"></div>
+        </div>
+
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+

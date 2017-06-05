@@ -21,6 +21,12 @@ namespace Login
                       "~/css/StyleSheet_Master.css",
                       "~/Content/PagedList.css"
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.js"));
         }
     }
 }

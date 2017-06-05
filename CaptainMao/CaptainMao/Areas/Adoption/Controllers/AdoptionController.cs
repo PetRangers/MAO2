@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CaptainMao.Areas.Adoption.Models;
+using CaptainMao.Areas.Adoption.ViewModel;
 
 namespace CaptainMao.Areas.Adoption.Controllers
 {
     public class AdoptionController : Controller
     {
+        MaoEntities db = new MaoEntities();
+        IRepository<Models.Adoption> dbContext = new Repository<Models.Adoption>();
+        
         [ChildActionOnly]
         public ActionResult Aside()
         {
@@ -17,57 +22,96 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption
         public ActionResult Index()
         {
-            return View();
+            return View(db.Adoption.ToList());
         }
 
         // GET: Adoption/Adoption/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            AdoptionViewModel vm = new AdoptionViewModel();            
+            vm.adoption = db.Adoption.Find(id);
+
+            vm.category = db.Categories.Find(vm.adoption.CategoryID);
+            vm.city = db.Citys.Find(vm.adoption.CityID);
+            return View(vm);
+        }
+
+        public ActionResult GetImage(int id)
+        {
+            var adoption = db.Adoption.Find(id);
+            byte[] img = adoption.BytesImage;
+            return File(img, "image/jpeg");
         }
 
         // GET: Adoption/Adoption/Create
-        public ActionResult Create()
+        public ActionResult CreateAdoption()
         {
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.City = db.Citys.ToList();
             return View();
         }
 
         // POST: Adoption/Adoption/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateAdoption(Adoption.Models.Adoption pet, HttpPostedFileBase PetImage)
         {
-            try
+            if (PetImage != null)
             {
-                // TODO: Add insert logic here
+                string strPath = Request.PhysicalApplicationPath + @"Images\" + PetImage.FileName;
+                PetImage.SaveAs(strPath);
 
-                return RedirectToAction("Index");
+                var ImgSize = PetImage.ContentLength;
+                byte[] ImgByte = new byte[ImgSize];
+                PetImage.InputStream.Read(ImgByte, 0, ImgSize);
+
+                pet.PetImage = PetImage.FileName;
+                pet.BytesImage = ImgByte;
             }
-            catch
+
+            if (pet != null)
             {
-                return View();
+                pet.PostDate = DateTime.Now;
+                dbContext.Create(pet);
+                return RedirectToAction("index");
             }
+            return View();
+        }
+
+        public ActionResult AdoptionManage()
+        {
+            int UserID = 4;
+            var adoption = db.Adoption.Where(a => a.RegistrationUserID == UserID);
+            return View(adoption.ToList());
         }
 
         // GET: Adoption/Adoption/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var adoption = db.Adoption.Find(id);
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.City = db.Citys.ToList();
+
+            return View(adoption);
         }
 
         // POST: Adoption/Adoption/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Models.Adoption adoption, HttpPostedFileBase PetImage)
         {
-            try
+            if (PetImage != null)
             {
-                // TODO: Add update logic here
+                var ImgSize = PetImage.ContentLength;
+                byte[] ImgByte = new byte[ImgSize];
+                PetImage.InputStream.Read(ImgByte, 0, ImgSize);
 
-                return RedirectToAction("Index");
+                adoption.PetImage = PetImage.FileName;
+                adoption.BytesImage = ImgByte;
             }
-            catch
-            {
-                return View();
-            }
+            adoption.PostDate = DateTime.Now;
+            dbContext.Update(adoption);
+
+            return RedirectToAction("Index");
+            
         }
 
         // GET: Adoption/Adoption/Delete/5

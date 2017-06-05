@@ -27,7 +27,7 @@
                     <a class="btn btn-lg pull-left btn-dark accordion-toggle" title="關於我們" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <span class="sr-only">關於我們所有粉絲團</span>
                     </a>
-                    <a class="navbar-brand" href="#">CaptainMao</a>
+                    <a class="navbar-brand" href=@Url.Action("Index","CaptainMao")>CaptainMao</a>
                     <a id="menu-toggle" href="#" class="btn btn-lg btn-dark">
                         <span class="sr-only">開啟所有選單按鈕</span>
                         <i class="fa fa-bars"></i>
@@ -89,7 +89,7 @@
                                 <li><a href="#">Separated link</a></li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-toggle" href="#" title="登入"><span class="glyphicon glyphicon-user"></span><br /><br />user</a></li>
+                        @Html.Partial("_LoginPartial")
                     </ul>
                 </div><!-- /.nav-collapse -->
             </div><!-- /.container-fluid -->
@@ -102,7 +102,7 @@
                     <a><strong>毛孩隊長</strong></a>
                 </li>
                 <li>
-                    @Html.ActionLink("回首頁","Index", "CaptainMao", new{ @title = "回首頁" })
+                    @Html.ActionLink("回首頁","Index", "CaptainMao",null , new{ @title = "回首頁" })
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">毛孩購物</a>
