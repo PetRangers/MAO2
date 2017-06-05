@@ -282,6 +282,7 @@ namespace CaptainMao.Controllers
         public ActionResult UpdateProfile()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
+            ViewBag.userPhoto = "data:image /; base64," + Convert.ToBase64String(user.Photo);
 
             UpdateProfileViewModel model = new UpdateProfileViewModel();
             
@@ -305,7 +306,7 @@ namespace CaptainMao.Controllers
             {
                 return View(model);
             }
-
+            
             //ToDo: 將上傳檔案轉為byte[]，以便存回DB
             HttpPostedFileBase file = Request.Files["UserPhoto"];
             byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
@@ -313,7 +314,7 @@ namespace CaptainMao.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
             var user = db.Users.Where(u=>u.Id == currentUserId).First();
-
+            
             user.Email = model.Email;
             user.UserName = model.Email;
             user.LastName = model.LastName;
@@ -321,9 +322,9 @@ namespace CaptainMao.Controllers
             user.NickName = model.NickName;
             user.PhoneNumber = model.PhoneNumber;
             user.Photo = (_photo == null)? user.Photo : _photo;
-            
-            await db.SaveChangesAsync();
 
+            await db.SaveChangesAsync();
+            ViewBag.userPhoto = "data:image /; base64," + Convert.ToBase64String(user.Photo);
             ViewBag.ResultMsg = "個人資料修改成功!";
             return View(model);
             
