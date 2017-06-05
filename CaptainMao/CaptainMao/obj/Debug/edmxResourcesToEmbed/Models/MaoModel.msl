@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MaoModelStoreContainer" CdmEntityContainer="MaoEntities">
+    <EntitySetMapping Name="Adoption">
+      <EntityTypeMapping TypeName="MaoModel.Adoption">
+        <MappingFragment StoreEntitySet="Adoption">
+          <ScalarProperty Name="RegistrationUserID" ColumnName="RegistrationUserID" />
+          <ScalarProperty Name="DelCheck" ColumnName="DelCheck" />
+          <ScalarProperty Name="PetImage" ColumnName="PetImage" />
+          <ScalarProperty Name="BytesImage" ColumnName="BytesImage" />
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Hair" ColumnName="Hair" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Build" ColumnName="Build" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AdoptionID" ColumnName="AdoptionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdpWish">
+      <EntityTypeMapping TypeName="MaoModel.AdpWish">
+        <MappingFragment StoreEntitySet="AdpWish">
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="Hair" ColumnName="Hair" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Build" ColumnName="Build" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="WishID" ColumnName="WishID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Article">
+      <EntityTypeMapping TypeName="MaoModel.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="LastChDateTime" ColumnName="LastChDateTime" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+          <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="PosterID" ColumnName="PosterID" />
+          <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="MaoModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUserClaims">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUserLogins">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+          <ScalarProperty Name="Experience" ColumnName="Experience" />
+          <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Board">
+      <EntityTypeMapping TypeName="MaoModel.Board">
+        <MappingFragment StoreEntitySet="Board">
+          <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+          <ScalarProperty Name="BoardName" ColumnName="BoardName" />
+          <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MaoModel.Categories">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Citys">
+      <EntityTypeMapping TypeName="MaoModel.Citys">
+        <MappingFragment StoreEntitySet="Citys">
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="MaoModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="NewDateTime" ColumnName="NewDateTime" />
+          <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+          <ScalarProperty Name="PosterID" ColumnName="PosterID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hospital">
+      <EntityTypeMapping TypeName="MaoModel.Hospital">
+        <MappingFragment StoreEntitySet="Hospital">
+          <ScalarProperty Name="Map" ColumnName="Map" />
+          <ScalarProperty Name="OnView" ColumnName="OnView" />
+          <ScalarProperty Name="OnlineConsultation" ColumnName="OnlineConsultation" />
+          <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
+          <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+          <ScalarProperty Name="OutpatientProject" ColumnName="OutpatientProject" />
+          <ScalarProperty Name="Emergency" ColumnName="Emergency" />
+          <ScalarProperty Name="BusinessHours" ColumnName="BusinessHours" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
+          <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
+          <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TitleCategories">
+      <EntityTypeMapping TypeName="MaoModel.TitleCategories">
+        <MappingFragment StoreEntitySet="TitleCategories">
+          <ScalarProperty Name="TitleCategoryName" ColumnName="TitleCategoryName" />
+          <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPet">
+      <EntityTypeMapping TypeName="MaoModel.UserPet">
+        <MappingFragment StoreEntitySet="UserPet">
+          <ScalarProperty Name="PetBirthday" ColumnName="PetBirthday" />
+          <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
+          <ScalarProperty Name="PetSex" ColumnName="PetSex" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PetName" ColumnName="PetName" />
+          <ScalarProperty Name="PetID" ColumnName="PetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scorce">
+      <EntityTypeMapping TypeName="MaoModel.Scorce">
+        <MappingFragment StoreEntitySet="Scorce">
+          <ScalarProperty Name="NoteValue" ColumnName="NoteValue" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Scorce1" ColumnName="Scorce" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="MaoModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HospitalCategoryDetails" TypeName="MaoModel.HospitalCategoryDetails" StoreEntitySet="HospitalCategoryDetails">
+      <EndProperty Name="Hospital">
+        <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+      </EndProperty>
+      <EndProperty Name="Categories">
+        <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
