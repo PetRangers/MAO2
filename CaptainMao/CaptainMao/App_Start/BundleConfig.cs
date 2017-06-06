@@ -12,12 +12,14 @@ namespace Login
                         "~/Scripts/jquery-{version}.js", 
                         "~/Scripts/bootstrap.js", 
                         "~/Scripts/modernizr-2.6.2.js",
-                        "~/js/JavaScript.js"));
+                        "~/js/JavaScript.js"
+                        ));
 
             bundles.Add(new StyleBundle("~/css").Include(
                       "~/css/reset.css",
                       "~/Content/bootstrap.css",
-                      "~/css/StyleSheet_Master.css"
+                      "~/css/StyleSheet_Master.css",
+                      "~/Content/PagedList.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

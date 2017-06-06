@@ -12,8 +12,9 @@
     <ProjectView>ShowAllFiles</ProjectView>
     <NameOfLastUsedPublishProfile>CaptainMao</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <WebStackScaffolding_DbContextTypeFullName>CaptainMao.Models.MaoEntities</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_DbContextTypeFullName>CaptainMao.Models.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
