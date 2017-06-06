@@ -19,7 +19,6 @@ namespace CaptainMao.Models
         {
             this.sType = new HashSet<sType>();
             this.Order = new HashSet<Order>();
-            this.StoreUser = new HashSet<StoreUser>();
         }
     
         public int Merchandise_ID { get; set; }
@@ -30,12 +29,14 @@ namespace CaptainMao.Models
         public bool Merchandise_Fitness { get; set; }
         public System.DateTime Merchandise_Creatdate { get; set; }
         public Nullable<System.DateTime> Merchandiser_Editdata { get; set; }
+        public string Store_ID { get; set; }
+        public int CategoryID { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sType> sType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StoreUser> StoreUser { get; set; }
     }
 }

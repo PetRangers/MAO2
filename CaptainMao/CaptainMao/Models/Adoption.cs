@@ -29,8 +29,8 @@ namespace CaptainMao.Models
         public bool DelCheck { get; set; }
         public string RegistrationUserID { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Categories Categories { get; set; }
         public virtual Citys Citys { get; set; }
-        public virtual NormalUser NormalUser { get; set; }
     }
 }

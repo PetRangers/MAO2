@@ -115,7 +115,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult AdoptionManage()
         {
             Adoption_WishViewModel vm = new Adoption_WishViewModel();
-            string UserID = "QWE";
+            string UserID = "e3d67396-115e-49f6-9781-1f179486ad9d";                                          
             vm.adoptions = db.Adoption.Where(a => a.RegistrationUserID == UserID);
             vm.wishs = db.AdpWish.Where(a => a.UserID == UserID);
             bool flg1 = false;
@@ -253,7 +253,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             MySmtp.EnableSsl = true;
 
             var adoption = db.Adoption.Find(id);
-            string Email = adoption.NormalUser.Email;
+            string Email = adoption.AspNetUsers.Email;
             //發送Email
             MySmtp.Send("captainmao114@gmail.com", Email, "毛孩隊長",
                         "親愛的用戶您好，有其他用戶領養您的寵物 "+ "http://localhost:52326/Adoption/Adoption/Details/" + id +"，請您盡速回覆，謝謝。");

@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
   <EntityType Name="Adoption">
     <Key>
       <PropertyRef Name="AdoptionID" />
@@ -180,6 +190,16 @@
     <Property Name="Date" Type="nvarchar" MaxLength="50" />
     <Property Name="NoteValue" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="TitleCategories">
     <Key>
       <PropertyRef Name="TitleCategoryID" />
@@ -198,6 +218,66 @@
     <Property Name="PetSex" Type="bit" />
     <Property Name="PetPhoto" Type="varbinary(max)" />
     <Property Name="PetBirthday" Type="date" />
+  </EntityType>
+  <EntityType Name="Merchandise">
+    <Key>
+      <PropertyRef Name="Merchandise_ID" />
+    </Key>
+    <Property Name="Merchandise_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Merchandise_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Merchandise_Price" Type="money" Nullable="false" />
+    <Property Name="Merchandise_Photo" Type="varbinary(max)" />
+    <Property Name="Merchandise_Description" Type="nvarchar(max)" />
+    <Property Name="Merchandise_Fitness" Type="bit" Nullable="false" />
+    <Property Name="Merchandise_Creatdate" Type="datetime" Nullable="false" />
+    <Property Name="Merchandiser_Editdata" Type="datetime" />
+    <Property Name="Store_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandise_Type_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Merchandise_Type_View">
+    <Key>
+      <PropertyRef Name="Merchandise_ID" />
+      <PropertyRef Name="sType_ID" />
+    </Key>
+    <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+    <Property Name="sType_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandsie_Order_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Merchandsie_Order_View">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+      <PropertyRef Name="Merchandise_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="user_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="merchandise_Volume" Type="int" Nullable="false" />
+    <Property Name="Order_Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Order_Fitness" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sType">
+    <Key>
+      <PropertyRef Name="sType_ID" />
+    </Key>
+    <Property Name="sType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sType_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Type_ID" />
+    </Key>
+    <Property Name="Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK_Adoption_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -435,6 +515,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_merchandise_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="Store_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_merchandise_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandise_Type_View_merchandise1">
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+    <End Role="Merchandise_Type_View" Type="Self.Merchandise_Type_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="Merchandise_ID" />
+      </Principal>
+      <Dependent Role="Merchandise_Type_View">
+        <PropertyRef Name="Merchandise_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandise_Type_View_sType">
+    <End Role="sType" Type="Self.sType" Multiplicity="1" />
+    <End Role="Merchandise_Type_View" Type="Self.Merchandise_Type_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sType">
+        <PropertyRef Name="sType_ID" />
+      </Principal>
+      <Dependent Role="Merchandise_Type_View">
+        <PropertyRef Name="sType_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandsie_Order_View_merchandise">
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+    <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="Merchandise_ID" />
+      </Principal>
+      <Dependent Role="Merchandsie_Order_View">
+        <PropertyRef Name="Merchandise_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandsie_Order_View_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Order_ID" />
+      </Principal>
+      <Dependent Role="Merchandsie_Order_View">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="user_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Scorce_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Scorce" Type="Self.Scorce" Multiplicity="*" />
@@ -456,6 +620,18 @@
       </Principal>
       <Dependent Role="Scorce">
         <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sType_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="sType" Type="Self.sType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Type_ID" />
+      </Principal>
+      <Dependent Role="sType">
+        <PropertyRef Name="Type_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -484,6 +660,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MaoModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Adoption" EntityType="Self.Adoption" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AdpWish" EntityType="Self.AdpWish" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
@@ -497,8 +674,13 @@
     <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
     <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [HospitalCategoryDetails].[HospitalID] AS [HospitalID], 
@@ -513,6 +695,18 @@
     [Scorce].[Date] AS [Date], 
     [Scorce].[NoteValue] AS [NoteValue]
     FROM [dbo].[Scorce] AS [Scorce]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Merchandise_Type_View" EntityType="Self.Merchandise_Type_View" store:Type="Tables" store:Schema="ShoppingNetwork">
+      <DefiningQuery>SELECT 
+    [Merchandise_Type_View].[Merchandise_ID] AS [Merchandise_ID], 
+    [Merchandise_Type_View].[sType_ID] AS [sType_ID]
+    FROM [ShoppingNetwork].[Merchandise_Type_View] AS [Merchandise_Type_View]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Merchandsie_Order_View" EntityType="Self.Merchandsie_Order_View" store:Type="Tables" store:Schema="ShoppingNetwork">
+      <DefiningQuery>SELECT 
+    [Merchandsie_Order_View].[Order_ID] AS [Order_ID], 
+    [Merchandsie_Order_View].[Merchandise_ID] AS [Merchandise_ID]
+    FROM [ShoppingNetwork].[Merchandsie_Order_View] AS [Merchandsie_Order_View]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Adoption_AspNetUsers" Association="Self.FK_Adoption_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -590,6 +784,34 @@
       <End Role="Hospital" EntitySet="Hospital" />
       <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_merchandise_AspNetUsers" Association="Self.FK_merchandise_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_merchandise_Categories" Association="Self.FK_merchandise_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandise_Type_View_merchandise1" Association="Self.FK_Merchandise_Type_View_merchandise1">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Merchandise_Type_View" EntitySet="Merchandise_Type_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandise_Type_View_sType" Association="Self.FK_Merchandise_Type_View_sType">
+      <End Role="sType" EntitySet="sType" />
+      <End Role="Merchandise_Type_View" EntitySet="Merchandise_Type_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandsie_Order_View_merchandise" Association="Self.FK_Merchandsie_Order_View_merchandise">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandsie_Order_View_Order" Association="Self.FK_Merchandsie_Order_View_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_AspNetUsers" Association="Self.FK_Order_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
     <AssociationSet Name="FK_Scorce_AspNetUsers" Association="Self.FK_Scorce_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Scorce" EntitySet="Scorce" />
@@ -597,6 +819,10 @@
     <AssociationSet Name="FK_Scorce_Hospital" Association="Self.FK_Scorce_Hospital">
       <End Role="Hospital" EntitySet="Hospital" />
       <End Role="Scorce" EntitySet="Scorce" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="sType" EntitySet="sType" />
     </AssociationSet>
     <AssociationSet Name="FK_UserPet_AspNetUsers" Association="Self.FK_UserPet_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

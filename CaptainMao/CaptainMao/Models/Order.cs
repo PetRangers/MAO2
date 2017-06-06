@@ -26,7 +26,7 @@ namespace CaptainMao.Models
         public System.DateTime Order_Createdate { get; set; }
         public bool Order_Fitness { get; set; }
     
-        public virtual NormalUser NormalUser { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandise { get; set; }
     }

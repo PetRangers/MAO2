@@ -622,7 +622,6 @@
     <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\AdoptionWish.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\CreateAdpWish.cshtml" />
-    <EntityDeploy Include="Models\MaoModel.edmx">
     <Content Include="Areas\Article\Views\Article\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\BoardCategories.cshtml" />
     <Content Include="Areas\Article\Views\Article\Board.cshtml" />
@@ -680,6 +679,11 @@
     <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -687,11 +691,6 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -1315,6 +1314,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1322,6 +1322,18 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Article.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Board.cs">
@@ -1336,9 +1348,15 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1357,16 +1375,13 @@
     <Compile Include="Models\Merchandise.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NormalUser.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial\Article.cs" />
+    <Compile Include="Models\Partial\Comment.cs" />
+    <Compile Include="Models\Partial\TitleCategories.cs" />
     <Compile Include="Models\Scorce.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StoreUser.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
@@ -1382,9 +1397,6 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPet.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserStates.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
