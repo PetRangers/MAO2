@@ -53,11 +53,18 @@
                 <input type="submit" class="btn btn-lg btn-default" value="修改" />
             </div>
         </div>
-        <p>@ViewBag.ResultMsg</p>
+        if (ViewBag.ResultMsg != null)
+        {
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @ViewBag.ResultMsg
+            </div>
+        }
+
 }
 @section Script {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
     document.getElementById("UserPhoto").onchange = function () {
         var reader = new FileReader();
 
@@ -69,5 +76,5 @@
         // read the image file as a data URL.
         reader.readAsDataURL(this.files[0]);
     };
-</script>
+    </script>
 }

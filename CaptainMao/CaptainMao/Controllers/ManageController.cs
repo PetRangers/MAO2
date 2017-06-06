@@ -306,14 +306,18 @@ namespace CaptainMao.Controllers
             {
                 return View(model);
             }
-            
-            //ToDo: 將上傳檔案轉為byte[]，以便存回DB
-            HttpPostedFileBase file = Request.Files["UserPhoto"];
-            byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
 
+            //ToDo: 將上傳檔案轉為byte[]，以便存回DB
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
             var user = db.Users.Where(u=>u.Id == currentUserId).First();
+
+            HttpPostedFileBase file = Request.Files["UserPhoto"];
+            if (file.FileName != "")
+            {
+                byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
+                user.Photo = _photo;
+            }
             
             user.Email = model.Email;
             user.UserName = model.Email;
@@ -321,13 +325,11 @@ namespace CaptainMao.Controllers
             user.FirstName = model.FirstName;
             user.NickName = model.NickName;
             user.PhoneNumber = model.PhoneNumber;
-            user.Photo = (_photo == null)? user.Photo : _photo;
-
+            
             await db.SaveChangesAsync();
             ViewBag.userPhoto = "data:image /; base64," + Convert.ToBase64String(user.Photo);
             ViewBag.ResultMsg = "個人資料修改成功!";
             return View(model);
-            
         }
 
         //
