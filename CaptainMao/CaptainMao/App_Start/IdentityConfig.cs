@@ -12,6 +12,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CaptainMao.Models;
 using System.Web.Helpers;
+using Twilio;
+using Twilio.Clients;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace CaptainMao
 {
@@ -22,54 +26,84 @@ namespace CaptainMao
             //第一種寫法，使用WebMail Helper。寄送註冊認證信時沒問題，但無法寄送雙因素驗證信件。
 
             // 將您的電子郵件服務外掛到這裡以傳送電子郵件。
-            WebMail.SmtpServer = "smtp.gmail.com";
-            WebMail.SmtpPort = 587;
-            WebMail.UserName = "captainmao114@gmail.com";
-            WebMail.Password = "gogoP@ssw0rd";
-            WebMail.EnableSsl = true;
-            WebMail.From = "captainmao114@gmail.com";
+            //WebMail.SmtpServer = "smtp.gmail.com";
+            //WebMail.SmtpPort = 587;
+            //WebMail.UserName = "captainmao114@gmail.com";
+            //WebMail.Password = "gogoP@ssw0rd";
+            //WebMail.EnableSsl = true;
+            //WebMail.From = "captainmao114@gmail.com";
 
-            WebMail.Send(message.Destination, message.Subject, message.Body);
+            //WebMail.Send(message.Destination, message.Subject, message.Body);
 
-            return Task.FromResult(0);
+            //return Task.FromResult(0);
 
             //=========================================
             //嘗試另一種郵件服務的寫法。結果雙因素驗證信件成功了，但註冊認證信無法依html格式正常顯示。
             // Credentials:
-            //var credentialUserName = "captainmao114@gmail.com";
-            //var sentFrom = "captainmao114@gmail.com";
-            //var pwd = "gogoP@ssw0rd";
+            var credentialUserName = "captainmao114@gmail.com";
+            var sentFrom = "captainmao114@gmail.com";
+            var pwd = "gogoP@ssw0rd";
 
-            //// Configure the client:
-            //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com");
+            // Configure the client:
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com");
 
-            //client.Port = 587;
-            //client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-            //client.UseDefaultCredentials = false;
+            client.Port = 587;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
 
-            //// Creatte the credentials:
-            //System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
+            // Creatte the credentials:
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
 
-            //client.EnableSsl = true;
-            //client.Credentials = credentials;
+            client.EnableSsl = true;
+            client.Credentials = credentials;
 
-            //// Create the message:
-            //var mail = new System.Net.Mail.MailMessage(sentFrom,message.Destination, message.Subject, message.Body);
-            
-            //// Send:
-            //return client.SendMailAsync(mail);
+            // Create the message:
+            var mail = new System.Net.Mail.MailMessage(sentFrom,message.Destination, message.Subject, message.Body);
+            mail.IsBodyHtml = true;
+
+            // Send:
+            return client.SendMailAsync(mail);
 
         }
     }
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // 將您的 SMS 服務外掛到這裡以傳送簡訊。
-            return Task.FromResult(0);
-        }
-    }
+    //public class SmsService : IIdentityMessageService
+    //{
+    //    private readonly ITwilioMessageSender _messageSender;
+
+    //    public SmsService() : this(new TwilioMessageSender()) { }
+
+    //    public SmsService(ITwilioMessageSender messageSender)
+    //    {
+    //        _messageSender = messageSender;
+    //    }
+
+    //    public async Task SendAsync(IdentityMessage message)
+    //    {
+    //        await _messageSender.SendMessageAsync(message.Destination,
+    //                                              Config.TwilioNumber,
+    //                                              message.Body);
+    //    }
+    //}
+
+    //public interface ITwilioMessageSender
+    //{
+    //    Task SendMessageAsync(string to, string from, string body);
+    //}
+    //public class TwilioMessageSender : ITwilioMessageSender
+    //{
+    //    public TwilioMessageSender()
+    //    {
+    //        TwilioClient.Init(Config.AccountSid, Config.AuthToken);
+    //    }
+
+    //    public async Task SendMessageAsync(string to, string from, string body)
+    //    {
+    //        await MessageResource.CreateAsync(new PhoneNumber(to),
+    //                                          from: new PhoneNumber(from),
+    //                                          body: body);
+    //    }
+    //}
 
     // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -108,15 +142,15 @@ namespace CaptainMao
             // 您可以撰寫專屬提供者，並將它外掛到這裡。
             manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser>
             {
-                MessageFormat = "您的安全碼為 {0}"
+                MessageFormat = "您在毛孩隊長寵物網的安全碼為 {0}"
             });
             manager.RegisterTwoFactorProvider("電子郵件代碼", new EmailTokenProvider<ApplicationUser>
             {
-                Subject = "安全碼",
+                Subject = "毛孩隊長寵物網-安全碼",
                 BodyFormat = "您的安全碼為 {0}"
             });
             manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
