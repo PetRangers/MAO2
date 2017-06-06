@@ -31,8 +31,8 @@ namespace CaptainMao.Models
         public Nullable<int> Number { get; set; }
         public bool IsDeleted { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Board Board { get; set; }
-        public virtual NormalUser NormalUser { get; set; }
         public virtual TitleCategories TitleCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }

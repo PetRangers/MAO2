@@ -1,0 +1,7 @@
+﻿@model IEnumerable<CaptainMao.Models.Board>
+
+
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.BoardName, "Index", "Article", new { boardID = item.BoardID }, new { @class = "btn btn-info" })
+    }

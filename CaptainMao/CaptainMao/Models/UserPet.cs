@@ -22,7 +22,7 @@ namespace CaptainMao.Models
         public byte[] PetPhoto { get; set; }
         public Nullable<System.DateTime> PetBirthday { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Categories Categories { get; set; }
-        public virtual NormalUser NormalUser { get; set; }
     }
 }

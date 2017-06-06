@@ -26,6 +26,6 @@ namespace CaptainMao.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article> Article { get; set; }
-        public virtual NormalUser NormalUser { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

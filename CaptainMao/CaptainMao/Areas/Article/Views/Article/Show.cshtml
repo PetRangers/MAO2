@@ -1,0 +1,83 @@
+﻿@model CaptainMao.Areas.Article.Models.CommentViewModel
+
+@{
+    ViewBag.Title = "討論區";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section style{
+        <style>
+            #back{
+                background-color:burlywood;
+                margin-left:3px;
+                margin-right:3px;
+            }
+        </style>
+    }
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:70px;background-color:#fff266" class="drawingpin">
+            <div class="list-group navbar-left">
+                @Html.ActionLink("主版", "Board", null, new { @class = "btn btn-info" })
+                @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+        <div id="back" class="row drawingpin">
+            <div class="caption">
+                <div>
+                    <h2>[@Html.DisplayFor(model => model.article.First().TitleCategories.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
+                </div>
+                <div>
+                    <h3>@Html.DisplayFor(model => model.article.First().PosterID)</h3>
+                    <h5 class="text-right">@Html.DisplayNameFor(model => model.article.First().CreateDateTime) : @Html.DisplayFor(model => model.article.First().CreateDateTime)</h5>
+                </div>
+                <div class="thumbnail">
+                    @*<p>@Html.DisplayFor(model => model.article.First().ContentText)</p>*@
+                    <p>@Html.Raw(HttpUtility.HtmlDecode(Model.article.First().ContentText))</p>
+                </div>
+            </div>
+
+            <div>
+                <p class="navbar-left">
+                    <a href="#" onclick="javascript:history.back()" class="btn btn-primary glyphicon glyphicon-arrow-left">回上一頁</a>
+                </p>
+                <p class="navbar-right">
+                    @Html.ActionLink("回覆", "Comment", new { id = Model.article.First().ArticleID }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })
+                </p>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @foreach (var item in Model.comment)
+                    {
+                        <div>
+                            <h3>@item.PosterID</h3>
+                        </div>
+                                <div class="text-right">
+                                    <h5>@Html.DisplayNameFor(a=>a.comment.First().NewDateTime) : @item.NewDateTime</h5>
+                                </div>
+                                <div class="thumbnail">
+                                    <p>@Html.Raw(HttpUtility.HtmlDecode(@item.ContentText))</p>
+                                </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-------------------articleEnd------------------->
+</article>
+
+
+
+
+
+
