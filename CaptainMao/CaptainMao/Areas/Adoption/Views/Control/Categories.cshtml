@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CaptainMao.Models.Categories>
+
+<div>
+    @foreach (var category in Model)
+    {
+        @Html.ActionLink(category.CategoryName, "Index", "Adoption", new { categoryid = category.CategoryID, cityid = ViewBag.cityid, search = ViewBag.search }, new { @class = "btn btn-default", style = "width:80px;margin:5px" });
+    }
+    @Html.ActionLink("取消搜尋", "Index", "Adoption", new { categoryid = "", cityid = ViewBag.cityid, search = ViewBag.search }, new { @class = "btn btn-default" })
+</div>
