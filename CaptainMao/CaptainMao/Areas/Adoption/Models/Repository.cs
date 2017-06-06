@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using CaptainMao.Models;
 
 namespace CaptainMao.Areas.Adoption.Models
 {

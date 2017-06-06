@@ -65,6 +65,14 @@
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -116,20 +124,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Adoption\Models\MAOModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\Adoption\Models\MAOModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
@@ -154,7 +153,19 @@
     <Content Include="images\navbar.png" />
     <Content Include="images\texture.png" />
     <Content Include="images\wrip.jpg" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\video.js" />
+    <Content Include="Models\MaoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+      <LastGenOutput>MaoModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MaoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+      <LastGenOutput>MaoModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="js\JavaScript.js" />
@@ -180,21 +191,28 @@
     <Content Include="Areas\Article\Views\Default\Index.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
     <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
-    <EntityDeploy Include="Areas\Adoption\Models\MAOModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MAOModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Areas\Adoption\Models\MAOModel.edmx.diagram">
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdpWish.cshtml" />
+    <EntityDeploy Include="Models\MaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MaoModel.edmx.diagram">
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -205,7 +223,9 @@
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -213,39 +233,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
-    <Compile Include="Areas\Adoption\Models\Adoption.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\AdpWish.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\Categories.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\Citys.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
     <Compile Include="Areas\Adoption\Models\IRepository.cs" />
-    <Compile Include="Areas\Adoption\Models\MAOModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\MAOModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\MAOModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Adoption\Models\Partial\Adoption.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\AdpWish.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Categories.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Citys.cs" />
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\IndexViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\DefaultController.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
@@ -254,6 +251,78 @@
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Adoption.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdpWish.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Article.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Board.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categories.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Citys.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hospital.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Merchandise.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NormalUser.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Scorce.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoreUser.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitleCategories.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPet.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserStates.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
@@ -296,7 +365,6 @@
     <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Areas\buy\Models\" />
     <Folder Include="Areas\buy\Views\Shared\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

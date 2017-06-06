@@ -1,0 +1,183 @@
+﻿@model IPagedList<CaptainMao.Models.AdpWish>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AdoptionWish";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section style{
+    <style>
+
+        #search{
+            background-color:yellow;   
+            padding:10px;
+            font-size:20px
+        }
+
+        #search button{
+            width:100px;
+            margin:10px;
+            font-size:20px
+        }
+
+        #display {
+            background-color: burlywood;
+            padding-top: 50px;
+        }
+
+            #display > .row > div > div {
+                height: 400px;
+                font-size:20px;
+            }
+
+    </style>
+}
+
+@section script{
+    <script>
+        $(document).ready(function () {
+            $('#txtsearch').change(function () {
+                var txt = $(this).val();
+
+                $('#searchStart').attr("href", function () {
+                    var url = $(this).attr("href");
+                    var cateid = "@Request.QueryString["categoryid"]";
+                    var cityid = "@Request.QueryString["cityid"]";
+                    if (cateid == "" && cityid == "")
+                    {
+                        var result = url + "?search=" + txt;
+                    }
+                    else
+                    {
+                        var result = "/Adoption/Adoption/AdoptionWish?categoryid=" +cateid +"&cityid=" +cityid + "&search=" + txt;
+                    }
+                    return result;
+                });
+            })
+        });
+    </script>
+}
+
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <div id="search" class="drawingpin row">
+            <div><h2>條件搜尋</h2></div>
+            <div class="col-md-6">
+                <button class="btn btn-default" id="CateSearch" data-target="#cateSearch" data-toggle="modal">
+                    @if (ViewBag.category != null)
+                    {
+                        @ViewBag.category
+                    }
+                    else
+                    {
+                        @:寵物類別
+                }
+                </button>
+                <button class="btn btn-default" id="CitySearch" data-target="#citySearch" data-toggle="modal">
+                    @if (ViewBag.city != null)
+                    {
+                        @ViewBag.city
+                    }
+                    else
+                    {
+                        @:居住城市
+                }
+                </button>
+            </div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("AdoptionWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
+                    <input type="text" id="txtsearch" name="txtsearch" />
+                    <a href=@Url.Action("AdoptionWish", "Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
+                }
+            </div>
+
+        </div>
+        <br />
+        <div id="display" class="drawingpin">
+            <div class="row">
+                @foreach (var adoption in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h2>@Html.DisplayNameFor(a => adoption.WishID) : @Html.DisplayFor(a => adoption.WishID)</h2>
+                                <p>@Html.DisplayNameFor(a => adoption.CategoryID) : @Html.DisplayFor(a => adoption.Categories.CategoryName)</p>
+                                @if (adoption.Sex != null)
+                                {
+                                    <p>@Html.DisplayNameFor(a => adoption.Sex) : @Html.DisplayFor(a => adoption.Sex)</p>
+                                }
+                                @if (adoption.Build != null)
+                                {
+                                    <p>@Html.DisplayNameFor(a => adoption.Build) : @Html.DisplayFor(a => adoption.Build)</p>
+                                }
+                                @if (adoption.Age != null)
+                                {
+                                    <p>@Html.DisplayNameFor(a => adoption.Age) : @Html.DisplayFor(a => adoption.Age)</p>
+                                }
+                                @if (adoption.Hair != null)
+                                {
+                                    <p>@Html.DisplayNameFor(a => adoption.Hair) : @Html.DisplayFor(a => adoption.Hair)</p>
+                                }
+                                <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.Citys.CityName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.NormalUser.LastName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.NormalUser.Phone) : @Html.DisplayFor(a => adoption.NormalUser.Phone)</p>
+                                <p>@Html.DisplayNameFor(a =>adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("AdoptionWish", new { page = page, categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"], search = Request.QueryString["search"] }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
+@*寵物種類搜尋*@
+<div class="modal fade" id="cateSearch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">寵物類別</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("CateForWish", "Control")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+@*居住地搜尋*@
+<div class="modal fade" id="citySearch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">居住都市</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("CitiesForWish", "Control")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

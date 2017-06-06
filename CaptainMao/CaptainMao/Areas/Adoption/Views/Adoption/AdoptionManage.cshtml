@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CaptainMao.Areas.Adoption.Models.Adoption>
+﻿@model CaptainMao.Areas.Adoption.ViewModel.Adoption_WishViewModel
 @{
     ViewBag.Title = "AdoptionManage";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -19,16 +19,26 @@
             font-size: 20px;
         }
 
-        #display {
-            background-color: yellow;
+        #display1 ,#display2 {
+            background-color: burlywood;
             padding-top: 50px;
         }
 
-            #display > .row > div > div {
-                height: 430px;
+            #display1 > .row > div > div {
+                height: 450px;
+                font-size:20px;
             }
 
-            #display img {
+            #display2 > .row > div > div {
+                height: 350px;
+                font-size:20px;
+            }
+
+            #display2 .caption {
+                height:300px;
+            }
+
+            #display1 img {
                 height: 250px;
             }
     </style>
@@ -44,29 +54,12 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
-        <div id="search" class="drawingpin">
-            <div class="col-md-4 search"><label>寵物類別：</label><select class="srchselect"><option selected>狗</option><option>貓</option></select></div>
-            <div class="col-md-4 search"><label>　　性別：</label><select class="srchselect"><option selected>公</option><option>母</option></select></div>
-            <div class="col-md-4 search"><label>　　體型：</label><select class="srchselect"><option selected>小型</option><option>中型</option><option>大型</option></select></div>
-            <div class="col-md-4 search"><label>　　年紀：</label><select class="srchselect"><option selected>幼年</option><option>成年</option></select></div>
-            <div class="col-md-4 search"><label>所在地區：</label><select class="srchselect"><option selected>台北市</option><option>新北市</option><option>基隆市</option></select></div>
-            <div class="col-md-4 search"><label>　　毛色：</label><select class="srchselect"><option selected>黑色</option><option>黃色</option></select></div>
-            <div class="text-right"><button class="btn btn-default">搜尋</button></div>
-
-        </div>
-        <br />
-        <div id="display" class="drawingpin">
+        <div id="display1" class="drawingpin">
             <div class="row">
-                @foreach (var adoption in Model)
+                @if (ViewBag.flag1)
                 {
-                    @*if (Model == null)
+                    foreach (var adoption in Model.adoptions)
                     {
-                        <div>
-                            測試
-                        </div>
-                    }
-                    else
-                    {*@
                         <div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
@@ -74,16 +67,80 @@
                                     <h2>@adoption.Name</h2>
                                     <p>@adoption.Sex</p>
                                     <p>@adoption.Build</p>
-                                    <p>@Html.ActionLink("修改/刪除", "Edit", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })</p>
+                                    <div class="pull-left">
+                                        @Html.DisplayNameFor(a => adoption.PostDate) :
+                                        @Html.DisplayFor(a => adoption.PostDate)
+                                    </div>
+
+                                    <p class="pull-right">
+                                        @Html.ActionLink("修改/刪除", "Edit", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })
+                                        @Html.ActionLink("詳細資料", "Details", new { id = adoption.AdoptionID }, new { @class = "btn btn-info" })
+
+
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
-                    //}
+                    }
+                }
+                else
+                {
+                    <div class="thumbnail col-md-offset-1 col-md-10 col-md-offset-1">
+                        <h2 class="text-center">目前尚無任何資料</h2>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div id="display2" class="drawingpin">
+            <div class="row">
+                @if (ViewBag.flag2)
+                {
+                    foreach (var wish in Model.wishs)
+                    {
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h2>@Html.DisplayNameFor(a => wish.WishID) : @Html.DisplayFor(a => wish.WishID)</h2>
+                                    <p>@Html.DisplayNameFor(a => wish.CategoryID) : @Html.DisplayFor(a => wish.Categories.CategoryName)</p>
+                                    @if (wish.Sex != null)
+                                    {
+                                        <p>@Html.DisplayNameFor(a => wish.Sex) : @Html.DisplayFor(a => wish.Sex)</p>
+                                    }
+                                    @if (wish.Build != null)
+                                    {
+                                        <p>@Html.DisplayNameFor(a => wish.Build) : @Html.DisplayFor(a => wish.Build)</p>
+                                    }
+                                    @if (wish.Age != null)
+                                    {
+                                        <p>@Html.DisplayNameFor(a => wish.Age) : @Html.DisplayFor(a => wish.Age)</p>
+                                    }
+                                    @if (wish.Hair != null)
+                                    {
+                                        <p>@Html.DisplayNameFor(a => wish.Hair) : @Html.DisplayFor(a => wish.Hair)</p>
+                                    }
+                                    <p>@Html.DisplayNameFor(a => wish.CityID) : @Html.DisplayFor(a => wish.Citys.CityName)</p>
+                                </div>
+                                <div class="pull-right">@Html.ActionLink("查看配對", "WishJoin", "Adoption", new { id = wish.WishID }, new { @class = "btn btn-primary" })</div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="thumbnail col-md-offset-1 col-md-10 col-md-offset-1">
+                        <h2 class="text-center">目前尚無任何資料</h2>
+                    </div>
                 }
 
-            </div>
 
+
+            </div>
         </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>
+
+
+
