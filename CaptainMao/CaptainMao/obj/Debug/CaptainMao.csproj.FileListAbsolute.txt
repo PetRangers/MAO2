@@ -260,13 +260,9 @@ C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\HtmlSanitizationLib
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\AntiXssLibrary.xml
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\HtmlSanitizationLibrary.xml
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\Autofac.dll
-C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.CKFinder.Connector.Config.dll
-C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.CKFinder.Connector.Core.dll
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.FileSystem.dll
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\ImageProcessor.dll
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\Autofac.xml
-C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.CKFinder.Connector.Config.xml
-C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.CKFinder.Connector.Core.xml
 C:\Users\III\Documents\GitHub\MAO2\CaptainMao\CaptainMao\bin\CKSource.FileSystem.xml
 C:\Users\Link\Documents\Homework\Mao\CaptainMao\CaptainMao\bin\roslyn\csc.exe
 C:\Users\Link\Documents\Homework\Mao\CaptainMao\CaptainMao\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
