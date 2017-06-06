@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adoption">
+    <Key>
+      <PropertyRef Name="AdoptionID" />
+    </Key>
+    <Property Name="AdoptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sex" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Build" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Age" Type="nchar" MaxLength="10" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="Hair" Type="nchar" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostDate" Type="datetime" Nullable="false" />
+    <Property Name="BytesImage" Type="image" />
+    <Property Name="PetImage" Type="nvarchar" MaxLength="50" />
+    <Property Name="DelCheck" Type="bit" Nullable="false" />
+    <Property Name="RegistrationUserID" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AdpWish">
+    <Key>
+      <PropertyRef Name="WishID" />
+    </Key>
+    <Property Name="WishID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Sex" Type="nchar" MaxLength="10" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Build" Type="nchar" MaxLength="10" />
+    <Property Name="Age" Type="nchar" MaxLength="10" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="Hair" Type="nchar" MaxLength="10" />
+    <Property Name="PostDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ArticleID" />
+    </Key>
+    <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoardID" Type="int" Nullable="false" />
+    <Property Name="PosterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="TitleCategoryID" Type="int" Nullable="false" />
+    <Property Name="ContentText" Type="nvarchar(max)" />
+    <Property Name="CreateDateTime" Type="datetime" />
+    <Property Name="LastChDateTime" Type="datetime" />
+    <Property Name="Number" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="NickName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LoginCount" Type="int" Nullable="false" />
+    <Property Name="Experience" Type="int" Nullable="false" />
+    <Property Name="DateRegistered" Type="datetime" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Board">
+    <Key>
+      <PropertyRef Name="BoardID" />
+    </Key>
+    <Property Name="BoardID" Type="int" Nullable="false" />
+    <Property Name="BoardName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MasterUserID" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Citys">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="ArticleID" Type="int" Nullable="false" />
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PosterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ContentText" Type="nvarchar(max)" />
+    <Property Name="NewDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="HospitalID" />
+    </Key>
+    <Property Name="HospitalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HospitalName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HospitalAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddressArea" Type="int" Nullable="false" />
+    <Property Name="HospitalPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="BusinessHours" Type="nvarchar" MaxLength="50" />
+    <Property Name="Emergency" Type="nvarchar" MaxLength="50" />
+    <Property Name="OutpatientProject" Type="nvarchar" MaxLength="50" />
+    <Property Name="Equipment" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="OnlineConsultation" Type="nvarchar" MaxLength="50" />
+    <Property Name="OnView" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Map" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.dbo.HospitalCategoryDetails' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="HospitalCategoryDetails">
+    <Key>
+      <PropertyRef Name="HospitalID" />
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="HospitalID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.dbo.Scorce' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Scorce">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="HospitalID" />
+    </Key>
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="HospitalID" Type="int" Nullable="false" />
+    <Property Name="Scorce" Type="int" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoteValue" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TitleCategories">
+    <Key>
+      <PropertyRef Name="TitleCategoryID" />
+    </Key>
+    <Property Name="TitleCategoryID" Type="int" Nullable="false" />
+    <Property Name="TitleCategoryName" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserPet">
+    <Key>
+      <PropertyRef Name="PetID" />
+    </Key>
+    <Property Name="PetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PetName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="PetSex" Type="bit" />
+    <Property Name="PetPhoto" Type="varbinary(max)" />
+    <Property Name="PetBirthday" Type="date" />
+  </EntityType>
+  <Association Name="FK_Adoption_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adoption">
+        <PropertyRef Name="RegistrationUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Adoption_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Adoption">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Adoption_Citys">
+    <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+    <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citys">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Adoption">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdpWish_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdpWish">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdpWish_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="AdpWish">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdpWish_Citys">
+    <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+    <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citys">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="AdpWish">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="PosterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_Board">
+    <End Role="Board" Type="Self.Board" Multiplicity="1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Board">
+        <PropertyRef Name="BoardID" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="BoardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_TitleCategories">
+    <End Role="TitleCategories" Type="Self.TitleCategories" Multiplicity="1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleCategories">
+        <PropertyRef Name="TitleCategoryID" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="TitleCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Board_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Board" Type="Self.Board" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Board">
+        <PropertyRef Name="MasterUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Article">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ArticleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="PosterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hospital_Citys">
+    <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citys">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Hospital">
+        <PropertyRef Name="AddressArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HospitalCategoryDetails_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="HospitalCategoryDetails">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HospitalCategoryDetails_Hospital">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="HospitalCategoryDetails">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Scorce_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Scorce" Type="Self.Scorce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Scorce">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Scorce_Hospital">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="Scorce" Type="Self.Scorce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="Scorce">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPet_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPet">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPet_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="UserPet">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MaoModelStoreContainer">
+    <EntitySet Name="Adoption" EntityType="Self.Adoption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdpWish" EntityType="Self.AdpWish" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Board" EntityType="Self.Board" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [HospitalCategoryDetails].[HospitalID] AS [HospitalID], 
+    [HospitalCategoryDetails].[CategoryID] AS [CategoryID]
+    FROM [dbo].[HospitalCategoryDetails] AS [HospitalCategoryDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Scorce" EntityType="Self.Scorce" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Scorce].[UserID] AS [UserID], 
+    [Scorce].[HospitalID] AS [HospitalID], 
+    [Scorce].[Scorce] AS [Scorce], 
+    [Scorce].[Date] AS [Date], 
+    [Scorce].[NoteValue] AS [NoteValue]
+    FROM [dbo].[Scorce] AS [Scorce]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Adoption_AspNetUsers" Association="Self.FK_Adoption_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Adoption" EntitySet="Adoption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Adoption_Categories" Association="Self.FK_Adoption_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Adoption" EntitySet="Adoption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Adoption_Citys" Association="Self.FK_Adoption_Citys">
+      <End Role="Citys" EntitySet="Citys" />
+      <End Role="Adoption" EntitySet="Adoption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdpWish_AspNetUsers" Association="Self.FK_AdpWish_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AdpWish" EntitySet="AdpWish" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdpWish_Categories" Association="Self.FK_AdpWish_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="AdpWish" EntitySet="AdpWish" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdpWish_Citys" Association="Self.FK_AdpWish_Citys">
+      <End Role="Citys" EntitySet="Citys" />
+      <End Role="AdpWish" EntitySet="AdpWish" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_AspNetUsers" Association="Self.FK_Article_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Article" EntitySet="Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_Board" Association="Self.FK_Article_Board">
+      <End Role="Board" EntitySet="Board" />
+      <End Role="Article" EntitySet="Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_TitleCategories" Association="Self.FK_Article_TitleCategories">
+      <End Role="TitleCategories" EntitySet="TitleCategories" />
+      <End Role="Article" EntitySet="Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Board_AspNetUsers" Association="Self.FK_Board_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Board" EntitySet="Board" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Article" Association="Self.FK_Comment_Article">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_AspNetUsers" Association="Self.FK_Comment_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hospital_Citys" Association="Self.FK_Hospital_Citys">
+      <End Role="Citys" EntitySet="Citys" />
+      <End Role="Hospital" EntitySet="Hospital" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HospitalCategoryDetails_Categories" Association="Self.FK_HospitalCategoryDetails_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HospitalCategoryDetails_Hospital" Association="Self.FK_HospitalCategoryDetails_Hospital">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Scorce_AspNetUsers" Association="Self.FK_Scorce_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Scorce" EntitySet="Scorce" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Scorce_Hospital" Association="Self.FK_Scorce_Hospital">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="Scorce" EntitySet="Scorce" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPet_AspNetUsers" Association="Self.FK_UserPet_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserPet" EntitySet="UserPet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPet_Categories" Association="Self.FK_UserPet_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="UserPet" EntitySet="UserPet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

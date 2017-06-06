@@ -10,22 +10,15 @@
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <script src="~/Scripts/ckeditor/plugins/image/dialogs/image.js"></script>>
     <script>
-        var editor = CKEDITOR.replace('content', {
-            toolbar: 'Custom',
-            skin: "bootstrapck",
-            basepath: '/Article'
-        });
-        CKFinder.setupCKEditor(editor, { basePath: '/ckfinder/', rememberLastFolder: false });
+        $(function () {
+            CKEDITOR.replace('content', {
+                toolbar: 'Custom',
+                skin: "bootstrapck",
+                filebrowserImageBrowseUrl: "@Url.Action("CKEditorImageFileManager", "Article")"
+            });
+        }); 
     </script>
 }
-@section style{
-     <style>
-         #cke_content{
-             resize:none;
-         }
-     </style>
-    }
-
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
