@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CaptainMao.Areas.Adoption.Models
+namespace CaptainMao.Models
 {
     [MetadataType(typeof(CitysMetadata))]
     public partial class Citys

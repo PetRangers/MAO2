@@ -1,11 +1,48 @@
-﻿@model CaptainMao.Areas.Adoption.Models.Adoption
+﻿@model CaptainMao.Models.Adoption
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
-<!--aside側欄 article主欄-->
+@section style{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
 
+        #delete{
+            color:white;
+            margin-right:5px;
+        }
+    </style>
+}
+
+@section script{
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#del').click(function () {
+                var dialog = $("#dialog-confirm");
+                dialog.attr("style", "visibility:visible;")
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true
+                });
+            })
+
+            $('#cancel').click(function () {
+                $("#dialog-confirm").dialog("close");
+            })
+        });
+    </script>
+}
+
+
+
+
+<!--aside側欄 article主欄-->
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -14,7 +51,7 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div class="thumbnail drawingpin">
-        <h2>新增收養單</h2>
+        <h2>修改收養機會: @Html.DisplayFor(a => a.AdoptionID)</h2>
         <div class="row">
             <div class="col-md-7">
                 @using (Html.BeginForm("Edit", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
@@ -80,7 +117,7 @@
                         <div class="col-sm-10">
                             <img src="@Url.Action("GetImage",new { id = @Html.DisplayFor(a => a.AdoptionID) })" class="img-thumbnail thumb" />
                             @Html.HiddenFor(a => a.PetImage)
-                            @Html.HiddenFor(a => a.BytesImage )
+                            @Html.HiddenFor(a => a.BytesImage)
 
                             @Html.EditorFor(a => a.PetImage, new { HtmlAttributes = new { type = "file", @class = "form-control", placeholder = "Product Image" } })
                         </div>
@@ -89,10 +126,10 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-8">
                             <button type="submit" class="btn btn-primary">修改</button>
-                            @Html.ActionLink("取消", "AdoptionManage","Adoption", new { }, new { @class = "btn btn-default" });
+                            @Html.ActionLink("取消", "AdoptionManage", "Adoption", new { }, new { @class = "btn btn-default" })
                         </div>
                         <div class="col-sm-2">
-                            @Html.ActionLink("刪除", "AdoptionManage", "Adoption", new { }, new { @class = "btn btn-danger" });
+                            <button type="button" class="btn btn-danger pull-right" id="del">刪除</button>
                         </div>
                     </div>
                                 }
@@ -105,3 +142,12 @@
     <!-------------------articleEnd------------------->
 </article>
 
+<div id="dialog-confirm" title="您確定要刪除?" style="visibility:hidden;">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; "></span>您即將刪除這筆領養機會，使用者們將無法在領養列表看到這筆機會，您確定要刪除?</p>
+    <hr />
+    <span>
+        <button type="button" class="btn btn-default pull-right" id="cancel">取消</button>
+        @Html.ActionLink("刪除", "Delete", "Adoption", new { id = Model.AdoptionID }, new { @class = "btn btn-danger pull-right", id = "delete" })
+    </span>
+
+</div>

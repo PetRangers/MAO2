@@ -400,7 +400,7 @@ namespace CaptainMao.Controllers
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
-                return View("Error");
+                return RedirectToAction("Login", "Account");
             }
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
@@ -419,7 +419,7 @@ namespace CaptainMao.Controllers
                 return View();
             }
 
-            // 產生並傳送 Token
+            // 產生並傳送 Token  
             if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
                 return View("Error");
