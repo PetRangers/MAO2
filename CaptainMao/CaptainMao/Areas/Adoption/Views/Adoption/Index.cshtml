@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CaptainMao.Areas.Adoption.Models.Adoption>
+﻿@model IPagedList<CaptainMao.Models.Adoption>
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -6,33 +8,63 @@
 
 @section style{
     <style>
+
         #search{
-            background-color:yellow;
+            background-color:yellow;   
+            padding:10px;
+            font-size:20px
         }
 
-        .search label {
-            font-size: 20px;
+        #search button{
+            width:100px;
+            margin:10px;
+            font-size:20px
         }
 
-        .srchselect {
-            width: 100px;
-            font-size: 20px;
-        }
 
         #display{
-            background-color:yellow;
+            background-color:burlywood;
             padding-top:50px;
         }
 
         #display > .row > div > div {
-            height: 430px;
+            height: 450px;
+            font-size:20px;
         }
 
         #display img {
             height: 250px;
         }
+
     </style>
 }
+
+
+@section script{
+    <script>
+        $(document).ready(function () {
+            $('#txtsearch').change(function () {
+                var txt = $(this).val();
+
+
+                $('#searchStart').attr("href", function () {
+                    var url = $(this).attr("href");
+                    var cateid = "@Request.QueryString["categoryid"]";
+                    var cityid = "@Request.QueryString["cityid"]";
+                    if (cateid == "" && cityid == "")
+                    {
+                        var result = url + "?search=" + txt;
+                    }
+                    else
+                    {
+                        var result = "/Adoption/Adoption?categoryid=" +cateid +"&cityid=" +cityid + "&search=" + txt;
+                    }
+                    return result;
+                });
+            })
+        });
+    </script>
+    }
 
 <!--aside側欄 article主欄-->
 
@@ -44,14 +76,43 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
-        <div id="search"  class="drawingpin">
-            <div class="col-md-4 search"><label>寵物類別：</label><select class="srchselect"><option selected>狗</option><option>貓</option></select></div>
-            <div class="col-md-4 search"><label>　　性別：</label><select class="srchselect"><option selected>公</option><option>母</option></select></div>
-            <div class="col-md-4 search"><label>　　體型：</label><select class="srchselect"><option selected>小型</option><option>中型</option><option>大型</option></select></div>
-            <div class="col-md-4 search"><label>　　年紀：</label><select class="srchselect"><option selected>幼年</option><option>成年</option></select></div>
-            <div class="col-md-4 search"><label>所在地區：</label><select class="srchselect"><option selected>台北市</option><option>新北市</option><option>基隆市</option></select></div>
-            <div class="col-md-4 search"><label>　　毛色：</label><select class="srchselect"><option selected>黑色</option><option>黃色</option></select></div>
-            <div class="text-right"><button class="btn btn-default">搜尋</button></div>
+        <div id="search" class="drawingpin row">
+            <div><h2>條件搜尋</h2></div>
+            <div class="col-md-6">
+                <button class="btn btn-default" id="CateSearch" data-target="#cateSearch" data-toggle="modal">
+                    @if (ViewBag.category != null)
+                    {
+                        @ViewBag.category
+                    }
+                    else
+                    {
+                        @:寵物類別
+                }
+                </button>
+                <button class="btn btn-default" id="CitySearch" data-target="#citySearch" data-toggle="modal">
+                    @if (ViewBag.city != null)
+                    {
+                        @ViewBag.city
+                    }
+                    else
+                    {
+                        @:居住城市
+                }
+                </button>
+            </div>
+            @*<button class="btn btn-default">性別</button>
+                <button class="btn btn-default">體型</button>
+                <button class="btn btn-default">年紀</button>*@
+            <div class="col-md-6">
+                @using (Html.BeginForm("Index", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
+                    <input type="text" id="txtsearch" name="txtsearch" />
+                    <a href=@Url.Action("Index","Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
+                }
+            </div>
+
+
 
         </div>
         <br />
@@ -66,92 +127,58 @@
                                 <h2>@adoption.Name</h2>
                                 <p>@adoption.Sex</p>
                                 <p>@adoption.Build</p>
-                                <p>@Html.ActionLink("詳細資料","Details",new { id = adoption.AdoptionID}, new { @class = "btn btn-primary" })</p>
+                                <div class="pull-left">
+                                    @Html.DisplayNameFor(a => adoption.PostDate) :
+                                    @Html.DisplayFor(a => adoption.PostDate)
+                                </div>
+
+                                <div class="pull-right">
+                                    @Html.ActionLink("我要領養", "Email", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("詳細資料", "Details", new { id = adoption.AdoptionID }, new { @class = "btn btn-info" })
+                                </div>
                             </div>
                         </div>
                     </div>
                 }
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/B1.jpg">
-                                    <div class="caption">
-                                        <h2>貓頭鷹</h2>
-                                        <p>性別:母</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/C5.JPG">
-                                    <div class="caption">
-                                        <h2>貓</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/D2.jpg">
-                                    <div class="caption">
-                                        <h2>狗</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:中型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/D6.jpg">
-                                    <div class="caption">
-                                        <h2>狗</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/C5.JPG">
-                                    <div class="caption">
-                                        <h2>貓</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/C5.JPG">
-                                    <div class="caption">
-                                        <h2>貓</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <img src="/images/Adoption/C5.JPG">
-                                    <div class="caption">
-                                        <h2>貓</h2>
-                                        <p>性別:公</p>
-                                        <p>體型:小型</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"], search = Request.QueryString["search"] }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>
+
+@*寵物種類搜尋*@
+<div class="modal fade" id="cateSearch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">寵物類別</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("Categories", "Control")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+@*居住地搜尋*@
+<div class="modal fade" id="citySearch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">居住都市</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("Cities", "Control")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

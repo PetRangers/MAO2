@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CaptainMao.Models.Adoption>
+
+@{
+    ViewBag.Title = "WishJoin";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section style{
+    <style>
+        #search {
+            background-color: yellow;
+        }
+
+        .search label {
+            font-size: 20px;
+        }
+
+        .srchselect {
+            width: 100px;
+            font-size: 20px;
+        }
+
+        #display {
+            background-color: burlywood;
+            padding-top: 50px;
+        }
+
+            #display > .row > div > div {
+                height: 450px;
+                font-size: 20px;
+            }
+
+            #display img {
+                height: 250px;
+            }
+    </style>
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+        <div id="display" class="drawingpin">
+            <h2>心願編號: @ViewBag.wishID 的配對結果</h2>
+
+            <div class="row">
+                @foreach (var adoption in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Action("GetImage","Adoption",new { id =adoption.AdoptionID })">
+                            <div class="caption">
+                                <h2>@adoption.Name</h2>
+                                <p>@adoption.Sex</p>
+                                <p>@adoption.Build</p>
+                                <p class="pull-right">@Html.ActionLink("詳細資料", "Details", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>

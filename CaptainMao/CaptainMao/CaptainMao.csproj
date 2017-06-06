@@ -231,6 +231,8 @@
     <Content Include="images\navbar.png" />
     <Content Include="images\texture.png" />
     <Content Include="images\wrip.jpg" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\video.js" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -258,6 +260,12 @@
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdpWish.cshtml" />
     <Content Include="Areas\Article\Views\Article\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\BoardCategories.cshtml" />
     <Content Include="Areas\Article\Views\Article\Board.cshtml" />
@@ -267,6 +275,11 @@
     <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -282,8 +295,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -912,7 +927,9 @@
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -923,39 +940,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
-    <Compile Include="Areas\Adoption\Models\Adoption.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\AdpWish.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\Categories.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\Citys.cs">
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
     <Compile Include="Areas\Adoption\Models\IRepository.cs" />
-    <Compile Include="Areas\Adoption\Models\MAOModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\MAOModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Adoption\Models\MAOModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Adoption\Models\Partial\Adoption.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\AdpWish.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Categories.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Citys.cs" />
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\IndexViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
@@ -972,6 +966,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1005,9 +1000,15 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1023,38 +1024,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Merchandise.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Partial\Article.cs" />
     <Compile Include="Models\Partial\Comment.cs" />
     <Compile Include="Models\Partial\TitleCategories.cs" />
-    <Compile Include="Migrations\201705291831072_InitialCreate.cs" />
-    <Compile Include="Migrations\201705291831072_InitialCreate.Designer.cs">
-      <DependentUpon>201705291831072_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705291859312_Init.cs" />
-    <Compile Include="Migrations\201705291859312_Init.Designer.cs">
-      <DependentUpon>201705291859312_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705301454381_Init1.cs" />
-    <Compile Include="Migrations\201705301454381_Init1.Designer.cs">
-      <DependentUpon>201705301454381_Init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706040705238_Init2.cs" />
-    <Compile Include="Migrations\201706040705238_Init2.Designer.cs">
-      <DependentUpon>201706040705238_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706040736241_Init3.cs" />
-    <Compile Include="Migrations\201706040736241_Init3.Designer.cs">
-      <DependentUpon>201706040736241_Init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IdentityUtilities.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TitleCategories.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPet.cs">
@@ -1113,6 +1104,7 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Manage\UpdateProfile.cshtml" />
     <Content Include="Views\Account\Register2.cshtml" />
+    <Content Include="Views\Account\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
