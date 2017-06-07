@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -270,7 +269,6 @@
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
     <Content Include="css\StyleSheet_Master.less" />
-    <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\web.config" />
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
@@ -976,7 +974,6 @@
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

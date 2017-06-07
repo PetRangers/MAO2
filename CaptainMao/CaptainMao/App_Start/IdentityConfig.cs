@@ -11,11 +11,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CaptainMao.Models;
-using System.Web.Helpers;
 using Twilio;
 using Twilio.Clients;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
+using System.Web.Configuration;
 
 namespace CaptainMao
 {
@@ -68,43 +68,55 @@ namespace CaptainMao
         }
     }
 
-    //public class SmsService : IIdentityMessageService
-    //{
-    //    private readonly ITwilioMessageSender _messageSender;
+    public class SmsService : IIdentityMessageService
+    {
+        private readonly ITwilioMessageSender _messageSender;
 
-    //    public SmsService() : this(new TwilioMessageSender()) { }
+        public SmsService() : this(new TwilioMessageSender()) { }
 
-    //    public SmsService(ITwilioMessageSender messageSender)
-    //    {
-    //        _messageSender = messageSender;
-    //    }
+        public SmsService(ITwilioMessageSender messageSender)
+        {
+            _messageSender = messageSender;
+        }
 
-    //    public async Task SendAsync(IdentityMessage message)
-    //    {
-    //        await _messageSender.SendMessageAsync(message.Destination,
-    //                                              Config.TwilioNumber,
-    //                                              message.Body);
-    //    }
-    //}
+        public async Task SendAsync(IdentityMessage message)
+        {
+            await _messageSender.SendMessageAsync(message.Destination,
+                                                  Config.TwilioNumber,
+                                                  message.Body);
+        }
+    }
 
-    //public interface ITwilioMessageSender
-    //{
-    //    Task SendMessageAsync(string to, string from, string body);
-    //}
-    //public class TwilioMessageSender : ITwilioMessageSender
-    //{
-    //    public TwilioMessageSender()
-    //    {
-    //        TwilioClient.Init(Config.AccountSid, Config.AuthToken);
-    //    }
+    public interface ITwilioMessageSender
+    {
+        Task SendMessageAsync(string to, string from, string body);
+    }
+    public class TwilioMessageSender : ITwilioMessageSender
+    {
+        public TwilioMessageSender()
+        {
+            TwilioClient.Init(Config.AccountSid, Config.AuthToken);
+        }
 
-    //    public async Task SendMessageAsync(string to, string from, string body)
-    //    {
-    //        await MessageResource.CreateAsync(new PhoneNumber(to),
-    //                                          from: new PhoneNumber(from),
-    //                                          body: body);
-    //    }
-    //}
+        public async Task SendMessageAsync(string to, string from, string body)
+        {
+            await MessageResource.CreateAsync(new PhoneNumber(to),
+                                              from: new PhoneNumber(from),
+                                              body: body);
+        }
+    }
+
+    public class Config
+    {
+        public static string AccountSid => WebConfigurationManager.AppSettings["AccountSid"] ??
+                                           "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+
+        public static string AuthToken => WebConfigurationManager.AppSettings["AuthToken"] ??
+                                          "aXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+
+        public static string TwilioNumber => WebConfigurationManager.AppSettings["TwilioNumber"] ??
+                                             "+123456";
+    }
 
     // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -151,7 +163,7 @@ namespace CaptainMao
                 BodyFormat = "您的安全碼為 {0}"
             });
             manager.EmailService = new EmailService();
-            //manager.SmsService = new SmsService();
+            manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

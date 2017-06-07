@@ -27,7 +27,7 @@
                     <a class="btn btn-lg pull-left btn-dark accordion-toggle" title="關於我們" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <span class="sr-only">關於我們所有粉絲團</span>
                     </a>
-                    <a class="navbar-brand" href=@Url.Action("Index","CaptainMao")>CaptainMao</a>
+                    <a class="navbar-brand" href=@Url.Action("Index","CaptainMao",new { area=""})>CaptainMao</a>
                     <a id="menu-toggle" href="#" class="btn btn-lg btn-dark">
                         <span class="sr-only">開啟所有選單按鈕</span>
                         <i class="fa fa-bars"></i>
@@ -74,7 +74,7 @@
                             </ul>
                         </li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
+                        <li><a href="@Url.Action("Index","Adoption",new { area="Adoption"})" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
                         <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩地圖">美食醫院<br /><br />查詢專區</a></li>
                     </ul>
@@ -102,7 +102,7 @@
                     <a><strong>毛孩隊長</strong></a>
                 </li>
                 <li>
-                    @Html.ActionLink("回首頁","Index", "CaptainMao",null , new{ @title = "回首頁" })
+                    @Html.ActionLink("回首頁","Index", "CaptainMao", new { area = "" }, new{ @title = "回首頁" })
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">毛孩購物</a>
