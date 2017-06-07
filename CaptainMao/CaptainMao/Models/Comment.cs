@@ -21,6 +21,6 @@ namespace CaptainMao.Models
         public Nullable<System.DateTime> NewDateTime { get; set; }
     
         public virtual Article Article { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

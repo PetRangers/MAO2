@@ -24,8 +24,8 @@ namespace CaptainMao.Models
         public string Hair { get; set; }
         public System.DateTime PostDate { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Categories Categories { get; set; }
-        public virtual Citys Citys { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual City City { get; set; }
     }
 }

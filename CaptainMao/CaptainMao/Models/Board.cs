@@ -17,15 +17,15 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Board()
         {
-            this.Article = new HashSet<Article>();
+            this.Articles = new HashSet<Article>();
         }
     
         public int BoardID { get; set; }
         public string BoardName { get; set; }
         public string MasterUserID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Article> Article { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

@@ -12,23 +12,23 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUsers
+    public partial class AspNetUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetUsers()
+        public AspNetUser()
         {
-            this.Adoption = new HashSet<Adoption>();
-            this.AdpWish = new HashSet<AdpWish>();
-            this.Article = new HashSet<Article>();
-            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            this.Board = new HashSet<Board>();
-            this.Comment = new HashSet<Comment>();
-            this.Merchandise = new HashSet<Merchandise>();
-            this.Order = new HashSet<Order>();
-            this.Scorce = new HashSet<Scorce>();
-            this.UserPet = new HashSet<UserPet>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.Merchandises = new HashSet<Merchandise>();
+            this.Orders = new HashSet<Order>();
+            this.Boards = new HashSet<Board>();
+            this.Adoptions = new HashSet<Adoption>();
+            this.AdpWishes = new HashSet<AdpWish>();
+            this.Articles = new HashSet<Article>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.Comments = new HashSet<Comment>();
+            this.Scorces = new HashSet<Scorce>();
+            this.UserPets = new HashSet<UserPet>();
+            this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
         public string Id { get; set; }
@@ -52,28 +52,28 @@ namespace CaptainMao.Models
         public byte[] Photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adoption> Adoption { get; set; }
+        public virtual ICollection<Merchandise> Merchandises { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdpWish> AdpWish { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Article> Article { get; set; }
+        public virtual ICollection<Board> Boards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual ICollection<Adoption> Adoptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<AdpWish> AdpWishes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Board> Board { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandise { get; set; }
+        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Scorce> Scorce { get; set; }
+        public virtual ICollection<Scorce> Scorces { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPet> UserPet { get; set; }
+        public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

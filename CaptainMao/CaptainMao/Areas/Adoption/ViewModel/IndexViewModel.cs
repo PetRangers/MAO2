@@ -9,7 +9,7 @@ namespace CaptainMao.Areas.Adoption.ViewModel
     public class IndexViewModel
     {
         public IEnumerable<CaptainMao.Models.Adoption> adoptions { get; set; }
-        public IEnumerable<Categories> categories { get; set; }
-        public IEnumerable<Citys> cities { get; set; }
+        public IEnumerable<Category> categories { get; set; }
+        public IEnumerable<City> cities { get; set; }
     }
 }
