@@ -35,7 +35,16 @@
             
     </script>
     }
-
+@section style{
+    <style>
+        .title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 200px;
+        }
+    </style>
+}
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -74,7 +83,7 @@
                             <td><a href="@Url.Action("Index","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategories.TitleCategoryName)</a></td>
                             <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
                             <td>
-                                <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})">@Html.DisplayFor(a => item.Title)</a>
+                                <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
                             </td>
                             <td>@Html.DisplayFor(a => item.PosterID)</td>
                             <td>@Html.DisplayFor(a => item.Comment.Count) / @Html.DisplayFor(a => item.Number)</td>

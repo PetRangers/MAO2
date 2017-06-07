@@ -9,6 +9,7 @@ using PagedList.Mvc;
 using PagedList;
 using Microsoft.Security.Application;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.Article.Controllers
 {
@@ -42,9 +43,27 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult Board()
         {
             BoardViewModel board = new BoardViewModel();
+            string imgpath = "";
             board.article = db.Article.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(6);
+            foreach (var item in board.article)
+            {
+                imgpath = GetImgPath(item.ContentText);
+                item.ContentText = imgpath;
+            }
             return View(board);
         }
+
+        private string GetImgPath(string contentText)
+        {
+            string imgpath = "";
+            if (contentText.Contains("src=\""))
+            {
+                imgpath = contentText.Split(new string[] { "src=\"" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new string[] { "\"" }, StringSplitOptions.RemoveEmptyEntries)[0];
+            }
+            imgpath = imgpath != ""  ? imgpath : "\\images\\catdog.png";
+            return imgpath;
+        }
+
         public ActionResult Create()
         {
             ViewBag.datas = db.TitleCategories.ToList();
@@ -66,7 +85,8 @@ namespace CaptainMao.Areas.Article.Controllers
             {
                 article.CreateDateTime = DateTime.Now;
                 article.LastChDateTime = DateTime.Now;
-                
+
+                //string posterid= User.Identity.GetUserId();
                 article.PosterID = db.Article.First().PosterID;
                 article.Number = 0;
 
@@ -100,6 +120,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             if (ModelState.IsValid)
             {
+                //comment.ArticleID= db.AspNetUsers.Find(id).Id;
                 comment.ArticleID = db.Article.Find(id).ArticleID;
                 //comment.ArticleID = commentdb.GetID(id).ArticleID;
                 comment.NewDateTime = DateTime.Now;
