@@ -17,13 +17,13 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Type()
         {
-            this.sTypes = new HashSet<sType>();
+            this.sType = new HashSet<sType>();
         }
     
         public int Type_ID { get; set; }
         public string Type_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sType> sTypes { get; set; }
+        public virtual ICollection<sType> sType { get; set; }
     }
 }

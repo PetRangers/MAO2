@@ -17,7 +17,7 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public sType()
         {
-            this.Merchandises = new HashSet<Merchandise>();
+            this.Merchandise = new HashSet<Merchandise>();
         }
     
         public int sType_ID { get; set; }
@@ -26,6 +26,6 @@ namespace CaptainMao.Models
     
         public virtual Type Type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        public virtual ICollection<Merchandise> Merchandise { get; set; }
     }
 }

@@ -260,35 +260,6 @@ body a:hover {
   aside > .panel:hover {
     left: 0px;
   }
-}
-aside {
-  display: block;
-}
-aside .panel {
-  box-shadow: -2px 5px 10px;
-  position: fixed;
-  z-index: 805;
-}
-aside a {
-  display: block;
-  padding-left: 10px;
-  color: #8a0e0b;
-}
-aside .list-group-item {
-  background-color: rgba(247, 237, 205, 0.8);
-}
-article {
-  padding: 10px 0px;
-  background-color: rgba(49, 44, 38, 0.38);
-  background-image: url("../images/texture.png");
-}
-footer {
-  height: 50px;
-  background-image: url('../images/navbar.png');
-  background-size: cover;
-  background-position: center;
-  clear: both;
-}
 /*navbar*/
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a,

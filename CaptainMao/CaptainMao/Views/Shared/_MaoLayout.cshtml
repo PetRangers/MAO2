@@ -11,12 +11,12 @@
     <meta name="keywords" content="寵物,毛小孩,狗,狗狗,汪,喵,貓,貓咪,領養,討論,寵物美容" />
     <title>@ViewBag.Title - CaptainMao</title>
 
+     @Styles.Render("~/css")
 
-    @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet" />
     @RenderSection("style", false)
-
+      
 </head>
 <body>
     <div id="page">
@@ -27,7 +27,7 @@
                     <a class="btn btn-lg pull-left btn-dark accordion-toggle" title="關於我們" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <span class="sr-only">關於我們所有粉絲團</span>
                     </a>
-                    <a class="navbar-brand" href="#">CaptainMao</a>
+                    <a class="navbar-brand" href=@Url.Action("Index","CaptainMao",new { area=""})>CaptainMao</a>
                     <a id="menu-toggle" href="#" class="btn btn-lg btn-dark">
                         <span class="sr-only">開啟所有選單按鈕</span>
                         <i class="fa fa-bars"></i>
@@ -74,8 +74,8 @@
                             </ul>
                         </li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
+                        <li><a href="@Url.Action("Index","Adoption",new { area="Adoption"})" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
+                        <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩地圖">美食醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -89,10 +89,7 @@
                                 <li><a href="#">Separated link</a></li>
                             </ul>
                         </li>
-                        <li>
-                        @Html.ActionLink("user", "index", "Login","buy", new { @class = "glyphicon glyphicon-user" })
-                            
-                        </li>
+                        @Html.Partial("_LoginPartial")
                     </ul>
                 </div><!-- /.nav-collapse -->
             </div><!-- /.container-fluid -->
@@ -105,7 +102,7 @@
                     <a><strong>毛孩隊長</strong></a>
                 </li>
                 <li>
-                    @Html.ActionLink("回首頁","Index", "CaptainMao", new{ @title = "回首頁" })
+                    @Html.ActionLink("回首頁","Index", "CaptainMao", new { area = "" }, new{ @title = "回首頁" })
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">毛孩購物</a>
@@ -133,7 +130,7 @@
         <!-- 左邊側欄-->
         <div id="accordion" class="social">
             <div class="accordion-social">
-<!--class加in會打開--><ul class="panel-collapse collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
+                <!--class加in會打開--><ul class="panel-collapse collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
                     <li><a href="https://www.facebook.com/soldierupdesigns" target="_blank" class="fa fa-lg fa-facebook"></a></li>
                     <li><a href="https://twitter.com/soldierupdesign" target="_blank" class="fa fa-lg fa-twitter"></a></li>
                     <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank" class="fa fa-lg fa-google-plus"></a></li>

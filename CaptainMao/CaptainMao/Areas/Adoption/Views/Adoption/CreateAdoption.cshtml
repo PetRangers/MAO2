@@ -1,11 +1,17 @@
-﻿@model CaptainMao.Areas.Adoption.Models.Adoption
+﻿@model CaptainMao.Models.Adoption
 @{
     ViewBag.Title = "CreateAdoption";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
 <!--aside側欄 article主欄-->
-
+@section style{
+    <style>
+        #frm{
+            font-size:18px;
+        }
+    </style>
+    }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -14,10 +20,10 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div class="thumbnail drawingpin">
-        <h2>新增收養單</h2>
+        <h2>新增領養機會</h2>
         <div class="row">
             <div class="col-md-7">
-                @using (Html.BeginForm("CreateAdoption", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("CreateAdoption", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id="frm" }))
                 {
                     <div class="form-group">
                         @Html.LabelFor(a => a.Name, new { @class = "col-sm-2 control-label" })
@@ -38,12 +44,14 @@
                                 var categories = new SelectList(ViewBag.Category, "CategoryID", "CategoryName");
                             }
                             @Html.DropDownListFor(a => a.CategoryID, categories, "請選擇", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CategoryID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(a => a.Build, new { @class = "col-sm-2 control-label" })
                         <div class="col-sm-10">
                             @Html.EditorFor(a => a.Build, new { HtmlAttributes = new { @class = "form-control", placeholder = "Build" } })
+                            @Html.ValidationMessageFor(m => m.Build, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -59,6 +67,7 @@
                                 var cities = new SelectList(ViewBag.City, "CityID", "CityName");
                             }
                             @Html.DropDownListFor(a => a.CityID, cities, "請選擇", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CityID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">

@@ -17,7 +17,7 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.Merchandises = new HashSet<Merchandise>();
+            this.Merchandise = new HashSet<Merchandise>();
         }
     
         public int Order_ID { get; set; }
@@ -26,8 +26,8 @@ namespace CaptainMao.Models
         public System.DateTime Order_Createdate { get; set; }
         public bool Order_Fitness { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        public virtual ICollection<Merchandise> Merchandise { get; set; }
     }
 }
