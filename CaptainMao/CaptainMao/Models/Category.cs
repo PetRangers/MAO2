@@ -18,6 +18,10 @@ namespace CaptainMao.Models
         public Category()
         {
             this.Merchandises = new HashSet<Merchandise>();
+            this.Adoptions = new HashSet<Adoption>();
+            this.AdpWishes = new HashSet<AdpWish>();
+            this.UserPets = new HashSet<UserPet>();
+            this.Hospitals = new HashSet<Hospital>();
         }
     
         public int CategoryID { get; set; }
@@ -25,5 +29,13 @@ namespace CaptainMao.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandises { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Adoption> Adoptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdpWish> AdpWishes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPet> UserPets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Hospital> Hospitals { get; set; }
     }
 }

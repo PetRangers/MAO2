@@ -2,7 +2,6 @@
 using CaptainMao.Models;
 using Newtonsoft.Json;
 using System;
-using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -118,6 +117,7 @@ namespace CaptainMao.Areas.buy.Models
             mer.Merchandise_Photo = vm._Merchandise.Merchandise_Photo;
             mer.Merchandise_Price = vm._Merchandise.Merchandise_Price;
             mer.Store_ID = vm._Merchandise.Store_ID;
+            mer.Merchandise_Creatdate = DateTime.UtcNow;
             //尋找剛剛創出的ID
             int Merchandise_ID=  MerSaveReturnID(mer);
             for (int x= 0;x< vm.sType_ID.Length;x++) {

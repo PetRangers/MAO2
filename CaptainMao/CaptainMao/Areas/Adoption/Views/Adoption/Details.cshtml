@@ -1,8 +1,110 @@
-﻿
-@{
+﻿@model CaptainMao.Areas.Adoption.ViewModel.AdoptionViewModel
+@{ 
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
-<h2>Details</h2>
+@section style{
+    <style>
+        img{
+            width:500px;
+        }
 
+        .row>div{
+            margin-top:50px;
+            font-size:20px;
+        }
+    </style>
+    }
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+        <div class="thumbnail drawingpin">
+            <div class="row">
+                <div class="col-md-5">
+                    <img src="@Url.Action("GetImage","Adoption",new { id =Model.adoption.AdoptionID })" />
+                </div>
+
+                <div class="col-md-7 form-horizontal">
+                    <div class="caption">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Name,new { @class = "col-sm-2"})
+                            <div class="col-sm-10">                          
+                                @Html.DisplayFor(a => a.adoption.Name)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Sex, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.Sex)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.category.CategoryName, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.category.CategoryName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Build, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.Build)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Age, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.Age)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.city.CityName, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.city.CityName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Hair, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.Hair)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.Description, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.Description)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.NormalUser.LastName, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.NormalUser.LastName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.NormalUser.Phone, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.NormalUser.Phone)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.adoption.NormalUser.Email, new { @class = "col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(a => a.adoption.NormalUser.Email)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-------------------articleEnd------------------->
+</article>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adoption">
           <Key>
             <PropertyRef Name="AdoptionID" />
@@ -152,7 +152,6 @@
           <Property Name="HospitalAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AddressArea" Type="int" Nullable="false" />
           <Property Name="HospitalPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CategoryID" Type="int" />
           <Property Name="BusinessHours" Type="nvarchar" MaxLength="50" />
           <Property Name="Emergency" Type="nvarchar" MaxLength="50" />
           <Property Name="OutpatientProject" Type="nvarchar" MaxLength="50" />
@@ -161,6 +160,7 @@
           <Property Name="OnlineConsultation" Type="nvarchar" MaxLength="50" />
           <Property Name="OnView" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Map" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
         </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'Mao.dbo.HospitalCategoryDetails' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
@@ -500,7 +500,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_merchandise_AspNetUsers">
+        <Association Name="FK_Merchandise_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -644,6 +644,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+          <Parameter Name="sTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+          <Parameter Name="sTypeID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="MaoModelStoreContainer">
           <EntitySet Name="Adoption" EntityType="Self.Adoption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdpWish" EntityType="Self.AdpWish" Schema="dbo" store:Type="Tables" />
@@ -767,7 +778,7 @@
             <End Role="Hospital" EntitySet="Hospital" />
             <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_merchandise_AspNetUsers" Association="Self.FK_merchandise_AspNetUsers">
+          <AssociationSet Name="FK_Merchandise_AspNetUsers" Association="Self.FK_Merchandise_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Merchandise" EntitySet="Merchandise" />
           </AssociationSet>
@@ -816,103 +827,155 @@
             <End Role="UserPet" EntitySet="UserPet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Adoption">
-          <Key>
-            <PropertyRef Name="AdoptionID" />
-          </Key>
-          <Property Name="AdoptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Build" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Age" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CityID" Type="Int32" Nullable="false" />
-          <Property Name="Hair" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BytesImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PetImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DelCheck" Type="Boolean" Nullable="false" />
-          <Property Name="RegistrationUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Adoption_AspNetUsers" FromRole="Adoption" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_Adoption_Categories" FromRole="Adoption" ToRole="Categories" />
-          <NavigationProperty Name="Citys" Relationship="Self.FK_Adoption_Citys" FromRole="Adoption" ToRole="Citys" />
-        </EntityType>
-        <EntityType Name="AdpWish">
-          <Key>
-            <PropertyRef Name="WishID" />
-          </Key>
-          <Property Name="WishID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Build" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Age" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CityID" Type="Int32" Nullable="false" />
-          <Property Name="Hair" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AdpWish_AspNetUsers" FromRole="AdpWish" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_AdpWish_Categories" FromRole="AdpWish" ToRole="Categories" />
-          <NavigationProperty Name="Citys" Relationship="Self.FK_AdpWish_Citys" FromRole="AdpWish" ToRole="Citys" />
-        </EntityType>
-        <EntityType Name="Article">
-          <Key>
-            <PropertyRef Name="ArticleID" />
-          </Key>
-          <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BoardID" Type="Int32" Nullable="false" />
-          <Property Name="PosterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TitleCategoryID" Type="Int32" Nullable="false" />
-          <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastChDateTime" Type="DateTime" Precision="3" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Article_AspNetUsers" FromRole="Article" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Board" Relationship="Self.FK_Article_Board" FromRole="Article" ToRole="Board" />
-          <NavigationProperty Name="TitleCategories" Relationship="Self.FK_Article_TitleCategories" FromRole="Article" ToRole="TitleCategories" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Article" FromRole="Article" ToRole="Comment" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
+        <EntityContainer Name="MaoEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="DeleteToMerchandise_Type_View">
+          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EditToMerchandise_Type_View">
+            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+            <Parameter Name="sTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertToMerchandise_Type_View">
+            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+            <Parameter Name="sTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AspNetUsers" EntityType="MaoModel.AspNetUser" />
+          <EntitySet Name="Categories" EntityType="MaoModel.Category" />
+          <EntitySet Name="Merchandises" EntityType="MaoModel.Merchandise" />
+          <EntitySet Name="Orders" EntityType="MaoModel.Order" />
+          <EntitySet Name="sTypes" EntityType="MaoModel.sType" />
+          <EntitySet Name="Types" EntityType="MaoModel.Type" />
+          <AssociationSet Name="FK_Merchandise_AspNetUsers" Association="MaoModel.FK_Merchandise_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_AspNetUsers" Association="MaoModel.FK_Order_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_merchandise_Categories" Association="MaoModel.FK_merchandise_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sType_Type" Association="MaoModel.FK_sType_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="sType" EntitySet="sTypes" />
+          </AssociationSet>
+          <AssociationSet Name="Merchandise_Type_View" Association="MaoModel.Merchandise_Type_View">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="sType" EntitySet="sTypes" />
+          </AssociationSet>
+          <AssociationSet Name="Merchandsie_Order_View" Association="MaoModel.Merchandsie_Order_View">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Boards" EntityType="MaoModel.Board" />
+          <AssociationSet Name="FK_Board_AspNetUsers" Association="MaoModel.FK_Board_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Board" EntitySet="Boards" />
+          </AssociationSet>
+          <EntitySet Name="Adoptions" EntityType="MaoModel.Adoption" />
+          <EntitySet Name="AdpWishes" EntityType="MaoModel.AdpWish" />
+          <EntitySet Name="Articles" EntityType="MaoModel.Article" />
+          <EntitySet Name="AspNetRoles" EntityType="MaoModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="MaoModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="MaoModel.AspNetUserLogin" />
+          <EntitySet Name="Citys" EntityType="MaoModel.City" />
+          <EntitySet Name="Comments" EntityType="MaoModel.Comment" />
+          <EntitySet Name="Hospitals" EntityType="MaoModel.Hospital" />
+          <EntitySet Name="TitleCategories" EntityType="MaoModel.TitleCategory" />
+          <EntitySet Name="UserPets" EntityType="MaoModel.UserPet" />
+          <EntitySet Name="Scorces" EntityType="MaoModel.Scorce" />
+          <AssociationSet Name="FK_Adoption_AspNetUsers" Association="MaoModel.FK_Adoption_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Adoption" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adoption_Categories" Association="MaoModel.FK_Adoption_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Adoption" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adoption_Citys" Association="MaoModel.FK_Adoption_Citys">
+            <End Role="City" EntitySet="Citys" />
+            <End Role="Adoption" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdpWish_AspNetUsers" Association="MaoModel.FK_AdpWish_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AdpWish" EntitySet="AdpWishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdpWish_Categories" Association="MaoModel.FK_AdpWish_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="AdpWish" EntitySet="AdpWishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdpWish_Citys" Association="MaoModel.FK_AdpWish_Citys">
+            <End Role="City" EntitySet="Citys" />
+            <End Role="AdpWish" EntitySet="AdpWishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_AspNetUsers" Association="MaoModel.FK_Article_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_Board" Association="MaoModel.FK_Article_Board">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Article_TitleCategories" Association="MaoModel.FK_Article_TitleCategories">
+            <End Role="TitleCategory" EntitySet="TitleCategories" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Article" Association="MaoModel.FK_Comment_Article">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MaoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_AspNetUsers" Association="MaoModel.FK_Comment_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scorce_AspNetUsers" Association="MaoModel.FK_Scorce_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Scorce" EntitySet="Scorces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPet_AspNetUsers" Association="MaoModel.FK_UserPet_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserPet" EntitySet="UserPets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPet_Categories" Association="MaoModel.FK_UserPet_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="UserPet" EntitySet="UserPets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospital_Citys" Association="MaoModel.FK_Hospital_Citys">
+            <End Role="City" EntitySet="Citys" />
+            <End Role="Hospital" EntitySet="Hospitals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scorce_Hospital" Association="MaoModel.FK_Scorce_Hospital">
+            <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="Scorce" EntitySet="Scorces" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="MaoModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="HospitalCategoryDetails" Association="MaoModel.HospitalCategoryDetails">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Hospital" EntitySet="Hospitals" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -923,7 +986,7 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -931,50 +994,254 @@
           <Property Name="Experience" Type="Int32" Nullable="false" />
           <Property Name="DateRegistered" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Adoption" Relationship="Self.FK_Adoption_AspNetUsers" FromRole="AspNetUsers" ToRole="Adoption" />
-          <NavigationProperty Name="AdpWish" Relationship="Self.FK_AdpWish_AspNetUsers" FromRole="AspNetUsers" ToRole="AdpWish" />
-          <NavigationProperty Name="Article" Relationship="Self.FK_Article_AspNetUsers" FromRole="AspNetUsers" ToRole="Article" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Board" Relationship="Self.FK_Board_AspNetUsers" FromRole="AspNetUsers" ToRole="Board" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_AspNetUsers" FromRole="AspNetUsers" ToRole="Comment" />
-          <NavigationProperty Name="Merchandise" Relationship="Self.FK_merchandise_AspNetUsers" FromRole="AspNetUsers" ToRole="Merchandise" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_AspNetUsers" FromRole="AspNetUsers" ToRole="Order" />
-          <NavigationProperty Name="Scorce" Relationship="Self.FK_Scorce_AspNetUsers" FromRole="AspNetUsers" ToRole="Scorce" />
-          <NavigationProperty Name="UserPet" Relationship="Self.FK_UserPet_AspNetUsers" FromRole="AspNetUsers" ToRole="UserPet" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Merchandises" Relationship="MaoModel.FK_Merchandise_AspNetUsers" FromRole="AspNetUser" ToRole="Merchandise" />
+          <NavigationProperty Name="Orders" Relationship="MaoModel.FK_Order_AspNetUsers" FromRole="AspNetUser" ToRole="Order" />
+          <NavigationProperty Name="Boards" Relationship="MaoModel.FK_Board_AspNetUsers" FromRole="AspNetUser" ToRole="Board" />
+          <NavigationProperty Name="Adoptions" Relationship="MaoModel.FK_Adoption_AspNetUsers" FromRole="AspNetUser" ToRole="Adoption" />
+          <NavigationProperty Name="AdpWishes" Relationship="MaoModel.FK_AdpWish_AspNetUsers" FromRole="AspNetUser" ToRole="AdpWish" />
+          <NavigationProperty Name="Articles" Relationship="MaoModel.FK_Article_AspNetUsers" FromRole="AspNetUser" ToRole="Article" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="MaoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Comments" Relationship="MaoModel.FK_Comment_AspNetUsers" FromRole="AspNetUser" ToRole="Comment" />
+          <NavigationProperty Name="Scorces" Relationship="MaoModel.FK_Scorce_AspNetUsers" FromRole="AspNetUser" ToRole="Scorce" />
+          <NavigationProperty Name="UserPets" Relationship="MaoModel.FK_UserPet_AspNetUsers" FromRole="AspNetUser" ToRole="UserPet" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MaoModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Merchandises" Relationship="MaoModel.FK_merchandise_Categories" FromRole="Category" ToRole="Merchandise" />
+          <NavigationProperty Name="Adoptions" Relationship="MaoModel.FK_Adoption_Categories" FromRole="Category" ToRole="Adoption" />
+          <NavigationProperty Name="AdpWishes" Relationship="MaoModel.FK_AdpWish_Categories" FromRole="Category" ToRole="AdpWish" />
+          <NavigationProperty Name="UserPets" Relationship="MaoModel.FK_UserPet_Categories" FromRole="Category" ToRole="UserPet" />
+          <NavigationProperty Name="Hospitals" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Category" ToRole="Hospital" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="Merchandise_ID" />
+          </Key>
+          <Property Name="Merchandise_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Merchandise_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Merchandise_Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Merchandise_Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Merchandise_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Merchandise_Fitness" Type="Boolean" Nullable="false" />
+          <Property Name="Merchandise_Creatdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Merchandiser_Editdata" Type="DateTime" Precision="3" />
+          <Property Name="Store_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Merchandise_AspNetUsers" FromRole="Merchandise" ToRole="AspNetUser" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_merchandise_Categories" FromRole="Merchandise" ToRole="Category" />
+          <NavigationProperty Name="sTypes" Relationship="MaoModel.Merchandise_Type_View" FromRole="Merchandise" ToRole="sType" />
+          <NavigationProperty Name="Orders" Relationship="MaoModel.Merchandsie_Order_View" FromRole="Merchandise" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="user_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
+          <Property Name="Order_Createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUser" />
+          <NavigationProperty Name="Merchandises" Relationship="MaoModel.Merchandsie_Order_View" FromRole="Order" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="sType">
+          <Key>
+            <PropertyRef Name="sType_ID" />
+          </Key>
+          <Property Name="sType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sType_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="MaoModel.FK_sType_Type" FromRole="sType" ToRole="Type" />
+          <NavigationProperty Name="Merchandises" Relationship="MaoModel.Merchandise_Type_View" FromRole="sType" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sTypes" Relationship="MaoModel.FK_sType_Type" FromRole="Type" ToRole="sType" />
+        </EntityType>
+        <Association Name="FK_Merchandise_AspNetUsers">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="Store_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_AspNetUsers">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="user_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_merchandise_Categories">
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sType_Type">
+          <End Type="MaoModel.Type" Role="Type" Multiplicity="1" />
+          <End Type="MaoModel.sType" Role="sType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="sType">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Merchandise_Type_View">
+          <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <End Type="MaoModel.sType" Role="sType" Multiplicity="*" />
+        </Association>
+        <Association Name="Merchandsie_Order_View">
+          <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <End Type="MaoModel.Order" Role="Order" Multiplicity="*" />
+        </Association>
         <EntityType Name="Board">
           <Key>
             <PropertyRef Name="BoardID" />
           </Key>
           <Property Name="BoardID" Type="Int32" Nullable="false" />
-          <Property Name="BoardName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BoardName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MasterUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Article" Relationship="Self.FK_Article_Board" FromRole="Board" ToRole="Article" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Board_AspNetUsers" FromRole="Board" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Board_AspNetUsers" FromRole="Board" ToRole="AspNetUser" />
+          <NavigationProperty Name="Articles" Relationship="MaoModel.FK_Article_Board" FromRole="Board" ToRole="Article" />
         </EntityType>
-        <EntityType Name="Categories">
+        <Association Name="FK_Board_AspNetUsers">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="MaoModel.Board" Role="Board" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="MasterUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Adoption">
           <Key>
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="AdoptionID" />
           </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Adoption" Relationship="Self.FK_Adoption_Categories" FromRole="Categories" ToRole="Adoption" />
-          <NavigationProperty Name="AdpWish" Relationship="Self.FK_AdpWish_Categories" FromRole="Categories" ToRole="AdpWish" />
-          <NavigationProperty Name="Merchandise" Relationship="Self.FK_merchandise_Categories" FromRole="Categories" ToRole="Merchandise" />
-          <NavigationProperty Name="UserPet" Relationship="Self.FK_UserPet_Categories" FromRole="Categories" ToRole="UserPet" />
-          <NavigationProperty Name="Hospital" Relationship="Self.HospitalCategoryDetails" FromRole="Categories" ToRole="Hospital" />
+          <Property Name="AdoptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Build" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="Hair" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BytesImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PetImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DelCheck" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Adoption_AspNetUsers" FromRole="Adoption" ToRole="AspNetUser" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_Adoption_Categories" FromRole="Adoption" ToRole="Category" />
+          <NavigationProperty Name="City" Relationship="MaoModel.FK_Adoption_Citys" FromRole="Adoption" ToRole="City" />
         </EntityType>
-        <EntityType Name="Citys">
+        <EntityType Name="AdpWish">
+          <Key>
+            <PropertyRef Name="WishID" />
+          </Key>
+          <Property Name="WishID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Build" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="Hair" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_AdpWish_AspNetUsers" FromRole="AdpWish" ToRole="AspNetUser" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_AdpWish_Categories" FromRole="AdpWish" ToRole="Category" />
+          <NavigationProperty Name="City" Relationship="MaoModel.FK_AdpWish_Citys" FromRole="AdpWish" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardID" Type="Int32" Nullable="false" />
+          <Property Name="PosterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TitleCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastChDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Article_AspNetUsers" FromRole="Article" ToRole="AspNetUser" />
+          <NavigationProperty Name="Board" Relationship="MaoModel.FK_Article_Board" FromRole="Article" ToRole="Board" />
+          <NavigationProperty Name="TitleCategory" Relationship="MaoModel.FK_Article_TitleCategories" FromRole="Article" ToRole="TitleCategory" />
+          <NavigationProperty Name="Comments" Relationship="MaoModel.FK_Comment_Article" FromRole="Article" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MaoModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityID" />
           </Key>
           <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Adoption" Relationship="Self.FK_Adoption_Citys" FromRole="Citys" ToRole="Adoption" />
-          <NavigationProperty Name="AdpWish" Relationship="Self.FK_AdpWish_Citys" FromRole="Citys" ToRole="AdpWish" />
-          <NavigationProperty Name="Hospital" Relationship="Self.FK_Hospital_Citys" FromRole="Citys" ToRole="Hospital" />
+          <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adoptions" Relationship="MaoModel.FK_Adoption_Citys" FromRole="City" ToRole="Adoption" />
+          <NavigationProperty Name="AdpWishes" Relationship="MaoModel.FK_AdpWish_Citys" FromRole="City" ToRole="AdpWish" />
+          <NavigationProperty Name="Hospitals" Relationship="MaoModel.FK_Hospital_Citys" FromRole="City" ToRole="Hospital" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -982,123 +1249,74 @@
           </Key>
           <Property Name="ArticleID" Type="Int32" Nullable="false" />
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PosterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PosterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewDateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Article" Relationship="Self.FK_Comment_Article" FromRole="Comment" ToRole="Article" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Comment_AspNetUsers" FromRole="Comment" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Article" Relationship="MaoModel.FK_Comment_Article" FromRole="Comment" ToRole="Article" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Comment_AspNetUsers" FromRole="Comment" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Hospital">
           <Key>
             <PropertyRef Name="HospitalID" />
           </Key>
           <Property Name="HospitalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HospitalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="HospitalAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HospitalName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HospitalAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AddressArea" Type="Int32" Nullable="false" />
-          <Property Name="HospitalPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="HospitalPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BusinessHours" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Emergency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OutpatientProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WebAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OnlineConsultation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OnView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OnView" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Map" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Citys" Relationship="Self.FK_Hospital_Citys" FromRole="Hospital" ToRole="Citys" />
-          <NavigationProperty Name="Scorce" Relationship="Self.FK_Scorce_Hospital" FromRole="Hospital" ToRole="Scorce" />
-          <NavigationProperty Name="Categories" Relationship="Self.HospitalCategoryDetails" FromRole="Hospital" ToRole="Categories" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="MaoModel.FK_Hospital_Citys" FromRole="Hospital" ToRole="City" />
+          <NavigationProperty Name="Scorces" Relationship="MaoModel.FK_Scorce_Hospital" FromRole="Hospital" ToRole="Scorce" />
+          <NavigationProperty Name="Categories" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Hospital" ToRole="Category" />
         </EntityType>
-        <EntityType Name="TitleCategories">
+        <EntityType Name="TitleCategory">
           <Key>
             <PropertyRef Name="TitleCategoryID" />
           </Key>
           <Property Name="TitleCategoryID" Type="Int32" Nullable="false" />
-          <Property Name="TitleCategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Article" Relationship="Self.FK_Article_TitleCategories" FromRole="TitleCategories" ToRole="Article" />
+          <Property Name="TitleCategoryName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Articles" Relationship="MaoModel.FK_Article_TitleCategories" FromRole="TitleCategory" ToRole="Article" />
         </EntityType>
         <EntityType Name="UserPet">
           <Key>
             <PropertyRef Name="PetID" />
           </Key>
           <Property Name="PetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PetName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="PetSex" Type="Boolean" />
           <Property Name="PetPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="PetBirthday" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_UserPet_AspNetUsers" FromRole="UserPet" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_UserPet_Categories" FromRole="UserPet" ToRole="Categories" />
-        </EntityType>
-        <EntityType Name="Merchandise">
-          <Key>
-            <PropertyRef Name="Merchandise_ID" />
-          </Key>
-          <Property Name="Merchandise_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Merchandise_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Merchandise_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Merchandise_Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Merchandise_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Merchandise_Fitness" Type="Boolean" Nullable="false" />
-          <Property Name="Merchandise_Creatdate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Merchandiser_Editdata" Type="DateTime" Precision="3" />
-          <Property Name="Store_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_merchandise_AspNetUsers" FromRole="Merchandise" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_merchandise_Categories" FromRole="Merchandise" ToRole="Categories" />
-          <NavigationProperty Name="sType" Relationship="Self.Merchandise_Type_View" FromRole="Merchandise" ToRole="sType" />
-          <NavigationProperty Name="Order" Relationship="Self.Merchandsie_Order_View" FromRole="Merchandise" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Order_ID" />
-          </Key>
-          <Property Name="Order_ID" Type="Int32" Nullable="false" />
-          <Property Name="user_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
-          <Property Name="Order_Createdate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Merchandise" Relationship="Self.Merchandsie_Order_View" FromRole="Order" ToRole="Merchandise" />
-        </EntityType>
-        <EntityType Name="sType">
-          <Key>
-            <PropertyRef Name="sType_ID" />
-          </Key>
-          <Property Name="sType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sType_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Type_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Type" Relationship="Self.FK_sType_Type" FromRole="sType" ToRole="Type" />
-          <NavigationProperty Name="Merchandise" Relationship="Self.Merchandise_Type_View" FromRole="sType" ToRole="Merchandise" />
-        </EntityType>
-        <EntityType Name="Type">
-          <Key>
-            <PropertyRef Name="Type_ID" />
-          </Key>
-          <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="sType" Relationship="Self.FK_sType_Type" FromRole="Type" ToRole="sType" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_UserPet_AspNetUsers" FromRole="UserPet" ToRole="AspNetUser" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_UserPet_Categories" FromRole="UserPet" ToRole="Category" />
         </EntityType>
         <EntityType Name="Scorce">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="HospitalID" />
           </Key>
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="HospitalID" Type="Int32" Nullable="false" />
           <Property Name="Scorce1" Type="Int32" />
           <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NoteValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Scorce_AspNetUsers" FromRole="Scorce" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Hospital" Relationship="Self.FK_Scorce_Hospital" FromRole="Scorce" ToRole="Hospital" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Scorce_AspNetUsers" FromRole="Scorce" ToRole="AspNetUser" />
+          <NavigationProperty Name="Hospital" Relationship="MaoModel.FK_Scorce_Hospital" FromRole="Scorce" ToRole="Hospital" />
         </EntityType>
         <Association Name="FK_Adoption_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="MaoModel.Adoption" Role="Adoption" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Adoption">
@@ -1107,10 +1325,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Adoption_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.Adoption" Role="Adoption" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Categories">
+            <Principal Role="Category">
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Adoption">
@@ -1119,10 +1337,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Adoption_Citys">
-          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
-          <End Role="Adoption" Type="Self.Adoption" Multiplicity="*" />
+          <End Type="MaoModel.City" Role="City" Multiplicity="1" />
+          <End Type="MaoModel.Adoption" Role="Adoption" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Citys">
+            <Principal Role="City">
               <PropertyRef Name="CityID" />
             </Principal>
             <Dependent Role="Adoption">
@@ -1131,10 +1349,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdpWish_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.AdpWish" Role="AdpWish" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AdpWish">
@@ -1143,10 +1361,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdpWish_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.AdpWish" Role="AdpWish" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Categories">
+            <Principal Role="Category">
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="AdpWish">
@@ -1155,10 +1373,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdpWish_Citys">
-          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
-          <End Role="AdpWish" Type="Self.AdpWish" Multiplicity="*" />
+          <End Type="MaoModel.City" Role="City" Multiplicity="1" />
+          <End Type="MaoModel.AdpWish" Role="AdpWish" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Citys">
+            <Principal Role="City">
               <PropertyRef Name="CityID" />
             </Principal>
             <Dependent Role="AdpWish">
@@ -1167,10 +1385,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Article">
@@ -1179,8 +1397,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_Board">
-          <End Role="Board" Type="Self.Board" Multiplicity="1" />
-          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <End Type="MaoModel.Board" Role="Board" Multiplicity="1" />
+          <End Type="MaoModel.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Board">
               <PropertyRef Name="BoardID" />
@@ -1191,10 +1409,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_TitleCategories">
-          <End Role="TitleCategories" Type="Self.TitleCategories" Multiplicity="1" />
-          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <End Type="MaoModel.TitleCategory" Role="TitleCategory" Multiplicity="1" />
+          <End Type="MaoModel.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TitleCategories">
+            <Principal Role="TitleCategory">
               <PropertyRef Name="TitleCategoryID" />
             </Principal>
             <Dependent Role="Article">
@@ -1203,8 +1421,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Article">
-          <End Role="Article" Type="Self.Article" Multiplicity="1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <End Type="MaoModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="MaoModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Article">
               <PropertyRef Name="ArticleID" />
@@ -1215,50 +1433,38 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Board_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Board" Type="Self.Board" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Board">
-              <PropertyRef Name="MasterUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Comment_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Comment">
@@ -1266,35 +1472,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_merchandise_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Merchandise">
-              <PropertyRef Name="Store_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="user_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Scorce_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Scorce" Type="Self.Scorce" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.Scorce" Role="Scorce" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Scorce">
@@ -1303,10 +1485,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserPet_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.UserPet" Role="UserPet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserPet">
@@ -1314,23 +1496,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_merchandise_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="Merchandise">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserPet_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.UserPet" Role="UserPet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Categories">
+            <Principal Role="Category">
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="UserPet">
@@ -1339,10 +1509,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Hospital_Citys">
-          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
-          <End Role="Hospital" Type="Self.Hospital" Multiplicity="*" />
+          <End Type="MaoModel.City" Role="City" Multiplicity="1" />
+          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Citys">
+            <Principal Role="City">
               <PropertyRef Name="CityID" />
             </Principal>
             <Dependent Role="Hospital">
@@ -1351,8 +1521,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Scorce_Hospital">
-          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
-          <End Role="Scorce" Type="Self.Scorce" Multiplicity="*" />
+          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="1" />
+          <End Type="MaoModel.Scorce" Role="Scorce" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hospital">
               <PropertyRef Name="HospitalID" />
@@ -1362,434 +1532,288 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_sType_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="1" />
-          <End Role="sType" Type="Self.sType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="Type_ID" />
-            </Principal>
-            <Dependent Role="sType">
-              <PropertyRef Name="Type_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <End Type="MaoModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
         <Association Name="HospitalCategoryDetails">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
-          <End Role="Hospital" Type="Self.Hospital" Multiplicity="*" />
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="*" />
+          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="*" />
         </Association>
-        <Association Name="Merchandise_Type_View">
-          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
-          <End Role="sType" Type="Self.sType" Multiplicity="*" />
-        </Association>
-        <Association Name="Merchandsie_Order_View">
-          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="MaoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Adoption" EntityType="Self.Adoption" />
-          <EntitySet Name="AdpWish" EntityType="Self.AdpWish" />
-          <EntitySet Name="Article" EntityType="Self.Article" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Board" EntityType="Self.Board" />
-          <EntitySet Name="Categories" EntityType="Self.Categories" />
-          <EntitySet Name="Citys" EntityType="Self.Citys" />
-          <EntitySet Name="Comment" EntityType="Self.Comment" />
-          <EntitySet Name="Hospital" EntityType="Self.Hospital" />
-          <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" />
-          <EntitySet Name="UserPet" EntityType="Self.UserPet" />
-          <EntitySet Name="Merchandise" EntityType="Self.Merchandise" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="sType" EntityType="Self.sType" />
-          <EntitySet Name="Type" EntityType="Self.Type" />
-          <EntitySet Name="Scorce" EntityType="Self.Scorce" />
-          <AssociationSet Name="FK_Adoption_AspNetUsers" Association="Self.FK_Adoption_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Adoption" EntitySet="Adoption" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adoption_Categories" Association="Self.FK_Adoption_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Adoption" EntitySet="Adoption" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adoption_Citys" Association="Self.FK_Adoption_Citys">
-            <End Role="Citys" EntitySet="Citys" />
-            <End Role="Adoption" EntitySet="Adoption" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdpWish_AspNetUsers" Association="Self.FK_AdpWish_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AdpWish" EntitySet="AdpWish" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdpWish_Categories" Association="Self.FK_AdpWish_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="AdpWish" EntitySet="AdpWish" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdpWish_Citys" Association="Self.FK_AdpWish_Citys">
-            <End Role="Citys" EntitySet="Citys" />
-            <End Role="AdpWish" EntitySet="AdpWish" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Article_AspNetUsers" Association="Self.FK_Article_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Article" EntitySet="Article" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Article_Board" Association="Self.FK_Article_Board">
-            <End Role="Board" EntitySet="Board" />
-            <End Role="Article" EntitySet="Article" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Article_TitleCategories" Association="Self.FK_Article_TitleCategories">
-            <End Role="TitleCategories" EntitySet="TitleCategories" />
-            <End Role="Article" EntitySet="Article" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Article" Association="Self.FK_Comment_Article">
-            <End Role="Article" EntitySet="Article" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Board_AspNetUsers" Association="Self.FK_Board_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Board" EntitySet="Board" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_AspNetUsers" Association="Self.FK_Comment_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_merchandise_AspNetUsers" Association="Self.FK_merchandise_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Merchandise" EntitySet="Merchandise" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_AspNetUsers" Association="Self.FK_Order_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scorce_AspNetUsers" Association="Self.FK_Scorce_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Scorce" EntitySet="Scorce" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPet_AspNetUsers" Association="Self.FK_UserPet_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserPet" EntitySet="UserPet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_merchandise_Categories" Association="Self.FK_merchandise_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Merchandise" EntitySet="Merchandise" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPet_Categories" Association="Self.FK_UserPet_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="UserPet" EntitySet="UserPet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Hospital_Citys" Association="Self.FK_Hospital_Citys">
-            <End Role="Citys" EntitySet="Citys" />
-            <End Role="Hospital" EntitySet="Hospital" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scorce_Hospital" Association="Self.FK_Scorce_Hospital">
-            <End Role="Hospital" EntitySet="Hospital" />
-            <End Role="Scorce" EntitySet="Scorce" />
-          </AssociationSet>
-          <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="sType" EntitySet="sType" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="HospitalCategoryDetails" Association="Self.HospitalCategoryDetails">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Hospital" EntitySet="Hospital" />
-          </AssociationSet>
-          <AssociationSet Name="Merchandise_Type_View" Association="Self.Merchandise_Type_View">
-            <End Role="Merchandise" EntitySet="Merchandise" />
-            <End Role="sType" EntitySet="sType" />
-          </AssociationSet>
-          <AssociationSet Name="Merchandsie_Order_View" Association="Self.Merchandsie_Order_View">
-            <End Role="Merchandise" EntitySet="Merchandise" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MaoModelStoreContainer" CdmEntityContainer="MaoEntities">
-          <EntitySetMapping Name="Adoption">
-            <EntityTypeMapping TypeName="MaoModel.Adoption">
-              <MappingFragment StoreEntitySet="Adoption">
-                <ScalarProperty Name="AdoptionID" ColumnName="AdoptionID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="Build" ColumnName="Build" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="Hair" ColumnName="Hair" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
-                <ScalarProperty Name="BytesImage" ColumnName="BytesImage" />
-                <ScalarProperty Name="PetImage" ColumnName="PetImage" />
-                <ScalarProperty Name="DelCheck" ColumnName="DelCheck" />
-                <ScalarProperty Name="RegistrationUserID" ColumnName="RegistrationUserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AdpWish">
-            <EntityTypeMapping TypeName="MaoModel.AdpWish">
-              <MappingFragment StoreEntitySet="AdpWish">
-                <ScalarProperty Name="WishID" ColumnName="WishID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="Build" ColumnName="Build" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="Hair" ColumnName="Hair" />
-                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Article">
-            <EntityTypeMapping TypeName="MaoModel.Article">
-              <MappingFragment StoreEntitySet="Article">
-                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
-                <ScalarProperty Name="PosterID" ColumnName="PosterID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
-                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="LastChDateTime" ColumnName="LastChDateTime" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="MaoModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="MaoModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="MaoModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
+          <FunctionImportMapping FunctionImportName="EditToMerchandise_Type_View" FunctionName="MaoModel.Store.EditToMerchandise_Type_View" />
+          <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="MaoModel.AspNetUsers">
+            <EntityTypeMapping TypeName="MaoModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
-                <ScalarProperty Name="Experience" ColumnName="Experience" />
-                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Board">
-            <EntityTypeMapping TypeName="MaoModel.Board">
-              <MappingFragment StoreEntitySet="Board">
-                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
-                <ScalarProperty Name="BoardName" ColumnName="BoardName" />
-                <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="MaoModel.Categories">
+            <EntityTypeMapping TypeName="MaoModel.Category">
               <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merchandises">
+            <EntityTypeMapping TypeName="MaoModel.Merchandise">
+              <MappingFragment StoreEntitySet="Merchandise">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Store_ID" ColumnName="Store_ID" />
+                <ScalarProperty Name="Merchandiser_Editdata" ColumnName="Merchandiser_Editdata" />
+                <ScalarProperty Name="Merchandise_Creatdate" ColumnName="Merchandise_Creatdate" />
+                <ScalarProperty Name="Merchandise_Fitness" ColumnName="Merchandise_Fitness" />
+                <ScalarProperty Name="Merchandise_Description" ColumnName="Merchandise_Description" />
+                <ScalarProperty Name="Merchandise_Photo" ColumnName="Merchandise_Photo" />
+                <ScalarProperty Name="Merchandise_Price" ColumnName="Merchandise_Price" />
+                <ScalarProperty Name="Merchandise_Name" ColumnName="Merchandise_Name" />
+                <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="MaoModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Order_Fitness" ColumnName="Order_Fitness" />
+                <ScalarProperty Name="Order_Createdate" ColumnName="Order_Createdate" />
+                <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sTypes">
+            <EntityTypeMapping TypeName="MaoModel.sType">
+              <MappingFragment StoreEntitySet="sType">
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="sType_Name" ColumnName="sType_Name" />
+                <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="MaoModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Merchandise_Type_View" TypeName="MaoModel.Merchandise_Type_View" StoreEntitySet="Merchandise_Type_View">
+            <EndProperty Name="sType">
+              <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
+            </EndProperty>
+            <EndProperty Name="Merchandise">
+              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Merchandsie_Order_View" TypeName="MaoModel.Merchandsie_Order_View" StoreEntitySet="Merchandsie_Order_View">
+            <EndProperty Name="Order">
+              <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+            </EndProperty>
+            <EndProperty Name="Merchandise">
+              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Boards">
+            <EntityTypeMapping TypeName="MaoModel.Board">
+              <MappingFragment StoreEntitySet="Board">
+                <ScalarProperty Name="MasterUserID" ColumnName="MasterUserID" />
+                <ScalarProperty Name="BoardName" ColumnName="BoardName" />
+                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adoptions">
+            <EntityTypeMapping TypeName="MaoModel.Adoption">
+              <MappingFragment StoreEntitySet="Adoption">
+                <ScalarProperty Name="RegistrationUserID" ColumnName="RegistrationUserID" />
+                <ScalarProperty Name="DelCheck" ColumnName="DelCheck" />
+                <ScalarProperty Name="PetImage" ColumnName="PetImage" />
+                <ScalarProperty Name="BytesImage" ColumnName="BytesImage" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Hair" ColumnName="Hair" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Build" ColumnName="Build" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdoptionID" ColumnName="AdoptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdpWishes">
+            <EntityTypeMapping TypeName="MaoModel.AdpWish">
+              <MappingFragment StoreEntitySet="AdpWish">
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="Hair" ColumnName="Hair" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Build" ColumnName="Build" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WishID" ColumnName="WishID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="MaoModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="LastChDateTime" ColumnName="LastChDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+                <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PosterID" ColumnName="PosterID" />
+                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MaoModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MaoModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MaoModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Citys">
-            <EntityTypeMapping TypeName="MaoModel.Citys">
+            <EntityTypeMapping TypeName="MaoModel.City">
               <MappingFragment StoreEntitySet="Citys">
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Comment">
+          <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="MaoModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-                <ScalarProperty Name="PosterID" ColumnName="PosterID" />
-                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
                 <ScalarProperty Name="NewDateTime" ColumnName="NewDateTime" />
+                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+                <ScalarProperty Name="PosterID" ColumnName="PosterID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Hospital">
+          <EntitySetMapping Name="Hospitals">
             <EntityTypeMapping TypeName="MaoModel.Hospital">
               <MappingFragment StoreEntitySet="Hospital">
-                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
-                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
-                <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
-                <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
-                <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="BusinessHours" ColumnName="BusinessHours" />
-                <ScalarProperty Name="Emergency" ColumnName="Emergency" />
-                <ScalarProperty Name="OutpatientProject" ColumnName="OutpatientProject" />
-                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
-                <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
-                <ScalarProperty Name="OnlineConsultation" ColumnName="OnlineConsultation" />
-                <ScalarProperty Name="OnView" ColumnName="OnView" />
                 <ScalarProperty Name="Map" ColumnName="Map" />
+                <ScalarProperty Name="OnView" ColumnName="OnView" />
+                <ScalarProperty Name="OnlineConsultation" ColumnName="OnlineConsultation" />
+                <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="OutpatientProject" ColumnName="OutpatientProject" />
+                <ScalarProperty Name="Emergency" ColumnName="Emergency" />
+                <ScalarProperty Name="BusinessHours" ColumnName="BusinessHours" />
+                <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
+                <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
+                <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TitleCategories">
-            <EntityTypeMapping TypeName="MaoModel.TitleCategories">
+            <EntityTypeMapping TypeName="MaoModel.TitleCategory">
               <MappingFragment StoreEntitySet="TitleCategories">
-                <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
                 <ScalarProperty Name="TitleCategoryName" ColumnName="TitleCategoryName" />
+                <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserPet">
+          <EntitySetMapping Name="UserPets">
             <EntityTypeMapping TypeName="MaoModel.UserPet">
               <MappingFragment StoreEntitySet="UserPet">
-                <ScalarProperty Name="PetID" ColumnName="PetID" />
-                <ScalarProperty Name="PetName" ColumnName="PetName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="PetSex" ColumnName="PetSex" />
-                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
                 <ScalarProperty Name="PetBirthday" ColumnName="PetBirthday" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Merchandise">
-            <EntityTypeMapping TypeName="MaoModel.Merchandise">
-              <MappingFragment StoreEntitySet="Merchandise">
-                <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
-                <ScalarProperty Name="Merchandise_Name" ColumnName="Merchandise_Name" />
-                <ScalarProperty Name="Merchandise_Price" ColumnName="Merchandise_Price" />
-                <ScalarProperty Name="Merchandise_Photo" ColumnName="Merchandise_Photo" />
-                <ScalarProperty Name="Merchandise_Description" ColumnName="Merchandise_Description" />
-                <ScalarProperty Name="Merchandise_Fitness" ColumnName="Merchandise_Fitness" />
-                <ScalarProperty Name="Merchandise_Creatdate" ColumnName="Merchandise_Creatdate" />
-                <ScalarProperty Name="Merchandiser_Editdata" ColumnName="Merchandiser_Editdata" />
-                <ScalarProperty Name="Store_ID" ColumnName="Store_ID" />
+                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
+                <ScalarProperty Name="PetSex" ColumnName="PetSex" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PetName" ColumnName="PetName" />
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="MaoModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
-                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
-                <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
-                <ScalarProperty Name="Order_Createdate" ColumnName="Order_Createdate" />
-                <ScalarProperty Name="Order_Fitness" ColumnName="Order_Fitness" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sType">
-            <EntityTypeMapping TypeName="MaoModel.sType">
-              <MappingFragment StoreEntitySet="sType">
-                <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
-                <ScalarProperty Name="sType_Name" ColumnName="sType_Name" />
-                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Type">
-            <EntityTypeMapping TypeName="MaoModel.Type">
-              <MappingFragment StoreEntitySet="Type">
-                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
-                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Scorce">
+          <EntitySetMapping Name="Scorces">
             <EntityTypeMapping TypeName="MaoModel.Scorce">
               <MappingFragment StoreEntitySet="Scorce">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
-                <ScalarProperty Name="Scorce1" ColumnName="Scorce" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="NoteValue" ColumnName="NoteValue" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Scorce1" ColumnName="Scorce" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="MaoModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
+            <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="HospitalCategoryDetails" TypeName="MaoModel.HospitalCategoryDetails" StoreEntitySet="HospitalCategoryDetails">
-            <EndProperty Name="Categories">
-              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-            </EndProperty>
             <EndProperty Name="Hospital">
               <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Merchandise_Type_View" TypeName="MaoModel.Merchandise_Type_View" StoreEntitySet="Merchandise_Type_View">
-            <EndProperty Name="Merchandise">
-              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
-            </EndProperty>
-            <EndProperty Name="sType">
-              <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Merchandsie_Order_View" TypeName="MaoModel.Merchandsie_Order_View" StoreEntitySet="Merchandsie_Order_View">
-            <EndProperty Name="Merchandise">
-              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
-            </EndProperty>
-            <EndProperty Name="Order">
-              <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+            <EndProperty Name="Category">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
@@ -1806,7 +1830,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
