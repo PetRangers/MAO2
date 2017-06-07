@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9bd484981c71458cbf90aad601d67305" Name="Diagram1">
-        <EntityTypeShape EntityType="MaoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Article" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
@@ -18,7 +17,6 @@
         <EntityTypeShape EntityType="MaoModel.Citys" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Comment" Width="1.5" PointX="9.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Hospital" Width="1.5" PointX="3" PointY="26.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.TitleCategories" Width="1.5" PointX="5.25" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />

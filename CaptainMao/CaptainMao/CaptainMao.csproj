@@ -17,7 +17,8 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -983,6 +984,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705291831072_InitialCreate.cs" />
+    <Compile Include="Migrations\201705291831072_InitialCreate.Designer.cs">
+      <DependentUpon>201705291831072_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705291859312_Init.cs" />
+    <Compile Include="Migrations\201705291859312_Init.Designer.cs">
+      <DependentUpon>201705291859312_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301454381_Init1.cs" />
+    <Compile Include="Migrations\201705301454381_Init1.Designer.cs">
+      <DependentUpon>201705301454381_Init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706040705238_Init2.cs" />
+    <Compile Include="Migrations\201706040705238_Init2.Designer.cs">
+      <DependentUpon>201706040705238_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706040736241_Init3.cs" />
+    <Compile Include="Migrations\201706040736241_Init3.Designer.cs">
+      <DependentUpon>201706040736241_Init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
@@ -1015,9 +1037,6 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comment.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hospital.cs">
@@ -1054,9 +1073,6 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategories.cs">
@@ -1139,24 +1155,14 @@
     <Folder Include="files\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705291831072_InitialCreate.resx">
-      <DependentUpon>201705291831072_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705291859312_Init.resx">
-      <DependentUpon>201705291859312_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705301454381_Init1.resx">
-      <DependentUpon>201705301454381_Init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706040705238_Init2.resx">
-      <DependentUpon>201706040705238_Init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706040736241_Init3.resx">
-      <DependentUpon>201706040736241_Init3.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\201705291831072_InitialCreate.resx" />
+    <EmbeddedResource Include="Migrations\201705291859312_Init.resx" />
+    <EmbeddedResource Include="Migrations\201705301454381_Init1.resx" />
+    <EmbeddedResource Include="Migrations\201706040705238_Init2.resx" />
+    <EmbeddedResource Include="Migrations\201706040736241_Init3.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

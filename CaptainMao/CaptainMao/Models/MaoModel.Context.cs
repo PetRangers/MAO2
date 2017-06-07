@@ -25,7 +25,6 @@ namespace CaptainMao.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Adoption> Adoption { get; set; }
         public virtual DbSet<AdpWish> AdpWish { get; set; }
         public virtual DbSet<Article> Article { get; set; }
@@ -38,7 +37,6 @@ namespace CaptainMao.Models
         public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Hospital> Hospital { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategories> TitleCategories { get; set; }
         public virtual DbSet<UserPet> UserPet { get; set; }
         public virtual DbSet<Merchandise> Merchandise { get; set; }
