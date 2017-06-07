@@ -43,7 +43,7 @@ namespace CaptainMao
             var credentialUserName = "captainmao114@gmail.com";
             var sentFrom = "captainmao114@gmail.com";
             var pwd = "gogoP@ssw0rd";
-
+              
             // Configure the client:
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com");
 
