@@ -38,7 +38,7 @@ namespace CaptainMao
             //return Task.FromResult(0);
 
             //=========================================
-            //嘗試另一種郵件服務的寫法。結果雙因素驗證信件成功了，但註冊認證信無法依html格式正常顯示。
+            //嘗試另一種郵件服務的寫法。結果雙因素驗證信件成功了，但註冊認證信html格式只要設定了IsBodyHtml就能正常顯示。
             // Credentials:
             var credentialUserName = "captainmao114@gmail.com";
             var sentFrom = "captainmao114@gmail.com";
@@ -60,10 +60,11 @@ namespace CaptainMao
             // Create the message:
             var mail = new System.Net.Mail.MailMessage(sentFrom,message.Destination, message.Subject, message.Body);
             mail.IsBodyHtml = true;
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
 
             // Send:
             return client.SendMailAsync(mail);
-
         }
     }
 
