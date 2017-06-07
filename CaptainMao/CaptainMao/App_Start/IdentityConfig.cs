@@ -109,13 +109,13 @@ namespace CaptainMao
     public class Config
     {
         public static string AccountSid => WebConfigurationManager.AppSettings["AccountSid"] ??
-                                           "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                                           "AC8772a897ed8aad004479e251460218a8";
 
         public static string AuthToken => WebConfigurationManager.AppSettings["AuthToken"] ??
-                                          "aXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                                          "bf7e09d38e4dc7347effb18df38dedf2";
 
         public static string TwilioNumber => WebConfigurationManager.AppSettings["TwilioNumber"] ??
-                                             "+123456";
+                                             "+18583466330";
     }
 
     // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。

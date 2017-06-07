@@ -193,16 +193,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Adoption\Models\MAOModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\Adoption\Models\MAOModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
