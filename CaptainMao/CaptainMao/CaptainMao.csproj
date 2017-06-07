@@ -48,15 +48,24 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -106,10 +115,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\buy\css\Index.css">
+      <DependentUpon>Index.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\Index.min.css">
+      <DependentUpon>Index.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingIndex.css">
+      <DependentUpon>shoppingIndex.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingIndex.min.css">
+      <DependentUpon>shoppingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\js\aside.js" />
+    <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
     <Content Include="css\StyleSheet_Master.css">
@@ -118,7 +143,6 @@
     <Content Include="css\StyleSheet_Master.min.css">
       <DependentUpon>StyleSheet_Master.css</DependentUpon>
     </Content>
-    <Content Include="css\StyleSheet_Master2.css" />
     <Content Include="css\video.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -134,7 +158,18 @@
     <Content Include="images\navbar.png" />
     <Content Include="images\texture.png" />
     <Content Include="images\wrip.jpg" />
+    <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="js\video.js" />
+    <Content Include="Models\MaoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+      <LastGenOutput>MaoModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MaoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+      <LastGenOutput>MaoModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="js\JavaScript.js" />
@@ -151,8 +186,34 @@
     <Content Include="fonts\fc_.ttf" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Login\Views\web.config" />
-    <Content Include="Areas\Area\Views\web.config" />
+    <Content Include="Areas\buy\Views\web.config" />
+    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
+    <Content Include="Areas\Adoption\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\Index.cshtml" />
+    <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
+    <Content Include="Areas\buy\Views\Login\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Store\Index.cshtml" />
+    <EntityDeploy Include="Models\MaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MaoModel.edmx.diagram">
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\Index.less" />
+    <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
+    <Content Include="Areas\buy\css\shoppingIndex.less" />
+    <Content Include="Areas\buy\Views\Store\Create.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -160,20 +221,87 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="images\Dog-Lovers.jpg" />
+    <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
+    <Content Include="Areas\WebForm\WebForm1.aspx" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Area\AreaAreaRegistration.cs" />
+    <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
+    <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
+    <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
+    <Compile Include="Areas\Article\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\buy\buyAreaRegistration.cs" />
+    <Compile Include="Areas\buy\Controllers\LoginController.cs" />
+    <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
+    <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
+    <Compile Include="Areas\buy\Controllers\StoreController.cs" />
+    <Compile Include="Areas\buy\Models\ClsBusinessLogic.cs" />
+    <Compile Include="Areas\buy\Models\ClsMao.cs" />
+    <Compile Include="Areas\buy\Models\IMao.cs" />
+    <Compile Include="Areas\buy\Models\partial\Category.cs" />
+    <Compile Include="Areas\buy\Models\partial\merchandise.cs" />
+    <Compile Include="Areas\buy\Models\partial\Order.cs" />
+    <Compile Include="Areas\buy\Models\partial\StoreUser.cs" />
+    <Compile Include="Areas\buy\Models\partial\sType.cs" />
+    <Compile Include="Areas\buy\Models\partial\Type.cs" />
+    <Compile Include="Areas\buy\ViewModel\vmCa.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Merchandise.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST.aspx.cs">
+      <DependentUpon>TEST.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST.aspx.designer.cs">
+      <DependentUpon>TEST.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -195,10 +323,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Area\Controllers\" />
-    <Folder Include="Areas\Area\Models\" />
-    <Folder Include="Areas\Area\Views\Shared\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\Adoption\Models\" />
+    <Folder Include="Areas\Adoption\Views\Shared\" />
+    <Folder Include="Areas\Article\Models\" />
+    <Folder Include="Areas\Article\Views\Shared\" />
+    <Folder Include="Areas\buy\Views\PublicFunction\" />
+    <Folder Include="Areas\buy\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

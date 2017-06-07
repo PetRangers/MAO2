@@ -3,6 +3,7 @@
 }
 aside .panel {
   box-shadow: -2px 5px 10px;
+  width:160px;
   position: fixed;
   z-index: 805;
 }
@@ -27,7 +28,7 @@ article {
   background-position: top left;
   background-size: 40px;
   box-shadow: -2px 5px 10px;
-  padding: 20px;
+  padding: 30px;
 }
 footer {
   height: 50px;

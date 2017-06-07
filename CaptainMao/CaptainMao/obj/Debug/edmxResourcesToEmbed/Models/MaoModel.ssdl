@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="NickName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LoginCount" Type="int" Nullable="false" />
+    <Property Name="Experience" Type="int" Nullable="false" />
+    <Property Name="DateRegistered" Type="datetime" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Merchandise">
+    <Key>
+      <PropertyRef Name="Merchandise_ID" />
+    </Key>
+    <Property Name="Merchandise_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Merchandise_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Merchandise_Price" Type="money" Nullable="false" />
+    <Property Name="Merchandise_Photo" Type="varbinary(max)" />
+    <Property Name="Merchandise_Description" Type="nvarchar(max)" />
+    <Property Name="Merchandise_Fitness" Type="bit" Nullable="false" />
+    <Property Name="Merchandise_Creatdate" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="Merchandiser_Editdata" Type="datetime" />
+    <Property Name="Store_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandise_Type_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Merchandise_Type_View">
+    <Key>
+      <PropertyRef Name="Merchandise_ID" />
+      <PropertyRef Name="sType_ID" />
+    </Key>
+    <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+    <Property Name="sType_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandsie_Order_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="Merchandsie_Order_View">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+      <PropertyRef Name="Merchandise_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="user_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="merchandise_Volume" Type="int" Nullable="false" />
+    <Property Name="Order_Createdate" Type="datetime" Nullable="false" />
+    <Property Name="Order_Fitness" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sType">
+    <Key>
+      <PropertyRef Name="sType_ID" />
+    </Key>
+    <Property Name="sType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sType_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Type_ID" />
+    </Key>
+    <Property Name="Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_merchandise_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="Store_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_merchandise_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandise_Type_View_merchandise1">
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+    <End Role="Merchandise_Type_View" Type="Self.Merchandise_Type_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="Merchandise_ID" />
+      </Principal>
+      <Dependent Role="Merchandise_Type_View">
+        <PropertyRef Name="Merchandise_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandise_Type_View_sType">
+    <End Role="sType" Type="Self.sType" Multiplicity="1" />
+    <End Role="Merchandise_Type_View" Type="Self.Merchandise_Type_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sType">
+        <PropertyRef Name="sType_ID" />
+      </Principal>
+      <Dependent Role="Merchandise_Type_View">
+        <PropertyRef Name="sType_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandsie_Order_View_merchandise">
+    <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+    <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="Merchandise_ID" />
+      </Principal>
+      <Dependent Role="Merchandsie_Order_View">
+        <PropertyRef Name="Merchandise_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Merchandsie_Order_View_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Order_ID" />
+      </Principal>
+      <Dependent Role="Merchandsie_Order_View">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="user_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sType_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="sType" Type="Self.sType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Type_ID" />
+      </Principal>
+      <Dependent Role="sType">
+        <PropertyRef Name="Type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+    <Parameter Name="sTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+    <Parameter Name="sTypeID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="MaoModelStoreContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
+    <EntitySet Name="Merchandise_Type_View" EntityType="Self.Merchandise_Type_View" store:Type="Tables" store:Schema="ShoppingNetwork">
+      <DefiningQuery>SELECT 
+    [Merchandise_Type_View].[Merchandise_ID] AS [Merchandise_ID], 
+    [Merchandise_Type_View].[sType_ID] AS [sType_ID]
+    FROM [ShoppingNetwork].[Merchandise_Type_View] AS [Merchandise_Type_View]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Merchandsie_Order_View" EntityType="Self.Merchandsie_Order_View" store:Type="Tables" store:Schema="ShoppingNetwork">
+      <DefiningQuery>SELECT 
+    [Merchandsie_Order_View].[Order_ID] AS [Order_ID], 
+    [Merchandsie_Order_View].[Merchandise_ID] AS [Merchandise_ID]
+    FROM [ShoppingNetwork].[Merchandsie_Order_View] AS [Merchandsie_Order_View]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_merchandise_AspNetUsers" Association="Self.FK_merchandise_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_merchandise_Categories" Association="Self.FK_merchandise_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandise_Type_View_merchandise1" Association="Self.FK_Merchandise_Type_View_merchandise1">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Merchandise_Type_View" EntitySet="Merchandise_Type_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandise_Type_View_sType" Association="Self.FK_Merchandise_Type_View_sType">
+      <End Role="sType" EntitySet="sType" />
+      <End Role="Merchandise_Type_View" EntitySet="Merchandise_Type_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandsie_Order_View_merchandise" Association="Self.FK_Merchandsie_Order_View_merchandise">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Merchandsie_Order_View_Order" Association="Self.FK_Merchandsie_Order_View_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_AspNetUsers" Association="Self.FK_Order_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="sType" EntitySet="sType" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

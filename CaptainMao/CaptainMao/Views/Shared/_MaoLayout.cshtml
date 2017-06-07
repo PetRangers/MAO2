@@ -89,7 +89,10 @@
                                 <li><a href="#">Separated link</a></li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-toggle" href="#" title="登入"><span class="glyphicon glyphicon-user"></span><br /><br />user</a></li>
+                        <li>
+                        @Html.ActionLink("user", "index", "Login","buy", new { @class = "glyphicon glyphicon-user" })
+                            
+                        </li>
                     </ul>
                 </div><!-- /.nav-collapse -->
             </div><!-- /.container-fluid -->
@@ -99,10 +102,10 @@
             <ul class="sidebar-nav">
                 <li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>
                 <li class="sidebar-brand">
-                    <a href="#top"><strong>毛孩隊長</strong></a>
+                    <a><strong>毛孩隊長</strong></a>
                 </li>
                 <li>
-                    <a href="/about" title="Go to About Us section">回首頁</a>
+                    @Html.ActionLink("回首頁","Index", "CaptainMao", new{ @title = "回首頁" })
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">毛孩購物</a>
@@ -118,10 +121,10 @@
                 <li>
                     <a href="/portfolio" title="Navigate to 'Our Services' section">美食醫院</a>
                 </li>
-                <li class="hidden-md hidden-lg toggle">
+                <li id="user" class="hidden-md hidden-lg toggle">
                     <span class="fa fa-user"></span>
                 </li>
-                <li class="hidden-md hidden-lg toggle">
+                <li id="shopping" class="hidden-md hidden-lg toggle">
                     <span class="fa fa-lg fa-cart-plus"></span>
                 </li>
 
@@ -130,7 +133,7 @@
         <!-- 左邊側欄-->
         <div id="accordion" class="social">
             <div class="accordion-social">
-<!--class加in會打開--><ul class="panel-collapse in collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
+<!--class加in會打開--><ul class="panel-collapse collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
                     <li><a href="https://www.facebook.com/soldierupdesigns" target="_blank" class="fa fa-lg fa-facebook"></a></li>
                     <li><a href="https://twitter.com/soldierupdesign" target="_blank" class="fa fa-lg fa-twitter"></a></li>
                     <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank" class="fa fa-lg fa-google-plus"></a></li>

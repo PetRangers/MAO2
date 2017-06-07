@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CaptainMao.Models.Category>
+
+
+<div id="firstpane" class="panel panel-primary">
+    @foreach (var vm in Model)
+    {
+        <p class="menu_head panel-heading" id=@vm.CategoryID>
+
+            @Html.ActionLink((string)vm.CategoryName + "毛小孩", "Index", "Shopping", new { CategoryID = @vm.CategoryID }, null)
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </p>
+        <div class="menu_body list-group">
+            @*利用razor配合linq*@
+            @{//利用陣列存取大分類
+                string[] strList = new string[12];
+                //從商品分類搜尋
+                foreach (var _vm in vm.Merchandises)
+                {
+                    //因商品具有多種小分類的特性
+                    var _ty = _vm.sTypes.Select(ty => ty.Type);
+                    foreach (var _sty in _ty)
+                    {
+                        //如果尚未在陣列內則儲存
+                        if (!strList.Contains(_sty.Type_Name))
+                        {
+                            strList[_sty.Type_ID] = _sty.Type_Name;
+                        };
+                    }
+                }
+                //印出
+                for (int x = 1; x < strList.Length; x++)
+                {
+                    if (strList[x] != null)
+                    {
+                        @Html.ActionLink(strList[x], "Index", "Shopping",
+                    new { CategoryID = @vm.CategoryID, Type_ID = x  },
+                    new { data_cate = @vm.CategoryID, data_type = x , @class = "list-group-item" })
+                    };
+                }
+                }
+        </div>
+}
+</div>
+<div id="sTypeArea">
+
+</div>

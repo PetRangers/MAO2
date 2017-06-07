@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Types" Relationship="Self.Merchandise_Category_View" FromRole="Categories" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="NormalUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LoginCount" Type="Int32" Nullable="false" />
+    <Property Name="Experience" Type="Int32" Nullable="false" />
+    <Property Name="BoardManagerOf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateRegistered" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StateCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_NormalUser" FromRole="NormalUser" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="StoreUser">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateRegistered" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StateCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="merchandises" Relationship="Self.Merchandsie_Store_View" FromRole="StoreUser" ToRole="merchandise" />
+  </EntityType>
+  <EntityType Name="merchandise">
+    <Key>
+      <PropertyRef Name="merchandise_ID" />
+    </Key>
+    <Property Name="merchandise_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="merchandise_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="merchandise_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="merchandise_Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="merchandise_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="merchandise_Fitness" Type="Boolean" Nullable="false" />
+    <Property Name="merchandise_Creatdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="merchandiser_Editdata" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Types" Relationship="Self.Merchandise_Type_View" FromRole="merchandise" ToRole="Type" />
+    <NavigationProperty Name="Orders" Relationship="Self.Merchandsie_Order_View" FromRole="merchandise" ToRole="Order" />
+    <NavigationProperty Name="StoreUsers" Relationship="Self.Merchandsie_Store_View" FromRole="merchandise" ToRole="StoreUser" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="Int32" Nullable="false" />
+    <Property Name="user_ID" Type="Int32" Nullable="false" />
+    <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
+    <Property Name="Order_Createdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="NormalUser" Relationship="Self.FK_Order_NormalUser" FromRole="Order" ToRole="NormalUser" />
+    <NavigationProperty Name="merchandises" Relationship="Self.Merchandsie_Order_View" FromRole="Order" ToRole="merchandise" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Type_ID" />
+    </Key>
+    <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Categories" Relationship="Self.Merchandise_Category_View" FromRole="Type" ToRole="Categories" />
+    <NavigationProperty Name="merchandises" Relationship="Self.Merchandise_Type_View" FromRole="Type" ToRole="merchandise" />
+  </EntityType>
+  <Association Name="FK_Order_NormalUser">
+    <End Role="NormalUser" Type="Self.NormalUser" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NormalUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="user_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Merchandise_Category_View">
+    <End Role="Categories" Type="Self.Category" Multiplicity="*" />
+    <End Role="Type" Type="Self.Type" Multiplicity="*" />
+  </Association>
+  <Association Name="Merchandise_Type_View">
+    <End Role="Type" Type="Self.Type" Multiplicity="*" />
+    <End Role="merchandise" Type="Self.merchandise" Multiplicity="*" />
+  </Association>
+  <Association Name="Merchandsie_Order_View">
+    <End Role="merchandise" Type="Self.merchandise" Multiplicity="*" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+  </Association>
+  <Association Name="Merchandsie_Store_View">
+    <End Role="merchandise" Type="Self.merchandise" Multiplicity="*" />
+    <End Role="StoreUser" Type="Self.StoreUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="MaoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="NormalUsers" EntityType="Self.NormalUser" />
+    <EntitySet Name="StoreUsers" EntityType="Self.StoreUser" />
+    <EntitySet Name="merchandises" EntityType="Self.merchandise" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <AssociationSet Name="FK_Order_NormalUser" Association="Self.FK_Order_NormalUser">
+      <End Role="NormalUser" EntitySet="NormalUsers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Merchandise_Category_View" Association="Self.Merchandise_Category_View">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Type" EntitySet="Types" />
+    </AssociationSet>
+    <AssociationSet Name="Merchandise_Type_View" Association="Self.Merchandise_Type_View">
+      <End Role="Type" EntitySet="Types" />
+      <End Role="merchandise" EntitySet="merchandises" />
+    </AssociationSet>
+    <AssociationSet Name="Merchandsie_Order_View" Association="Self.Merchandsie_Order_View">
+      <End Role="merchandise" EntitySet="merchandises" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Merchandsie_Store_View" Association="Self.Merchandsie_Store_View">
+      <End Role="merchandise" EntitySet="merchandises" />
+      <End Role="StoreUser" EntitySet="StoreUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

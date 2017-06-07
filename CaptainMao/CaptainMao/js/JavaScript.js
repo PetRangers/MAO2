@@ -26,7 +26,6 @@ $(document).ready(function () {
 
     $(".dropdown").hover(funDown,funUP);
 
-
     function funDown() {
         $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown('400');
      $(this).toggleClass('open');

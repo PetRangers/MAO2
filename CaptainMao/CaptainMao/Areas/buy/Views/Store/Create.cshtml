@@ -1,0 +1,150 @@
+﻿@model CaptainMao.Areas.buy.ViewModel.vmCa_Mer
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+@section style{
+    <style>
+
+        .drawingpin {
+            margin: 5px;
+        }
+        .drawingpin:nth-child(1) {
+            background-color:#b6ff00;
+        }
+
+        .drawingpin:nth-child(2) {
+            background-color:#ffd800
+        }
+        .drawingpin:nth-child(3) {
+            background-color:#67e14a
+            
+        }
+         .drawingpin:nth-child(4) {
+            background-color:#0094ff;
+            height:600px;
+            
+        }
+        #Merimg {
+            height:500px;
+            width:430px;
+        }
+        #textarea1 {
+            height:500px;
+            max-width: 100%;
+            width:100%;
+        }
+    </style>
+    }
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Action("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+
+    <!-------------------articleOpen------------------->
+
+        
+            @using (Html.BeginForm("Create", "Store", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <div  class="drawingpin col-sm-5">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c._Merchandise.Merchandise_Photo, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-8">
+                            <input class="form-control" type="file" placeholder="請選擇圖片" name="photo" id="photo"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c._Merchandise.Merchandise_Name, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(c => c._Merchandise.Merchandise_Name, new { htmlAttributes = new { placeholder = "請輸入商品名稱", @class = "form-control" } })
+                            @Html.ValidationMessageFor(p => p._Merchandise.Merchandise_Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            @Html.LabelFor(c => c._Category.First().CategoryName, new { @class = "col-sm-2 control-label" })
+                        </div>
+                        <div class="col-sm-8">
+                            @{
+                            SelectList select = new SelectList(Model._Category, "CategoryID", "CategoryName");
+                            }
+                            @Html.DropDownListFor(c => c._Merchandise.CategoryID, select, new { @class = "form-control", id = "_Category" })
+                        </div>
+                    </div>
+                    <div  class="drawingpin">
+                        <img  id="Merimg" />
+                    </div>
+               </div>
+                
+
+                <div  class="drawingpin col-sm-6">
+                    <div class="form-group" id="checkboxlist">
+                        @*判斷是否重複*@
+                        @{string typeName = "";}
+                        @foreach (var x in @Model._sType)
+                        {
+                            if (x.Type.Type_Name != typeName)
+                            {
+                                typeName = x.Type.Type_Name;<hr />
+                        @Html.LabelFor(c => x.Type.Type_Name, x.Type.Type_Name, new { @class = "col-sm-2  control-label" })
+                            }
+
+                        <label>
+                            <input type="checkbox" name="sType_ID" value=@x.sType_ID />
+                            @x.sType_Name
+                        </label>
+                        }
+
+                    </div>
+                    @Html.ValidationMessageFor(c => c.sType_ID)
+                </div>
+                
+                <div  class="drawingpin col-sm-11">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c._Merchandise.Merchandise_Price, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-8">
+                                @Html.EditorFor(c => c._Merchandise.Merchandise_Price, new { htmlAttributes = new { placeholder = "請輸入金額", @class = "form-control" } })
+                                @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Price)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c._Merchandise.Merchandise_Description, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-8">
+                                @Html.EditorFor(c => c._Merchandise.Merchandise_Description, new { htmlAttributes = new { placeholder = "請輸入描述", @class = "form-control",id= "textarea1" } })
+                                @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Description)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="col-sm-offset-2 btn btn-primary">新增</button>
+                        </div>
+                </div>
+
+            }
+                    
+
+    <!-------------------articleEnd------------------->
+
+
+</article>
+
+
+
+@section script{
+    @if(Model.sType_ID.Length>0 ){
+        for (int x = 0; x < Model.sType_ID.Length; x++)
+        {
+        <script>
+            $("#checkboxlist :checkbox[value="+@Model.sType_ID[x]+"]").prop("checked", true);
+        </script>
+        }
+    }
+<script>console.log(@ViewBag.Message)</script>
+<script src="~/Areas/buy/js/storeCreateIndex.js"></script>
+<script src="~/Areas/buy/js/jquery.validate.js"></script>
+<script src="~/Areas/buy/js/jquery.validate.unobtrusive.js"></script>
+}
