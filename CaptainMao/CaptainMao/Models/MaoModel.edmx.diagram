@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bba97110d94a4a2c8e6970523780487b" Name="Diagram1" ZoomLevel="43">
+      <Diagram DiagramId="bba97110d94a4a2c8e6970523780487b" Name="Diagram1" ZoomLevel="46">
         <EntityTypeShape EntityType="MaoModel.AspNetUser" Width="1.5" PointX="0.75" PointY="2.25" />
         <EntityTypeShape EntityType="MaoModel.Category" Width="1.5" PointX="0.75" PointY="8.875" />
         <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="3" PointY="2.875" />

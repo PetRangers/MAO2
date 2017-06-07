@@ -217,8 +217,6 @@
     <Content Include="Areas\Article\Views\Article\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
-    <Content Include="Areas\Article\Views\Default\Index.cshtml" />
-    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
@@ -1026,7 +1024,6 @@
     <Compile Include="Areas\buy\Models\partial\sType.cs" />
     <Compile Include="Areas\buy\Models\partial\Type.cs" />
     <Compile Include="Areas\buy\ViewModel\vmCa.cs" />
-    <Compile Include="Areas\buy\ViewModel\vmCaID-stypeID.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
