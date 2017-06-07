@@ -88,7 +88,7 @@ namespace CaptainMao.Areas.Article.Controllers
 
             vm.comment = db.Comment.Where(a => a.ArticleID == articleID);
             vm.article = db.Article.Where(a => a.ArticleID == articleID);
-            return View(vm);
+            return View(vm); 
         }
         public ActionResult Comment()
         {
