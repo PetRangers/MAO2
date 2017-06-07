@@ -1,0 +1,201 @@
+﻿@model List<string>
+@{
+    Layout = null;
+
+    System.Web.Configuration.HttpRuntimeSection sectionHttpRuntime
+        = System.Configuration.ConfigurationManager.GetSection("system.web/httpRuntime") as System.Web.Configuration.HttpRuntimeSection;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CKEditor檔案管理</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/ckeditorFileManager.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    <script src="~/Scripts/fileinput.min.js"></script>
+    <script src="~/Scripts/jquery.unveil.js"></script>
+
+    <script>
+        $(function () {
+            //image lazy loading
+            $("img").unveil(200, function () {
+                $(this).load(function () {
+                    $(this).removeClass("loading");
+                });
+            });
+
+            //file upload plugin
+            $("#inputFileupload").fileinput({
+                maxFileSize: @sectionHttpRuntime.MaxRequestLength,
+                uploadUrl: "@Url.Action("CKEditorFileUpload", "Article")",
+                allowedFileExtensions: ["jpg", "png", "gif"],
+                browseClass: "btn btn-primary",
+                showClose: false,
+                uploadAsync: false,
+                autoReplace: true,
+                maxFileCount: 5,
+                fileActionSettings: {
+                    showZoom: false
+                }
+            }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
+                var form = data.form, files = data.files, extra = data.extra,
+                    response = data.response, reader = data.reader;
+
+                //更新清單
+                if (response !== undefined) {
+                    var container = $("#FileContainer");
+                    var files = response.files;
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        var fileContentHtml = "<div class=\"FileItemContainer\" data-filename=\"" + file.FileName + "\"><img class=\"loading\" src=\"" + file.FilePath + file.FileName + "\" data-src=\"" + file.FilePath + file.FileName + "\" /><p>" + file.FileName + "</p><input type=\"button\" class=\"btn btn-danger btn-block\" value=\"刪除\" /><div>";
+                        container.prepend(fileContentHtml);
+                        container.find("img.loading").unveil(500, function () {
+                            $(this).load(function () {
+                                $(this).removeClass("loading");
+                            });
+                        });
+                    }
+                }
+
+                //關閉上傳視窗#UploadModal
+                $('#UploadModal').modal('hide');
+            });
+
+            //確定
+            $(document).on("click", "#btnOk", function () {
+                var selectedItem = $(".FileItemContainer.selected");
+                if (selectedItem.length > 0) {
+                    setSelectedUrl(selectedItem.find("img").attr("src"));
+                } else {
+                    if (confirm("尚未選取圖片\n按下「確定」關閉視窗\n按下「取消」重新選擇圖片"))
+                        window.close();
+                }
+            });
+
+            //取消
+            $(document).on("click", "#btnCancel", function () {
+                window.close();
+            });
+
+            //圖片點選事件
+            $(document).on("click", ".FileItemContainer > *:not(input:button)", function () {
+
+                if (!$(this).parent(".FileItemContainer").hasClass("selected")) {
+                    $(".FileItemContainer.selected").toggleClass("selected");
+                }
+                $(this).parent(".FileItemContainer").toggleClass("selected");
+            });
+
+            //上傳檔案modal視窗 相關事件
+            $('#UploadModal').on('hidden.bs.modal', function (e) {
+                //初始化檔案上傳控制項
+                $("#inputFileupload").fileinput("clear");
+            });
+
+            //搜尋文字輸入文字事件
+            $(document).on("keyup","#searchText",function(event){
+                $(".FileItemContainer.selected").removeClass("selected");
+
+                var searchText=$(this).val();
+                if(searchText===""){
+                    $(".FileItemContainer").fadeIn(500);
+                }else{
+                    $(".FileItemContainer[data-filename*='"+searchText+"']").fadeIn(500);
+                    $(".FileItemContainer:not([data-filename*='"+searchText+"'])").fadeOut(500);
+                }
+            });
+
+            //清除輸入的搜尋文字
+            $(document).on("click","#btnClearSearchText",function(){
+                $("#searchText").val("");
+                $(".FileItemContainer").fadeIn(500);
+            });
+
+            //刪除檔案
+            $(document).on("click",".FileItemContainer > input:button",function(event){
+                var container=$(this).parent(".FileItemContainer");
+                var filename=container.attr("data-filename");
+                if(confirm("確定刪除「"+filename+"」？")){
+                    container.removeClass("selected");
+                    $.post("@Url.Action("CKEditorFileDelete", "Article")",{fileName:filename},function(result){
+                        if(result.IsSuccess){
+                            container.remove();
+                        }else{
+                            alert("刪除失敗-"+result.Message);
+                        }
+                    });
+                }
+            });
+        });
+        //回填資料至CKEditor設定欄位
+        function setSelectedUrl(url) {
+            var funcNum = $("#requestCKEditorFuncNum").val();
+            window.opener.CKEDITOR.tools.callFunction(funcNum, url);
+            window.close();
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;圖片檔案管理</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="padding:8px 0;">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" aria-label="Bold"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <input type="text" id="searchText" class="form-control" />
+                        <div class="input-group-btn">
+                            <button type="button" id="btnClearSearchText" class="btn btn-danger" aria-label="Bold"><span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding:8px;">
+                    <input type="button" id="btnUpload" class="btn btn-warning" value="上傳檔案" data-toggle="modal" data-target="#UploadModal" />
+                    <input type="button" id="btnOk" class="btn btn-primary" value="確定" />
+                    <input type="button" id="btnCancel" class="btn btn-danger" value="取消" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @Html.Hidden("requestCKEditorFuncNum", ViewData["CKEditorFuncNum"], new { @id = "requestCKEditorFuncNum" })
+        <div class="row">
+            <div class="col-md-12" role="main" id="FileContainer">
+                @if (this.Model != null && this.Model.Count > 0)
+                {
+                    foreach (var item in this.Model)
+                    {
+                        <div class="FileItemContainer" data-filename="@Path.GetFileName(item)">
+                            <img class="loading" src="@Url.Content(item)" data-src="@Url.Content(item)" />
+                            <p>@Path.GetFileName(item)</p>
+                            <input type="button" class="btn btn-danger btn-block" value="刪除" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div id="UploadModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <input id="inputFileupload" name="file" type="file" multiple accept="image/*">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
