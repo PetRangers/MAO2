@@ -17,8 +17,8 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hospital()
         {
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
             this.Scorces = new HashSet<Scorce>();
-            this.Categories = new HashSet<Category>();
         }
     
         public int HospitalID { get; set; }
@@ -38,8 +38,8 @@ namespace CaptainMao.Models
     
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Scorce> Scorces { get; set; }
+        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Scorce> Scorces { get; set; }
     }
 }

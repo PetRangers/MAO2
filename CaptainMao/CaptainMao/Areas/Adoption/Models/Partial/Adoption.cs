@@ -55,9 +55,7 @@ namespace CaptainMao.Models
 
             public Nullable<int> RegistrationUserID { get; set; }
 
-            public virtual Category Categories { get; set; }
 
-            public virtual City Citys { get; set; }
 
         }
     }

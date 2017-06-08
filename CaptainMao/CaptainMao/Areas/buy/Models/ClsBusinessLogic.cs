@@ -18,72 +18,45 @@ namespace CaptainMao.Areas.buy.Models
         IMao<StoreUser> _store = new ClsMao<StoreUser>();
 
         /*尋找商品*/
-        public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_stypeID vm)
+        public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_typeID_stypeID vm)
         {
             IEnumerable<Merchandise> selectMer = null;
-            int selectX = 0;
-            if (vm.CategoryID.HasValue)
-                selectX++;
-            if (vm.Type_ID.HasValue)
-                selectX++;
+            //依照網址去找尋所需要呈現的商品
             if (vm.sType_ID.HasValue)
             {
-                selectX += 2;
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.sType_ID == vm.sType_ID));
             }
-            switch (selectX)
+            else if (vm.Type_ID.HasValue)
             {
-                case 1:
-                    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
-                    break;
-                case 2:
-                    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.Type_ID == vm.Type_ID));
-                    break;
-                case 3:
-                    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.sType_ID == vm.sType_ID));
-                    break;
-                default:
-                    selectMer = _merchandise.GetAll();
-                    break;
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.Type_ID == vm.Type_ID));
             }
-
-
-
-            //if (vm.sType_ID.HasValue)
-            //{   //利用小分類搜尋
-            //    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.sType_ID == vm.sType_ID&&ss.Type_ID==vm.Type_ID));
-            //}
-            //else if (vm.Type_ID.HasValue)
-            //{   //利用大分類搜尋，因大分類在小分類內，故較雜
-            //    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s=>s.sTypes.Any(ss=>ss.Type_ID==vm.Type_ID));
-
-            //}
-            //else if (vm.CategoryID.HasValue)
-            //{   //利用寵物分類搜尋
-            //    selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
-            //}
-            //else
-            //{
-            //    selectMer = _merchandise.GetAll();
-            //}
+            else if (vm.CategoryID.HasValue)
+            {
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
+            }
+            else {
+                selectMer = _merchandise.GetAll();
+            }
             return selectMer;
         }
-        /*大分類回傳*/
+        /*寵物分類回傳*/
         public IEnumerable<Category> Logic_GetAllCategory() {
             return _Category.GetAll();
         }
-        /*小分類回傳*/
-        public IEnumerable<vmType_sType> Logic_Type_selectsType(vmCaID_stypeID vm)
+
+        /*依照該類別目前商品有的小分類回傳*/
+        public IEnumerable<vm_sType> Logic_Type_selectsType(vmCaID_typeID_stypeID vm)
         {
             //搜尋所有該寵物分類的商品
             var mer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
-            List<vmType_sType> vmlist = new List<vmType_sType>();
+            List<vm_sType> vmlist = new List<vm_sType>();
              
             //利用搜尋出來的商品去找他所有的小分類
             foreach (var _mer in mer)
             {   //將小分類搜尋出來
                var sty = _mer.sTypes.OrderBy(y => y.Type_ID).
                     Where(y=>y.Type_ID==vm.Type_ID).
-                    Select(y=>new vmType_sType {sType_ID= y.sType_ID,sType_Name= y.sType_Name});
+                    Select(y=>new vm_sType {sType_ID= y.sType_ID,sType_Name= y.sType_Name});
 
                 //在該商品的多個小分類中尋找
                 foreach (var _sty in sty)
@@ -93,64 +66,67 @@ namespace CaptainMao.Areas.buy.Models
                         vmlist.Add(_sty);
                     }
                 }
-                //if (!vmlist.Contains(sty)) {
-                //    vmlist.Add(sty);
-                //}
-               
             }
-
             return vmlist;
         }
-
+        /*所有小分類回傳*/
         public IEnumerable<CaptainMao.Models.sType> Logic_GetsType()
         {
             return _sType.GetAll().OrderBy(x=>x.Type_ID);
         }
-
-        public void MerchandiseSave(ViewModel.vmCa_Mer vm) {
-            Merchandise mer = new CaptainMao.Models.Merchandise();
-            mer.CategoryID =  vm._Merchandise.CategoryID;
-            
-            mer.Merchandise_Description = vm._Merchandise.Merchandise_Description;
-            mer.Merchandise_Fitness = true;
-            mer.Merchandise_Name = vm._Merchandise.Merchandise_Name;
-            mer.Merchandise_Photo = vm._Merchandise.Merchandise_Photo;
-            mer.Merchandise_Price = vm._Merchandise.Merchandise_Price;
-            mer.Store_ID = vm._Merchandise.Store_ID;
-            mer.Merchandise_Creatdate = DateTime.UtcNow;
-            //尋找剛剛創出的ID
-            int Merchandise_ID=  MerSaveReturnID(mer);
-            for (int x= 0;x< vm.sType_ID.Length;x++) {
-                DB.InsertToMerchandise_Type_View(Merchandise_ID, Convert.ToInt32(vm.sType_ID[x]));
+        /*商品儲存*/
+        public void Logic_MerchandiseSave(ViewModel.vmCa_Mer_stype vm) {
+            using (var transaction = DB.Database.BeginTransaction())
+            {
+                try
+                {
+                    vm._Merchandise.Merchandise_Creatdate = DateTime.UtcNow;
+                    int Merchandise_ID = MerSaveReturnID(vm._Merchandise);
+                    /*使用預存程式儲存*/
+                    for (int x = 0; x < vm.sType_ID.Length; x++)
+                    {
+                        DB.InsertToMerchandise_Type_View(Merchandise_ID, Convert.ToInt32(vm.sType_ID[x]));
+                    }
+                    transaction.Commit();
+                }
+                catch{
+                    transaction.Rollback();
+                }
+                
             }
         }
-
-
+        /*尋找創出的ID*/
         private int MerSaveReturnID(Merchandise mer) {
             _merchandise.Create(mer);
             return mer.Merchandise_ID;
         }
 
-         public IEnumerable<vmCa_Type> Logic_Category_selectType(int CategoryID)
+        /*商品修改*/
+        public string Logic_MerchandiseEdit(vmCa_Mer_stype vm)
         {
-            //var type = _Category.GetbyID(CategoryID).sTypes;
+            using (var transaction = DB.Database.BeginTransaction())
+            {
 
-            //List<vmCa_Type> vmLis = new List<vmCa_Type>();
-            //string x = null;
-            //foreach (var s in type)
-            //{
-            //    if (x != s.Type.Type_Name)
-            //    {
-            //        vmCa_Type _vm = new vmCa_Type();
-            //        _vm.Type_ID = s.Type_ID;
-            //        _vm.Type_Name = s.Type.Type_Name;
-            //        vmLis.Add(_vm);
-            //        x = s.Type.Type_Name;
-            //    }
-            //}
-            return null;
+                    vm._Merchandise.Merchandiser_Editdata = DateTime.UtcNow;
+                    _merchandise.Edit(vm._Merchandise);
+                    DB.DeleteToMerchandise_Type_View(vm._Merchandise.Merchandise_ID);
+                    /*使用預存程式儲存*/
+                    for (int x = 0; x < vm.sType_ID.Length; x++)
+                    {
+                        DB.InsertToMerchandise_Type_View(vm._Merchandise.Merchandise_ID, 
+                            Convert.ToInt32(vm.sType_ID[x]));
+                    }
+                    transaction.Commit();
+                    return "修改成功";
+
+                //catch(Exception ex)
+                //{
+                //    transaction.Rollback();
+                //    return ex.Message;
+                //}
+
+            }
         }
-
         //取出圖片
         public byte[] Logic_getMerchandisePhoto(int num)
         {
@@ -162,25 +138,38 @@ namespace CaptainMao.Areas.buy.Models
             return DB.Merchandises.Where(x=>x.Store_ID ==id);
         }
 
-//存入圖片 photo:從前端得到的 x:存入的byte[]欄位
+        //存入圖片 photo:從前端得到的 x:存入的byte[]欄位
         public byte[] Logic_PhotoToByte(HttpPostedFileBase photo)
         {
-
             byte[] byteImg = new byte[photo.ContentLength];
             photo.InputStream.Read(byteImg, 0, photo.ContentLength);
-             
             return byteImg;
+        }
+        /*傳入值給vmCa_Mer*/
+        public vmCa_Mer_stype Logic_returnNewCa_Mer(vmCa_Mer_stype vm) {
+            vm._Category = Logic_GetAllCategory();
+            vm._Merchandise = new Merchandise();
+            vm._sType = Logic_GetsType();
+            vm.sType_ID = vm.sType_ID == null ? new string[] { } : vm.sType_ID;
+            return vm;
+        }
+
+        public vmCa_Mer_stype Logic_returnEdit_CaMerSty(int Merchandise_ID,string store_ID) {
+            vmCa_Mer_stype vm = new vmCa_Mer_stype();
+            Logic_returnNewCa_Mer(vm);
+            vm._Merchandise = _merchandise.GetbyID(Merchandise_ID);
+            if (vm._Merchandise.Store_ID != store_ID) {
+                throw new MissingFieldException();
+            }
+            vm.sType_ID = vm._Merchandise.sTypes.Select(s => s.sType_ID.ToString()).ToArray();
+            return vm;
         }
 
 
-        public IEnumerable<CaptainMao.Models.Type> Logic_GetAllType(){
-            return _Type.GetAll();
-            }
-        
 
-
-
-
-
+        public void Logic_MerchandiseDelete(int Merchandise_ID) {
+            DB.DeleteToMerchandise_Type_View(Merchandise_ID);
+            _merchandise.DeletebyID(Merchandise_ID);
+        }
     }
 }

@@ -986,9 +986,14 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="HospitalCategoryDetails" Association="MaoModel.HospitalCategoryDetails">
+          <EntitySet Name="HospitalCategoryDetails" EntityType="MaoModel.HospitalCategoryDetail" />
+          <AssociationSet Name="FK_HospitalCategoryDetails_Categories" Association="MaoModel.FK_HospitalCategoryDetails_Categories">
             <End Role="Category" EntitySet="Categories" />
+            <End Role="HospitalCategoryDetail" EntitySet="HospitalCategoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalCategoryDetails_Hospital" Association="MaoModel.FK_HospitalCategoryDetails_Hospital">
             <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="HospitalCategoryDetail" EntitySet="HospitalCategoryDetails" />
           </AssociationSet>
           <AssociationSet Name="Merchandise_Order_View" Association="MaoModel.Merchandise_Order_View">
             <End Role="Merchandise" EntitySet="Merchandises" />
@@ -1047,7 +1052,7 @@
           <NavigationProperty Name="Adoptions" Relationship="MaoModel.FK_Adoption_Categories" FromRole="Category" ToRole="Adoption" />
           <NavigationProperty Name="AdpWishes" Relationship="MaoModel.FK_AdpWish_Categories" FromRole="Category" ToRole="AdpWish" />
           <NavigationProperty Name="UserPets" Relationship="MaoModel.FK_UserPet_Categories" FromRole="Category" ToRole="UserPet" />
-          <NavigationProperty Name="Hospitals" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Category" ToRole="Hospital" />
+          <NavigationProperty Name="HospitalCategoryDetails" Relationship="MaoModel.FK_HospitalCategoryDetails_Categories" FromRole="Category" ToRole="HospitalCategoryDetail" />
         </EntityType>
         <EntityType Name="Merchandise">
           <Key>
@@ -1252,7 +1257,7 @@
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -1307,7 +1312,7 @@
           <Property Name="CategoryID" Type="Int32" />
           <NavigationProperty Name="City" Relationship="MaoModel.FK_Hospital_Citys" FromRole="Hospital" ToRole="City" />
           <NavigationProperty Name="Scorces" Relationship="MaoModel.FK_Scorce_Hospital" FromRole="Hospital" ToRole="Scorce" />
-          <NavigationProperty Name="Categories" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Hospital" ToRole="Category" />
+          <NavigationProperty Name="HospitalCategoryDetails" Relationship="MaoModel.FK_HospitalCategoryDetails_Hospital" FromRole="Hospital" ToRole="HospitalCategoryDetail" />
         </EntityType>
         <EntityType Name="TitleCategory">
           <Key>
@@ -1552,6 +1557,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HospitalCategoryDetails_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+          <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="HospitalCategoryDetails">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Scorce_Hospital">
           <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="1" />
           <End Type="MaoModel.Scorce" Role="Scorce" Multiplicity="*" />
@@ -1568,9 +1585,39 @@
           <End Type="MaoModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <Association Name="HospitalCategoryDetails">
-          <End Type="MaoModel.Category" Role="Category" Multiplicity="*" />
-          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="*" />
+        <EntityType Name="HospitalCategoryDetail">
+          <Key>
+            <PropertyRef Name="CountID" />
+          </Key>
+          <Property Name="CountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_HospitalCategoryDetails_Categories" FromRole="HospitalCategoryDetail" ToRole="Category" />
+          <NavigationProperty Name="Hospital" Relationship="MaoModel.FK_HospitalCategoryDetails_Hospital" FromRole="HospitalCategoryDetail" ToRole="Hospital" />
+        </EntityType>
+        <Association Name="FK_HospitalCategoryDetails_Categories">
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.HospitalCategoryDetail" Role="HospitalCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="HospitalCategoryDetail">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalCategoryDetails_Hospital">
+          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="1" />
+          <End Type="MaoModel.HospitalCategoryDetail" Role="HospitalCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="HospitalCategoryDetail">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="Merchandise_Order_View">
           <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />

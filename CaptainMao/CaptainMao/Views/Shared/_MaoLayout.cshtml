@@ -75,7 +75,7 @@
                             </ul>
                         </li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
-                        <li><a href="@Url.Action("Index","Adoption",new { area="Adoption"})" class="dropdown-toggle" title="毛孩活動">快樂跳舞<br /><br />活動專區</a></li>
+                        <li><a href="@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" class="dropdown-toggle" title="毛孩領養">尋找新家<br /><br />領養專區</a></li>
                         <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
                         <li><a href="#" class="dropdown-toggle" title="毛孩地圖">美食醫院<br /><br />查詢專區</a></li>
                     </ul>
@@ -142,7 +142,6 @@
                 </ul>
             </div>
         </div>
-
         <main class="container-fluid">
             <div class="row">
                 @RenderBody()

@@ -9,7 +9,7 @@
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
-    @Html.Action("Aside")
+    @Html.Action("Aside","Store")
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
@@ -25,6 +25,7 @@
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
+                        <td>@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</td>
                         <th></th>
                     </tr>
                 </thead>
@@ -37,9 +38,10 @@
                             <td><img src='@Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID})' class="img-circle" width="80" /></td>
                             <td>@Html.DisplayFor(c => _model.Merchandise_Price)</td>
                             <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
+                            <td>@Html.DisplayFor(c=>_model.Merchandise_Fitness)</td>
                             <td>
-                                @Html.ActionLink("修改",null)
-                                @Html.ActionLink("刪除",null)
+                                @Html.ActionLink("修改","Edit","Store",new { Merchandise_ID =_model.Merchandise_ID},new{@class= "btn btn-primary" })
+                                @Html.ActionLink("刪除", "Delete", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
                             </td>
                         </tr>
                     }
@@ -54,4 +56,5 @@
 }
 @section script{
 
+<script>console.log(@ViewBag.Message)</script>
 }

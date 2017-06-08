@@ -17,25 +17,25 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Merchandises = new HashSet<Merchandise>();
             this.Adoptions = new HashSet<Adoption>();
             this.AdpWishes = new HashSet<AdpWish>();
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
+            this.Merchandises = new HashSet<Merchandise>();
             this.UserPets = new HashSet<UserPet>();
-            this.Hospitals = new HashSet<Hospital>();
         }
     
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Adoption> Adoptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdpWish> AdpWishes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPet> UserPets { get; set; }
+        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hospital> Hospitals { get; set; }
+        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPet> UserPets { get; set; }
     }
 }

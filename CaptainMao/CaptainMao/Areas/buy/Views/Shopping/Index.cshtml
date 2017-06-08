@@ -11,7 +11,7 @@
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
-    @Html.Action("Aside")
+    @Html.Action("Aside","Shopping")
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11"> 
@@ -50,6 +50,5 @@
 
 @section script{
     <!--aside-->
-    
     <script src='@Url.Content("~/Areas/buy/js/aside.js")' ></script>
 }
