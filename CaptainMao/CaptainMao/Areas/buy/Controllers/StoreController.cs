@@ -1,4 +1,5 @@
 ﻿using CaptainMao.Areas.buy.Models;
+using CaptainMao.Areas.buy.ViewModel;
 using CaptainMao.Models;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,14 @@ namespace CaptainMao.Areas.buy.Controllers
 {
     public class StoreController : Controller
     {
-        IMao<CaptainMao.Models.Type> _type = new ClsMao<CaptainMao.Models.Type>();
-
-        ClsBusinessLogic fun = new ClsBusinessLogic();
+        ClsBusinessLogic fun = new ClsBusinessLogic();  //使用商業邏輯層
        // GET: buy/Store
 
         public ActionResult Index()
         {
-            if (Session["user_identity"] != null)
-            {
-                return View(fun.Logic_SelectStoreMerch((string)Session["user_identity"]));
-            }
-            else {
-                return RedirectToAction("index", "Login");
-            }
+            if (Session["user_identity"] != null)   //判斷是否有登入
+            { return View(fun.Logic_SelectStoreMerch((string)Session["user_identity"])); }
+            return RedirectToAction("index", "Login");  //沒登入則回去登入首頁
         }
 
         [ChildActionOnly]
@@ -35,59 +30,85 @@ namespace CaptainMao.Areas.buy.Controllers
         [HttpGet]
         public ActionResult Create() {
             if (Session["user_identity"] == null)
-            {
-                return RedirectToAction("index", "Login");
-            }
-
-            ViewModel.vmCa_Mer vm = new ViewModel.vmCa_Mer();
-            vm._Category = fun.Logic_GetAllCategory();
-            vm._sType = fun.Logic_GetsType();
-            vm.sType_ID = new string[] { };
-            return View(vm);
+            { return RedirectToAction("index", "Login"); }
+            vmCa_Mer_stype vm = new vmCa_Mer_stype();
+            ViewBag.Form = "Create";
+            return View(fun.Logic_returnNewCa_Mer(vm));
         }
 
         [HttpPost]
-        public ActionResult Create(ViewModel.vmCa_Mer vm, HttpPostedFileBase photo)
+        public ActionResult Create(vmCa_Mer_stype vm, HttpPostedFileBase photo)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    vm._Category = fun.Logic_GetAllCategory();
-                    vm._sType = fun.Logic_GetsType();
-                    vm.sType_ID = vm.sType_ID == null ? new string[] { } : vm.sType_ID;
-                    
-                    //    ViewBag.sType_ID = new string[] { };
-                    //    ViewBag.sType_IDError = "請選擇一個以上的分類";
-                    //}
-                    
-                    return View(vm);
+                    return View(fun.Logic_returnNewCa_Mer(vm));
                 }
-                /*轉圖片*/
                 if (photo != null)
-                {
+                {  /*轉圖片*/
                     vm._Merchandise.Merchandise_Photo =fun.Logic_PhotoToByte(photo);
                 }
-
                 vm._Merchandise.Store_ID = (string)Session["user_identity"];
-                fun.MerchandiseSave(vm);
-
+                fun.Logic_MerchandiseSave(vm);
+                
                 return RedirectToAction("Index");
             }
             catch (Exception ex) {
                 ViewBag.Message= ex.Message;
-                vm._Category = fun.Logic_GetAllCategory();
-                vm._sType = fun.Logic_GetsType();
-                return View(vm);
+                ViewBag.Form = "Create";
+                return View(fun.Logic_returnNewCa_Mer(vm));
             }
-
-
         }
+        [HttpGet]
+        public ActionResult Edit(int Merchandise_ID) {
+            //            ViewBag.notMer
+            try
+            {
+                if (Session["user_identity"] == null)
+                { return RedirectToAction("index", "Login"); }
+                ViewBag.Form = "Edit";
 
-
-        public ActionResult Edite() {
-            return View();
+                return View("Create", fun.Logic_returnEdit_CaMerSty(Merchandise_ID, (string)Session["user_identity"]));
+            }
+            catch (MissingFieldException)
+            {
+                ViewBag.notMer = true;
+                return View("Create");
+            }
+            catch(Exception ex) {
+                ViewBag.Message = ex.Message;
+                ViewBag.Form = "Edit";
+                return View("Create");
+            }
         }
-
+        [HttpPost]
+        public ActionResult Edit(vmCa_Mer_stype vm, HttpPostedFileBase photo) {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.Form = "Edit";
+                    return View("Create", fun.Logic_returnEdit_CaMerSty(vm._Merchandise.Merchandise_ID, (string)Session["user_identity"]));
+                }
+                if (photo != null)
+                {  /*轉圖片*/
+                    vm._Merchandise.Merchandise_Photo = fun.Logic_PhotoToByte(photo);
+                }
+                vm._Merchandise.Store_ID = (string)Session["user_identity"];
+                fun.Logic_MerchandiseEdit(vm);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                ViewBag.Form = "Edit";
+                return View("Create",vm);
+            }
+        }
+        public ActionResult Delete(int Merchandise_ID) {
+            fun.Logic_MerchandiseDelete(Merchandise_ID);
+            return RedirectToAction("Index");
+        }
     }
 }

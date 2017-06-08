@@ -162,13 +162,11 @@
           <Property Name="Map" Type="nvarchar" MaxLength="50" />
           <Property Name="CategoryID" Type="int" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'Mao.dbo.HospitalCategoryDetails' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="HospitalCategoryDetails">
           <Key>
-            <PropertyRef Name="HospitalID" />
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="CountID" />
           </Key>
+          <Property Name="CountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
@@ -669,18 +667,13 @@
           <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
-          <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [HospitalCategoryDetails].[HospitalID] AS [HospitalID], 
-    [HospitalCategoryDetails].[CategoryID] AS [CategoryID]
-    FROM [dbo].[HospitalCategoryDetails] AS [HospitalCategoryDetails]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Scorce" EntityType="Self.Scorce" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Scorce].[UserID] AS [UserID], 
@@ -966,9 +959,14 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="HospitalCategoryDetails" Association="MaoModel.HospitalCategoryDetails">
+          <EntitySet Name="HospitalCategoryDetails" EntityType="MaoModel.HospitalCategoryDetail" />
+          <AssociationSet Name="FK_HospitalCategoryDetails_Categories" Association="MaoModel.FK_HospitalCategoryDetails_Categories">
             <End Role="Category" EntitySet="Categories" />
+            <End Role="HospitalCategoryDetail" EntitySet="HospitalCategoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalCategoryDetails_Hospital" Association="MaoModel.FK_HospitalCategoryDetails_Hospital">
             <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="HospitalCategoryDetail" EntitySet="HospitalCategoryDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetUser">
@@ -1017,7 +1015,7 @@
           <NavigationProperty Name="Adoptions" Relationship="MaoModel.FK_Adoption_Categories" FromRole="Category" ToRole="Adoption" />
           <NavigationProperty Name="AdpWishes" Relationship="MaoModel.FK_AdpWish_Categories" FromRole="Category" ToRole="AdpWish" />
           <NavigationProperty Name="UserPets" Relationship="MaoModel.FK_UserPet_Categories" FromRole="Category" ToRole="UserPet" />
-          <NavigationProperty Name="Hospitals" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Category" ToRole="Hospital" />
+          <NavigationProperty Name="HospitalCategoryDetails" Relationship="MaoModel.FK_HospitalCategoryDetails_Categories" FromRole="Category" ToRole="HospitalCategoryDetail" />
         </EntityType>
         <EntityType Name="Merchandise">
           <Key>
@@ -1275,7 +1273,7 @@
           <Property Name="CategoryID" Type="Int32" />
           <NavigationProperty Name="City" Relationship="MaoModel.FK_Hospital_Citys" FromRole="Hospital" ToRole="City" />
           <NavigationProperty Name="Scorces" Relationship="MaoModel.FK_Scorce_Hospital" FromRole="Hospital" ToRole="Scorce" />
-          <NavigationProperty Name="Categories" Relationship="MaoModel.HospitalCategoryDetails" FromRole="Hospital" ToRole="Category" />
+          <NavigationProperty Name="HospitalCategoryDetails" Relationship="MaoModel.FK_HospitalCategoryDetails_Hospital" FromRole="Hospital" ToRole="HospitalCategoryDetail" />
         </EntityType>
         <EntityType Name="TitleCategory">
           <Key>
@@ -1536,9 +1534,39 @@
           <End Type="MaoModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <Association Name="HospitalCategoryDetails">
-          <End Type="MaoModel.Category" Role="Category" Multiplicity="*" />
-          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="*" />
+        <EntityType Name="HospitalCategoryDetail">
+          <Key>
+            <PropertyRef Name="CountID" />
+          </Key>
+          <Property Name="CountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="MaoModel.FK_HospitalCategoryDetails_Categories" FromRole="HospitalCategoryDetail" ToRole="Category" />
+          <NavigationProperty Name="Hospital" Relationship="MaoModel.FK_HospitalCategoryDetails_Hospital" FromRole="HospitalCategoryDetail" ToRole="Hospital" />
+        </EntityType>
+        <Association Name="FK_HospitalCategoryDetails_Categories">
+          <End Type="MaoModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MaoModel.HospitalCategoryDetail" Role="HospitalCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="HospitalCategoryDetail">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalCategoryDetails_Hospital">
+          <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="1" />
+          <End Type="MaoModel.HospitalCategoryDetail" Role="HospitalCategoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="HospitalCategoryDetail">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1808,14 +1836,15 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="HospitalCategoryDetails" TypeName="MaoModel.HospitalCategoryDetails" StoreEntitySet="HospitalCategoryDetails">
-            <EndProperty Name="Hospital">
-              <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
-            </EndProperty>
-            <EndProperty Name="Category">
-              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="HospitalCategoryDetails">
+            <EntityTypeMapping TypeName="MaoModel.HospitalCategoryDetail">
+              <MappingFragment StoreEntitySet="HospitalCategoryDetails">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="CountID" ColumnName="CountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -17,7 +17,8 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -218,6 +219,12 @@
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\buy\css\Create.css">
+      <DependentUpon>Create.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\Create.min.css">
+      <DependentUpon>Create.css</DependentUpon>
+    </Content>
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -241,6 +248,8 @@
     <Content Include="Areas\buy\css\shoppingIndex.less" />
     <Content Include="Areas\buy\Views\Store\Create.cshtml" />
     <Content Include="Areas\buy\Views\Store\Index.cshtml" />
+    <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
+    <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
@@ -265,8 +274,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
-    <Content Include="css\StyleSheet_Master.css" />
-    <Content Include="css\StyleSheet_Master.min.css" />
+    <Content Include="css\StyleSheet_Master.css">
+      <DependentUpon>StyleSheet_Master.less</DependentUpon>
+    </Content>
+    <Content Include="css\StyleSheet_Master.min.css">
+      <DependentUpon>StyleSheet_Master.css</DependentUpon>
+    </Content>
     <Content Include="css\video.css" />
     <Content Include="favicon.ico" />
     <Content Include="files\1fabec0335901a37a1aae9037d955749.png" />
@@ -328,7 +341,20 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\Index.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\web.config" />
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
@@ -1018,6 +1044,11 @@
     <Compile Include="Areas\buy\Models\partial\sType.cs" />
     <Compile Include="Areas\buy\Models\partial\Type.cs" />
     <Compile Include="Areas\buy\ViewModel\vmCa.cs" />
+    <Compile Include="Areas\Hospital\Controllers\HospitalController.cs" />
+    <Compile Include="Areas\Hospital\Controllers\HospitalCRUDController.cs" />
+    <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
+    <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
+    <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
@@ -1083,6 +1114,9 @@
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\Hospital.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HospitalCategoryDetail.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -1193,6 +1227,7 @@
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\buy\Views\Shared\" />
+    <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

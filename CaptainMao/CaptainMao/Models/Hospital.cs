@@ -18,7 +18,7 @@ namespace CaptainMao.Models
         public Hospital()
         {
             this.Scorces = new HashSet<Scorce>();
-            this.Categories = new HashSet<Category>();
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
         }
     
         public int HospitalID { get; set; }
@@ -40,6 +40,6 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Scorce> Scorces { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
     }
 }

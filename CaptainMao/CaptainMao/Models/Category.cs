@@ -21,7 +21,7 @@ namespace CaptainMao.Models
             this.Adoptions = new HashSet<Adoption>();
             this.AdpWishes = new HashSet<AdpWish>();
             this.UserPets = new HashSet<UserPet>();
-            this.Hospitals = new HashSet<Hospital>();
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
         }
     
         public int CategoryID { get; set; }
@@ -36,6 +36,6 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hospital> Hospitals { get; set; }
+        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
     }
 }

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<script>
+    //攔截submit 做檢查
+    function checkForm() {
+        if ($('#UserID').val() == "") {
+            alert("請輸入發言人");
+            return false;
+        }
+        if ($('#Score').val() == "") {
+            alert("請選擇星等評價");
+            return false;
+        }
+        if ($('#NoteValue').val() == "") {
+            if (confirm("請輸入留言")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+</script>
+<h2>ListToNote</h2>
+<form method="post" action="~/Hospital/ListToNote" onsubmit="return checkForm(this);">
+    <h2>@ViewBag.HospitalName - @ViewBag.HospitalID</h2>
+    <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
+    <table>
+        <tr>
+            <th>評分者</th>
+            <td><input type="text" id="UserID" name="UserID" /></td>
+            <th>星等</th>
+            <td>@Html.DropDownList("Scorce1")</td>
+        </tr>
+        <tr>
+            <th>評語</th>
+            <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="送出評分" /></td>
+        </tr>
+    </table>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>評分者</th>
+            <th>評語</th>
+            <th>星等</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserID</td>
+                <td>@item.NoteValue</td>
+                <td>@item.Score</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
