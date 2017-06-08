@@ -24,8 +24,8 @@ namespace CaptainMao.Models
         public string BoardName { get; set; }
         public string MasterUserID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article> Articles { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

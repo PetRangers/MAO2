@@ -13,6 +13,13 @@ namespace CaptainMao
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "Adoption",
+            //    url: "{area}/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Adoption", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new[] { "CaptainMao.Areas.Adoption" }
+            //    );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

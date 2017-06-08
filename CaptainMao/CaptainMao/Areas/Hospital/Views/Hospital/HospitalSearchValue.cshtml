@@ -1,0 +1,154 @@
+﻿@*@model CaptainMao.Areas.Hodpital.Models.ViewModel.HospitalModel*@
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+<script>
+    function checkForm() {
+        if ($('#UserID').val() == "") {
+            alert("請輸入發言人");
+            return false;
+        }
+        if ($('#Score').val() == "") {
+            alert("請選擇星等評價");
+            return false;
+        }
+        if ($('#NoteValue').val() == "") {
+            if (confirm("請輸入留言")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    window.onload = function poto() {
+
+        for (var i = 1; i <= 5; i++) {
+            document.getElementById(i + "idimg").onmouseover = mouseover;
+            document.getElementById(i + "idimg").onmouseout = mouseout;
+            document.getElementById(i + "idimg").onclick = mouseclick;
+        }
+    };
+    function mouseover() {
+        var q = parseInt(event.currentTarget.id)
+        for (var i = 1; i <= q; i++)
+        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764.jpg" }
+    }
+    function mouseout() {
+        var q = parseInt(event.currentTarget.id)
+        for (var i = 1; i <= q; i++)
+        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" }
+    }
+    function mouseclick() {
+        var q = parseInt(event.currentTarget.id)
+        for (var i = 1; i <= q; i++)
+        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" }
+        for (var i = 1; i <= 5; i++) {
+            document.getElementById(i + "idimg").onmouseover = null;
+            document.getElementById(i + "idimg").onmouseout = null;
+            document.getElementById(i + "idimg").onclick = null;
+        }
+        document.getElementById("idsp").innerHTML = "<p>可獲得 " + q + "個毛孩子 </p>";
+        document.getElementById("butck").onclick = buttonclick;
+        document.getElementById("butck").style = "display:black";
+    }
+    function buttonclick() {
+        for (var i = 1; i <= 5 ; i++) {
+            document.getElementById(i + "idimg").onmouseover = mouseover;
+            document.getElementById(i + "idimg").onmouseout = mouseout;
+            document.getElementById(i + "idimg").onclick = mouseclick;
+            document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764.jpg";
+        }
+        document.getElementById("idsp").innerHTML = "";
+        document.getElementById("butck").style = "display:none";
+    }
+
+
+
+
+</script>
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @*@Html.Partial("Aside")*@
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:auto;background-color:#fff266" class="drawingpin">
+            一星：@ViewBag.zS
+            二星：@ViewBag.xS
+            六星：@ViewBag.cS
+            @*@foreach (var item in Model)
+                {*@
+            <h2> @Model.HospitalName</h2>
+            <h4>醫院地址:</h4><p>@Model.HospitalAddress</p>
+            <h4>醫院區域:</h4><p>@Model.AddressArea</p>
+            <h4>醫院電話:</h4><p>@Model.HospitalPhone</p>
+            <h4>寵物種類:</h4><p>@ViewBag.SetName</p>
+            <h4>營業時間:</h4><p>@Model.BusinessHours</p>
+            <h4>急診時間:</h4><p>@Model.Emergency</p>
+            <h4>專業科目:</h4><p>@Model.OutpatientProject</p>
+            <h4>醫院設備:</h4><p>@Model.Equipment</p>
+            <h4>醫院網址:</h4><p>@Model.WebAddress</p>
+            <h4>線上問診:</h4><p>@Model.OnlineConsultation</p>
+            <h4>醫院地圖:</h4><p>@Model.Map</p>
+            @*}*@
+            @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml");}
+
+        </div>
+        <div style="height:500px;background-color:burlywood" class="drawingpin">
+
+            <h2>ListToNote</h2>
+            <form method="post" action="~/Hospital/ListToNote" onsubmit="return checkForm(this);">
+                <h2>@*@ViewBag.HospitalName*@ - @ViewBag.HospitalID</h2>
+                <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
+                <table>
+                    <tr>
+                        <th>評分者</th>
+                        <td><input type="text" id="UserID" name="UserID" /></td>
+                        <th>星等</th>
+                        <td>
+                            <img id="1idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                            <img id="2idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                            <img id="3idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                            <img id="4idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                            <img id="5idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>評語</th>
+                        <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="送出評分" /></td>
+                    </tr>
+                </table>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>評分者</th>
+                        <th>評語</th>
+                        <th>星等</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var item in Model)
+                        {
+                            <tr></tr>
+                        }*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
+
+
+

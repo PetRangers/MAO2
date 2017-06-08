@@ -7,22 +7,13 @@
 
 @section script{
 <script src="~/Scripts/ckeditor/ckeditor.js"></script>
-<script src="~/CKFinderScripts/ckfinder.js"></script>
     <script>
-            var editor= CKEDITOR.replace('content', {
+        $(function () {
+            CKEDITOR.replace('content', {
                 toolbar: 'Custom',
                 skin: "bootstrapck",
-                filebrowserImageUploadUrl: "@Url.Action("Upload")"
+                filebrowserImageBrowseUrl: "@Url.Action("CKEditorImageFileManager", "Article")"
             });
-        CKEDITOR.on('dialogDefinition', function (e) {
-            if (e.data.name == 'image') {
-                var dialog = e.data.definition;
-                oldOnShow = dialog.onShow;
-                dialog.onShow = function () {
-                    oldOnShow.apply(this, arguments);
-                    this.selectPage('Upload');
-                };
-            }
         });
     </script>
     }
@@ -87,13 +78,11 @@
                             @Html.ValidationMessageFor(model => model.ContentText, "", new { @class = "text-danger" })
                          </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="送出" class="btn btn-default" />
                         </div>
                     </div>
-
                 </div>
               }
             <div>

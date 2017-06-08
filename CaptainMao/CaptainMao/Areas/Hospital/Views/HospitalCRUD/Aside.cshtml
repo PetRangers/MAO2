@@ -1,0 +1,48 @@
+﻿
+<script type="text/javascript">
+
+    //再下拉選單註冊的事件，去呼叫原本的Ajax去刷新頁面
+    function CheckThis() {
+        ChangeList();
+    }
+
+    //會呼叫這個Ajax
+    function ChangeList() {
+        var clicktbn = $('#HospitalCity').val();//取出HospitalCity標籤的value
+        var clicktbnRace = $('#HospitalPetRace').val();
+
+        $.ajax({
+            url: "/Hospital/_HospitalSearchCity",//要把資料丟去哪一個Action的路徑
+            type: "POST",//資料傳遞的方式
+            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace },//要帶去給Action的資料名稱:資料內容
+            dataType: "text",//設定格式 可能是Json
+            traditional: true,//是否改為同步
+            success: function (data) {//Ajax成功時會執行的區塊
+                //alert("1");
+                $('#ShowMePlease').load("/Hospital/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace });//刷新頁面上標籤為ShowMePlease的區塊，刷新的內容來自/Hospital/_HospitalSearchCity這支Action，並給他參數
+
+            },
+            error: function (XMLHttpRequest) {//Ajax失敗時會執行的區塊
+                alert(XMLHttpRequest.responseText);
+                //$('#_HospitalCity').load("/Hospital/_HospitalSearchCity", { "CityID": clicktbn });
+            }
+        });
+    }
+  </script>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"> 編輯</h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"><a href="@Url.Action("CreatHospital",new { })">新增</a></li>
+        <li class="list-group-item"><a>查詢所有</a></li>
+        <li class="list-group-item"><a href="#">查詢</a></li>
+        <li class="list-group-item">@Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity, new { @onchange = "CheckThis()" })</li>
+        <li class="list-group-item">  @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)@ViewBag.HospitalPetRace)</li>
+        @*資料型態為IEnumerable<SelectListItem>的資料，來源是後端丟出的ViewBag.HospitalCity，並透過 new { @onchange = "CheckThis()" }這段註冊一個會去呼叫CheckThis()的onchange事件*@
+    </ul>
+    <ul></ul>
+
+
+
+</div>

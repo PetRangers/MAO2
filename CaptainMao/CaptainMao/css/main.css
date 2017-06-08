@@ -3,6 +3,7 @@
 }
 aside .panel {
   box-shadow: -2px 5px 10px;
+  width:160px;
   position: fixed;
   z-index: 805;
 }
@@ -19,7 +20,6 @@ article {
   background-color: rgba(49, 44, 38, 0.38);
   background-image: url("../images/texture.png");
 }
-
 article>div{
     min-height:800px;
 }
@@ -31,7 +31,7 @@ article>div{
   background-position: top left;
   background-size: 40px;
   box-shadow: -2px 5px 10px;
-  padding: 20px;
+  padding: 30px;
 }
 footer {
   height: 50px;

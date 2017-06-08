@@ -18,9 +18,10 @@ namespace Login
             bundles.Add(new StyleBundle("~/css").Include(
                       "~/css/reset.css",
                       "~/Content/bootstrap.css",
-                      "~/css/StyleSheet_Master.css",
-                      "~/Content/PagedList.css"
+                     "~/Content/PagedList.css",
+                      "~/css/StyleSheet_Master.css"
                       ));
+            
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
