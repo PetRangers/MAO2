@@ -15,9 +15,9 @@ namespace CaptainMao.Areas.buy
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "buy_default",
-                "buy/{controller}/{action}/{id}",
-                new { controller="Shopping", action = "Index", id = UrlParameter.Optional }
+                name: "buy_default",
+                url: "buy/{controller}/{action}/{id}",
+                defaults: new { controller="Shopping", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

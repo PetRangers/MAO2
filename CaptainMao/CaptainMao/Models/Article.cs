@@ -17,7 +17,7 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Article()
         {
-            this.Comment = new HashSet<Comment>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public int ArticleID { get; set; }
@@ -31,10 +31,10 @@ namespace CaptainMao.Models
         public Nullable<int> Number { get; set; }
         public bool IsDeleted { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Board Board { get; set; }
-        public virtual TitleCategories TitleCategories { get; set; }
+        public virtual TitleCategory TitleCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

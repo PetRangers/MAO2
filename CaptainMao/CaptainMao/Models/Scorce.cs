@@ -20,7 +20,7 @@ namespace CaptainMao.Models
         public string Date { get; set; }
         public string NoteValue { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Hospital Hospital { get; set; }
     }
 }

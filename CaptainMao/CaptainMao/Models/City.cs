@@ -12,18 +12,24 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public City()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.Adoptions = new HashSet<Adoption>();
+            this.AdpWishes = new HashSet<AdpWish>();
+            this.Hospitals = new HashSet<Hospital>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public int CityID { get; set; }
+        public string CityName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<Adoption> Adoptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdpWish> AdpWishes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Hospital> Hospitals { get; set; }
     }
 }
