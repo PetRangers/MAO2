@@ -25,6 +25,21 @@
                 @Html.ActionLink("建立", "SetPassword", "Manage", null, new { @class = "btn btn-default" })
             }
         </dd>
+
+        <dt>電話號碼: @(Model.PhoneNumber ?? "None")</dt>
+        <dd>
+            @if (Model.PhoneNumber != null)
+            {
+                @Html.ActionLink("修改", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" })
+                @: &nbsp;|&nbsp;
+                @Html.ActionLink("移除", "RemovePhoneNumber", "Manage", null, new { @class = "btn btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("新增", "AddPhoneNumber")
+            }
+        </dd>
+
         <dt>外部登入:</dt>
         <dd>
             @Model.Logins.Count 
