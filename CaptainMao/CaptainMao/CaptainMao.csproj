@@ -258,6 +258,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ckeditorFileManager.css" />
+    <Content Include="Content\jqcloud.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -274,6 +275,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\0DQPb7DHZM.png" />
+    <Content Include="images\33725431546_cc653802ce_h.jpg" />
     <Content Include="images\B1.jpg" />
     <Content Include="images\B3.jpg" />
     <Content Include="images\backimg.jpg" />
@@ -327,6 +329,9 @@
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
     <Content Include="css\StyleSheet_Master.less" />
+    <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -340,14 +345,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jqcloud-1.0.4.js" />
+    <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -897,7 +900,6 @@
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
@@ -908,7 +910,6 @@
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\fileinput.js" />
     <Content Include="Scripts\fileinput.min.js" />
-    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -962,8 +963,6 @@
     <Content Include="images\Dog-Lovers.jpg" />
     <Content Include="Scripts\plugins\canvas-to-blob.js" />
     <Content Include="Scripts\plugins\canvas-to-blob.min.js" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\plugins\piexif.js" />
     <Content Include="Scripts\plugins\piexif.min.js" />
     <Content Include="Scripts\plugins\purify.js" />
@@ -1000,7 +999,6 @@
     <Compile Include="Areas\Adoption\ViewModel\IndexViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
-    <Compile Include="Areas\Article\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
@@ -1193,8 +1191,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
-    <Folder Include="Areas\Article\Views\Shared\" />
-    <Folder Include="Areas\Article\Views\Values\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\buy\Views\Shared\" />
   </ItemGroup>

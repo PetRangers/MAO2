@@ -7,11 +7,7 @@
 
 @section style{
         <style>
-            #back{
-                background-color:burlywood;
-                margin-left:3px;
-                margin-right:3px;
-            }
+           
         </style>
     }
 
@@ -30,49 +26,56 @@
                 @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
             </div>
         </div>
-        <div id="back" class="row drawingpin">
-            <div class="caption">
-                <div>
-                    <h2>[@Html.DisplayFor(model => model.article.First().TitleCategory.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
-                </div>
-                <div>
-                    <h3>@Html.DisplayFor(model => model.article.First().PosterID)</h3>
-                    <h5 class="text-right">@Html.DisplayNameFor(model => model.article.First().CreateDateTime) : @Html.DisplayFor(model => model.article.First().CreateDateTime)</h5>
-                </div>
-                <div class="thumbnail">
-                    @*<p>@Html.DisplayFor(model => model.article.First().ContentText)</p>*@
-                    <p>@Html.Raw(HttpUtility.HtmlDecode(Model.article.First().ContentText))</p>
-                </div>
-            </div>
-
-            <div>
-                <p class="navbar-left">
-                    <a href="#" onclick="javascript:history.back()" class="btn btn-primary glyphicon glyphicon-arrow-left">回上一頁</a>
-                </p>
-                <p class="navbar-right">
-                    @Html.ActionLink("回覆", "Comment", new { id = Model.article.First().ArticleID }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })
-                </p>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    @foreach (var item in Model.comment)
-                    {
-                        <div>
-                            <h3>@item.PosterID</h3>
-                        </div>
+        <div class="col-md-12">
+            <div class="col-lg-9">
+                <div class="col-lg-12">
+                        <div style="background-color:burlywood" class="drawingpin">
+                            <div class="row">
+                                <h2>[@Html.DisplayFor(model => model.article.First().TitleCategory.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
+                                <h3>@Html.DisplayFor(model => model.article.First().PosterID)</h3>
                                 <div class="text-right">
-                                    <h5>@Html.DisplayNameFor(a=>a.comment.First().NewDateTime) : @item.NewDateTime</h5>
+                                    <h5>@Html.DisplayNameFor(model => model.article.First().CreateDateTime) : @Html.DisplayFor(model => model.article.First().CreateDateTime)</h5>
                                 </div>
                                 <div class="thumbnail">
-                                    <p>@Html.Raw(HttpUtility.HtmlDecode(@item.ContentText))</p>
+                                    <p>@Html.Raw(HttpUtility.HtmlDecode(Model.article.First().ContentText))</p>
                                 </div>
-                    }
+                                <div>
+                                    <p class="navbar-left">
+                                        <a href="#" onclick="javascript:history.back()" class="btn btn-primary glyphicon glyphicon-arrow-left">回上一頁</a>
+                                    </p>
+                                    <p class="navbar-right">
+                                        @Html.ActionLink("回覆", "Comment", new { id = Model.article.First().ArticleID }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        @foreach (var item in Model.comment)
+                        {
+                                <div style="background-color:burlywood" class="drawingpin">
+                                    <div>
+                                        <h3>@item.PosterID</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <h5>@Html.DisplayNameFor(a => a.comment.First().NewDateTime) : @item.NewDateTime</h5>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <p>@Html.Raw(HttpUtility.HtmlDecode(@item.ContentText))</p>
+                                    </div>
+                                </div>
+                        }
+                    </div>
                 </div>
             </div>
 
+
+            <div class="col-lg-3">
+                <div style="background-color:burlywood" class="drawingpin">
+
+                </div>
+            </div>
         </div>
     </div>
-
     <!-------------------articleEnd------------------->
 </article>
 

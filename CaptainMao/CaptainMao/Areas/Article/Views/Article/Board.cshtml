@@ -29,6 +29,9 @@
                 @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
             </div>
         </div>
+        <div class="drawingpin">
+            <img src="~/images/33725431546_cc653802ce_h.jpg" style="max-width:100%" width="1300" height="300"/>
+        </div>
         <div class="row">
             <div class="col-lg-9">
                 <div style="background-color:burlywood" class="drawingpin">
@@ -40,7 +43,7 @@
                                 <div class="thumbnail" style="height:200px">
                                     <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><img style="width:120px;height:100px" src="@Html.DisplayFor(a=>item.ContentText)" /></a>
                                     <div class="caption">
-                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="title text-center">[@Html.DisplayFor(a => item.TitleCategories.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
+                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="title text-center">[@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
                                         <h4 class="text-right">瀏覽人數 ： @Html.DisplayFor(a=>item.Number)</h4>
                                     </div>
                                 </div>
