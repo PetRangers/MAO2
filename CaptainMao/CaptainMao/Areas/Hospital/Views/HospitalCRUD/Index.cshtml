@@ -1,0 +1,152 @@
+﻿@*@model CaptainMao.Areas.Hospital.Models.ViewModel.HospitalModel*@
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:700px;background-color:#fff266" class="drawingpin" id="ShowMePlease" name="ShowMePlease">
+            <h2>醫院資料</h2>
+            @*<a href="@Url.Action("CreatHospital",new { })" class="btn btn-primary"><span></span> 新增醫院</a>*@
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>醫院編號</th>
+                        <th>醫院名稱</th>
+                        <th>醫院地址</th>
+                        <th>醫院區域</th>
+                        <th>醫院電話</th>
+                        <th>寵物種類</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*Model 表示Controller傳過來的資料*@
+                    @foreach (var _category in Model)
+                    {
+                        <tr>
+                            <td>@_category.HospitalID</td>
+                            <td>@_category.HospitalName</td>
+                            <td>@_category.HospitalAddress</td>
+                            <td>@_category.AddressArea</td>
+                            <td>@_category.HospitalPhone</td>
+                            @*<td>@_category.CategoryID</td>*@
+                            @*<td><a href="~/Category/Edit/@_category.HospitaNumber" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 編輯</a></td>
+                                <td><a href="~/Category/Delete/@_category.HospitaNumber" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> 刪除</a></td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div style="height:750px;background-color:burlywood" class="drawingpin">
+            <form method="post" action="~/HospitalCRUD/UpDataHospital" class="form-horizontal">
+                @*<div class="form-group" style="display:none">
+                        <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    <label for="HospitalName"
+                           class="col-sm-2 control-label">醫院名稱</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="HospitalName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="HospitalAddress"
+                           class="col-sm-2 control-label">醫院地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="HospitalAddress" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AddressArea"
+                           class="col-sm-2 control-label">醫院區域</label>
+                    <div class="col-sm-10">
+                        <li class="form-control" name="AddressArea">@Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity, new { @onchange = "CheckThis()" })</li>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="HospitalPhone"
+                           class="col-sm-2 control-label">醫院電話</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="HospitalPhone" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="PetRace"
+                           class="col-sm-2 control-label">寵物種類</label>
+                    <div class="col-sm-10">
+                        <li class="list-group-item">  @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)@ViewBag.HospitalPetRace)</li>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="BusinessHours"
+                           class="col-sm-2 control-label">營業時間</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="BusinessHours" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Emergency"
+                           class="col-sm-2 control-label">急診時間</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Emergency" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="OutpatientProject"
+                           class="col-sm-2 control-label">專業科目</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="OutpatientProject" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Equipment"
+                           class="col-sm-2 control-label">醫院設備</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Equipment" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="WebAddress"
+                           class="col-sm-2 control-label">醫院網址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="WebAddress" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="OnlineConsultation"
+                           class="col-sm-2 control-label">線上問診</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="OnlineConsultation" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="OnView"
+                           class="col-sm-2 control-label">OnView</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="OnView" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-default">修改</button>
+                        <button type="submit" class="btn btn-default">刪除</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>

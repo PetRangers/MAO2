@@ -1,0 +1,19 @@
+﻿@*@model IEnumerable<CaptainMao.Models.Hospital>*@
+@{
+    ViewBag.Title = "HospitalSearch";
+    //Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+<style>
+    a {
+        font-size: 36px;
+    }
+</style>
+
+
+<h2>醫院列表</h2>
+
+@foreach (var a in Model)
+    {/*//顯示欄位 超連結*/
+            <a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>    }
+
