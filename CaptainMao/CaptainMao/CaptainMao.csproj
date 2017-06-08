@@ -975,7 +975,7 @@
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register3.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1117,6 +1117,9 @@
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StoreInfo.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sType.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1181,8 +1184,10 @@
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Manage\UpdateProfile.cshtml" />
-    <Content Include="Views\Account\Register2.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
+    <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
+    <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -46,6 +46,7 @@ namespace CaptainMao.Models
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
         public virtual DbSet<UserPet> UserPets { get; set; }
         public virtual DbSet<Scorce> Scorces { get; set; }
+        public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
     
         public virtual int DeleteToMerchandise_Type_View(Nullable<int> merchandiseID)
         {

@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bba97110d94a4a2c8e6970523780487b" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="bba97110d94a4a2c8e6970523780487b" Name="Diagram1" ZoomLevel="116">
         <EntityTypeShape EntityType="MaoModel.AspNetUser" Width="1.5" PointX="0.75" PointY="2.25" />
-        <EntityTypeShape EntityType="MaoModel.Category" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="MaoModel.Category" Width="1.5" PointX="0.625" PointY="9.5" />
         <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="3" PointY="2.875" />
         <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="5.25" PointY="3.625" />
         <EntityTypeShape EntityType="MaoModel.sType" Width="1.5" PointX="5.25" PointY="0.75" />
@@ -51,6 +51,9 @@
         <AssociationConnector Association="MaoModel.FK_Scorce_Hospital" />
         <AssociationConnector Association="MaoModel.AspNetUserRoles" />
         <AssociationConnector Association="MaoModel.HospitalCategoryDetails" />
+        <AssociationConnector Association="MaoModel.Merchandise_Order_View" />
+        <EntityTypeShape EntityType="MaoModel.StoreInfo" Width="1.5" PointX="3" PointY="16.625" />
+        <AssociationConnector Association="MaoModel.FK_StoreInfo_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

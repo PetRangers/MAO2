@@ -19,6 +19,7 @@ namespace CaptainMao.Models
         {
             this.sTypes = new HashSet<sType>();
             this.Orders = new HashSet<Order>();
+            this.Orders1 = new HashSet<Order>();
         }
     
         public int Merchandise_ID { get; set; }
@@ -38,5 +39,7 @@ namespace CaptainMao.Models
         public virtual ICollection<sType> sTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders1 { get; set; }
     }
 }

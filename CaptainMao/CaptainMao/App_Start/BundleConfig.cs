@@ -27,7 +27,10 @@ namespace Login
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
+                        "~/js/jquery-ui.min.js"));
         }
     }
 }

@@ -92,22 +92,22 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Email" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="256" />
+          <Property Name="SecurityStamp" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="32" />
           <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
           <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
           <Property Name="LockoutEndDateUtc" Type="datetime" />
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" />
-          <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="LoginCount" Type="int" Nullable="false" />
-          <Property Name="Experience" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="32" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="32" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="32" />
+          <Property Name="LoginCount" Type="int" />
+          <Property Name="Experience" Type="int" />
           <Property Name="DateRegistered" Type="datetime" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
@@ -162,13 +162,11 @@
           <Property Name="Map" Type="nvarchar" MaxLength="50" />
           <Property Name="CategoryID" Type="int" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'Mao.dbo.HospitalCategoryDetails' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="HospitalCategoryDetails">
           <Key>
-            <PropertyRef Name="HospitalID" />
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="CountID" />
           </Key>
+          <Property Name="CountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
@@ -184,6 +182,16 @@
           <Property Name="Scorce" Type="int" />
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
           <Property Name="NoteValue" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StoreInfo">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StoreAddress" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Score" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="TitleCategories">
           <Key>
@@ -220,6 +228,16 @@
           <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
         <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandise_Order_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="Merchandise_Order_View">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+            <PropertyRef Name="Merchandise_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" Nullable="false" />
+          <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandise_Type_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="Merchandise_Type_View">
           <Key>
@@ -228,16 +246,6 @@
           </Key>
           <Property Name="Merchandise_ID" Type="int" Nullable="false" />
           <Property Name="sType_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'Mao.ShoppingNetwork.Merchandsie_Order_View' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
-        <EntityType Name="Merchandsie_Order_View">
-          <Key>
-            <PropertyRef Name="Order_ID" />
-            <PropertyRef Name="Merchandise_ID" />
-          </Key>
-          <Property Name="Order_ID" Type="int" Nullable="false" />
-          <Property Name="Merchandise_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -550,24 +558,24 @@
         </Association>
         <Association Name="FK_Merchandsie_Order_View_merchandise">
           <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
-          <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+          <End Role="Merchandise_Order_View" Type="Self.Merchandise_Order_View" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Merchandise">
               <PropertyRef Name="Merchandise_ID" />
             </Principal>
-            <Dependent Role="Merchandsie_Order_View">
+            <Dependent Role="Merchandise_Order_View">
               <PropertyRef Name="Merchandise_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Merchandsie_Order_View_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="Merchandsie_Order_View" Type="Self.Merchandsie_Order_View" Multiplicity="*" />
+          <End Role="Merchandise_Order_View" Type="Self.Merchandise_Order_View" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="Order_ID" />
             </Principal>
-            <Dependent Role="Merchandsie_Order_View">
+            <Dependent Role="Merchandise_Order_View">
               <PropertyRef Name="Order_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -605,6 +613,18 @@
             </Principal>
             <Dependent Role="Scorce">
               <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreInfo_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="StoreInfo" Type="Self.StoreInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInfo">
+              <PropertyRef Name="StoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -669,18 +689,14 @@
           <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreInfo" EntityType="Self.StoreInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
-          <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [HospitalCategoryDetails].[HospitalID] AS [HospitalID], 
-    [HospitalCategoryDetails].[CategoryID] AS [CategoryID]
-    FROM [dbo].[HospitalCategoryDetails] AS [HospitalCategoryDetails]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Scorce" EntityType="Self.Scorce" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Scorce].[UserID] AS [UserID], 
@@ -690,17 +706,17 @@
     [Scorce].[NoteValue] AS [NoteValue]
     FROM [dbo].[Scorce] AS [Scorce]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Merchandise_Order_View" EntityType="Self.Merchandise_Order_View" store:Type="Tables" store:Schema="ShoppingNetwork">
+            <DefiningQuery>SELECT 
+    [Merchandise_Order_View].[Order_ID] AS [Order_ID], 
+    [Merchandise_Order_View].[Merchandise_ID] AS [Merchandise_ID]
+    FROM [ShoppingNetwork].[Merchandise_Order_View] AS [Merchandise_Order_View]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Merchandise_Type_View" EntityType="Self.Merchandise_Type_View" store:Type="Tables" store:Schema="ShoppingNetwork">
             <DefiningQuery>SELECT 
     [Merchandise_Type_View].[Merchandise_ID] AS [Merchandise_ID], 
     [Merchandise_Type_View].[sType_ID] AS [sType_ID]
     FROM [ShoppingNetwork].[Merchandise_Type_View] AS [Merchandise_Type_View]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Merchandsie_Order_View" EntityType="Self.Merchandsie_Order_View" store:Type="Tables" store:Schema="ShoppingNetwork">
-            <DefiningQuery>SELECT 
-    [Merchandsie_Order_View].[Order_ID] AS [Order_ID], 
-    [Merchandsie_Order_View].[Merchandise_ID] AS [Merchandise_ID]
-    FROM [ShoppingNetwork].[Merchandsie_Order_View] AS [Merchandsie_Order_View]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Adoption_AspNetUsers" Association="Self.FK_Adoption_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -796,11 +812,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Merchandsie_Order_View_merchandise" Association="Self.FK_Merchandsie_Order_View_merchandise">
             <End Role="Merchandise" EntitySet="Merchandise" />
-            <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+            <End Role="Merchandise_Order_View" EntitySet="Merchandise_Order_View" />
           </AssociationSet>
           <AssociationSet Name="FK_Merchandsie_Order_View_Order" Association="Self.FK_Merchandsie_Order_View_Order">
             <End Role="Order" EntitySet="Order" />
-            <End Role="Merchandsie_Order_View" EntitySet="Merchandsie_Order_View" />
+            <End Role="Merchandise_Order_View" EntitySet="Merchandise_Order_View" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_AspNetUsers" Association="Self.FK_Order_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -813,6 +829,10 @@
           <AssociationSet Name="FK_Scorce_Hospital" Association="Self.FK_Scorce_Hospital">
             <End Role="Hospital" EntitySet="Hospital" />
             <End Role="Scorce" EntitySet="Scorce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreInfo_AspNetUsers" Association="Self.FK_StoreInfo_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreInfo" EntitySet="StoreInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
             <End Role="Type" EntitySet="Type" />
@@ -970,28 +990,37 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Hospital" EntitySet="Hospitals" />
           </AssociationSet>
+          <AssociationSet Name="Merchandise_Order_View" Association="MaoModel.Merchandise_Order_View">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="StoreInfoes" EntityType="MaoModel.StoreInfo" />
+          <AssociationSet Name="FK_StoreInfo_AspNetUsers" Association="MaoModel.FK_StoreInfo_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="StoreInfo" EntitySet="StoreInfoes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LoginCount" Type="Int32" Nullable="false" />
-          <Property Name="Experience" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="LoginCount" Type="Int32" />
+          <Property Name="Experience" Type="Int32" />
           <Property Name="DateRegistered" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Merchandises" Relationship="MaoModel.FK_Merchandise_AspNetUsers" FromRole="AspNetUser" ToRole="Merchandise" />
@@ -1006,6 +1035,7 @@
           <NavigationProperty Name="Scorces" Relationship="MaoModel.FK_Scorce_AspNetUsers" FromRole="AspNetUser" ToRole="Scorce" />
           <NavigationProperty Name="UserPets" Relationship="MaoModel.FK_UserPet_AspNetUsers" FromRole="AspNetUser" ToRole="UserPet" />
           <NavigationProperty Name="AspNetRoles" Relationship="MaoModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="StoreInfo" Relationship="MaoModel.FK_StoreInfo_AspNetUsers" FromRole="AspNetUser" ToRole="StoreInfo" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -1037,6 +1067,7 @@
           <NavigationProperty Name="Category" Relationship="MaoModel.FK_merchandise_Categories" FromRole="Merchandise" ToRole="Category" />
           <NavigationProperty Name="sTypes" Relationship="MaoModel.Merchandise_Type_View" FromRole="Merchandise" ToRole="sType" />
           <NavigationProperty Name="Orders" Relationship="MaoModel.Merchandsie_Order_View" FromRole="Merchandise" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="MaoModel.Merchandise_Order_View" FromRole="Merchandise" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1049,6 +1080,7 @@
           <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUser" />
           <NavigationProperty Name="Merchandises" Relationship="MaoModel.Merchandsie_Order_View" FromRole="Order" ToRole="Merchandise" />
+          <NavigationProperty Name="Merchandises1" Relationship="MaoModel.Merchandise_Order_View" FromRole="Order" ToRole="Merchandise" />
         </EntityType>
         <EntityType Name="sType">
           <Key>
@@ -1540,6 +1572,33 @@
           <End Type="MaoModel.Category" Role="Category" Multiplicity="*" />
           <End Type="MaoModel.Hospital" Role="Hospital" Multiplicity="*" />
         </Association>
+        <Association Name="Merchandise_Order_View">
+          <End Type="MaoModel.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <End Type="MaoModel.Order" Role="Order" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StoreInfo">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StoreAddress" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Score" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="AspNetUser" Relationship="MaoModel.FK_StoreInfo_AspNetUsers" FromRole="StoreInfo" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_StoreInfo_AspNetUsers">
+          <End Type="MaoModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MaoModel.StoreInfo" Role="StoreInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInfo">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1629,14 +1688,6 @@
           <AssociationSetMapping Name="Merchandise_Type_View" TypeName="MaoModel.Merchandise_Type_View" StoreEntitySet="Merchandise_Type_View">
             <EndProperty Name="sType">
               <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
-            </EndProperty>
-            <EndProperty Name="Merchandise">
-              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Merchandsie_Order_View" TypeName="MaoModel.Merchandsie_Order_View" StoreEntitySet="Merchandsie_Order_View">
-            <EndProperty Name="Order">
-              <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
             </EndProperty>
             <EndProperty Name="Merchandise">
               <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
@@ -1816,6 +1867,25 @@
               <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="Merchandise_Order_View" TypeName="MaoModel.Merchandise_Order_View" StoreEntitySet="Merchandise_Order_View">
+            <EndProperty Name="Order">
+              <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+            </EndProperty>
+            <EndProperty Name="Merchandise">
+              <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="StoreInfoes">
+            <EntityTypeMapping TypeName="MaoModel.StoreInfo">
+              <MappingFragment StoreEntitySet="StoreInfo">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="StoreAddress" ColumnName="StoreAddress" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
