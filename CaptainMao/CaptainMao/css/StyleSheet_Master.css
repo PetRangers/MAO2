@@ -91,11 +91,8 @@ body a:hover {
 }
 .accordion-toggle:after {
   font-family: 'FontAwesome';
-  content: "\f068";
   float: none;
   position: relative;
-}
-.accordion-toggle.collapsed:after {
   content: "\f067";
 }
 .accordion-toggle span:after {
@@ -263,8 +260,6 @@ body a:hover {
   aside > .panel:hover {
     left: 0px;
   }
-}
-
 /*navbar*/
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a,

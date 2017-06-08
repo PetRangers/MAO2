@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+<article class="container" style="height:100vh;text-align:center;">
+    <div>
+        <div class="drawingpin" style="height:50vh;background-color:burlywood">
+            @Html.ActionLink("一般使用者登入", "NormalUser", "Login", new { @class = "btn btn-primary" })
+            @Html.ActionLink("商家登入", "StoreUser", "Login", new { @class = "btn btn-warning" })
+        </div>
+    </div>
+</article>

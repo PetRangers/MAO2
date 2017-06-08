@@ -12,24 +12,18 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Citys
+    public partial class TitleCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Citys()
+        public TitleCategory()
         {
-            this.Adoption = new HashSet<Adoption>();
-            this.AdpWish = new HashSet<AdpWish>();
-            this.Hospital = new HashSet<Hospital>();
+            this.Articles = new HashSet<Article>();
         }
     
-        public int CityID { get; set; }
-        public string CityName { get; set; }
+        public int TitleCategoryID { get; set; }
+        public string TitleCategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adoption> Adoption { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdpWish> AdpWish { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hospital> Hospital { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

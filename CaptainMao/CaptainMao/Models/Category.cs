@@ -12,30 +12,30 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public Category()
         {
-            this.Adoption = new HashSet<Adoption>();
-            this.AdpWish = new HashSet<AdpWish>();
-            this.Merchandise = new HashSet<Merchandise>();
-            this.UserPet = new HashSet<UserPet>();
-            this.Hospital = new HashSet<Hospital>();
+            this.Merchandises = new HashSet<Merchandise>();
+            this.Adoptions = new HashSet<Adoption>();
+            this.AdpWishes = new HashSet<AdpWish>();
+            this.UserPets = new HashSet<UserPet>();
+            this.Hospitals = new HashSet<Hospital>();
         }
     
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adoption> Adoption { get; set; }
+        public virtual ICollection<Merchandise> Merchandises { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdpWish> AdpWish { get; set; }
+        public virtual ICollection<Adoption> Adoptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandise { get; set; }
+        public virtual ICollection<AdpWish> AdpWishes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPet> UserPet { get; set; }
+        public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hospital> Hospital { get; set; }
+        public virtual ICollection<Hospital> Hospitals { get; set; }
     }
 }

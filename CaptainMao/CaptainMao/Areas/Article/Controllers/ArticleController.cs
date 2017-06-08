@@ -9,6 +9,7 @@ using PagedList.Mvc;
 using PagedList;
 using Microsoft.Security.Application;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.Article.Controllers
 {
@@ -21,7 +22,7 @@ namespace CaptainMao.Areas.Article.Controllers
         //顯示所有文章
         public ActionResult Index(int? page, int? titleCategoryID, int? boardID)
         {
-            var article = db.Article.Select(a => a);
+            var article = db.Articles.Select(a => a);
             if (titleCategoryID != null)
             {
                 article = article.Where(a => a.TitleCategoryID == titleCategoryID && a.IsDeleted != true);
@@ -36,19 +37,37 @@ namespace CaptainMao.Areas.Article.Controllers
         [ChildActionOnly]
         public ActionResult BoardCategories()
         {
-            return PartialView(db.Board.ToList());
+            return PartialView(db.Boards.ToList());
         }
         //顯示主版內容
         public ActionResult Board()
         {
             BoardViewModel board = new BoardViewModel();
-            board.article = db.Article.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(6);
+            string imgpath = "";
+            board.article = db.Articles.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(6);
+            foreach (var item in board.article)
+            {
+                imgpath = GetImgPath(item.ContentText);
+                item.ContentText = imgpath;
+            }
             return View(board);
         }
+
+        private string GetImgPath(string contentText)
+        {
+            string imgpath = "";
+            if (contentText.Contains("src=\""))
+            {
+                imgpath = contentText.Split(new string[] { "src=\"" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new string[] { "\"" }, StringSplitOptions.RemoveEmptyEntries)[0];
+            }
+            imgpath = imgpath != ""  ? imgpath : "\\images\\catdog.png";
+            return imgpath;
+        }
+
         public ActionResult Create()
         {
             ViewBag.datas = db.TitleCategories.ToList();
-            ViewBag.datas2 = db.Board.ToList();
+            ViewBag.datas2 = db.Boards.ToList();
             return View();
         }
         //建立文章
@@ -56,7 +75,7 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult Create(CaptainMao.Models.Article article)
         {
             ViewBag.datas = db.TitleCategories.ToList();
-            ViewBag.datas2 = db.Board.ToList();
+            ViewBag.datas2 = db.Boards.ToList();
 
             //string url = Url.Content("~/Images/" + upload.FileName);
             ////string script = $"<script>window.parent.CKEDITOR.tools.callFunction({article},'{url}','')</script>";
@@ -66,8 +85,9 @@ namespace CaptainMao.Areas.Article.Controllers
             {
                 article.CreateDateTime = DateTime.Now;
                 article.LastChDateTime = DateTime.Now;
-                
-                article.PosterID = db.Article.First().PosterID;
+
+                //string posterid= User.Identity.GetUserId();
+                article.PosterID = db.Articles.First().PosterID;
                 article.Number = 0;
 
                 articledb.Create(article);
@@ -80,14 +100,14 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult Show(int? articleID)
         {
             CaptainMao.Areas.Article.Models.CommentViewModel vm = new CommentViewModel();
-            var article = db.Article.Find(articleID);
+            var article = db.Articles.Find(articleID);
             article.Number++;
 
             db.Entry(article).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            vm.comment = db.Comment.Where(a => a.ArticleID == articleID);
-            vm.article = db.Article.Where(a => a.ArticleID == articleID);
+            vm.comment = db.Comments.Where(a => a.ArticleID == articleID);
+            vm.article = db.Articles.Where(a => a.ArticleID == articleID);
             return View(vm); 
         }
         public ActionResult Comment()
@@ -100,12 +120,13 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             if (ModelState.IsValid)
             {
-                comment.ArticleID = db.Article.Find(id).ArticleID;
+                //comment.ArticleID= db.AspNetUsers.Find(id).Id;
+                comment.ArticleID = db.Articles.Find(id).ArticleID;
                 //comment.ArticleID = commentdb.GetID(id).ArticleID;
                 comment.NewDateTime = DateTime.Now;
-                comment.PosterID = db.Article.First().PosterID;
+                comment.PosterID = db.Articles.First().PosterID;
 
-                var articleDT = db.Article.Find(id);
+                var articleDT = db.Articles.Find(id);
                 articleDT.LastChDateTime = DateTime.Now;
                 db.Entry(articleDT).State = System.Data.Entity.EntityState.Modified;
 
@@ -122,15 +143,15 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult Poster(int? page, string posterID)
         {
             posterID = "d6927155-c35b-4810-a830-e9de6cd9cf0d";
-            var article = db.Article.Where(a =>a.PosterID==posterID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
+            var article = db.Articles.Where(a =>a.PosterID==posterID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
             return View(article.ToList().ToPagedList(page ?? 1, 10));
         }
         //修改文章前用ID找文章
         public ActionResult Edit(int? articleID)
         {
             ViewBag.datas = db.TitleCategories.ToList();
-            ViewBag.datas2 = db.Board.ToList();
-            CaptainMao.Models.Article article = db.Article.Find(articleID);
+            ViewBag.datas2 = db.Boards.ToList();
+            CaptainMao.Models.Article article = db.Articles.Find(articleID);
             article.ContentText = HttpUtility.HtmlDecode(article.ContentText);
             return View(article);
         }
@@ -139,7 +160,7 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult Edit(CaptainMao.Models.Article article)
         {
             ViewBag.datas = db.TitleCategories.ToList();
-            ViewBag.datas2 = db.Board.ToList();
+            ViewBag.datas2 = db.Boards.ToList();
 
             if (ModelState.IsValid)
             {
@@ -153,7 +174,7 @@ namespace CaptainMao.Areas.Article.Controllers
         //刪除文章，但只是把文章做隱藏
         public ActionResult Del(int? articleID)
         {
-            db.Article.Find(articleID).IsDeleted = true;
+            db.Articles.Find(articleID).IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Poster");
         }

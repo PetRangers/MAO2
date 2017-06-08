@@ -8,8 +8,8 @@ namespace CaptainMao.Areas.Adoption.ViewModel
 {
     public class AdoptionViewModel
     {
-        public Categories category { get; set; }
+        public Category category { get; set; }
         public CaptainMao.Models.Adoption adoption { get; set; }
-        public Citys city { get; set; }
+        public City city { get; set; }
     }
 }

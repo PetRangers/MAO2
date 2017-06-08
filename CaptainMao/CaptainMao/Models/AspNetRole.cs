@@ -12,18 +12,18 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TitleCategories
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TitleCategories()
+        public AspNetRole()
         {
-            this.Article = new HashSet<Article>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public int TitleCategoryID { get; set; }
-        public string TitleCategoryName { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Article> Article { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

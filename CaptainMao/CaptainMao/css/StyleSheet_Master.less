@@ -97,18 +97,19 @@ body {
     left: .5%;
     width: 2.7%;
     min-width: 50px;
+
+
     &:hover,&:focus{
         cursor: pointer;
     }
     &:after{
         font-family: 'FontAwesome';
-        content: "\f068";
         float: none;
         position: relative;
-    }
-    &.collapsed:after{
         content: "\f067";
     }
+
+
      span:after{
         /* symbol for "opening" panels */
         font-family: 'FontAwesome';
@@ -311,17 +312,6 @@ article {
     padding: 10px 0px;
     background-color: rgba(49, 44, 38, 0.38);
     background-image: url("../images/texture.png");
-    div>div{
-        margin-top: 20px;
-        border-radius: 0px 20px 20px 20px;
-        background-image: url('../images/drawingpin.png');
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-size: 40px;
-        box-shadow: -2px 5px 10px;
-        padding: 20px;
-    }
-
 }
 footer {
     height: 50px;

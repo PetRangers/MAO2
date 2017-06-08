@@ -11,12 +11,13 @@
     <meta name="keywords" content="寵物,毛小孩,狗,狗狗,汪,喵,貓,貓咪,領養,討論,寵物美容" />
     <title>@ViewBag.Title - CaptainMao</title>
 
-     @Styles.Render("~/css")
 
+    @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet" />
+
     @RenderSection("style", false)
-      
+
 </head>
 <body>
     <div id="page">
@@ -102,7 +103,7 @@
                     <a><strong>毛孩隊長</strong></a>
                 </li>
                 <li>
-                    @Html.ActionLink("回首頁","Index", "CaptainMao", new { area = "" }, new{ @title = "回首頁" })
+                    @Html.ActionLink("回首頁", "Index", "CaptainMao", new { area = "" }, new { @title = "回首頁" })
                 </li>
                 <li>
                     <a href="/about" title="Go to About Us section">毛孩購物</a>
@@ -118,10 +119,10 @@
                 <li>
                     <a href="/portfolio" title="Navigate to 'Our Services' section">美食醫院</a>
                 </li>
-                <li class="hidden-md hidden-lg toggle">
+                <li id="user" class="hidden-md hidden-lg toggle">
                     <span class="fa fa-user"></span>
                 </li>
-                <li class="hidden-md hidden-lg toggle">
+                <li id="shopping" class="hidden-md hidden-lg toggle">
                     <span class="fa fa-lg fa-cart-plus"></span>
                 </li>
 
@@ -130,7 +131,7 @@
         <!-- 左邊側欄-->
         <div id="accordion" class="social">
             <div class="accordion-social">
-<!--class加in會打開--><ul class="panel-collapse in collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
+                <!--class加in會打開--><ul class="panel-collapse collapse nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
                     <li><a href="https://www.facebook.com/soldierupdesigns" target="_blank" class="fa fa-lg fa-facebook"></a></li>
                     <li><a href="https://twitter.com/soldierupdesign" target="_blank" class="fa fa-lg fa-twitter"></a></li>
                     <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank" class="fa fa-lg fa-google-plus"></a></li>
@@ -144,7 +145,7 @@
 
         <main class="container-fluid">
             <div class="row">
-               @RenderBody()
+                @RenderBody()
             </div>
         </main>
         <footer>
