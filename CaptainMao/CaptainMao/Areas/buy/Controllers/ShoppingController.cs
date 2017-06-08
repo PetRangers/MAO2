@@ -13,7 +13,7 @@ namespace CaptainMao.Areas.buy.Controllers
     public class ShoppingController : Controller
     {
         ClsBusinessLogic fun = new ClsBusinessLogic();
-        public ActionResult Index(vmCaID_stypeID vm)
+        public ActionResult Index(vmCaID_typeID_stypeID vm)
         {
             IEnumerable<Merchandise> selectMer =fun.Logic_SelectMerchandise(vm);
             return View(selectMer);

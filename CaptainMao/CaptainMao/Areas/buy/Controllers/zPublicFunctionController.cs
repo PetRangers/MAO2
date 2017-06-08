@@ -18,42 +18,13 @@ namespace CaptainMao.Areas.buy.Controllers
             /// </summary>
             /// <param name="vm">傳入categoryID or typeID or stypeID</param>
             /// <returns>index-aside.js</returns>
-        public ActionResult returnJson_asTypes(vmCaID_stypeID vm)
+        public ActionResult returnJson_asTypes(vmCaID_typeID_stypeID vm)
         {
 
             return Json(fun.Logic_Type_selectsType(vm)
                 , JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult returnJson_Types(int CategoryID) {
-        //    return Json(fun.Logic_Category_selectType(CategoryID),
-        //        JsonRequestBehavior.AllowGet);
-        //}
-        
-            
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="CategoryID">CategoryID</param>
-            /// <returns>store</returns>
-        public ActionResult returnJson_Stypes(int CategoryID)
-        {
-            return null;
-        }
-
-
-
-
-
-
-
-        //public ActionResult returnJsonsTypes(vmCaID_stypeID vm)
-        //{
-        //    var stype = _Category.GetbyID((int)vm.CategoryID).Types.
-        //        Where(t => t.Type_ID.Equals(vm.Type_ID)).First().sTypes.Select(s => new { s.sType_ID, s.sType_Name });
-
-        //    return Json(stype, JsonRequestBehavior.AllowGet);
-        //}
         public ActionResult PixbyID(int id)
         {
             return File(fun.Logic_getMerchandisePhoto(id), "image/jpeg");

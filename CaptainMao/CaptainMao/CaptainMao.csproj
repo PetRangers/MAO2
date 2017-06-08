@@ -218,6 +218,12 @@
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
     <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\buy\css\Create.css">
+      <DependentUpon>Create.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\Create.min.css">
+      <DependentUpon>Create.css</DependentUpon>
+    </Content>
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -264,8 +270,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
-    <Content Include="css\StyleSheet_Master.css" />
-    <Content Include="css\StyleSheet_Master.min.css" />
+    <Content Include="css\StyleSheet_Master.css">
+      <DependentUpon>StyleSheet_Master.less</DependentUpon>
+    </Content>
+    <Content Include="css\StyleSheet_Master.min.css">
+      <DependentUpon>StyleSheet_Master.css</DependentUpon>
+    </Content>
     <Content Include="css\video.css" />
     <Content Include="favicon.ico" />
     <Content Include="files\1fabec0335901a37a1aae9037d955749.png" />
@@ -326,6 +336,9 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
@@ -1196,7 +1209,6 @@
     <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Areas\Article\Views\Values\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
-    <Folder Include="Areas\buy\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
