@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CaptainMao.Models
+namespace CaptainMao.Areas.Hospital.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hospital()
         {
-            this.Scorces = new HashSet<Scorce>();
-            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetails>();
+            this.Scorce = new HashSet<Scorce>();
         }
     
         public int HospitalID { get; set; }
@@ -26,6 +26,7 @@ namespace CaptainMao.Models
         public string HospitalAddress { get; set; }
         public int AddressArea { get; set; }
         public string HospitalPhone { get; set; }
+        public Nullable<int> CategoryID { get; set; }
         public string BusinessHours { get; set; }
         public string Emergency { get; set; }
         public string OutpatientProject { get; set; }
@@ -34,12 +35,11 @@ namespace CaptainMao.Models
         public string OnlineConsultation { get; set; }
         public string OnView { get; set; }
         public string Map { get; set; }
-        public Nullable<int> CategoryID { get; set; }
     
-        public virtual City City { get; set; }
+        public virtual Citys Citys { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Scorce> Scorces { get; set; }
+        public virtual ICollection<HospitalCategoryDetails> HospitalCategoryDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
+        public virtual ICollection<Scorce> Scorce { get; set; }
     }
 }

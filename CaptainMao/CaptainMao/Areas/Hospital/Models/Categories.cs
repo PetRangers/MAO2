@@ -7,35 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CaptainMao.Models
+namespace CaptainMao.Areas.Hospital.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Categories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Categories()
         {
-            this.Merchandises = new HashSet<Merchandise>();
-            this.Adoptions = new HashSet<Adoption>();
-            this.AdpWishes = new HashSet<AdpWish>();
-            this.UserPets = new HashSet<UserPet>();
-            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetail>();
+            this.Adoption = new HashSet<Adoption>();
+            this.AdpWish = new HashSet<AdpWish>();
+            this.HospitalCategoryDetails = new HashSet<HospitalCategoryDetails>();
+            this.UserPet = new HashSet<UserPet>();
         }
     
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        public virtual ICollection<Adoption> Adoption { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adoption> Adoptions { get; set; }
+        public virtual ICollection<AdpWish> AdpWish { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdpWish> AdpWishes { get; set; }
+        public virtual ICollection<HospitalCategoryDetails> HospitalCategoryDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPet> UserPets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
+        public virtual ICollection<UserPet> UserPet { get; set; }
     }
 }
