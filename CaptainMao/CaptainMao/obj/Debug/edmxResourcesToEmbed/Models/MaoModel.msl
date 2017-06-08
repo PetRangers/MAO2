@@ -11,7 +11,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Adoption">
+    <EntitySetMapping Name="Adoptions">
       <EntityTypeMapping TypeName="MaoModel.Adoption">
         <MappingFragment StoreEntitySet="Adoption">
           <ScalarProperty Name="AdoptionID" ColumnName="AdoptionID" />
@@ -31,7 +31,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AdpWish">
+    <EntitySetMapping Name="AdpWishes">
       <EntityTypeMapping TypeName="MaoModel.AdpWish">
         <MappingFragment StoreEntitySet="AdpWish">
           <ScalarProperty Name="WishID" ColumnName="WishID" />
@@ -46,7 +46,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Article">
+    <EntitySetMapping Name="Articles">
       <EntityTypeMapping TypeName="MaoModel.Article">
         <MappingFragment StoreEntitySet="Article">
           <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
@@ -63,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="MaoModel.AspNetRoles">
+      <EntityTypeMapping TypeName="MaoModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -71,7 +71,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="MaoModel.AspNetUserClaims">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUserClaim">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -81,7 +81,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="MaoModel.AspNetUserLogins">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUserLogin">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -90,7 +90,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="MaoModel.AspNetUsers">
+      <EntityTypeMapping TypeName="MaoModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -114,7 +114,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Board">
+    <EntitySetMapping Name="Boards">
       <EntityTypeMapping TypeName="MaoModel.Board">
         <MappingFragment StoreEntitySet="Board">
           <ScalarProperty Name="BoardID" ColumnName="BoardID" />
@@ -124,7 +124,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="MaoModel.Categories">
+      <EntityTypeMapping TypeName="MaoModel.Category">
         <MappingFragment StoreEntitySet="Categories">
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -132,14 +132,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Citys">
-      <EntityTypeMapping TypeName="MaoModel.Citys">
+      <EntityTypeMapping TypeName="MaoModel.City">
         <MappingFragment StoreEntitySet="Citys">
           <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="CityName" ColumnName="CityName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comment">
+    <EntitySetMapping Name="Comments">
       <EntityTypeMapping TypeName="MaoModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
           <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
@@ -150,7 +150,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Hospital">
+    <EntitySetMapping Name="Hospitals">
       <EntityTypeMapping TypeName="MaoModel.Hospital">
         <MappingFragment StoreEntitySet="Hospital">
           <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
@@ -158,7 +158,6 @@
           <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
           <ScalarProperty Name="AddressArea" ColumnName="AddressArea" />
           <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="BusinessHours" ColumnName="BusinessHours" />
           <ScalarProperty Name="Emergency" ColumnName="Emergency" />
           <ScalarProperty Name="OutpatientProject" ColumnName="OutpatientProject" />
@@ -167,11 +166,21 @@
           <ScalarProperty Name="OnlineConsultation" ColumnName="OnlineConsultation" />
           <ScalarProperty Name="OnView" ColumnName="OnView" />
           <ScalarProperty Name="Map" ColumnName="Map" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HospitalCategoryDetails">
+      <EntityTypeMapping TypeName="MaoModel.HospitalCategoryDetail">
+        <MappingFragment StoreEntitySet="HospitalCategoryDetails">
+          <ScalarProperty Name="CountID" ColumnName="CountID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="MaoModel.sysdiagrams">
+      <EntityTypeMapping TypeName="MaoModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -182,14 +191,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TitleCategories">
-      <EntityTypeMapping TypeName="MaoModel.TitleCategories">
+      <EntityTypeMapping TypeName="MaoModel.TitleCategory">
         <MappingFragment StoreEntitySet="TitleCategories">
           <ScalarProperty Name="TitleCategoryID" ColumnName="TitleCategoryID" />
           <ScalarProperty Name="TitleCategoryName" ColumnName="TitleCategoryName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserPet">
+    <EntitySetMapping Name="UserPets">
       <EntityTypeMapping TypeName="MaoModel.UserPet">
         <MappingFragment StoreEntitySet="UserPet">
           <ScalarProperty Name="PetID" ColumnName="PetID" />
@@ -202,7 +211,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Merchandise">
+    <EntitySetMapping Name="Merchandises">
       <EntityTypeMapping TypeName="MaoModel.Merchandise">
         <MappingFragment StoreEntitySet="Merchandise">
           <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
@@ -218,7 +227,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Order">
+    <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="MaoModel.Order">
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
@@ -229,7 +238,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sType">
+    <EntitySetMapping Name="sTypes">
       <EntityTypeMapping TypeName="MaoModel.sType">
         <MappingFragment StoreEntitySet="sType">
           <ScalarProperty Name="sType_ID" ColumnName="sType_ID" />
@@ -238,7 +247,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Type">
+    <EntitySetMapping Name="Types">
       <EntityTypeMapping TypeName="MaoModel.Type">
         <MappingFragment StoreEntitySet="Type">
           <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
@@ -246,7 +255,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Scorce">
+    <EntitySetMapping Name="Scorces">
       <EntityTypeMapping TypeName="MaoModel.Scorce">
         <MappingFragment StoreEntitySet="Scorce">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -263,14 +272,6 @@
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="UserId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="HospitalCategoryDetails" TypeName="MaoModel.HospitalCategoryDetails" StoreEntitySet="HospitalCategoryDetails">
-      <EndProperty Name="Categories">
-        <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-      </EndProperty>
-      <EndProperty Name="Hospital">
-        <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="Merchandise_Type_View" TypeName="MaoModel.Merchandise_Type_View" StoreEntitySet="Merchandise_Type_View">

@@ -8,6 +8,7 @@ using CaptainMao.Areas.Adoption.Models;
 using CaptainMao.Areas.Adoption.ViewModel;
 using PagedList;
 using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.Adoption.Controllers
 {
@@ -27,7 +28,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult Index(int? page, int? categoryid, int? cityid,string search)
         {
             
-            var adoptions = db.Adoption.Select(a => a);
+            var adoptions = db.Adoptions.Select(a => a);
 
             if (search != "" && search != null)
             {
@@ -52,7 +53,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult Details(int id)
         {
             AdoptionViewModel vm = new AdoptionViewModel();
-            vm.adoption = db.Adoption.Find(id);
+            vm.adoption = db.Adoptions.Find(id);
 
             vm.category = db.Categories.Find(vm.adoption.CategoryID);
             vm.city = db.Citys.Find(vm.adoption.CityID);
@@ -61,7 +62,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
         public ActionResult GetImage(int id)
         {
-            var adoption = db.Adoption.Find(id);
+            var adoption = db.Adoptions.Find(id);
             byte[] img = adoption.BytesImage;
             return File(img, "image/jpeg");
         }
@@ -115,9 +116,9 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult AdoptionManage()
         {
             Adoption_WishViewModel vm = new Adoption_WishViewModel();
-            string UserID = "e3d67396-115e-49f6-9781-1f179486ad9d";                                          
-            vm.adoptions = db.Adoption.Where(a => a.RegistrationUserID == UserID);
-            vm.wishs = db.AdpWish.Where(a => a.UserID == UserID);
+            string UserID = User.Identity.GetUserId();
+            vm.adoptions = db.Adoptions.Where(a => a.RegistrationUserID == UserID);
+            vm.wishs = db.AdpWishes.Where(a => a.UserID == UserID);
             bool flg1 = false;
             bool flg2 = false;
             if (vm.adoptions.Count() > 0)
@@ -137,7 +138,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption/Edit/5
         public ActionResult Edit(int id)
         {
-            var adoption = db.Adoption.Find(id);
+            var adoption = db.Adoptions.Find(id);
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Citys.ToList();
 
@@ -181,8 +182,8 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption/Delete/5
         public ActionResult Delete(int id)
         {
-            var adoption = db.Adoption.Find(id);
-            db.Adoption.Remove(adoption);
+            var adoption = db.Adoptions.Find(id);
+            db.Adoptions.Remove(adoption);
             db.SaveChanges();
             //dbContext.Delete(adoption);
             return RedirectToAction("AdoptionManage");
@@ -190,7 +191,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
         public ActionResult AdoptionWish(int? page, int? categoryid, int? cityid, string search)
         {
-            var wishs = db.AdpWish.Select(a => a);
+            var wishs = db.AdpWishes.Select(a => a);
 
             if (search != "" && search != null)
             {
@@ -234,8 +235,8 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
         public ActionResult WishJoin(int id)
         {
-            var wish = db.AdpWish.Find(id);
-            var result = db.Adoption.Where(a => a.CategoryID == wish.CategoryID 
+            var wish = db.AdpWishes.Find(id);
+            var result = db.Adoptions.Where(a => a.CategoryID == wish.CategoryID 
                                                                           && a.CityID == wish.CityID 
                                                                           && (a.Sex == wish.Sex || a.Build == wish.Build || a.Age == wish.Age || a.Hair == wish.Hair));
             ViewBag.wishID = id;
@@ -252,8 +253,8 @@ namespace CaptainMao.Areas.Adoption.Controllers
             //Gmial 的 smtp 必需要使用 SSL
             MySmtp.EnableSsl = true;
 
-            var adoption = db.Adoption.Find(id);
-            string Email = adoption.AspNetUsers.Email;
+            var adoption = db.Adoptions.Find(id);
+            string Email = adoption.AspNetUser.Email;
             //發送Email
             MySmtp.Send("captainmao114@gmail.com", Email, "毛孩隊長",
                         "親愛的用戶您好，有其他用戶領養您的寵物 "+ "http://localhost:52326/Adoption/Adoption/Details/" + id +"，請您盡速回覆，謝謝。");

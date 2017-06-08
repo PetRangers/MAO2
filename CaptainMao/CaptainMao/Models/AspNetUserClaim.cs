@@ -12,20 +12,13 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdpWish
+    public partial class AspNetUserClaim
     {
-        public int WishID { get; set; }
-        public string UserID { get; set; }
-        public string Sex { get; set; }
-        public int CategoryID { get; set; }
-        public string Build { get; set; }
-        public string Age { get; set; }
-        public int CityID { get; set; }
-        public string Hair { get; set; }
-        public System.DateTime PostDate { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual City City { get; set; }
     }
 }

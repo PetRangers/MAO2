@@ -157,7 +157,6 @@
     <Property Name="HospitalAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="AddressArea" Type="int" Nullable="false" />
     <Property Name="HospitalPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="CategoryID" Type="int" />
     <Property Name="BusinessHours" Type="nvarchar" MaxLength="50" />
     <Property Name="Emergency" Type="nvarchar" MaxLength="50" />
     <Property Name="OutpatientProject" Type="nvarchar" MaxLength="50" />
@@ -166,14 +165,13 @@
     <Property Name="OnlineConsultation" Type="nvarchar" MaxLength="50" />
     <Property Name="OnView" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Map" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryID" Type="int" />
   </EntityType>
-  <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'Mao.dbo.HospitalCategoryDetails' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
   <EntityType Name="HospitalCategoryDetails">
     <Key>
-      <PropertyRef Name="HospitalID" />
-      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="CountID" />
     </Key>
+    <Property Name="CountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HospitalID" Type="int" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
   </EntityType>
@@ -515,7 +513,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_merchandise_AspNetUsers">
+  <Association Name="FK_Merchandise_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="*" />
     <ReferentialConstraint>
@@ -674,6 +672,7 @@
     <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
@@ -681,12 +680,6 @@
     <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
     <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
     <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
-    <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [HospitalCategoryDetails].[HospitalID] AS [HospitalID], 
-    [HospitalCategoryDetails].[CategoryID] AS [CategoryID]
-    FROM [dbo].[HospitalCategoryDetails] AS [HospitalCategoryDetails]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="Scorce" EntityType="Self.Scorce" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Scorce].[UserID] AS [UserID], 
@@ -784,7 +777,7 @@
       <End Role="Hospital" EntitySet="Hospital" />
       <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_merchandise_AspNetUsers" Association="Self.FK_merchandise_AspNetUsers">
+    <AssociationSet Name="FK_Merchandise_AspNetUsers" Association="Self.FK_Merchandise_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Merchandise" EntitySet="Merchandise" />
     </AssociationSet>

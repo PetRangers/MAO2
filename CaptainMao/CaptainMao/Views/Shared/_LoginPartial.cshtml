@@ -16,6 +16,6 @@
 }
 else
 {
-        <li><a class="dropdown-toggle" href=@Url.Action("Login","Account") title="登入"><span class="fa fa-lg fa-user"></span><br /><br />Log In</a></li>
-        <li><a class="dropdown-toggle" href=@Url.Action("Register", "Account") title="註冊"><span class="fa fa-lg fa-user-plus"></span><br /><br />Register</a></li>
+        <li><a class="dropdown-toggle" href=@Url.Action("Login","Account",new { Area = ""}) title="登入"><span class="fa fa-lg fa-user"></span><br /><br />Log In</a></li>
+        <li><a class="dropdown-toggle" href=@Url.Action("Register", "Account",new { Area = ""}) title="註冊"><span class="fa fa-lg fa-user-plus"></span><br /><br />Register</a></li>
 }

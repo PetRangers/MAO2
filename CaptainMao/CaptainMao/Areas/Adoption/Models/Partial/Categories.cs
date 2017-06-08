@@ -8,7 +8,7 @@ using System.Web;
 namespace CaptainMao.Models
 {
     [MetadataType(typeof(CategoriesMetadata))]
-    public partial class Categories
+    public partial class Category
     {
         public class CategoriesMetadata
         {
