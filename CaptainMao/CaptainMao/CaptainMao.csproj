@@ -264,12 +264,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
-    <Content Include="css\StyleSheet_Master.css">
-      <DependentUpon>StyleSheet_Master.less</DependentUpon>
-    </Content>
-    <Content Include="css\StyleSheet_Master.min.css">
-      <DependentUpon>StyleSheet_Master.css</DependentUpon>
-    </Content>
+    <Content Include="css\StyleSheet_Master.css" />
+    <Content Include="css\StyleSheet_Master.min.css" />
     <Content Include="css\video.css" />
     <Content Include="favicon.ico" />
     <Content Include="files\1fabec0335901a37a1aae9037d955749.png" />
@@ -314,7 +310,6 @@
     <Content Include="fonts\catsvsdogsLT.ttf" />
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
-    <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\buy\Views\web.config" />
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
@@ -331,6 +326,7 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="css\StyleSheet_Master.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
