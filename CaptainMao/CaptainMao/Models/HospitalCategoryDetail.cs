@@ -16,7 +16,7 @@ namespace CaptainMao.Models
     {
         public int CountID { get; set; }
         public int HospitalID { get; set; }
-        public int CategoryID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Hospital Hospital { get; set; }

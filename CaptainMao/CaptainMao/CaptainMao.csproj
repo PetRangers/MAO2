@@ -339,13 +339,13 @@
     <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
-    <EntityDeploy Include="Models\MaoModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MaoModel.edmx.diagram">
-      <DependentUpon>MaoModel.edmx</DependentUpon>
-    </Content>
+    <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\buy\css\Create.less" />
@@ -363,8 +363,10 @@
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
+    <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
-    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
+	<Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
@@ -372,6 +374,13 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
+    <EntityDeploy Include="Models\MaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MaoModel.edmx.diagram">
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -385,9 +394,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="Scripts\jqcloud-1.0.4.js" />
     <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1023,6 +1035,7 @@
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\AppSettingsHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -1252,6 +1265,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
+    <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
     <Folder Include="obj\Debug\" />

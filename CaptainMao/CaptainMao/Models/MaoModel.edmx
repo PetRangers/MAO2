@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adoption">
           <Key>
             <PropertyRef Name="AdoptionID" />
@@ -142,6 +142,7 @@
           <Property Name="PosterID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ContentText" Type="nvarchar(max)" />
           <Property Name="NewDateTime" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Hospital">
           <Key>
@@ -168,7 +169,7 @@
           </Key>
           <Property Name="CountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalID" Type="int" Nullable="false" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
         </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'Mao.dbo.Scorce' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
@@ -256,6 +257,15 @@
           <Property Name="merchandise_Volume" Type="int" Nullable="false" />
           <Property Name="Order_Createdate" Type="datetime" Nullable="false" />
           <Property Name="Order_Fitness" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="shoppingcart">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Merchandise_ID" Type="int" Nullable="false" />
+          <Property Name="merchandise_Volume" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="sType">
           <Key>
@@ -485,7 +495,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HospitalCategoryDetails_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -616,6 +626,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shoppingcart_Merchandise">
+          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+          <End Role="shoppingcart" Type="Self.shoppingcart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="Merchandise_ID" />
+            </Principal>
+            <Dependent Role="shoppingcart">
+              <PropertyRef Name="Merchandise_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StoreInfo_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="StoreInfo" Type="Self.StoreInfo" Multiplicity="0..1" />
@@ -667,10 +689,6 @@
         <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
         </Function>
-        <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
-          <Parameter Name="sTypeID" Type="int" Mode="In" />
-        </Function>
         <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
           <Parameter Name="sTypeID" Type="int" Mode="In" />
@@ -695,6 +713,7 @@
           <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="ShoppingNetwork" store:Type="Tables" />
+          <EntitySet Name="shoppingcart" EntityType="Self.shoppingcart" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="sType" EntityType="Self.sType" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Scorce" EntityType="Self.Scorce" store:Type="Tables" store:Schema="dbo">
@@ -830,6 +849,10 @@
             <End Role="Hospital" EntitySet="Hospital" />
             <End Role="Scorce" EntitySet="Scorce" />
           </AssociationSet>
+          <AssociationSet Name="FK_shoppingcart_Merchandise" Association="Self.FK_shoppingcart_Merchandise">
+            <End Role="Merchandise" EntitySet="Merchandise" />
+            <End Role="shoppingcart" EntitySet="shoppingcart" />
+          </AssociationSet>
           <AssociationSet Name="FK_StoreInfo_AspNetUsers" Association="Self.FK_StoreInfo_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="StoreInfo" EntitySet="StoreInfo" />
@@ -847,7 +870,8 @@
             <End Role="UserPet" EntitySet="UserPet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1016,6 +1040,7 @@
           <Property Name="PosterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Article" Relationship="Self.FK_Comment_Article" FromRole="Comment" ToRole="Article" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Comment_AspNetUsers" FromRole="Comment" ToRole="AspNetUsers" />
         </EntityType>
@@ -1047,7 +1072,7 @@
           </Key>
           <Property Name="CountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HospitalID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Self.FK_HospitalCategoryDetails_Categories" FromRole="HospitalCategoryDetails" ToRole="Categories" />
           <NavigationProperty Name="Hospital" Relationship="Self.FK_HospitalCategoryDetails_Hospital" FromRole="HospitalCategoryDetails" ToRole="Hospital" />
         </EntityType>
@@ -1100,6 +1125,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Merchandise_AspNetUsers" FromRole="Merchandise" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="Self.FK_merchandise_Categories" FromRole="Merchandise" ToRole="Categories" />
+          <NavigationProperty Name="shoppingcarts" Relationship="Self.FK_shoppingcart_Merchandise" FromRole="Merchandise" ToRole="shoppingcart" />
           <NavigationProperty Name="Orders" Relationship="Self.Merchandise_Order_View" FromRole="Merchandise" ToRole="Order" />
           <NavigationProperty Name="sTypes" Relationship="Self.Merchandise_Type_View" FromRole="Merchandise" ToRole="sType" />
         </EntityType>
@@ -1114,6 +1140,16 @@
           <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
           <NavigationProperty Name="Merchandises" Relationship="Self.Merchandise_Order_View" FromRole="Order" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="shoppingcart">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Merchandise_ID" Type="Int32" Nullable="false" />
+          <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Merchandise" Relationship="Self.FK_shoppingcart_Merchandise" FromRole="shoppingcart" ToRole="Merchandise" />
         </EntityType>
         <EntityType Name="sType">
           <Key>
@@ -1379,7 +1415,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HospitalCategoryDetails_Categories">
-          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
           <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -1450,6 +1486,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shoppingcart_Merchandise">
+          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+          <End Role="shoppingcart" Type="Self.shoppingcart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="Merchandise_ID" />
+            </Principal>
+            <Dependent Role="shoppingcart">
+              <PropertyRef Name="Merchandise_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_sType_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="sType" Type="Self.sType" Multiplicity="*" />
@@ -1493,6 +1541,7 @@
           <EntitySet Name="UserPets" EntityType="Self.UserPet" />
           <EntitySet Name="Merchandises" EntityType="Self.Merchandise" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="shoppingcarts" EntityType="Self.shoppingcart" />
           <EntitySet Name="sTypes" EntityType="Self.sType" />
           <EntitySet Name="Types" EntityType="Self.Type" />
           <EntitySet Name="Scorces" EntityType="Self.Scorce" />
@@ -1596,6 +1645,10 @@
             <End Role="Hospital" EntitySet="Hospitals" />
             <End Role="Scorce" EntitySet="Scorces" />
           </AssociationSet>
+          <AssociationSet Name="FK_shoppingcart_Merchandise" Association="Self.FK_shoppingcart_Merchandise">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="shoppingcart" EntitySet="shoppingcarts" />
+          </AssociationSet>
           <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
             <End Role="Type" EntitySet="Types" />
             <End Role="sType" EntitySet="sTypes" />
@@ -1613,11 +1666,7 @@
             <End Role="sType" EntitySet="sTypes" />
           </AssociationSet>
           <FunctionImport Name="DeleteToMerchandise_Type_View">
-          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="EditToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
-            <Parameter Name="sTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
@@ -1766,6 +1815,7 @@
                 <ScalarProperty Name="PosterID" ColumnName="PosterID" />
                 <ScalarProperty Name="ContentText" ColumnName="ContentText" />
                 <ScalarProperty Name="NewDateTime" ColumnName="NewDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1857,6 +1907,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="shoppingcarts">
+            <EntityTypeMapping TypeName="MaoModel.shoppingcart">
+              <MappingFragment StoreEntitySet="shoppingcart">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+                <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sTypes">
             <EntityTypeMapping TypeName="MaoModel.sType">
               <MappingFragment StoreEntitySet="sType">
@@ -1910,7 +1970,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
-          <FunctionImportMapping FunctionImportName="EditToMerchandise_Type_View" FunctionName="MaoModel.Store.EditToMerchandise_Type_View" />
           <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
         </EntityContainerMapping>
       </Mapping>
