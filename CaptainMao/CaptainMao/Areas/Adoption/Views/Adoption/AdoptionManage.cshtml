@@ -103,7 +103,7 @@
                             <div class="thumbnail">
                                 <div class="caption">
                                     <h2>@Html.DisplayNameFor(a => wish.WishID) : @Html.DisplayFor(a => wish.WishID)</h2>
-                                    <p>@Html.DisplayNameFor(a => wish.CategoryID) : @Html.DisplayFor(a => wish.Categories.CategoryName)</p>
+                                    <p>@Html.DisplayNameFor(a => wish.CategoryID) : @Html.DisplayFor(a => wish.Category.CategoryName)</p>
                                     @if (wish.Sex != null)
                                     {
                                         <p>@Html.DisplayNameFor(a => wish.Sex) : @Html.DisplayFor(a => wish.Sex)</p>
@@ -120,7 +120,7 @@
                                     {
                                         <p>@Html.DisplayNameFor(a => wish.Hair) : @Html.DisplayFor(a => wish.Hair)</p>
                                     }
-                                    <p>@Html.DisplayNameFor(a => wish.CityID) : @Html.DisplayFor(a => wish.Citys.CityName)</p>
+                                    <p>@Html.DisplayNameFor(a => wish.CityID) : @Html.DisplayFor(a => wish.City.CityName)</p>
                                 </div>
                                 <div class="pull-right">@Html.ActionLink("查看配對", "WishJoin", "Adoption", new { id = wish.WishID }, new { @class = "btn btn-primary" })</div>
                             </div>

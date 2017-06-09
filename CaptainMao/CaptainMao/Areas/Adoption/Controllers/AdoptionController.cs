@@ -8,6 +8,7 @@ using CaptainMao.Areas.Adoption.Models;
 using CaptainMao.Areas.Adoption.ViewModel;
 using PagedList;
 using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.Adoption.Controllers
 {
@@ -115,7 +116,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult AdoptionManage()
         {
             Adoption_WishViewModel vm = new Adoption_WishViewModel();
-            string UserID = "e3d67396-115e-49f6-9781-1f179486ad9d";                                          
+            string UserID = User.Identity.GetUserId();
             vm.adoptions = db.Adoptions.Where(a => a.RegistrationUserID == UserID);
             vm.wishs = db.AdpWishes.Where(a => a.UserID == UserID);
             bool flg1 = false;

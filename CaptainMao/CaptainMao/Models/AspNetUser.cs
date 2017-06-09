@@ -76,5 +76,6 @@ namespace CaptainMao.Models
         public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual StoreInfo StoreInfo { get; set; }
     }
 }

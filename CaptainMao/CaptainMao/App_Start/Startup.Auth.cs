@@ -46,6 +46,9 @@ namespace CaptainMao
             // 這類似於登入時的 RememberMe 選項。
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+            app.MapSignalR();
+
+
             // 註銷下列各行以啟用利用協力廠商登入提供者登入
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

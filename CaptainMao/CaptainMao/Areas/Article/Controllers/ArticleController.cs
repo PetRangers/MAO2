@@ -86,8 +86,7 @@ namespace CaptainMao.Areas.Article.Controllers
                 article.CreateDateTime = DateTime.Now;
                 article.LastChDateTime = DateTime.Now;
 
-                //string posterid= User.Identity.GetUserId();
-                article.PosterID = db.Articles.First().PosterID;
+                article.PosterID = User.Identity.GetUserId();
                 article.Number = 0;
 
                 articledb.Create(article);
@@ -124,7 +123,7 @@ namespace CaptainMao.Areas.Article.Controllers
                 comment.ArticleID = db.Articles.Find(id).ArticleID;
                 //comment.ArticleID = commentdb.GetID(id).ArticleID;
                 comment.NewDateTime = DateTime.Now;
-                comment.PosterID = db.Articles.First().PosterID;
+                comment.PosterID = User.Identity.GetUserId();
 
                 var articleDT = db.Articles.Find(id);
                 articleDT.LastChDateTime = DateTime.Now;
@@ -142,7 +141,7 @@ namespace CaptainMao.Areas.Article.Controllers
         //顯示使用者的發佈的文章
         public ActionResult Poster(int? page, string posterID)
         {
-            posterID = "d6927155-c35b-4810-a830-e9de6cd9cf0d";
+            posterID = User.Identity.GetUserId();
             var article = db.Articles.Where(a =>a.PosterID==posterID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
             return View(article.ToList().ToPagedList(page ?? 1, 10));
         }
@@ -290,6 +289,11 @@ namespace CaptainMao.Areas.Article.Controllers
             {
                 return Json(new { IsSuccess = false, Message = "Can't find file by file name." });
             }
+        }
+
+        public ActionResult TableCloud()
+        {
+            return PartialView();
         }
     }
 }

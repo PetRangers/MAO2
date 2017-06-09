@@ -14,6 +14,9 @@
             white-space: nowrap;
             width:200px;
         }
+        tr>th{
+            text-align:center;
+        }
     </style>
     }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -31,51 +34,61 @@
                 @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
             </div>
         </div>
-        <div style="background-color:burlywood" class="drawingpin">
-            <div class="navbar-left">
-                @Html.Action("BoardCategories")
+        <div class="row">
+            <div class="col-lg-9">
+                <div style="background-color:burlywood" class="drawingpin">
+                    <div class="navbar-left">
+                        @Html.Action("BoardCategories")
+                    </div>
+                    <table class="table table-bordered table-hover" id="articletable">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(a => a.First().TitleCategoryID)</th>
+                                <th>@Html.DisplayNameFor(a => a.First().BoardID)</th>
+                                <th>@Html.DisplayNameFor(a => a.First().Title)</th>
+                                <th>@Html.DisplayNameFor(a => a.First().PosterID)</th>
+                                <th>@Html.DisplayNameFor(a => a.First().Comments.First().CommentID) / @Html.DisplayNameFor(a => a.First().Number)</th>
+                                <th>@Html.DisplayNameFor(a => a.First().LastChDateTime)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="tb">
+                                    <td><a href="@Url.Action("Index","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
+                                    <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
+                                    <td>
+                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
+                                    </td>
+                                    <td>@Html.DisplayFor(a => item.AspNetUser.NickName)</td>
+                                    <td>@Html.DisplayFor(a => item.Comments.Count) / @Html.DisplayFor(a => item.Number)</td>
+                                    <td>@Html.DisplayFor(a => item.LastChDateTime)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, titleCategoryID = Request.QueryString["titleCategoryID"], boardID = Request.QueryString["boardID"] }), new PagedListRenderOptions
+                   {
+                       LinkToFirstPageFormat = "<< 第一頁",
+                       LinkToPreviousPageFormat = "< 前一頁",
+                       LinkToNextPageFormat = "下一頁 >",
+                       LinkToLastPageFormat = "最末頁 >>",
+                       DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                       DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                       DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                       DisplayLinkToNextPage = PagedListDisplayMode.Always
+                   })
+                    </div>
+                </div>
             </div>
-            <table class="table table-bordered table-hover" id="articletable">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(a => a.First().TitleCategoryID)</th>
-                        <th>@Html.DisplayNameFor(a => a.First().BoardID)</th>
-                        <th>@Html.DisplayNameFor(a => a.First().Title)</th>
-                        <th>@Html.DisplayNameFor(a => a.First().PosterID)</th>
-                        <th>@Html.DisplayNameFor(a=>a.First().Comments.First().CommentID) / @Html.DisplayNameFor(a => a.First().Number)</th>
-                        <th>@Html.DisplayNameFor(a => a.First().LastChDateTime)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr id="tb">
-                            <td><a href="@Url.Action("Index","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
-                            <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
-                            <td>
-                                <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})" ><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
-                            </td>
-                            <td>@Html.DisplayFor(a => item.PosterID)</td>
-                            <td>@Html.DisplayFor(a=>item.Comments.Count) / @Html.DisplayFor(a => item.Number)</td>
-                            <td>@Html.DisplayFor(a=>item.LastChDateTime)</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <div class="text-center">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, titleCategoryID = Request.QueryString["titleCategoryID"], boardID = Request.QueryString["boardID"] }), new PagedListRenderOptions
-           {
-               LinkToFirstPageFormat = "<< 第一頁",
-               LinkToPreviousPageFormat = "< 前一頁",
-               LinkToNextPageFormat = "下一頁 >",
-               LinkToLastPageFormat = "最末頁 >>",
-               DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-               DisplayLinkToLastPage = PagedListDisplayMode.Always,
-               DisplayLinkToPreviousPage=PagedListDisplayMode.Always,
-               DisplayLinkToNextPage=PagedListDisplayMode.Always
-           })
+            <div class="col-lg-3">
+                <div style="background-color:burlywood" class="drawingpin">
+
+                </div>
             </div>
         </div>
+
     </div>
     <!-------------------articleEnd------------------->
 </article>
