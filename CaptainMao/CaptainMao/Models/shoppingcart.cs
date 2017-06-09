@@ -12,13 +12,13 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HospitalCategoryDetail
+    public partial class shoppingcart
     {
-        public int CountID { get; set; }
-        public int HospitalID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public string userID { get; set; }
+        public int Merchandise_ID { get; set; }
+        public int merchandise_Volume { get; set; }
+        public System.DateTime DateCreated { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Hospital Hospital { get; set; }
+        public virtual Merchandise Merchandise { get; set; }
     }
 }

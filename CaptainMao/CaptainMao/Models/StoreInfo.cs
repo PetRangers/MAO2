@@ -12,13 +12,14 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HospitalCategoryDetail
+    public partial class StoreInfo
     {
-        public int CountID { get; set; }
-        public int HospitalID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public string StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string StoreAddress { get; set; }
+        public string ContactName { get; set; }
+        public Nullable<decimal> Score { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Hospital Hospital { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

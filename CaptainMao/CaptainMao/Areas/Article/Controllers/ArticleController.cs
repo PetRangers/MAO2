@@ -76,21 +76,23 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
-
-            //string url = Url.Content("~/Images/" + upload.FileName);
-            ////string script = $"<script>window.parent.CKEDITOR.tools.callFunction({article},'{url}','')</script>";
-            //upload.SaveAs(Server.MapPath("~/Images/" + upload.FileName));
-            //return Content(script);
             if (ModelState.IsValid)
             {
-                article.CreateDateTime = DateTime.Now;
-                article.LastChDateTime = DateTime.Now;
+                try
+                {
+                    article.CreateDateTime = DateTime.Now;
+                    article.LastChDateTime = DateTime.Now;
 
-                article.PosterID = User.Identity.GetUserId();
-                article.Number = 0;
+                    article.PosterID = User.Identity.GetUserId();
+                    article.Number = 0;
 
-                articledb.Create(article);
-                return RedirectToAction("Index");
+                    articledb.Create(article);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "請先登入";
+                }
             }
             return View();
         }
@@ -98,39 +100,45 @@ namespace CaptainMao.Areas.Article.Controllers
         [HttpGet]
         public ActionResult Show(int? articleID)
         {
-            CaptainMao.Areas.Article.Models.CommentViewModel vm = new CommentViewModel();
+            CaptainMao.Areas.Article.Models.CommentViewModel commentVM = new CommentViewModel();
             var article = db.Articles.Find(articleID);
             article.Number++;
 
             db.Entry(article).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            vm.comment = db.Comments.Where(a => a.ArticleID == articleID);
-            vm.article = db.Articles.Where(a => a.ArticleID == articleID);
-            return View(vm); 
+            commentVM.comment = db.Comments.Where(a => a.ArticleID == articleID);
+            commentVM.article = db.Articles.Where(a => a.ArticleID == articleID);
+            return View(commentVM); 
         }
-        public ActionResult Comment()
+        public ActionResult Comment(int? articleID)
         {
+            ViewBag.articleid = articleID;
             return View();
         }
         //建置留言
         [HttpPost]
-        public ActionResult Comment(CaptainMao.Models.Comment comment, int id)
+        public ActionResult Comment(CaptainMao.Models.Comment comment)
         {
             if (ModelState.IsValid)
             {
-                //comment.ArticleID= db.AspNetUsers.Find(id).Id;
-                comment.ArticleID = db.Articles.Find(id).ArticleID;
-                //comment.ArticleID = commentdb.GetID(id).ArticleID;
-                comment.NewDateTime = DateTime.Now;
-                comment.PosterID = User.Identity.GetUserId();
+                try
+                {
+                    comment.NewDateTime = DateTime.Now;
+                    comment.PosterID = User.Identity.GetUserId();
 
-                var articleDT = db.Articles.Find(id);
-                articleDT.LastChDateTime = DateTime.Now;
-                db.Entry(articleDT).State = System.Data.Entity.EntityState.Modified;
+                    var articleDT = db.Articles.Find(comment.ArticleID);
+                    articleDT.LastChDateTime = DateTime.Now;
+                    db.Entry(articleDT).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
 
-                commentdb.Create(comment);
-                return RedirectToAction("Index");
+                    commentdb.Create(comment);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "請先登入";
+                }
             }
             return View();
         }
@@ -170,12 +178,52 @@ namespace CaptainMao.Areas.Article.Controllers
             }
             return View();
         }
+        //修改評論前用ID找文章
+        public ActionResult EditComment(int? commentID)
+        {
+            CaptainMao.Models.Comment comment = db.Comments.Find(commentID);
+            comment.ContentText = HttpUtility.HtmlDecode(comment.ContentText);
+            return View(comment);
+        }
+        //修改評論
+        [HttpPost]
+        public ActionResult EditComment(CaptainMao.Models.Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var commentDT = db.Articles.Find(comment.ArticleID);
+                    commentDT.LastChDateTime = DateTime.Now;
+                    db.Entry(commentDT).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    comment.NewDateTime = DateTime.Now;
+                    commentdb.Update(comment);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "請先登入";
+                }
+
+            }
+            return View();
+        }
+
         //刪除文章，但只是把文章做隱藏
         public ActionResult Del(int? articleID)
         {
             db.Articles.Find(articleID).IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Poster");
+        }
+        //刪除留言者評論
+        public ActionResult DelComment(int? commentID)
+        {
+            db.Comments.Find(commentID).IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         /// CKEditor 圖片檔案管理頁

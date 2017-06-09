@@ -24,7 +24,7 @@ namespace CaptainMao.Areas.Article.Models
 
         public void Delete(T _entity)
         {
-            
+
         }
 
         public IEnumerable<T> GetAll()
