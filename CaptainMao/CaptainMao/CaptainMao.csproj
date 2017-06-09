@@ -364,6 +364,14 @@
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1020,6 +1028,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
+    <Compile Include="Areas\Admin\Models\UserManageViewModel.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
@@ -1056,7 +1067,6 @@
     <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1175,12 +1185,6 @@
     <Compile Include="Models\UserPet.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1237,6 +1241,7 @@
     <Content Include="Views\Account\Error.cshtml" />
     <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
+    <Content Include="Views\Account\Lockout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1249,6 +1254,8 @@
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
+    <Folder Include="obj\Debug\" />
+    <Folder Include="obj\Release\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -3,14 +3,21 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
+
+        
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        @if (User.IsInRole("Store"))
+        {
+        //下面的寫法格式會跑掉，所以先註解
+        <li><a class="dropdown-toggle" href=@Url.Action("Index", "Store", new { area = "buy" }) title="商店管理介面"><span class="fa fa-lg fa-briefcase"> 商店管理</a></li>
+        //<li>@Html.ActionLink("商店管理介面", "Index", "Store", new { area = "buy" }, htmlAttributes: new { title = "管理帳戶" })</li>
+        }
         <li>
             @Html.ActionLink("您好，" + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "管理帳戶" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()" title="登出">Log Out <span class="fa fa-lg fa-sign-out"></span></a></li>
-        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>*@
     </ul>
     }
 }
