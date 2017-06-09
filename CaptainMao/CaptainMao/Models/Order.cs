@@ -18,7 +18,6 @@ namespace CaptainMao.Models
         public Order()
         {
             this.Merchandises = new HashSet<Merchandise>();
-            this.Merchandises1 = new HashSet<Merchandise>();
         }
     
         public int Order_ID { get; set; }
@@ -30,7 +29,5 @@ namespace CaptainMao.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandises { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises1 { get; set; }
     }
 }

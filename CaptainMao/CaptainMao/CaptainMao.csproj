@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -1090,9 +1089,6 @@
     <Compile Include="Models\HospitalCategoryDetail.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HospitalCategoryDetail.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUtilities.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -1212,7 +1208,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
-    <Folder Include="Areas\buy\Views\Shared\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

@@ -325,9 +325,7 @@ namespace CaptainMao.Controllers
             }
 
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
-            return View(model);
-            // 如果執行到這裡，發生某項失敗，則重新顯示表單
-            return View(model);
+            return View("Register");
         }
 
         //GET: /Account/VerifyEmail
