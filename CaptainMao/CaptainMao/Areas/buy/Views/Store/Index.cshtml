@@ -40,6 +40,7 @@
                             <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
                             <td>@Html.DisplayFor(c=>_model.Merchandise_Fitness)</td>
                             <td>
+                                <button>快速修改</button>
                                 @Html.ActionLink("修改","Edit","Store",new { Merchandise_ID =_model.Merchandise_ID},new{@class= "btn btn-primary" })
                                 @Html.ActionLink("刪除", "Delete", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
                             </td>
