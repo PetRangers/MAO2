@@ -339,13 +339,6 @@
     <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
-    <EntityDeploy Include="Models\MaoModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MaoModel.edmx.diagram">
-      <DependentUpon>MaoModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -371,6 +364,8 @@
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
+    <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -378,7 +373,6 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

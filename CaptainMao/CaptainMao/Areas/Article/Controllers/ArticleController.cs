@@ -107,7 +107,7 @@ namespace CaptainMao.Areas.Article.Controllers
             db.Entry(article).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            commentVM.comment = db.Comments.Where(a => a.ArticleID == articleID);
+            commentVM.comment = db.Comments.Where(a => a.ArticleID == articleID && a.IsDeleted!=true);
             commentVM.article = db.Articles.Where(a => a.ArticleID == articleID);
             return View(commentVM); 
         }
