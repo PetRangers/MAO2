@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -237,12 +236,12 @@
     <Content Include="Areas\buy\css\shoppingIndex.min.css">
       <DependentUpon>shoppingIndex.css</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\js\aside.js" />
+    <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\buy\js\ShoppingIndex.js" />
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\Views\Login\Index.cshtml" />
     <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
@@ -353,6 +352,7 @@
     <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\web.config" />
+    <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1032,7 +1032,6 @@
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
-    <Compile Include="Areas\buy\Controllers\LoginController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
     <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
@@ -1151,6 +1150,12 @@
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\shoppingcart.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoreInfo.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sType.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1230,7 +1235,6 @@
     <Folder Include="Areas\Article\Views\Shared\" />
     <Folder Include="Areas\Article\Views\Values\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
-    <Folder Include="Areas\buy\Views\Shared\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

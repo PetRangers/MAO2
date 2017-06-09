@@ -27,9 +27,10 @@
                             <th>@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
                             <th>@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
                             <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         @foreach (var _model in Model)
                         {
                             <tr>
@@ -38,6 +39,10 @@
                                 <td><img src='@Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID})' class="img-circle" width="80" /></td>
                                 <td>@Html.DisplayFor(c => _model.Merchandise_Price)</td>
                                 <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
+                                <td>
+                                    @Html.ActionLink("詳細資料", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("加入", "AddCart", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -50,5 +55,5 @@
 
 @section script{
     <!--aside-->
-    <script src='@Url.Content("~/Areas/buy/js/aside.js")' ></script>
+    <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
 }

@@ -12,20 +12,15 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Board
+    public partial class StoreInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Board()
-        {
-            this.Articles = new HashSet<Article>();
-        }
+        public string StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string StoreAddress { get; set; }
+        public string ContactName { get; set; }
+        public byte[] Photo { get; set; }
+        public Nullable<decimal> Score { get; set; }
     
-        public int BoardID { get; set; }
-        public string BoardName { get; set; }
-        public string MasterUserID { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Article> Articles { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

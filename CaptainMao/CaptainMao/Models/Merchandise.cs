@@ -17,8 +17,9 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Merchandise()
         {
-            this.sTypes = new HashSet<sType>();
             this.Orders = new HashSet<Order>();
+            this.sTypes = new HashSet<sType>();
+            this.shoppingcarts = new HashSet<shoppingcart>();
         }
     
         public int Merchandise_ID { get; set; }
@@ -35,8 +36,10 @@ namespace CaptainMao.Models
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sType> sTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<shoppingcart> shoppingcarts { get; set; }
     }
 }

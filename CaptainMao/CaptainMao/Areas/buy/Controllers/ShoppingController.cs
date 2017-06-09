@@ -7,14 +7,21 @@ using CaptainMao.Models;
 
 using CaptainMao.Areas.buy.Models;
 using CaptainMao.Areas.buy.ViewModel;
+using CaptainMao.Filters;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.buy.Controllers
 {
     public class ShoppingController : Controller
     {
         ClsBusinessLogic fun = new ClsBusinessLogic();
+        
         public ActionResult Index(vmCaID_typeID_stypeID vm)
         {
+            if (User.Identity.GetUserId() == null || Session["user_identity"] ==null)
+            {
+                Session["user_identity"] =Request.AnonymousID;
+            }
             IEnumerable<Merchandise> selectMer =fun.Logic_SelectMerchandise(vm);
             return View(selectMer);
         }
@@ -24,6 +31,14 @@ namespace CaptainMao.Areas.buy.Controllers
         {
             return View(fun.Logic_GetAllCategory());
         }
+
+        public ActionResult About(int Merchandise_ID) {
+
+            return View(fun.Logic_GetAllMerchandise(Merchandise_ID));
+        }
+
+
+
 
 
 
