@@ -366,7 +366,7 @@
     <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
-	<Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
@@ -1268,8 +1268,6 @@
     <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
-    <Folder Include="obj\Debug\" />
-    <Folder Include="obj\Release\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
