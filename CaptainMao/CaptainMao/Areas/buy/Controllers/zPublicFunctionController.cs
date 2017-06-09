@@ -20,7 +20,6 @@ namespace CaptainMao.Areas.buy.Controllers
             /// <returns>index-aside.js</returns>
         public ActionResult returnJson_asTypes(vmCaID_typeID_stypeID vm)
         {
-
             return Json(fun.Logic_Type_selectsType(vm)
                 , JsonRequestBehavior.AllowGet);
         }
@@ -29,5 +28,20 @@ namespace CaptainMao.Areas.buy.Controllers
         {
             return File(fun.Logic_getMerchandisePhoto(id), "image/jpeg");
         }
+
+        [NonAction]
+        public void AddCart(int Merchandise_ID)
+        {
+            if (Session["user_identity"] == null)
+            {
+                RedirectToAction("index", "Login");
+            }
+            else {
+
+             
+            }
+        }
+
+
     }
 }

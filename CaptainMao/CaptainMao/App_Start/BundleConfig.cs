@@ -9,10 +9,12 @@ namespace Login
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/jquery-{version}.js", 
+
+                "~/js/JavaScript.js",
+                "~/Scripts/jquery-{version}.js", 
                         "~/Scripts/bootstrap.js", 
-                        "~/Scripts/modernizr-2.6.2.js",
-                        "~/js/JavaScript.js"
+                        "~/Scripts/modernizr-2.6.2.js"
+                        
                         ));
 
             bundles.Add(new StyleBundle("~/css").Include(
@@ -27,7 +29,10 @@ namespace Login
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
+                        "~/js/jquery-ui.min.js"));
         }
     }
 }

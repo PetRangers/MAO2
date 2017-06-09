@@ -85,6 +85,14 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -193,36 +201,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\AdoptionWish.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\CreateAdpWish.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
-    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
-    <Content Include="Areas\Adoption\Views\web.config" />
-    <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Board.cshtml" />
-    <Content Include="Areas\Article\Views\Article\BoardCategories.cshtml" />
-    <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Comment.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Create.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Index.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show.cshtml" />
-    <Content Include="Areas\Article\Views\web.config" />
-    <Content Include="Areas\buy\css\Create.css">
-      <DependentUpon>Create.less</DependentUpon>
+    <Content Include="Areas\Adoption\Models\MAOModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+      <LastGenOutput>MAOModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\buy\css\Create.min.css">
-      <DependentUpon>Create.css</DependentUpon>
+    <Content Include="Areas\Adoption\Models\MAOModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MAOModel.edmx</DependentUpon>
+      <LastGenOutput>MAOModel.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
@@ -236,12 +223,12 @@
     <Content Include="Areas\buy\css\shoppingIndex.min.css">
       <DependentUpon>shoppingIndex.css</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\js\aside.js" />
+    <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\buy\js\ShoppingIndex.js" />
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\Views\Login\Index.cshtml" />
     <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
@@ -326,6 +313,39 @@
     <Content Include="fonts\fc_.ttf" />
     <Content Include="Areas\buy\Views\web.config" />
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
+    <Content Include="Areas\Adoption\Views\web.config" />
+    <Content Include="Areas\Article\Views\web.config" />
+    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\AdoptionWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\CreateAdpWish.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Index.cshtml" />
+    <Content Include="Areas\Article\Views\Article\BoardCategories.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Board.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Create.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Show.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Comment.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Upload.ashx" />
+    <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\WishJoin.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Categories.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
+    <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
+    <EntityDeploy Include="Models\MaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MaoModel.edmx.diagram">
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -358,6 +378,7 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -945,6 +966,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unveil.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1003,7 +1026,7 @@
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register3.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1034,7 +1057,6 @@
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
-    <Compile Include="Areas\buy\Controllers\LoginController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
     <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
@@ -1150,6 +1172,7 @@
     <Compile Include="Models\Partial\Article.cs" />
     <Compile Include="Models\Partial\Comment.cs" />
     <Compile Include="Models\Partial\TitleCategories.cs" />
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1171,6 +1194,12 @@
     <Compile Include="Models\UserPet.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1223,8 +1252,10 @@
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Manage\UpdateProfile.cshtml" />
-    <Content Include="Views\Account\Register2.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
+    <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
+    <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

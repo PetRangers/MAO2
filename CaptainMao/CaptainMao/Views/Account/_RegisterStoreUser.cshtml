@@ -1,0 +1,76 @@
+﻿@model CaptainMao.Models.RegisterStoreViewModel
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        @using (Html.BeginForm("RegisterStore", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>建立新的帳戶。</h4>
+            <hr />
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group lg">
+                                        <div class="col-md-12">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.Email), tabindex = "1" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group lg">
+                                        <div class="col-md-12">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.Password), tabindex = "2" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group lg">
+                                        <div class="col-md-12">
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword), tabindex = "3" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group lg">
+
+                                                    @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.StoreName), tabindex = "4" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group lg">
+                                                    @Html.TextBoxFor(m => m.StoreAddress, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.StoreAddress), tabindex = "5" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group lg">
+                                        <div class="col-md-12">
+                                            @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.ContactName), tabindex = "6" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group lg">
+                                        <div class="col-md-12">
+                                            @Html.TextBoxFor(m => m.ContactPhone, new { @class = "form-control  input-lg", placeholder = Html.DisplayNameFor(m => m.ContactPhone), tabindex = "6" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="sizing-addon1" for="UserPhoto1">@Html.DisplayNameFor(m => m.Photo)</span>
+                                                <input type="file" class="form-control" name="UserPhoto" id="UserPhoto1" aria-describedby="sizing-addon1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img id="UserPhotoPreview1" alt="無圖片可供預覽" class="thumbnail" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <input type="submit" value="註冊" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                                </div>
+                            </div>
+        }
+    </div>
+</div>
+

@@ -16,6 +16,7 @@ namespace CaptainMao.Areas.buy.Models
         IMao<CaptainMao.Models.Type> _Type = new ClsMao<CaptainMao.Models.Type>();
         IMao<sType> _sType = new ClsMao<sType>();
         IMao<StoreUser> _store = new ClsMao<StoreUser>();
+        IMao<Order> _order = new ClsMao<Order>();
 
         /*尋找商品*/
         public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_typeID_stypeID vm)
@@ -44,6 +45,9 @@ namespace CaptainMao.Areas.buy.Models
             return _Category.GetAll();
         }
 
+        public Merchandise Logic_GetAllMerchandise(int Merchandise_ID) {
+            return _merchandise.GetbyID(Merchandise_ID);
+        }
         /*依照該類別目前商品有的小分類回傳*/
         public IEnumerable<vm_sType> Logic_Type_selectsType(vmCaID_typeID_stypeID vm)
         {
@@ -165,11 +169,17 @@ namespace CaptainMao.Areas.buy.Models
             return vm;
         }
 
-
-
         public void Logic_MerchandiseDelete(int Merchandise_ID) {
             DB.DeleteToMerchandise_Type_View(Merchandise_ID);
             _merchandise.DeletebyID(Merchandise_ID);
+        }
+
+
+        public void Logic_AddOrder(string user_identity, int Merchandise_ID) {
+
+            
+
+
         }
     }
 }

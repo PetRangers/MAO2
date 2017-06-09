@@ -4,84 +4,104 @@
 }
 
 
-    <h2 style="text-align:center"><span class="fa fa-lg fa-user-plus"></span></h2>
-    <h2 style="text-align:center">@ViewBag.Title</h2>
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        <h4>建立新的帳戶。</h4>
-        <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.NickName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.NickName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Photo, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                <img id="UserPhotoPreview" width="200" alt="無圖片可供預覽"/>
-                <input type="file" name="UserPhoto" id="UserPhoto"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-lg btn-default" value="註冊" />
-            </div>
-        </div>
-    }
+<h3 style="text-align:center">
+    <span class="fa fa-lg fa-user-plus"></span>
+</h3>
+<h3 style="text-align:center">@ViewBag.Title</h3>
 
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Panel title</h3>
+                    <span class="pull-right">
+                        <!-- Tabs -->
+                        <ul class="nav panel-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">個人</a></li>
+                            <li><a href="#tab2" data-toggle="tab">商家</a></li>
+                        </ul>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            @Html.Partial("_RegisterNormalUser")
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            @Html.Partial("_RegisterStoreUser")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Style {
+    <style>
+
+        .panel-tabs {
+            position: relative;
+            bottom: 30px;
+            clear: both;
+            border-bottom: 1px solid transparent;
+        }
+
+            .panel-tabs > li {
+                float: left;
+                margin-bottom: -1px;
+            }
+
+                .panel-tabs > li > a {
+                    margin-right: 2px;
+                    margin-top: 4px;
+                    line-height: .85;
+                    border: 1px solid transparent;
+                    border-radius: 4px 4px 0 0;
+                    color: #ffffff;
+                }
+
+                    .panel-tabs > li > a:hover {
+                        border-color: transparent;
+                        color: #ffffff;
+                        background-color: transparent;
+                    }
+
+                .panel-tabs > li.active > a,
+                .panel-tabs > li.active > a:hover,
+                .panel-tabs > li.active > a:focus {
+                    color: #fff;
+                    cursor: default;
+                    -webkit-border-radius: 2px;
+                    -moz-border-radius: 2px;
+                    border-radius: 2px;
+                    background-color: rgba(255,255,255, .23);
+                    border-bottom-color: transparent;
+                }
+    </style>
+}
 
 @section Script {
-    @Scripts.Render("~/bundles/jqueryval")
-<script>
-    document.getElementById("UserPhoto").onchange = function () {
-        var reader = new FileReader();
+    <script>
+            document.getElementById("UserPhoto").onchange = function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // get loaded data and render thumbnail.
+                    document.getElementById("UserPhotoPreview").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+            };
+            document.getElementById("UserPhoto1").onchange = function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // get loaded data and render thumbnail.
+                    document.getElementById("UserPhotoPreview1").src = e.target.result;
+                };
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
+            };
 
-        reader.onload = function (e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("UserPhotoPreview").src = e.target.result;
-        };
-
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
-    };
-    </script>
+</script>
 }

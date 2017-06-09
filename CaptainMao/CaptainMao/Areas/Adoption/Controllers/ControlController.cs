@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CaptainMao.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CaptainMao.Areas.Adoption.Controllers
 {
@@ -63,6 +64,19 @@ namespace CaptainMao.Areas.Adoption.Controllers
                 ViewBag.search = search;
             }
             return PartialView(db.Citys.ToList());
+        }
+
+        public ActionResult Chat()
+        {
+            var userID = User.Identity.GetUserId();
+            if (userID == null)
+            {
+                return RedirectToAction("Login","Account",new { Area = ""});
+            }
+            var userNickName = db.AspNetUsers.Where(u => u.Id == userID).Select(u => u.NickName).First();
+            ViewBag.userID = userID;
+            ViewBag.userNickName = userNickName;
+            return View();
         }
     }
 }

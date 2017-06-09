@@ -113,7 +113,7 @@
                         <div class="thumbnail">
                             <div class="caption">
                                 <h2>@Html.DisplayNameFor(a => adoption.WishID) : @Html.DisplayFor(a => adoption.WishID)</h2>
-                                <p>@Html.DisplayNameFor(a => adoption.CategoryID) : @Html.DisplayFor(a => adoption.Categories.CategoryName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.CategoryID) : @Html.DisplayFor(a => adoption.Category.CategoryName)</p>
                                 @if (adoption.Sex != null)
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Sex) : @Html.DisplayFor(a => adoption.Sex)</p>
@@ -130,9 +130,9 @@
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Hair) : @Html.DisplayFor(a => adoption.Hair)</p>
                                 }
-                                <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.Citys.CityName)</p>
-                                <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUsers.LastName)</p>
-                                <p>@Html.DisplayNameFor(a => adoption.AspNetUsers.PhoneNumber) : @Html.DisplayFor(a => adoption.AspNetUsers.PhoneNumber)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.City.CityName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUser.LastName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.AspNetUser.PhoneNumber) : @Html.DisplayFor(a => adoption.AspNetUser.PhoneNumber)</p>
                                 <p>@Html.DisplayNameFor(a =>adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
 
                             </div>
