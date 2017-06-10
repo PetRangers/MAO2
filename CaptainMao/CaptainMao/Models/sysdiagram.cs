@@ -12,14 +12,12 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class shoppingcart
+    public partial class sysdiagram
     {
-        public int cartID { get; set; }
-        public string userID { get; set; }
-        public int Merchandise_ID { get; set; }
-        public int merchandise_Volume { get; set; }
-        public System.DateTime DateCreated { get; set; }
-    
-        public virtual Merchandise Merchandise { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

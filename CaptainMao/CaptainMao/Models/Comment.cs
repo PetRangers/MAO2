@@ -19,6 +19,7 @@ namespace CaptainMao.Models
         public string PosterID { get; set; }
         public string ContentText { get; set; }
         public Nullable<System.DateTime> NewDateTime { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Article Article { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

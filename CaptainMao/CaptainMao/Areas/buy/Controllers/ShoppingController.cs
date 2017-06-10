@@ -20,8 +20,9 @@ namespace CaptainMao.Areas.buy.Controllers
         {
             if (User.Identity.GetUserId() == null || Session["user_identity"] ==null)
             {
-                Session["user_identity"] =Request.AnonymousID;
+                Session["user_identity"] = Guid.NewGuid().ToString();
             }
+
             IEnumerable<Merchandise> selectMer =fun.Logic_SelectMerchandise(vm);
             return View(selectMer);
         }
@@ -29,7 +30,7 @@ namespace CaptainMao.Areas.buy.Controllers
         [ChildActionOnly]
         public ActionResult Aside()
         {
-            return View(fun.Logic_GetAllCategory());
+            return PartialView(fun.Logic_GetAllCategory());
         }
 
         public ActionResult About(int Merchandise_ID) {
