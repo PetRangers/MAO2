@@ -41,11 +41,11 @@ namespace CaptainMao.Models
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Hospital> Hospitals { get; set; }
         public virtual DbSet<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
+        public virtual DbSet<Scorce> Scorces { get; set; }
         public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
         public virtual DbSet<UserPet> UserPets { get; set; }
-        public virtual DbSet<Scorce> Scorces { get; set; }
         public virtual DbSet<Merchandise> Merchandises { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<shoppingcart> shoppingcarts { get; set; }
@@ -59,6 +59,19 @@ namespace CaptainMao.Models
                 new ObjectParameter("MerchandiseID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteToMerchandise_Type_View", merchandiseIDParameter);
+        }
+    
+        public virtual int EditToMerchandise_Type_View(Nullable<int> merchandiseID, Nullable<int> sTypeID)
+        {
+            var merchandiseIDParameter = merchandiseID.HasValue ?
+                new ObjectParameter("MerchandiseID", merchandiseID) :
+                new ObjectParameter("MerchandiseID", typeof(int));
+    
+            var sTypeIDParameter = sTypeID.HasValue ?
+                new ObjectParameter("sTypeID", sTypeID) :
+                new ObjectParameter("sTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditToMerchandise_Type_View", merchandiseIDParameter, sTypeIDParameter);
         }
     
         public virtual int InsertToMerchandise_Type_View(Nullable<int> merchandiseID, Nullable<int> sTypeID)

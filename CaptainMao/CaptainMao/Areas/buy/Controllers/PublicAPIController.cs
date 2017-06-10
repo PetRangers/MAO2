@@ -32,6 +32,8 @@ namespace CaptainMao.Areas.buy.Controllers
         }
         //修改訂單
         public void PutShoppingCart(vmShoppingCar_Mer vm) {
+            string id = "6d25c244-4906-4edf-af59-0b86b044be88"  ;
+            fun.Logic_putShoppingCart(vm, id);
 
         }
         //刪除項目
