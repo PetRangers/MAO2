@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -8,14 +9,33 @@ namespace CaptainMao.Areas.Admin.Models
 {
     public class NormalUserViewModel
     {
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
-        public string NickName { get; set; }
+        [Display(Name = "ID")]
+        public string Id { get; set; }
+
+        [Display(Name = "姓")]
         public string LastName { get; set; }
+
+        [Display(Name = "名")]
         public string FirstName { get; set; }
+
+        [Display(Name = "電子郵件(帳號)")]
+        [Required]
+        [EmailAddress]
+        public string UserName { get; set; }
+
+        [Display(Name = "手機")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "暱稱")]
+        public string NickName { get; set; }
+
+        [Display(Name = "註冊日期")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime DateRegistered { get; set; }
-        public byte[] Photo { get; set; }
+
+        [Display(Name = "照片")]
+        public string Photo { get; set; }
     }
 
     public class NormalUserDetailViewModel
@@ -38,5 +58,7 @@ namespace CaptainMao.Areas.Admin.Models
         public System.DateTime DateRegistered { get; set; }
         public byte[] Photo { get; set; }
     }
+
+
 
 }

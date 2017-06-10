@@ -4,29 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6999ffc9e4ec4dde988671bbca0d9df3" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Article" Width="1.5" PointX="7.5" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.AspNetRole" Width="1.5" PointX="0.75" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="32.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.AspNetUser" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Board" Width="1.5" PointX="5.25" PointY="35.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Category" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.City" Width="1.5" PointX="3" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Comment" Width="1.5" PointX="10.75" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Hospital" Width="1.5" PointX="3" PointY="29.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.HospitalCategoryDetail" Width="1.5" PointX="10.25" PointY="26.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.StoreInfo" Width="1.5" PointX="5.25" PointY="37.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.TitleCategory" Width="1.5" PointX="5.25" PointY="40.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="10.5" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.shoppingcart" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.sType" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Type" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.Scorce" Width="1.5" PointX="5.25" PointY="24.5" IsExpanded="true" />
+      <Diagram DiagramId="0b3fb51b1ecf4d7ab3450c91433dabc7" Name="Diagram1">
+        <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Article" Width="1.5" PointX="7.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.AspNetRole" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.AspNetUser" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Board" Width="1.5" PointX="5.25" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Category" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.City" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Comment" Width="1.5" PointX="10.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Hospital" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.HospitalCategoryDetail" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.StoreInfo" Width="1.5" PointX="5.25" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.TitleCategory" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Scorce" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
         <AssociationConnector Association="MaoModel.FK_Adoption_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Adoption_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Adoption_Citys" ManuallyRouted="false" />
@@ -41,22 +36,27 @@
         <AssociationConnector Association="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Board_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Comment_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_Merchandise_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_Order_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Scorce_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_StoreInfo_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_UserPet_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_HospitalCategoryDetails_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_merchandise_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_UserPet_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Hospital_Citys" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_HospitalCategoryDetails_Hospital" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Scorce_Hospital" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_shoppingcart_Merchandise" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_sType_Type" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.Merchandise_Order_View" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.Merchandise_Type_View" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="11.25" PointY="13" />
+        <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="16.5" PointY="15.75" />
+        <EntityTypeShape EntityType="MaoModel.shoppingcart" Width="1.5" PointX="13.5" PointY="19.5" />
+        <EntityTypeShape EntityType="MaoModel.sType" Width="1.5" PointX="13.5" PointY="13.875" />
+        <EntityTypeShape EntityType="MaoModel.Type" Width="1.5" PointX="11.25" PointY="10.125" />
+        <AssociationConnector Association="MaoModel.FK_Merchandise_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Order_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_merchandise_Categories" />
+        <AssociationConnector Association="MaoModel.FK_shoppingcart_Merchandise" />
+        <AssociationConnector Association="MaoModel.FK_sType_Type" />
+        <AssociationConnector Association="MaoModel.Merchandise_Order_View" />
+        <AssociationConnector Association="MaoModel.Merchandise_Type_View" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
