@@ -13,13 +13,25 @@
                 @Html.ActionLink("回網站首頁", "Index", "CaptainMao", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("回會員管理主頁", "Index", "NormalUser", new { area = "Admin" }, new { @class = "navbar-brand" })
             </div>
-            
+
         </div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-    @RenderSection("script", required: false)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                
+                    @RenderPage(@Url.Content("~/Areas/Admin/Views/Shared/Aside.cshtml"))
+                
+            </div>
+            <div class="col-md-9">
+                <div class="container body-content">
+                    @RenderBody()
+                </div>
+            </div>
+            </div>
+        </div>
+
+            @RenderSection("script", required: false)
 </body>
 </html>

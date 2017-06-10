@@ -6,7 +6,7 @@
 
 <h2>Index</h2>
 <p>
-    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new{ @class="btn btn-default" })
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
 </p>
 <table id="example" class="display" cellspacing="0" width="100%">
     <thead>
@@ -65,7 +65,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class="btn btn-primary"}) 
-                    @Html.ActionLink("Details", "Details", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class = "btn btn-success" }) 
+                    @Html.ActionLink("Details", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "btn btn-success" }) 
                     @Html.ActionLink("Delete", "Delete", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class = "btn btn-danger" })
                 </td>
             </tr>
