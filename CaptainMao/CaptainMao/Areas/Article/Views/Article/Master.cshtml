@@ -1,0 +1,125 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<CaptainMao.Models.Article>
+
+@{
+    ViewBag.Title = "版主管理系統";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+@section script{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('.Del').on('click', function (e) {
+                e.preventDefault();
+                var targerUrl = $(this).attr('href');
+                $('#dialogForm').dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                }).dialog({
+                    buttons: {
+                        '確定': function () {
+                            window.location.href = targerUrl;
+                        },
+                        '取消': function () {
+                            $(this).dialog('close');
+                        }
+                    }
+                })
+            })
+        })
+
+    </script>
+}
+@section style{
+    <style>
+        .title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 200px;
+        }
+
+        tr > th {
+            text-align: center;
+        }
+    </style>
+}
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:70px;background-color:#fff266" class="drawingpin">
+            <div class="navbar-left">
+                @Html.ActionLink("主版", "Board", null, new { @class = "btn btn-info" })
+                @Html.ActionLink("文章", "Index", null,new { @class="btn btn-info"})
+            </div>
+            <div class="navbar-right">
+                @Html.ActionLink("版主文章列表", "Master", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+        <div style="background-color:burlywood" class="drawingpin">
+            <table class="table table-bordered table-hover" id="articletable">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(a => a.First().TitleCategoryID)</th>
+                        <th>@Html.DisplayNameFor(a => a.First().BoardID)</th>
+                        <th>@Html.DisplayNameFor(a => a.First().Title)</th>
+                        <th>@Html.DisplayNameFor(a => a.First().PosterID)</th>
+                        <th>@Html.DisplayNameFor(a => a.First().Comments.First().CommentID) / @Html.DisplayNameFor(a => a.First().Number)</th>
+                        <th>@Html.DisplayNameFor(a => a.First().LastChDateTime)</th>
+                        <th>修改</th>
+                        <th>刪除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="tb">
+                            <td><a href="@Url.Action("Index","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
+                            <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
+                            <td>
+                                <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
+                            </td>
+                            <td>@Html.DisplayFor(a => item.AspNetUser.NickName)</td>
+                            <td>@Html.DisplayFor(a => item.Comments.Count) / @Html.DisplayFor(a => item.Number)</td>
+                            <td>@Html.DisplayFor(a => item.LastChDateTime)</td>
+                            <td>@Html.ActionLink("修改", "Edit", new { articleID = item.ArticleID }, new { @class = "btn btn-info glyphicon glyphicon-pencil" })</td>
+                            <td>@Html.ActionLink("刪除", "Del", new { articleID = item.ArticleID }, new { @class = "btn btn-danger glyphicon glyphicon-remove Del" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                @Html.PagedListPager(Model, page => Url.Action("Master", new { page, posterID = Request.QueryString["posterID"] }), new PagedListRenderOptions
+           {
+               LinkToFirstPageFormat = "<< 第一頁",
+               LinkToPreviousPageFormat = "< 前一頁",
+               LinkToNextPageFormat = "下一頁 >",
+               LinkToLastPageFormat = "最末頁 >>",
+               DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+               DisplayLinkToLastPage = PagedListDisplayMode.Always,
+               DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+               DisplayLinkToNextPage = PagedListDisplayMode.Always
+           })
+            </div>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+<div id="dialogForm" title="確認刪除">
+    <p>您確定要刪除嗎？</p>
+</div>
+
+
+
+

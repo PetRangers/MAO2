@@ -169,7 +169,7 @@
           </Key>
           <Property Name="CountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalID" Type="int" Nullable="false" />
-          <Property Name="CategoryID" Type="int" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'Mao.dbo.Scorce' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
@@ -260,8 +260,9 @@
         </EntityType>
         <EntityType Name="shoppingcart">
           <Key>
-            <PropertyRef Name="userID" />
+            <PropertyRef Name="cartID" />
           </Key>
+          <Property Name="cartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Merchandise_ID" Type="int" Nullable="false" />
           <Property Name="merchandise_Volume" Type="int" Nullable="false" />
@@ -495,7 +496,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HospitalCategoryDetails_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
           <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -1072,7 +1073,7 @@
           </Key>
           <Property Name="CountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HospitalID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_HospitalCategoryDetails_Categories" FromRole="HospitalCategoryDetails" ToRole="Categories" />
           <NavigationProperty Name="Hospital" Relationship="Self.FK_HospitalCategoryDetails_Hospital" FromRole="HospitalCategoryDetails" ToRole="Hospital" />
         </EntityType>
@@ -1143,8 +1144,9 @@
         </EntityType>
         <EntityType Name="shoppingcart">
           <Key>
-            <PropertyRef Name="userID" />
+            <PropertyRef Name="cartID" />
           </Key>
+          <Property Name="cartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Merchandise_ID" Type="Int32" Nullable="false" />
           <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
@@ -1415,7 +1417,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HospitalCategoryDetails_Categories">
-          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -1910,6 +1912,7 @@
           <EntitySetMapping Name="shoppingcarts">
             <EntityTypeMapping TypeName="MaoModel.shoppingcart">
               <MappingFragment StoreEntitySet="shoppingcart">
+                <ScalarProperty Name="cartID" ColumnName="cartID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
                 <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
