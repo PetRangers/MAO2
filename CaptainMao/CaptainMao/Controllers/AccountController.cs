@@ -120,15 +120,16 @@ namespace CaptainMao.Controllers
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var loginResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var loginResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (loginResult)
             {
                 case SignInStatus.Success:
-                    //var user = await UserManager.FindByNameAsync(model.Email);
-                    //if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                    //{
-                    //    return RedirectToAction("VerifyEmail", "Account");
-                    //}
+                    string userId = UserManager.FindByEmail(model.Email).Id;
+                    var userRole = await UserManager.GetRolesAsync(userId);
+                    if (userRole.Contains("Store"))
+                    {
+                        return RedirectToAction("Index", "Store", new { area = "buy" });
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

@@ -16,7 +16,7 @@ namespace CaptainMao.Areas.buy.Controllers
     {
         ClsBusinessLogic fun = new ClsBusinessLogic();  //使用商業邏輯層
        // GET: buy/Store
-       [AuthorizeMao(Roles = "store")]
+       [AuthorizeMao(Roles = "Store")]
         public ActionResult Index()
         {
              return View(fun.Logic_SelectStoreMerch(User.Identity.GetUserId())); 
@@ -27,7 +27,7 @@ namespace CaptainMao.Areas.buy.Controllers
             return PartialView();
         }
 
-        [AuthorizeMao(Roles = "store")]
+        [AuthorizeMao(Roles = "Store")]
         [HttpGet]
         public ActionResult Create() {
             vmCa_Mer_stype vm = new vmCa_Mer_stype();
@@ -59,7 +59,7 @@ namespace CaptainMao.Areas.buy.Controllers
                 return View(fun.Logic_returnNewCa_Mer(vm));
             }
         }
-        [AuthorizeMao(Roles = "store")]
+        [AuthorizeMao(Roles = "Store")]
         [HttpGet]
         public ActionResult Edit(int Merchandise_ID) {
             //            ViewBag.notMer

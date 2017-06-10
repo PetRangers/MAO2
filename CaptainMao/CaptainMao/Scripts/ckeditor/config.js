@@ -5,19 +5,19 @@
 
 CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
-    //config.language = 'zh-tw';
-     //config.uiColor = '#99CCFF';
-    //config.enterMode = CKEDITOR.ENTER_BR;
-    //config.shiftEnterMode = CKEDITOR.ENTER_P;
+    config.language = 'zh-tw';
+    //config.uiColor = '#99CCFF';
 
-    config.resize_enabled = false;
+    config.extraPlugins = 'autogrow';
+    config.autoGrow_minHeight = 200;
+    config.autoGrow_maxHeight = 600;
+    config.autoGrow_bottomSpace = 50;
+
+    //config.resize_enabled = false;
 
     config.htmlEncodeOutput = true;
 
     config.allowedContent = true;
-
-    //config.filebrowserImageUploadUrl = "/Article/Upload";
-    //config.filebrowserImageBrowseUrl = "/UploadImage";
 
     config.pasteFilter = null;
 

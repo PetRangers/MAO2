@@ -7,16 +7,12 @@
 
 @section script{
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
-    <script src="~/CKFinderScripts/ckfinder.js"></script>
     <script>
         CKEDITOR.replace('ContentText', {
                 toolbar: 'Custom',
                 skin: "bootstrapck",
-                
-                filebrowserImageUploadUrl: '/Areas/Article/Views/Article/Upload.ashx'
+                filebrowserImageBrowseUrl: "@Url.Action("CKEditorImageFileManager", "Article")"
             });
-        escape(CKEDITOR.instances.ContentText.getData())
-        //CKFinder.setupCKEditor(editor, { basePath: '~/UploadImage/', rememberLastFolder: false });
     </script>
 }
 

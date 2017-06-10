@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "帳號鎖定";
+}
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="box">
+        <div class="box-content" style="font-size:150%;">
+            <h1 class="tag-title text-center">@ViewBag.Title</h1>
+            <hr />
+            <p>
+                由於您連續登入失敗次數已達上限，我們將暫時鎖定您的帳號，以防止惡意的登入嘗試。
+            </p>
+            <p>
+                請稍後再嘗試登入。
+            </p>
+            <br />
+            <a href="#" class="btn btn-block btn-primary">聯絡網站管理員</a>
+        </div>
+    </div>
+</div>
+
+    @section Style {
+        <style>
+            .box {
+                background: #fff;
+                transition: all 0.2s ease;
+                border: 2px dashed #dadada;
+                margin-top: 10px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                background-clip: padding-box;
+                padding: 0 20px 20px 20px;
+                min-height: 340px;
+            }
+
+                .box:hover {
+                    border: 2px solid #525C7A;
+                }
+
+                .box tag-title {
+                    color: #fff;
+                    font-size: 24px;
+                    font-weight: 300;
+                    text-transform: uppercase;
+                }
+
+                .box .box-content {
+                    padding: 16px;
+                    border-radius: 0 0 2px 2px;
+                    background-clip: padding-box;
+                    box-sizing: border-box;
+                }
+
+                    .box .box-content p {
+                        color: #515c66;
+                        text-transform: none;
+                    }
+        </style>
+    }
+

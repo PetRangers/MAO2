@@ -17,7 +17,8 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -353,6 +354,13 @@
     <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
+    <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\buy\css\Create.less" />
@@ -370,9 +378,15 @@
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
+    <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Aside.cshtml" />
+	<Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -393,9 +407,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="Scripts\jqcloud-1.0.4.js" />
     <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1031,11 +1048,15 @@
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\AppSettingsHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Models\UserManageViewModel.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
@@ -1076,7 +1097,6 @@
     <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1200,12 +1220,6 @@
     <Compile Include="Models\UserPet.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1262,6 +1276,7 @@
     <Content Include="Views\Account\Error.cshtml" />
     <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
+    <Content Include="Views\Account\Lockout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1272,6 +1287,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
+    <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
