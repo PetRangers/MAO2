@@ -27,7 +27,6 @@ namespace CaptainMao.Areas.Admin.Controllers
             //var aspUsers = db.AspNetUsers.Where(u=>u.AspNetRoles.Contains(role)).ToList();
 
             List<NormalUserViewModel> normalUsers = new List<NormalUserViewModel>();
-
             foreach (var u in aspUsers)
             {
                 NormalUserViewModel user = new NormalUserViewModel
@@ -41,17 +40,26 @@ namespace CaptainMao.Areas.Admin.Controllers
                     DateRegistered =u.DateRegistered,
                     Photo = "data:image /; base64," + Convert.ToBase64String(u.Photo)
                 };
-                
                 normalUsers.Add(user);
             }
-            
             return View(normalUsers);
         }
 
-        // GET: Admin/NormalUser/Details/5
-        public ActionResult Details(int id)
+        // 單一使用者資料明細
+        // GET: Admin/NormalUser/Details/id
+        public ActionResult Details(string id)
         {
-            return View();
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            if (aspUser == null)
+            {
+                return HttpNotFound();
+            }
+            NormalUserDetailViewModel user = new NormalUserDetailViewModel
+            {
+
+            };
+
+            return View(user);
         }
 
         // GET: Admin/NormalUser/Create
