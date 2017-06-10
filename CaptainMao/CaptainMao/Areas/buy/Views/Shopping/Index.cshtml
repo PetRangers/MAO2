@@ -41,7 +41,7 @@
                                 <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
                                 <td>
                                     @Html.ActionLink("詳細資料", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
-                                    @Html.ActionLink("加入", "AddCart", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                                    @Html.ActionLink("加入", "AddCart", "zPublicFunction", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
                                 </td>
                             </tr>
                         }

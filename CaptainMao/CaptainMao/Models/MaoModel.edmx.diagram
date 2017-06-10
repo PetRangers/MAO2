@@ -41,13 +41,10 @@
         <AssociationConnector Association="MaoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Board_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Comment_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_Merchandise_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_Order_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Scorce_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_StoreInfo_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_UserPet_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_HospitalCategoryDetails_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.FK_merchandise_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_UserPet_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Hospital_Citys" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_HospitalCategoryDetails_Hospital" ManuallyRouted="false" />
@@ -55,8 +52,18 @@
         <AssociationConnector Association="MaoModel.FK_shoppingcart_Merchandise" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_sType_Type" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.Merchandise_Order_View" ManuallyRouted="false" />
-        <AssociationConnector Association="MaoModel.Merchandise_Type_View" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="11.25" PointY="13" />
+        <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="16.5" PointY="15.75" />
+        <EntityTypeShape EntityType="MaoModel.shoppingcart" Width="1.5" PointX="13.5" PointY="19.5" />
+        <EntityTypeShape EntityType="MaoModel.sType" Width="1.5" PointX="13.5" PointY="13.875" />
+        <EntityTypeShape EntityType="MaoModel.Type" Width="1.5" PointX="11.25" PointY="10.125" />
+        <AssociationConnector Association="MaoModel.FK_Merchandise_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_Order_AspNetUsers" />
+        <AssociationConnector Association="MaoModel.FK_merchandise_Categories" />
+        <AssociationConnector Association="MaoModel.FK_shoppingcart_Merchandise" />
+        <AssociationConnector Association="MaoModel.FK_sType_Type" />
+        <AssociationConnector Association="MaoModel.Merchandise_Order_View" />
+        <AssociationConnector Association="MaoModel.Merchandise_Type_View" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
