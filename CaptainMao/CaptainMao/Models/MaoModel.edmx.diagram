@@ -21,6 +21,16 @@
         <EntityTypeShape EntityType="MaoModel.StoreInfo" Width="1.5" PointX="5.25" PointY="33.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.TitleCategory" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+		<EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="10.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.shoppingcart" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.sType" Width="1.5" PointX="10.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaoModel.Type" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+
+
+
+
+
         <EntityTypeShape EntityType="MaoModel.Scorce" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
         <AssociationConnector Association="MaoModel.FK_Adoption_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Adoption_Categories" ManuallyRouted="false" />
@@ -44,6 +54,8 @@
         <AssociationConnector Association="MaoModel.FK_Hospital_Citys" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_HospitalCategoryDetails_Hospital" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.FK_Scorce_Hospital" ManuallyRouted="false" />
+        <AssociationConnector Association="MaoModel.FK_shoppingcart_Merchandise" ManuallyRouted="false" />
+        <AssociationConnector Association="MaoModel.FK_sType_Type" ManuallyRouted="false" />
         <AssociationConnector Association="MaoModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MaoModel.Merchandise" Width="1.5" PointX="11.25" PointY="13" />
         <EntityTypeShape EntityType="MaoModel.Order" Width="1.5" PointX="16.5" PointY="15.75" />

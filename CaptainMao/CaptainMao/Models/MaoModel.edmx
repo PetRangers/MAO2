@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Adoption">
           <Key>
             <PropertyRef Name="AdoptionID" />
@@ -193,6 +203,16 @@
           <Property Name="StoreAddress" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="ContactName" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Score" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TitleCategories">
           <Key>
@@ -690,15 +710,12 @@
         <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
         </Function>
-        <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
-          <Parameter Name="sTypeID" Type="int" Mode="In" />
-        </Function>
         <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
           <Parameter Name="sTypeID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="MaoModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Adoption" EntityType="Self.Adoption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdpWish" EntityType="Self.AdpWish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
@@ -714,6 +731,7 @@
           <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreInfo" EntityType="Self.StoreInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
@@ -875,10 +893,21 @@
             <End Role="UserPet" EntitySet="UserPet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Adoption">
           <Key>
             <PropertyRef Name="AdoptionID" />
@@ -1091,6 +1120,16 @@
           <Property Name="Score" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_StoreInfo_AspNetUsers" FromRole="StoreInfo" ToRole="AspNetUsers" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TitleCategory">
           <Key>
             <PropertyRef Name="TitleCategoryID" />
@@ -1112,6 +1151,67 @@
           <Property Name="PetBirthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserPet_AspNetUsers" FromRole="UserPet" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="Self.FK_UserPet_Categories" FromRole="UserPet" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="Merchandise_ID" />
+          </Key>
+          <Property Name="Merchandise_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Merchandise_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Merchandise_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Merchandise_Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Merchandise_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Merchandise_Fitness" Type="Boolean" Nullable="false" />
+          <Property Name="Merchandise_Creatdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Merchandiser_Editdata" Type="DateTime" Precision="3" />
+          <Property Name="Store_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Merchandise_AspNetUsers" FromRole="Merchandise" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_merchandise_Categories" FromRole="Merchandise" ToRole="Categories" />
+          <NavigationProperty Name="shoppingcarts" Relationship="Self.FK_shoppingcart_Merchandise" FromRole="Merchandise" ToRole="shoppingcart" />
+          <NavigationProperty Name="Orders" Relationship="Self.Merchandise_Order_View" FromRole="Merchandise" ToRole="Order" />
+          <NavigationProperty Name="sTypes" Relationship="Self.Merchandise_Type_View" FromRole="Merchandise" ToRole="sType" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="user_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
+          <Property Name="Order_Createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Order_Fitness" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Merchandises" Relationship="Self.Merchandise_Order_View" FromRole="Order" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="shoppingcart">
+          <Key>
+            <PropertyRef Name="cartID" />
+          </Key>
+          <Property Name="cartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Merchandise_ID" Type="Int32" Nullable="false" />
+          <Property Name="merchandise_Volume" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Merchandise" Relationship="Self.FK_shoppingcart_Merchandise" FromRole="shoppingcart" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="sType">
+          <Key>
+            <PropertyRef Name="sType_ID" />
+          </Key>
+          <Property Name="sType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sType_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_sType_Type" FromRole="sType" ToRole="Type" />
+          <NavigationProperty Name="Merchandises" Relationship="Self.Merchandise_Type_View" FromRole="sType" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="sTypes" Relationship="Self.FK_sType_Type" FromRole="Type" ToRole="sType" />
         </EntityType>
         <EntityType Name="Scorce">
           <Key>
@@ -1394,11 +1494,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shoppingcart_Merchandise">
+          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+          <End Role="shoppingcart" Type="Self.shoppingcart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="Merchandise_ID" />
+            </Principal>
+            <Dependent Role="shoppingcart">
+              <PropertyRef Name="Merchandise_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sType_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="sType" Type="Self.sType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="sType">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <EntityContainer Name="MaoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Adoptions" EntityType="Self.Adoption" />
           <EntitySet Name="AdpWishes" EntityType="Self.AdpWish" />
           <EntitySet Name="Articles" EntityType="Self.Article" />
@@ -1413,8 +1538,14 @@
           <EntitySet Name="Hospitals" EntityType="Self.Hospital" />
           <EntitySet Name="HospitalCategoryDetails" EntityType="Self.HospitalCategoryDetail" />
           <EntitySet Name="StoreInfoes" EntityType="Self.StoreInfo" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategory" />
           <EntitySet Name="UserPets" EntityType="Self.UserPet" />
+          <EntitySet Name="Merchandises" EntityType="Self.Merchandise" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="shoppingcarts" EntityType="Self.shoppingcart" />
+          <EntitySet Name="sTypes" EntityType="Self.sType" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
           <EntitySet Name="Scorces" EntityType="Self.Scorce" />
           <AssociationSet Name="FK_Adoption_AspNetUsers" Association="Self.FK_Adoption_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1504,16 +1635,20 @@
             <End Role="Hospital" EntitySet="Hospitals" />
             <End Role="Scorce" EntitySet="Scorces" />
           </AssociationSet>
+          <AssociationSet Name="FK_shoppingcart_Merchandise" Association="Self.FK_shoppingcart_Merchandise">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="shoppingcart" EntitySet="shoppingcarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sType_Type" Association="Self.FK_sType_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="sType" EntitySet="sTypes" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="DeleteToMerchandise_Type_View">
-          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="EditToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
-            <Parameter Name="sTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
@@ -1688,6 +1823,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MaoModelStoreContainer" CdmEntityContainer="MaoEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MaoModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Adoptions">
             <EntityTypeMapping TypeName="MaoModel.Adoption">
               <MappingFragment StoreEntitySet="Adoption">
@@ -1868,6 +2013,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MaoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TitleCategories">
             <EntityTypeMapping TypeName="MaoModel.TitleCategory">
               <MappingFragment StoreEntitySet="TitleCategories">
@@ -1949,6 +2105,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="shoppingcarts">
+            <EntityTypeMapping TypeName="MaoModel.shoppingcart">
+              <MappingFragment StoreEntitySet="shoppingcart">
+                <ScalarProperty Name="cartID" ColumnName="cartID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
+                <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sTypes">
             <EntityTypeMapping TypeName="MaoModel.sType">
               <MappingFragment StoreEntitySet="sType">
@@ -1982,6 +2149,8 @@
               <ScalarProperty Name="Merchandise_ID" ColumnName="Merchandise_ID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
+          <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

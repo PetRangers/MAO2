@@ -24,7 +24,7 @@ namespace CaptainMao.Areas.buy.Controllers
 
         [ChildActionOnly]
         public ActionResult Aside() {
-            return View();
+            return PartialView();
         }
 
         [AuthorizeMao(Roles = "Store")]

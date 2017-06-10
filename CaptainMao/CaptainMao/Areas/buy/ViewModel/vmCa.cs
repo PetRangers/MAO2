@@ -34,10 +34,27 @@ namespace CaptainMao.Areas.buy.ViewModel
 
         [Required(ErrorMessage="至少選一個分類")]
         public string[] sType_ID { get; set; }
+
     }
 
+    public class vmShoppingCar_Mer {
 
 
-
-
+        [DisplayName("商品編號")]
+        public int Merchandise_ID { get; set; }
+        [DisplayName("商品名稱")]
+        public string Merchandise_Name { get; set; }
+        [DisplayName("商品價錢")]
+        [DisplayFormat(DataFormatString = "{0:c0}")]
+        public decimal Merchandise_Price { get; set; }
+        [DisplayName("數量")]
+        [Range(1, 100)]
+        public int merchandise_Volume { get; set; }
+        [DisplayName("商品圖片")]
+        public byte[] Merchandise_Photo { get; set; }
+        [DisplayName("商店編號")]
+        public string Store_ID { get; set; }
+        [DisplayName("商店名稱")]
+        public string Store_Name { get; set; }
+    }
 }
