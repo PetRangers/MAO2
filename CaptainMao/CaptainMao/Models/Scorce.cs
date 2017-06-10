@@ -14,6 +14,7 @@ namespace CaptainMao.Models
     
     public partial class Scorce
     {
+        public int NodeId { get; set; }
         public string UserID { get; set; }
         public int HospitalID { get; set; }
         public Nullable<int> Scorce1 { get; set; }

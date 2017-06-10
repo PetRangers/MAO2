@@ -34,16 +34,16 @@
                         <td>{{shopping.Merchandise_Name}}</td>
                         
                         @*<img src='@Url.Action("PixbyID", "zPublicFunction", new { id = shopping.Merchandise_ID})' class="img-circle" width="80" />*@
-                        <td> <img ng-src="data:image/JPEG;base64,{{shopping.Merchandise_Photo}}" height="80" width="80"/></td>
+                        <td> <img ng-src="data:image/JPEG;base64,{{shopping.Merchandise_Photo}}" height="80" width="80" class="img-circle"/></td>
                         <td>{{shopping.Merchandise_Price }}</td>
-                        <td>@Html.EditorFor(c=>c.merchandise_Volume,new { htmlAttributes=new { ng_model = "shopping.merchandise_Volume" ,max=100,min=1} })</td>
+                        <td>@Html.EditorFor(c=>c.merchandise_Volume,new { htmlAttributes=new { ng_model = "shopping.merchandise_Volume" ,max=100,min=1, ng_change  = "myFunc()" } })</td>
                         <td>{{shopping.merchandise_Volume*shopping.Merchandise_Price}}</td>
                     </tr>
                     
                 </tbody>
 
             </table>
-            <button ng-click="myFunc" class="btn btn-primary pull-right">確認</button>
+            <button class="btn btn-primary pull-right">確認</button>
 
         </div>
         <div style="height:700px;background-color:burlywood" class="drawingpin">
@@ -73,7 +73,13 @@
         {
             $http.get(httpurl).then(function (response) { $scope.shopps = response.data; });
         }
+
         $scope.myFunc = function () {
+            alert(this);
+
+
+
+
             $http.put(httpurl, $scope.shopps).then(function (reponse) {
                 $scope.shopps = "";
                 loadData();
