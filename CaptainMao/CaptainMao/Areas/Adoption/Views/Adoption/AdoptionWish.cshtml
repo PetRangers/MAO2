@@ -102,7 +102,6 @@
                     <a href=@Url.Action("AdoptionWish", "Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
                 }
             </div>
-
         </div>
         <br />
         <div id="display" class="drawingpin">
@@ -131,11 +130,12 @@
                                     <p>@Html.DisplayNameFor(a => adoption.Hair) : @Html.DisplayFor(a => adoption.Hair)</p>
                                 }
                                 <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.City.CityName)</p>
-                                <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUser.LastName)</p>
+                                <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUser.NickName)</p>
                                 <p>@Html.DisplayNameFor(a => adoption.AspNetUser.PhoneNumber) : @Html.DisplayFor(a => adoption.AspNetUser.PhoneNumber)</p>
-                                <p>@Html.DisplayNameFor(a =>adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
-
+                                <p>@Html.DisplayNameFor(a => adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
                             </div>
+
+
                         </div>
                     </div>
                 }

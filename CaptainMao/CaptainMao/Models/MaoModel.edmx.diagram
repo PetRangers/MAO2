@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf1908c5aaeb43a583a437c1cdd3a94d" Name="Diagram1" ZoomLevel="34">
+      <Diagram DiagramId="34169288439b41899cfd5c6c33e02af6" Name="Diagram1">
         <EntityTypeShape EntityType="MaoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />

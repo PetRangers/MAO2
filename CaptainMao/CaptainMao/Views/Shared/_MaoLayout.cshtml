@@ -15,9 +15,9 @@
     @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet" />
-
+    <link href="~/css/chat.css" rel="stylesheet" />
     @RenderSection("style", false)
-
+   
 </head>
 <body>
     <div id="page">
@@ -37,6 +37,7 @@
                         <span class="sr-only">回TOP按鈕</span>
                         <i class="fa fa-chevron-up"></i>
                     </a>
+
 
                 </div>
                 <!-- nav下拉選單 -->
@@ -146,10 +147,20 @@
             <div class="row">
                 @RenderBody()
             </div>
+
+
+            <div class="div_left_bottom">
+                @Html.Partial("_Chat")
+            </div>
+
+
         </main>
         <footer>
             @Scripts.Render("~/bundles/modernizr")
             @RenderSection("script", false)
+            <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+            <script src="/signalr/hubs"></script>
+            <script src="~/js/chatjs.js"></script>
         </footer>
     </div>
 </body>

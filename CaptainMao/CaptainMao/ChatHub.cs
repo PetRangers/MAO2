@@ -27,8 +27,8 @@ namespace CaptainMao
             var userNickName = db.AspNetUsers.Where(u => u.UserName == userName).Select(u => u.NickName).First();
             //User is null then Identity and Name too.
             
-            Clients.Others.addList(userID, userNickName);
-            Clients.Caller.getList(UserHandler.ConnectedIds.Select(p => new { id = p.Key, name = p.Value }).ToList());
+            //Clients.Others.addList(userID, userNickName);
+            //Clients.Caller.getList(UserHandler.ConnectedIds.Select(p => new { id = p.Key, name = p.Value }).ToList());
             UserHandler.ConnectedIds.Add(userID, userNickName);
 
             return base.OnConnected();
@@ -51,7 +51,7 @@ namespace CaptainMao
         {
             var userID = Context.User.Identity.GetUserId();
             //當使用者離開時，移除在清單內的 ConnectionId
-            Clients.All.removeList(userID);
+            //Clients.All.removeList(userID);
             UserHandler.ConnectedIds.Remove(userID);
             return base.OnDisconnected(stopCalled);
         }

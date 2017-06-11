@@ -28,7 +28,7 @@
         }
 
         #display > .row > div > div {
-            height: 450px;
+            height: 480px;
             font-size:20px;
         }
 
@@ -38,7 +38,6 @@
 
     </style>
 }
-
 
 @section script{
     <script>
@@ -62,8 +61,10 @@
                     return result;
                 });
             })
+
         });
     </script>
+
     }
 
 <!--aside側欄 article主欄-->
@@ -100,9 +101,6 @@
                 }
                 </button>
             </div>
-            @*<button class="btn btn-default">性別</button>
-                <button class="btn btn-default">體型</button>
-                <button class="btn btn-default">年紀</button>*@
             <div class="col-md-6">
                 @using (Html.BeginForm("Index", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
@@ -111,11 +109,9 @@
                     <a href=@Url.Action("Index","Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
                 }
             </div>
-
-
-
         </div>
         <br />
+
         <div id="display" class="drawingpin">
             <div class="row">
                 @foreach (var adoption in Model)
@@ -131,8 +127,8 @@
                                     @Html.DisplayNameFor(a => adoption.PostDate) :
                                     @Html.DisplayFor(a => adoption.PostDate)
                                 </div>
-
                                 <div class="pull-right">
+                                    <a class="btn btn-success getchat" data-id="@adoption.AspNetUser.Id" data-name="@adoption.AspNetUser.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =adoption.AspNetUser.Id })">來聯絡我</a>
                                     @Html.ActionLink("我要領養", "Email", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary" })
                                     @Html.ActionLink("詳細資料", "Details", new { id = adoption.AdoptionID }, new { @class = "btn btn-info" })
                                 </div>

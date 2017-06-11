@@ -61,19 +61,6 @@ namespace CaptainMao.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteToMerchandise_Type_View", merchandiseIDParameter);
         }
     
-        public virtual int EditToMerchandise_Type_View(Nullable<int> merchandiseID, Nullable<int> sTypeID)
-        {
-            var merchandiseIDParameter = merchandiseID.HasValue ?
-                new ObjectParameter("MerchandiseID", merchandiseID) :
-                new ObjectParameter("MerchandiseID", typeof(int));
-    
-            var sTypeIDParameter = sTypeID.HasValue ?
-                new ObjectParameter("sTypeID", sTypeID) :
-                new ObjectParameter("sTypeID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditToMerchandise_Type_View", merchandiseIDParameter, sTypeIDParameter);
-        }
-    
         public virtual int InsertToMerchandise_Type_View(Nullable<int> merchandiseID, Nullable<int> sTypeID)
         {
             var merchandiseIDParameter = merchandiseID.HasValue ?
