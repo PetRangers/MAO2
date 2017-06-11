@@ -18,6 +18,7 @@ namespace CaptainMao.Models
         public string StoreName { get; set; }
         public string StoreAddress { get; set; }
         public string ContactName { get; set; }
+        public byte[] Photo { get; set; }
         public Nullable<decimal> Score { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
