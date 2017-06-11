@@ -120,15 +120,16 @@ namespace CaptainMao.Controllers
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var loginResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var loginResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (loginResult)
             {
                 case SignInStatus.Success:
-                    //var user = await UserManager.FindByNameAsync(model.Email);
-                    //if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                    //{
-                    //    return RedirectToAction("VerifyEmail", "Account");
-                    //}
+                    string userId = UserManager.FindByEmail(model.Email).Id;
+                    var userRole = await UserManager.GetRolesAsync(userId);
+                    if (userRole.Contains("Store"))
+                    {
+                        return RedirectToAction("Index", "Store", new { area = "buy" });
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -252,6 +253,81 @@ namespace CaptainMao.Controllers
             return View(model);
         }
 
+        //
+        // GET: /Account/RegisterStore
+        [AllowAnonymous]
+        public ActionResult RegisterStore()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/RegisterStore
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterStore(RegisterStoreViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //ToDo: 將上傳檔案轉為byte[]，以便存回DB
+                HttpPostedFileBase file = Request.Files["UserPhoto"];
+                byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
+                
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.ContactPhone,
+                    Photo = _photo,
+                    DateRegistered = DateTime.UtcNow,
+                    
+                };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //先將下面一行的登入流程取消，才不會註冊完馬上登入。(因為要先等電子郵件認證)
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    //要將使用者加入角色所需要的程式碼
+                    var roleName = "Store";
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                    if (!roleManager.RoleExists(roleName))
+                    {
+                        var role = new IdentityRole(roleName);
+                        await roleManager.CreateAsync(role);
+                    }
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
+
+                    //待使用者資料在AspNetUser被建立後，於StoreInfo加入其餘相關資料。
+                    MaoEntities db = new MaoEntities();
+                    StoreInfo store = new StoreInfo
+                    {
+                        StoreId=user.Id,
+                        StoreName = model.StoreName,
+                        StoreAddress = model.StoreAddress,
+                        ContactName = model.ContactName
+                    };
+                    db.StoreInfoes.Add(store);
+                    await db.SaveChangesAsync();
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // 傳送包含此連結的電子郵件
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string emailContent = "<h3>" + user.LastName + " " + user.FirstName + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" +
+                        "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
+                        "'>確認電子郵件</a></p>";
+                    await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
+
+                    return View("DisplayEmail");
+                }
+                AddErrors(result);
+            }
+
+            // 如果執行到這裡，發生某項失敗，則重新顯示表單
+            return View("Register");
+        }
 
         //GET: /Account/VerifyEmail
         public ActionResult VerifyEmail()

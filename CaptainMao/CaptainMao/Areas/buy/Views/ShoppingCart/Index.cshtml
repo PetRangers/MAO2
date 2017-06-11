@@ -1,0 +1,95 @@
+﻿@model CaptainMao.Areas.buy.ViewModel.vmShoppingCar_Mer
+    @{ 
+    ViewBag.Title = "Main";
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11" >
+    <!-------------------articleOpen------------------->
+    <div  ng-app="MaoApp" ng-controller="MainController">
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:700px;background-color:#fff266" class="drawingpin">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(c => c.Store_Name)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
+                        <th>@Html.DisplayNameFor(c=>c.Merchandise_Photo)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_Price)</th>
+                        <th>@Html.DisplayNameFor(c => c.merchandise_Volume)</th>
+                        <th>總價</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="shopping in shopps">
+                        <td>{{shopping.Store_Name}} </td>
+                        <td>{{ shopping.Merchandise_ID}}</td>
+                        <td>{{shopping.Merchandise_Name}}</td>
+                        
+                        @*<img src='@Url.Action("PixbyID", "zPublicFunction", new { id = shopping.Merchandise_ID})' class="img-circle" width="80" />*@
+                        <td> <img ng-src="data:image/JPEG;base64,{{shopping.Merchandise_Photo}}" height="80" width="80" class="img-circle"/></td>
+                        <td>{{shopping.Merchandise_Price }}</td>
+                        <td>@Html.EditorFor(c=>c.merchandise_Volume,new { htmlAttributes=new { ng_model = "shopping.merchandise_Volume" ,max=100,min=1, ng_change  = "myFunc()" } })</td>
+                        <td>{{shopping.merchandise_Volume*shopping.Merchandise_Price}}</td>
+                    </tr>
+                    
+                </tbody>
+
+            </table>
+            <button class="btn btn-primary pull-right">確認</button>
+
+        </div>
+        <div style="height:700px;background-color:burlywood" class="drawingpin">
+
+        </div>
+        <div style="height:700px;background-color:#b6ff00" class="drawingpin">
+
+        </div>
+        <div style="height:700px;background-color:#ff6a00" class="drawingpin">
+
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
+@section script{
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script>
+    var app = angular.module('MaoApp', []);
+    app.controller('MainController', function ($scope, $http) {
+        //抓實體網址
+      @*var httpurl = "@Url.RouteUrl("buy_default", new { httproute = "", controller = "PublicAPI" }, "http")"*@
+        var httpurl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "http")";
+        loadData();
+
+        function loadData()
+        {
+            $http.get(httpurl).then(function (response) { $scope.shopps = response.data; });
+        }
+
+        $scope.myFunc = function () {
+            alert(this);
+
+
+
+
+            $http.put(httpurl, $scope.shopps).then(function (reponse) {
+                $scope.shopps = "";
+                loadData();
+            })
+        }
+
+    });
+
+</script>
+}
+
+
+

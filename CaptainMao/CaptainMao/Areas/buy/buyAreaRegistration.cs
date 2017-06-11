@@ -20,5 +20,10 @@ namespace CaptainMao.Areas.buy
                 defaults: new { controller="Shopping", action = "Index", id = UrlParameter.Optional }
             );
         }
-    }
+
+
+
+
+
+        }
 }

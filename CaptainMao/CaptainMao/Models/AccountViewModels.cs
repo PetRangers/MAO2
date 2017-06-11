@@ -68,7 +68,7 @@ namespace CaptainMao.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "電子郵件")]
+        [Display(Name = "電子郵件(帳號)")]
         public string Email { get; set; }
 
         [Required]
@@ -97,6 +97,47 @@ namespace CaptainMao.Models
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "手機")]
         public string PhoneNumber { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "照片")]
+        public HttpPostedFileBase Photo { get; set; }
+    }
+
+    public class RegisterStoreViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "電子郵件(帳號)")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} 的長度至少必須為 {2} 個字元。", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "密碼")]
+        public string Password { get; set; }
+        
+        [DataType(DataType.Password)]
+        [Display(Name = "確認密碼")]
+        [Compare("Password", ErrorMessage = "密碼和確認密碼不相符。")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "商店名稱")]
+        public string StoreName { get; set; }
+
+        [Required]
+        [Display(Name = "商店住址")]
+        public string StoreAddress { get; set; }
+
+
+        [Required]
+        [Display(Name = "聯絡人姓名")]
+        public string ContactName { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "聯絡人手機")]
+        public string ContactPhone { get; set; }
 
         [DataType(DataType.Upload)]
         [Display(Name = "照片")]

@@ -122,8 +122,9 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -135,6 +136,10 @@
     </Reference>
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -152,10 +157,19 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -201,6 +215,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    
+    <Content Include="Areas\buy\css\Index.css">
+      <DependentUpon>Index.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\Index.min.css">
+      <DependentUpon>Index.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingIndex.css">
+      <DependentUpon>shoppingIndex.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingIndex.min.css">
+      <DependentUpon>shoppingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\js\ShoppingAside.js" />
+    <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\buy\js\ShoppingIndex.js" />
+    <Content Include="Areas\buy\js\storeCreateIndex.js" />
+    <Content Include="Areas\buy\js\jquery.validate.js" />
+    <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
+    <Content Include="Areas\buy\css\Index.less" />
+    <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
+    <Content Include="Areas\buy\css\shoppingIndex.less" />
+    <Content Include="Areas\buy\Views\Store\Create.cshtml" />
+    <Content Include="Areas\buy\Views\Store\Index.cshtml" />
+    <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
+    <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
+    <Content Include="Content\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -273,7 +325,6 @@
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Article\Views\web.config" />
-    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
@@ -294,6 +345,13 @@
     <Content Include="Areas\Adoption\Views\Control\Cities.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CateForWish.cshtml" />
     <Content Include="Areas\Adoption\Views\Control\CitiesForWish.cshtml" />
+    <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\buy\css\Create.less" />
@@ -311,6 +369,15 @@
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
+    <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
+    <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Areas\buy\Views\ShoppingCart\Aside.cshtml" />
+    <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -318,7 +385,10 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Adoption\Views\Control\Chat.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -332,9 +402,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="Scripts\jqcloud-1.0.4.js" />
     <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -963,18 +1036,24 @@
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register3.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_MaoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\AppSettingsHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
@@ -993,7 +1072,8 @@
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
-    <Compile Include="Areas\buy\Controllers\LoginController.cs" />
+    <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
+    <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
     <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
@@ -1003,6 +1083,7 @@
     <Compile Include="Areas\buy\Models\partial\Category.cs" />
     <Compile Include="Areas\buy\Models\partial\merchandise.cs" />
     <Compile Include="Areas\buy\Models\partial\Order.cs" />
+    <Compile Include="Areas\buy\Models\partial\shoppingcar.cs" />
     <Compile Include="Areas\buy\Models\partial\StoreUser.cs" />
     <Compile Include="Areas\buy\Models\partial\sType.cs" />
     <Compile Include="Areas\buy\Models\partial\Type.cs" />
@@ -1012,7 +1093,6 @@
     <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1075,11 +1155,10 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs" />
-    <Compile Include="Models\Hospital.cs">
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HospitalCategoryDetail.cs">
+    <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -1113,10 +1192,16 @@
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\shoppingcart.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreInfo.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategory.cs">
@@ -1128,12 +1213,6 @@
     <Compile Include="Models\UserPet.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1186,8 +1265,11 @@
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Manage\UpdateProfile.cshtml" />
-    <Content Include="Views\Account\Register2.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
+    <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
+    <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
+    <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Shared\_Chat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1199,6 +1281,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
+    <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
@@ -1211,6 +1294,9 @@
     <EmbeddedResource Include="Migrations\201705301454381_Init1.resx" />
     <EmbeddedResource Include="Migrations\201706040705238_Init2.resx" />
     <EmbeddedResource Include="Migrations\201706040736241_Init3.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

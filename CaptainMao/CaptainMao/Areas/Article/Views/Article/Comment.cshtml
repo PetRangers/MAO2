@@ -35,10 +35,11 @@
                 @Html.ActionLink("文章列表", "Index", null, new { @class = "btn btn-info" })
             </div>
         </div>
-        <div style="height:500px;background-color:burlywood" class="drawingpin">
+        <div style="background-color:burlywood" class="drawingpin">
 
             @using (Html.BeginForm("Comment","Article",FormMethod.Post,new { novaildate = "novalidate" }))
             {
+                @Html.HiddenFor(a=>a.ArticleID,new { ViewBag.articleid })
                 @Html.AntiForgeryToken()
                 <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

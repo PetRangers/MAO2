@@ -16,6 +16,7 @@ namespace CaptainMao.Areas.buy.Models
         IMao<CaptainMao.Models.Type> _Type = new ClsMao<CaptainMao.Models.Type>();
         IMao<sType> _sType = new ClsMao<sType>();
         IMao<StoreUser> _store = new ClsMao<StoreUser>();
+        IMao<shoppingcart> _shoppingcart = new ClsMao<shoppingcart>();
 
         /*尋找商品*/
         public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_typeID_stypeID vm)
@@ -44,6 +45,9 @@ namespace CaptainMao.Areas.buy.Models
             return _Category.GetAll();
         }
 
+        public Merchandise Logic_GetAllMerchandise(int Merchandise_ID) {
+            return _merchandise.GetbyID(Merchandise_ID);
+        }
         /*依照該類別目前商品有的小分類回傳*/
         public IEnumerable<vm_sType> Logic_Type_selectsType(vmCaID_typeID_stypeID vm)
         {
@@ -165,11 +169,52 @@ namespace CaptainMao.Areas.buy.Models
             return vm;
         }
 
-
-
         public void Logic_MerchandiseDelete(int Merchandise_ID) {
             DB.DeleteToMerchandise_Type_View(Merchandise_ID);
             _merchandise.DeletebyID(Merchandise_ID);
         }
+
+
+        public void Logic_AddShopping(string user_identity, int Merchandise_ID) {
+            shoppingcart sh = new shoppingcart();
+            sh.DateCreated = DateTime.UtcNow;
+            sh.Merchandise_ID = Merchandise_ID;
+            sh.merchandise_Volume = 1;
+            sh.userID = user_identity;
+            _shoppingcart.Create(sh);
+        }
+
+        public IEnumerable<vmShoppingCar_Mer> Logic_getShoppingCart(string identityID) {
+            List<vmShoppingCar_Mer> vmlist = new List<vmShoppingCar_Mer>();
+            var shopping =  DB.shoppingcarts.Where(c => c.userID.Equals(identityID));
+
+            foreach (var _sh in shopping)
+            {
+                vmShoppingCar_Mer vm = new vmShoppingCar_Mer();
+                vm.Merchandise_ID = _sh.Merchandise_ID;
+                vm.Merchandise_Name = _sh.Merchandise.Merchandise_Name;
+                vm.Merchandise_Price = _sh.Merchandise.Merchandise_Price;
+                vm.merchandise_Volume = _sh.merchandise_Volume;
+                vm.Merchandise_Photo = _sh.Merchandise.Merchandise_Photo;
+                vm.Store_ID = _sh.Merchandise.Store_ID;
+                vm.Store_Name = DB.AspNetUsers.Where(c => c.Id == _sh.Merchandise.Store_ID).Select(c => c.StoreInfo.StoreName).First();
+                vmlist.Add(vm);
+            }
+            return vmlist;
+        }
+        public void Logic_putShoppingCart(vmShoppingCar_Mer vm,string identityID)
+        {
+            shoppingcart _shopp = new shoppingcart();
+            _shopp.Merchandise_ID = vm.Merchandise_ID;
+            _shopp.merchandise_Volume = vm.merchandise_Volume;
+            _shopp.userID = identityID;
+            _shoppingcart.Edit(_shopp);
+
+        }
+
+
+
+
+
     }
 }
