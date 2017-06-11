@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CaptainMao.Areas.Hospital.Models
+namespace CaptainMao.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class StoreInfo
     {
-        public int ArticleID { get; set; }
-        public int CommentID { get; set; }
-        public string PosterID { get; set; }
-        public string ContentText { get; set; }
-        public Nullable<System.DateTime> NewDateTime { get; set; }
+        public string StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string StoreAddress { get; set; }
+        public string ContactName { get; set; }
+        public byte[] Photo { get; set; }
+        public Nullable<decimal> Score { get; set; }
     
-        public virtual Article Article { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

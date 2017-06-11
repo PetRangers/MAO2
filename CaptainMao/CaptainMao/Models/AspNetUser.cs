@@ -46,8 +46,8 @@ namespace CaptainMao.Models
         public string NickName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
-        public int LoginCount { get; set; }
-        public int Experience { get; set; }
+        public Nullable<int> LoginCount { get; set; }
+        public Nullable<int> Experience { get; set; }
         public System.DateTime DateRegistered { get; set; }
         public byte[] Photo { get; set; }
     
@@ -71,6 +71,7 @@ namespace CaptainMao.Models
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Scorce> Scorces { get; set; }
+        public virtual StoreInfo StoreInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

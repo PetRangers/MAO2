@@ -3,7 +3,7 @@
 }
 aside .panel {
   box-shadow: -2px 5px 10px;
-  width:160px;
+  width:130px;
   position: fixed;
   z-index: 805;
 }
@@ -40,3 +40,15 @@ footer {
   background-position: center;
   clear: both;
 }
+
+ .div_left_bottom {
+            margin-left:40px;
+            width: 300px;
+            /*float: left;*/
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            z-index: 20;
+            border: 2px solid #69c;
+            _position: absolute; /* position fixed for IE6 */
+        }
