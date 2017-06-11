@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CaptainMao.Areas.Admin.Models.NormalUserViewModel>
+
+<h2>一般會員管理</h2>
+
+@Html.ActionLink("新增會員", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
+<hr/>
+<table id="example" class="display table-condensed" cellspacing="0"">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRegistered)
+            </th>
+            <th>
+                功能
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NickName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    <img height="100" src="@item.Photo" alt="無圖片可供預覽" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRegistered)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class="btn btn-primary"}) 
+                    @Html.ActionLink("Details", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "btn btn-success" }) 
+                    @Html.ActionLink("Delete", "Delete", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Style{
+        
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    }
+
+@section Script{
+       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+        <script type="text/javascript" class="init">
+              $(document).ready(function () {
+                $('#example').DataTable();
+              });
+        </script>
+
+    }

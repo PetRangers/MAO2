@@ -14,6 +14,7 @@ namespace CaptainMao.Models
     
     public partial class shoppingcart
     {
+        public int cartID { get; set; }
         public string userID { get; set; }
         public int Merchandise_ID { get; set; }
         public int merchandise_Volume { get; set; }

@@ -1,5 +1,6 @@
 ﻿@model CaptainMao.Areas.Article.Models.CommentViewModel
 @using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = "討論區";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -87,7 +88,8 @@
                                     @{
                                         string id = User.Identity.GetUserId();
                                         string posterid = item.PosterID;
-                                        if (id == posterid)
+                                        string msid = item.Article.Board.MasterUserID;
+                                        if (msid==id || id == posterid)
                                         {
                                             @Html.ActionLink("修改", "EditComment", new { commentID = item.CommentID }, new { @class = "btn btn-info glyphicon glyphicon-pencil" }) @Html.ActionLink("刪除", "DelComment", new { commentID = item.CommentID }, new { @class = "btn btn-danger glyphicon glyphicon-remove Del" })
                                         }

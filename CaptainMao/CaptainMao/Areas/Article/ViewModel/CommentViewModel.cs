@@ -8,6 +8,7 @@ namespace CaptainMao.Areas.Article.Models
     public class CommentViewModel
     {
         public IEnumerable<CaptainMao.Models.Article> article { get; set; }
+        public IEnumerable<CaptainMao.Models.Board> board { get; set; }
         public IEnumerable<CaptainMao.Models.Comment> comment { get; set; }
     }
 }
