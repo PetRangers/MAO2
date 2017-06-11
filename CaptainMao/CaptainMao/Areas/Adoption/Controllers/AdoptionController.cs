@@ -54,7 +54,9 @@ namespace CaptainMao.Areas.Adoption.Controllers
         {
             AdoptionViewModel vm = new AdoptionViewModel();
             vm.adoption = db.Adoptions.Find(id);
-
+            vm.NickName = vm.adoption.AspNetUser.NickName;
+            vm.PhoneNumber = vm.adoption.AspNetUser.PhoneNumber;
+            vm.Email = vm.adoption.AspNetUser.Email;
             vm.category = db.Categories.Find(vm.adoption.CategoryID);
             vm.city = db.Citys.Find(vm.adoption.CityID);
             return View(vm);
@@ -70,6 +72,11 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption/Create
         public ActionResult CreateAdoption()
         {
+            var UserID = User.Identity.GetUserId();
+            if (UserID == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Citys.ToList();
             return View();
@@ -82,11 +89,11 @@ namespace CaptainMao.Areas.Adoption.Controllers
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Citys.ToList();
 
+            pet.RegistrationUserID = User.Identity.GetUserId();
+            pet.PostDate = DateTime.Now;
+
             if (PetImage != null)
             {
-                string strPath = Request.PhysicalApplicationPath + @"Images\" + PetImage.FileName;
-                PetImage.SaveAs(strPath);
-
                 var ImgSize = PetImage.ContentLength;
                 byte[] ImgByte = new byte[ImgSize];
                 PetImage.InputStream.Read(ImgByte, 0, ImgSize);
@@ -105,8 +112,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
                 {
                     pet.Sex = "~不明~";
                 }
-                pet.RegistrationUserID = "QWE";
-                pet.PostDate = DateTime.Now;
+
                 dbAdoption.Create(pet);
                 return RedirectToAction("index");
             }
@@ -261,5 +267,13 @@ namespace CaptainMao.Areas.Adoption.Controllers
             MySmtp.Dispose();
             return RedirectToAction("Index");
         }
+
+        public ActionResult GetUserImage(string id)
+        {
+            var photo = db.AspNetUsers.Where(u => u.Id == id).Select(u => u.Photo).First();
+            byte[] img = photo;
+            return File(img, "image/jpeg");
+        }
+
     }
 }

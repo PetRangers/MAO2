@@ -216,16 +216,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Adoption\Models\MAOModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\Adoption\Models\MAOModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MAOModel.edmx</DependentUpon>
-      <LastGenOutput>MAOModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -276,6 +266,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\chat.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
     <Content Include="css\StyleSheet_Master.css">
@@ -319,6 +310,7 @@
     <Content Include="images\R3.jpg" />
     <Content Include="images\texture.png" />
     <Content Include="images\wrip.jpg" />
+    <Content Include="js\chatjs.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\video.js" />
@@ -389,6 +381,10 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -396,9 +392,6 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
-    <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1060,7 +1053,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
@@ -1074,7 +1066,7 @@
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
-    <Compile Include="Areas\Adoption\ViewModel\IndexViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
@@ -1283,6 +1275,7 @@
     <Content Include="Views\Account\_RegisterNormalUser.cshtml" />
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Chat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
