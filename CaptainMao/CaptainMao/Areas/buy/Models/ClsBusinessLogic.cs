@@ -200,9 +200,20 @@ namespace CaptainMao.Areas.buy.Models
                 vm.Store_Name = DB.AspNetUsers.Where(c => c.Id == _sh.Merchandise.Store_ID).Select(c => c.StoreInfo.StoreName).First();
                 vmlist.Add(vm);
             }
-
             return vmlist;
         }
+        public void Logic_putShoppingCart(vmShoppingCar_Mer vm,string identityID)
+        {
+            shoppingcart _shopp = new shoppingcart();
+            _shopp.Merchandise_ID = vm.Merchandise_ID;
+            _shopp.merchandise_Volume = vm.merchandise_Volume;
+            _shopp.userID = identityID;
+            _shoppingcart.Edit(_shopp);
+
+        }
+
+
+
 
 
     }

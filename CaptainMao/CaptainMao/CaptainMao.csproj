@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -333,7 +332,6 @@
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
     <Content Include="Areas\Adoption\Views\web.config" />
     <Content Include="Areas\Article\Views\web.config" />
-    <Content Include="Areas\Article\Views\Default\QQQ.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\CreateAdoption.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\AdoptionManage.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Edit.cshtml" />
@@ -382,7 +380,7 @@
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Aside.cshtml" />
-	<Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
+    <Content Include="Areas\Article\Views\Article\CKEditorImageFileManager.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -394,6 +392,8 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
@@ -1056,6 +1056,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
