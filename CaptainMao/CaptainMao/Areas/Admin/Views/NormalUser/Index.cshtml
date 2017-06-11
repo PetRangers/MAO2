@@ -4,7 +4,7 @@
 
 @Html.ActionLink("新增會員", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
 <hr/>
-<table id="example" class="display table-condensed" cellspacing="0"">
+<table id="example" class="display nowrap" cellspacing="0"  width="100%">
 
     <thead>
         <tr>
@@ -71,16 +71,24 @@
 </table>
 
 @section Style{
-        
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        div.container {
+            max-width: 1200px
+        }
+    </style>
     }
 
 @section Script{
        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
         <script type="text/javascript" class="init">
               $(document).ready(function () {
-                $('#example').DataTable();
+                  $('#example').DataTable({
+                      responsive: true
+                  });
               });
         </script>
 

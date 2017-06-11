@@ -6,22 +6,29 @@
     <div class="tabbable">
         <ul class="nav nav-tabs padding-18">
             <li class="active">
-                <a data-toggle="tab" href="#home">
+                <a data-toggle="tab" href="#profile">
                     <i class="green ace-icon fa fa-user bigger-120"></i>
-                    Profile
+                    基本資料
                 </a>
             </li>
 
             <li>
-                <a data-toggle="tab" href="#feed">
+                <a data-toggle="tab" href="#account">
                     <i class="orange ace-icon fa fa-rss bigger-120"></i>
-                    Activity Feed
+                    帳號管理
+                </a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#activity">
+                    <i class="blue ace-icon fa fa-rss bigger-120"></i>
+                    近期活動
                 </a>
             </li>
         </ul>
 
         <div class="tab-content no-border padding-24">
-            <div id="home" class="tab-pane in active">
+            <div id="profile" class="tab-pane in active">
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
                         <span class="profile-picture">
@@ -61,49 +68,79 @@
                             </div>
 
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Location </div>
-
+                                <div class="profile-info-name"> 暱稱 </div>
                                 <div class="profile-info-value">
-                                    <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                    <span>Netherlands</span>
-                                    <span>Amsterdam</span>
+                                    <span>@Model.NickName</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Age </div>
+                                <div class="profile-info-name"> 註冊日期 </div>
 
                                 <div class="profile-info-value">
-                                    <span>38</span>
+                                    <span>@Model.DateRegistered</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Joined </div>
-
+                                <div class="profile-info-name"> 登入次數 </div>
                                 <div class="profile-info-value">
-                                    <span>2010/06/20</span>
+                                    <span>@Model.LoginCount</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Last Online </div>
+                                <div class="profile-info-name"> 上次登入 </div>
 
                                 <div class="profile-info-value">
                                     <span>3 hours ago</span>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="hr hr-8 dotted"></div>
-
-                        <div class="profile-user-info">
+                        
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Website </div>
-
+                                <div class="profile-info-name"> 電子郵件 </div>
                                 <div class="profile-info-value">
-                                    <a href="#" target="_blank">www.alexdoe.com</a>
+                                    <a href="mailto:@Model.UserName" target="_blank">@Model.UserName</a>
                                 </div>
+                                <div class="profile-info-value">
+                                    @{
+                                        if (Model.EmailConfirmed)
+                                        {
+                                            <label class="btn btn-success active">
+                                                <span class="glyphicon glyphicon-ok"> 已驗證</span>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="btn btn-danger active">
+                                                <span class="glyphicon glyphicon-alert"> 未驗證</span>
+                                            </label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 手機 </div>
+                                <div class="profile-info-value">
+                                    <span>@Model.PhoneNumber</span>
+                                </div>
+                                <div class="profile-info-value">
+                                        @{
+                                            if (Model.PhoneNumberConfirmed)
+                                            {
+                                                <label class="btn btn-success active">
+                                                    <span class="glyphicon glyphicon-ok"> 已驗證</span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="btn btn-danger active">
+                                                    <span class="glyphicon glyphicon-alert"> 未驗證</span>
+                                                </label>
+                                            }
+                                        }
+                                    </div>
                             </div>
 
                             <div class="profile-info-row">
@@ -116,53 +153,12 @@
                                 </div>
                             </div>
 
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">
-                                    <i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
-                                </div>
-
-                                <div class="profile-info-value">
-                                    <a href="#">Follow me on Twitter</a>
-                                </div>
-                            </div>
                         </div>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+            </div><!-- /#profile -->
 
-                <div class="space-20"></div>
-
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="widget-box transparent">
-                            <div class="widget-header widget-header-small">
-                                <h4 class="widget-title smaller">
-                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                    Little About Me
-                                </h4>
-                            </div>
-
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <p>
-                                        My job is mostly lorem ipsuming and dolor sit ameting as long as consectetur adipiscing elit.
-                                    </p>
-                                    <p>
-                                        Sometimes quisque commodo massa gets in the way and sed ipsum porttitor facilisis.
-                                    </p>
-                                    <p>
-                                        The best thing about my job is that vestibulum id ligula porta felis euismod and nullam quis risus eget urna mollis ornare.
-                                    </p>
-                                    <p>
-                                        Thanks for visiting my profile.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /#home -->
-
-            <div id="feed" class="tab-pane">
+            <div id="account" class="tab-pane">
                 <div class="profile-feed row">
                     <div class="col-sm-6">
                         <div class="profile-activity clearfix">
@@ -414,8 +410,261 @@
                         <i class="icon-on-right ace-icon fa fa-arrow-right"></i>
                     </button>
                 </div>
-            </div><!-- /#feed -->
+            </div><!-- /#account -->
 
+            <div id="activity" class="tab-pane">
+                <div class="profile-feed row">
+                    <div class="col-sm-6">
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <img class="pull-left" alt="Alex Doe's avatar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                                <a class="user" href="#"> Alex Doe </a>
+                                changed his profile photo.
+                                <a href="#">Take a look</a>
+
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    an hour ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <img class="pull-left" alt="Susan Smith's avatar" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+                                <a class="user" href="#"> Susan Smith </a>
+
+                                is now friends with Alex Doe.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    2 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-check btn-success no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+                                joined
+                                <a href="#">Country Music</a>
+
+                                group.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    5 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-picture-o btn-info no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+                                uploaded a new photo.
+                                <a href="#">Take a look</a>
+
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    5 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <img class="pull-left" alt="David Palms's avatar" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+                                <a class="user" href="#"> David Palms </a>
+
+                                left a comment on Alex's wall.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    8 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+
+                    <div class="col-sm-6">
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-pencil-square-o btn-pink no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+                                published a new blog post.
+                                <a href="#">Read now</a>
+
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    11 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <img class="pull-left" alt="Alex Doe's avatar" src="https://bootdey.com/img/Content/avatar/avatar4.png">
+                                <a class="user" href="#"> Alex Doe </a>
+
+                                upgraded his skills.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    12 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+
+                                logged in.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    12 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-power-off btn-inverse no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+
+                                logged out.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    16 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="profile-activity clearfix">
+                            <div>
+                                <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                <a class="user" href="#"> Alex Doe </a>
+
+                                logged in.
+                                <div class="time">
+                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                    16 hours ago
+                                </div>
+                            </div>
+
+                            <div class="tools action-buttons">
+                                <a href="#" class="blue">
+                                    <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                </a>
+
+                                <a href="#" class="red">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <div class="space-12"></div>
+
+                <div class="center">
+                    <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
+                        <i class="ace-icon fa fa-rss bigger-150 middle orange2"></i>
+                        <span class="bigger-110">View more activities</span>
+
+                        <i class="icon-on-right ace-icon fa fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div><!-- /#activity -->
         </div>
     </div>
 </div>
@@ -1790,6 +2039,16 @@
 
         .grey {
             color: #777 !important
+        }
+
+        /*===================================
+           以下為驗證勾選相關*/
+        .btn span.glyphicon {
+            opacity: 0;
+        }
+
+        .btn.active span.glyphicon {
+            opacity: 1;
         }
     </style>
 }
