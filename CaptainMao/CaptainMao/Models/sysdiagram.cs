@@ -12,14 +12,12 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StoreInfo
+    public partial class sysdiagram
     {
-        public string StoreId { get; set; }
-        public string StoreName { get; set; }
-        public string StoreAddress { get; set; }
-        public string ContactName { get; set; }
-        public Nullable<decimal> Score { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

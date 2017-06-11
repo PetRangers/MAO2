@@ -708,10 +708,6 @@
         <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
         </Function>
-        <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
-          <Parameter Name="sTypeID" Type="int" Mode="In" />
-        </Function>
         <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
           <Parameter Name="sTypeID" Type="int" Mode="In" />
@@ -1708,10 +1704,6 @@
           <FunctionImport Name="DeleteToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="EditToMerchandise_Type_View">
-            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
-            <Parameter Name="sTypeID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="InsertToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
             <Parameter Name="sTypeID" Mode="In" Type="Int32" />
@@ -2037,7 +2029,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
-          <FunctionImportMapping FunctionImportName="EditToMerchandise_Type_View" FunctionName="MaoModel.Store.EditToMerchandise_Type_View" />
           <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
         </EntityContainerMapping>
       </Mapping>
