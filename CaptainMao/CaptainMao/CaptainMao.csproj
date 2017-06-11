@@ -18,9 +18,9 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44322</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1060,7 +1060,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
