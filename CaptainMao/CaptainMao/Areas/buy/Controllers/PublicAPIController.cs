@@ -12,7 +12,7 @@ namespace CaptainMao.Areas.buy.Controllers
 {
     public class PublicAPIController : ApiController
     {
-
+         
         ClsBusinessLogic fun = new ClsBusinessLogic();
         //查詢訂單
         public IEnumerable<vmShoppingCar_Mer> GetShoppingCart()
