@@ -56,9 +56,24 @@ namespace CaptainMao.Areas.Admin.Controllers
             }
             NormalUserDetailViewModel user = new NormalUserDetailViewModel
             {
-
+                AccessFailedCount=aspUser.AccessFailedCount,
+                DateRegistered =aspUser.DateRegistered,
+                Id =aspUser.Id,
+                EmailConfirmed =aspUser.EmailConfirmed,
+                Experience =aspUser.Experience,
+                FirstName =aspUser.FirstName,
+                LastName =aspUser.LastName,
+                LockoutEnabled =aspUser.LockoutEnabled,
+                LockoutEndDateUtc =aspUser.LockoutEndDateUtc,
+                LoginCount =aspUser.LoginCount,
+                NickName =aspUser.NickName,
+                PhoneNumber =aspUser.PhoneNumber,
+                PhoneNumberConfirmed =aspUser.PhoneNumberConfirmed,
+                TwoFactorEnabled =aspUser.TwoFactorEnabled,
+                UserName =aspUser.UserName,
+                Photo = "data:image /; base64," + Convert.ToBase64String(aspUser.Photo)
             };
-
+            
             return View(user);
         }
 
