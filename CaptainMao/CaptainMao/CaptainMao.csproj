@@ -215,7 +215,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -378,6 +377,10 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
+    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -385,10 +388,6 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
-    <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1049,11 +1048,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />
@@ -1159,6 +1156,9 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hospital.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HospitalCategoryDetail.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
