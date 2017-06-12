@@ -27,7 +27,6 @@ namespace CaptainMao.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Adoption> Adoptions { get; set; }
         public virtual DbSet<AdpWish> AdpWishes { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
@@ -43,7 +42,6 @@ namespace CaptainMao.Models
         public virtual DbSet<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
         public virtual DbSet<Scorce> Scorces { get; set; }
         public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
         public virtual DbSet<UserPet> UserPets { get; set; }
         public virtual DbSet<Merchandise> Merchandises { get; set; }
@@ -51,6 +49,8 @@ namespace CaptainMao.Models
         public virtual DbSet<shoppingcart> shoppingcarts { get; set; }
         public virtual DbSet<sType> sTypes { get; set; }
         public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<LoginLog> LoginLogs { get; set; }
+        public virtual DbSet<FourStore> FourStores { get; set; }
     
         public virtual int DeleteToMerchandise_Type_View(Nullable<int> merchandiseID)
         {

@@ -11,99 +11,218 @@
     <link href="~/Content/jquery-ui-tc.theme.min.css" rel="stylesheet" />
     @RenderSection("style", required: false)
     <style>
-        body{
-            font-family:'微軟正黑體', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            }
+        body {
+            font-family: '微軟正黑體', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
+        /*#content {
+            position:fixed;
+            top: 0;
+            right: 0;
+           
+            left: 0;
+        }*/
         
     </style>
+
 </head>
 <body>
-    <div class="navbar navbar-default navbar-static-top">
-        <div class="container ">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <p class="navbar-brand" href="#"><strong>網站管理者介面 </strong></p>
+    @*<canvas> </canvas>
+    <div id="content">*@
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container ">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <p class="navbar-brand" href="#"><strong>網站管理者介面 </strong></p>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @Html.ActionLink("回網站首頁 ", "Index", "CaptainMao", new { area = "" })
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">會員管理 <span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
+                                <li role="presentation">@Html.ActionLink("一般會員管理", "Index", "NormalUser", new { area = "Admin" })</li>
+                                <li role="presentation">
+                                    <a href="#">商店會員管理</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#">權限設置</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">網站管理 <span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
+                                <li role="presentation">
+                                    <a href="#">討論版管理</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#">商城管理</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#">網站監控</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        @Html.ActionLink("回網站首頁 ", "Index", "CaptainMao", new { area = "" })
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">會員管理 <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
-                            <li role="presentation">@Html.ActionLink("一般會員管理", "Index", "NormalUser", new { area = "Admin" })</li>
-                            <li role="presentation">
-                                <a href="#">商店會員管理</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#">權限設置</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">網站管理 <span class="caret"></span></a>
-                        <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
-                            <li role="presentation">
-                                <a href="#">討論版管理</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#">商城管理</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#">網站監控</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Action</a>
-                            </li>
-                            <li>
-                                <a href="#">Another action</a>
-                            </li>
-                            <li>
-                                <a href="#">Something else here</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="#">Separated link</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="#">One more separated link</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
         </div>
-    </div>
+        <div class="container-fluid" style="margin:0 0 50px 0;">
+            <div class="row">
 
-
-    <div class="container-fluid" style="margin:0 0 50px 0;">
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="container body-content">
-                    @RenderBody()
+                <div class="col-md-12">
+                    <div class="container body-content">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @*</div>*@
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-ui-tc.min.js"></script>
+    <script>
+            var canvas = $('canvas')[0];
+            var context = canvas.getContext('2d');
 
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            var Dots = [];
+            var colors = ['#FF9900', '#424242', '#BCBCBC', '#3299BB'];
+            var maximum = 70;
+
+            function Initialize() {
+                GenerateDots();
+
+                Update();
+            }
+
+            function Dot() {
+                this.active = true;
+
+                this.diameter = Math.random() * 7;
+
+                this.x = Math.round(Math.random() * canvas.width);
+                this.y = Math.round(Math.random() * canvas.height);
+
+                this.velocity = {
+                    x: (Math.random() < 0.5 ? -1 : 1) * Math.random() * 0.7,
+                    y: (Math.random() < 0.5 ? -1 : 1) * Math.random() * 0.7
+                };
+
+                this.alpha = 0.1;
+                this.hex = colors[Math.round(Math.random() * 3)];
+                this.color = HexToRGBA(this.hex, this.alpha);
+            }
+
+            Dot.prototype = {
+                Update: function () {
+                    if (this.alpha < 0.8) {
+                        this.alpha += 0.01;
+                        this.color = HexToRGBA(this.hex, this.alpha);
+                    }
+
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+
+                    if (this.x > canvas.width + 5 || this.x < 0 - 5 || this.y > canvas.height + 5 || this.y < 0 - 5) {
+                        this.active = false;
+                    }
+                },
+
+                Draw: function () {
+                    context.fillStyle = this.color;
+                    context.beginPath();
+                    context.arc(this.x, this.y, this.diameter, 0, Math.PI * 2, false);
+                    context.fill();
+                }
+            }
+
+            function Update() {
+                GenerateDots();
+
+                Dots.forEach(function (Dot) {
+                    Dot.Update();
+                });
+
+                Dots = Dots.filter(function (Dot) {
+                    return Dot.active;
+                });
+
+                Render();
+                requestAnimationFrame(Update);
+            }
+
+            function Render() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                Dots.forEach(function (Dot) {
+                    Dot.Draw();
+                });
+            }
+
+            function GenerateDots() {
+                if (Dots.length < maximum) {
+                    for (var i = Dots.length; i < maximum; i++) {
+                        Dots.push(new Dot());
+                    }
+                }
+
+                return false;
+            }
+
+            function HexToRGBA(hex, alpha) {
+                var red = parseInt((TrimHex(hex)).substring(0, 2), 16);
+                var green = parseInt((TrimHex(hex)).substring(2, 4), 16);
+                var blue = parseInt((TrimHex(hex)).substring(4, 6), 16);
+
+                return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')';
+            }
+
+            function TrimHex(hex) {
+                return (hex.charAt(0) == "#") ? hex.substring(1, 7) : h;
+            }
+
+            $(window).resize(function () {
+                Dots = [];
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            Initialize();
+    </script>
     @RenderSection("script", required: false)
+
 
 </body>
 </html>

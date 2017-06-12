@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -1158,7 +1157,7 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
+    <Compile Include="Models\FourStore.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hospital.cs">
@@ -1169,6 +1168,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\LoginLog.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1205,9 +1207,6 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategory.cs">

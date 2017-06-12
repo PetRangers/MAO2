@@ -24,6 +24,8 @@ namespace CaptainMao.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private MaoEntities db = new MaoEntities();
+
 
         public AccountController()
         {
@@ -126,9 +128,23 @@ namespace CaptainMao.Controllers
                 case SignInStatus.Success:
                     string userId = UserManager.FindByEmail(model.Email).Id;
                     var userRole = await UserManager.GetRolesAsync(userId);
+
+                    //添加登入紀錄
+                    LoginLog login = new LoginLog
+                    {
+                        UserId=userId,
+                        LoginTime=DateTime.UtcNow,
+                        LoginIP=IdentityUtilities.GetIP()
+                    };
+                    db.LoginLogs.Add(login);
+                    await db.SaveChangesAsync();
                     if (userRole.Contains("Store"))
                     {
                         return RedirectToAction("Index", "Store", new { area = "buy" });
+                    }
+                    if (userRole.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "NormalUser", new { area = "Admin" });
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -300,7 +316,6 @@ namespace CaptainMao.Controllers
                     await UserManager.AddToRoleAsync(user.Id, roleName);
 
                     //待使用者資料在AspNetUser被建立後，於StoreInfo加入其餘相關資料。
-                    MaoEntities db = new MaoEntities();
                     StoreInfo store = new StoreInfo
                     {
                         StoreId=user.Id,
@@ -573,12 +588,13 @@ namespace CaptainMao.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //去除下面兩條限制，以便呼叫登出
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "CaptainMao");
+            return RedirectToAction("Index", "CaptainMao", new { area = "" });
         }
 
         //

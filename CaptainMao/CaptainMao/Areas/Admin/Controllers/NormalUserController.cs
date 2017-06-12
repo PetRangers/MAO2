@@ -65,7 +65,6 @@ namespace CaptainMao.Areas.Admin.Controllers
                 LastName =aspUser.LastName,
                 LockoutEnabled =aspUser.LockoutEnabled,
                 LockoutEndDateUtc =aspUser.LockoutEndDateUtc,
-                LoginCount =aspUser.LoginCount,
                 NickName =aspUser.NickName,
                 PhoneNumber =aspUser.PhoneNumber,
                 PhoneNumberConfirmed =aspUser.PhoneNumberConfirmed,
@@ -73,7 +72,9 @@ namespace CaptainMao.Areas.Admin.Controllers
                 UserName =aspUser.UserName,
                 Photo = "data:image /; base64," + Convert.ToBase64String(aspUser.Photo)
             };
-            
+            user.LoginCount = db.LoginLogs.Where(u => u.UserId == aspUser.Id).Count();
+            //user.LoginTime = db.LoginLogs.Where(u => u.UserId == aspUser.Id).OrderByDescending(u => u.LoginTime).First().LoginTime;
+
             return View(user);
         }
 
