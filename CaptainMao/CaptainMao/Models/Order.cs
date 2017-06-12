@@ -31,6 +31,5 @@ namespace CaptainMao.Models
         public virtual FourStore FourStore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandises { get; set; }
-        public virtual FourStore FourStore { get; set; }
     }
 }

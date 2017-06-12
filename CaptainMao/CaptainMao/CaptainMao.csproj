@@ -1164,9 +1164,6 @@
     <Compile Include="Models\FourStore.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FourStore.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>

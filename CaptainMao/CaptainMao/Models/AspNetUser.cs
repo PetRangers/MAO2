@@ -30,7 +30,6 @@ namespace CaptainMao.Models
             this.Scorces = new HashSet<Scorce>();
             this.UserPets = new HashSet<UserPet>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.LoginLogs = new HashSet<LoginLog>();
         }
     
         public string Id { get; set; }
@@ -80,7 +79,5 @@ namespace CaptainMao.Models
         public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoginLog> LoginLogs { get; set; }
     }
 }
