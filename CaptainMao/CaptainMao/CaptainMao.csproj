@@ -381,6 +381,7 @@
     <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -1048,6 +1049,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
@@ -1057,7 +1059,7 @@
     <Compile Include="Areas\Adoption\Models\IRepository.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Adoption.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\AdpWish.cs" />
-    <Compile Include="Areas\Adoption\Models\Partial\Citys.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\City.cs" />
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
@@ -1093,6 +1095,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Filters\AuthorizeMaoAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1155,6 +1158,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FourStore.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1163,6 +1169,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\LoginLog.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>

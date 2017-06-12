@@ -1,21 +1,19 @@
-﻿@model CaptainMao.Models.Adoption
+﻿@model CaptainMao.Models.AdpWish
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditWish";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
 @section style{
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <style>
-
-        #delete{
-            color:white;
-            margin-right:5px;
+        #delete {
+            color: white;
+            margin-right: 5px;
         }
     </style>
 }
-
 @section script{
     <script src="~/js/jquery-ui.min.js"></script>
     <script>
@@ -40,8 +38,6 @@
 }
 
 
-
-
 <!--aside側欄 article主欄-->
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
@@ -51,32 +47,26 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div class="thumbnail drawingpin">
-        <h2>修改收養機會: @Html.DisplayFor(a => a.AdoptionID)</h2>
+        <h2>修改收養機會: @Html.DisplayFor(a => a.WishID)</h2>
         <div class="row">
             <div class="col-md-7">
-                @using (Html.BeginForm("Edit", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("EditWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
                 {
                     <div class="form-group">
-                        @Html.LabelFor(a => a.Name, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-10">
-                            @Html.HiddenFor(a => a.AdoptionID)
-                            @Html.HiddenFor(a => a.RegistrationUserID)
-                            @Html.EditorFor(a => a.Name, new { HtmlAttributes = new { @class = "form-control", placeholder = "Name" } })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(a => a.Sex, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-10">
-                            @Html.EditorFor(a => a.Sex, new { HtmlAttributes = new { @class = "form-control", placeholder = "Sex" } })
-                        </div>
-                    </div>
-                    <div class="form-group">
+                        @Html.HiddenFor(a => a.WishID)
+                        @Html.HiddenFor(a => a.UserID)
                         @Html.LabelFor(a => a.CategoryID, new { @class = "col-sm-2 control-label" })
                         <div class="col-sm-10">
                             @{
                                 var categories = new SelectList(ViewBag.Category, "CategoryID", "CategoryName");
                             }
                             @Html.DropDownListFor(a => a.CategoryID, categories, "請選擇", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Sex, new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(a => a.Sex, new { HtmlAttributes = new { @class = "form-control", placeholder = "Sex" } })
                         </div>
                     </div>
                     <div class="form-group">
@@ -106,22 +96,6 @@
                             @Html.EditorFor(a => a.Hair, new { HtmlAttributes = new { @class = "form-control", placeholder = "Hair" } })
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(a => a.Description, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-10">
-                            @Html.EditorFor(a => a.Description, new { HtmlAttributes = new { @class = "form-control", placeholder = "Description" } })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(a => a.PetImage, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-10">
-                            <img src="@Url.Action("GetImage",new { id = @Html.DisplayFor(a => a.AdoptionID) })" class="img-thumbnail thumb" />
-                            @Html.HiddenFor(a => a.PetImage)
-                            @Html.HiddenFor(a => a.BytesImage)
-
-                            @Html.EditorFor(a => a.PetImage, new { HtmlAttributes = new { type = "file", @class = "form-control", placeholder = "Product Image" } })
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-8">
@@ -133,21 +107,18 @@
                         </div>
                     </div>
                                 }
-
             </div>
             <div class="col-md-5"></div>
         </div>
-
     </div>
     <!-------------------articleEnd------------------->
 </article>
-
 <div id="dialog-confirm" title="您確定要刪除?" style="visibility:hidden;">
     <p><span class="ui-icon ui-icon-alert" style="float:left; "></span>您即將刪除這筆領養機會，使用者們將無法在領養列表看到這筆機會，您確定要刪除?</p>
     <hr />
     <span>
         <button type="button" class="btn btn-default pull-right" id="cancel">取消</button>
-        @Html.ActionLink("刪除", "Delete", "Adoption", new { id = Model.AdoptionID }, new { @class = "btn btn-danger pull-right", id = "delete" })
+        @Html.ActionLink("刪除", "DeleteWish", "Adoption", new { id = Model.WishID }, new { @class = "btn btn-danger pull-right", id = "delete" })
     </span>
-
 </div>
+

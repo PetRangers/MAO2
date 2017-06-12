@@ -27,8 +27,8 @@
                 <input type="hidden" id="userID" value="@userID" />
                 <input type="hidden" id="userNickName" value="@userNickName" />
                 <input type="hidden" id="targetID" value="" />
-                <input type="hidden" id="userPhoto" value="@Url.Action("GetUserImage","Adoption",new { id =userID })" />
-                <ul id="chatul"></ul>
+                <input type="hidden" id="userPhoto" value="@Url.Action("GetUserImage","Adoption",new { id =userID, area = "Adoption" })" />
+                <ul class="chatul"></ul>
                 <div>
 
                     <div class="msj-rta macro" style="margin:auto">
