@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<CaptainMao.Areas.Admin.Models.NormalUserViewModel>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2>一般會員管理</h2>
 
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
-</p>
-<table id="example" class="display" cellspacing="0" width="100%">
+@Html.ActionLink("新增會員", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
+<hr/>
+<table id="example" class="display nowrap" cellspacing="0"  width="100%">
+
     <thead>
         <tr>
             <th>
@@ -74,24 +71,25 @@
 </table>
 
 @section Style{
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Content/jquery-ui.structure.min.css" rel="stylesheet" />
-<link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        div.container {
+            max-width: 1200px
+        }
+    </style>
     }
 
 @section Script{
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js">
-</script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.js">
-</script>
-<script src="~/Scripts/jquery-ui.min.js"></script>
-<script type="text/javascript" class="init">
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-</script>
+       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+        <script type="text/javascript" class="init">
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      responsive: true
+                  });
+              });
+        </script>
 
     }

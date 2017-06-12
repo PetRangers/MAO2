@@ -53,6 +53,7 @@ namespace CaptainMao.Models
         public virtual DbSet<shoppingcart> shoppingcarts { get; set; }
         public virtual DbSet<sType> sTypes { get; set; }
         public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<FourStore> FourStores { get; set; }
     
         public virtual int DeleteToMerchandise_Type_View(Nullable<int> merchandiseID)
         {
