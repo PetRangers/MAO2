@@ -31,26 +31,14 @@ namespace CaptainMao.Areas.buy.Controllers
         }
 
         
-        public ActionResult AddCart(int Merchandise_ID)
+        public ActionResult returnJson_selectFourStore(string city)
         {
-            string name = User.Identity.GetUserId()!=null ? User.Identity.GetUserId():(string)Session["user_identity"] ;
-            fun.Logic_AddShopping(name, Merchandise_ID);
-            return null;
+            return Json(fun.Logic_GetStore(city), JsonRequestBehavior.AllowGet);
         }
-        //[HttpGet]
-        //public ActionResult getShoppingCart() {
-        //    //string id = User.Identity.GetUserId() != null ? User.Identity.GetUserId() : (string)Session["user_identity"];
-        //    string id = "6d25c244-4906-4edf-af59-0b86b044be88";
-        //    return Json(fun.Logic_getShoppingCart(id), 
-        //        JsonRequestBehavior.AllowGet);
-        //}
-        //[HttpPost]
-        //public ActionResult getShoppingCart(vmShoppingCar_Mer vm)
-        //{
+        public ActionResult returnJson_selectCitys() {
 
-
-        //}
-
-
+            return Json(fun.Logic_GetAllCity(), JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

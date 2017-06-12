@@ -41,7 +41,7 @@
                                 <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
                                 <td>
                                     @Html.ActionLink("詳細資料", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
-                                    @Html.ActionLink("加入", "AddCart", "zPublicFunction", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                                    @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID ,area=""}, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
                                 </td>
                             </tr>
                         }
@@ -56,4 +56,6 @@
 @section script{
     <!--aside-->
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
+<script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+
 }

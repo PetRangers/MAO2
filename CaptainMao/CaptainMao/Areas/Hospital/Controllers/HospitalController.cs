@@ -13,7 +13,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         // GET: Hospital/Hospital
         public ActionResult HospitalSearchCity()
         {
-            var hospitalCitys = from a in DB.Citys select a;
+            var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
@@ -48,7 +48,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         {
 
             var hospitalSearchValue = from a in DB.Hospitals
-                                          //join b in DB.Citys on a.AddressArea equals b.CityID
+                                          //join b in DB.Cities on a.AddressArea equals b.CityID
                                           //join c in DB.Categories on a.CategoryID equals c.CategoryID
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
                                       join c in DB.Categories on b.CategoryID equals c.CategoryID

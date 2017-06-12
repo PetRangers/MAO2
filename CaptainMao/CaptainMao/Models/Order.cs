@@ -25,8 +25,10 @@ namespace CaptainMao.Models
         public int merchandise_Volume { get; set; }
         public System.DateTime Order_Createdate { get; set; }
         public bool Order_Fitness { get; set; }
+        public int DeliveryLocation { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual FourStore FourStore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandises { get; set; }
     }

@@ -25,7 +25,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         //搜尋所有
         public ActionResult HospitalSearchCity()
         {
-            var hospitalCitys = from a in DB.Citys select a;
+            var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
@@ -41,7 +41,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         }
         public ActionResult Index()
         {
-            var hospitalCitys = from a in DB.Citys select a;
+            var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
@@ -54,7 +54,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             ViewBag.HospitalPetRace = HospitalTextRace;
 
             var hospitalSearchAll = from a in DB.Hospitals
-                                    join b in DB.Citys on a.AddressArea equals b.CityID
+                                    join b in DB.Cities on a.AddressArea equals b.CityID
                                     join c in DB.Categories on a.CategoryID equals c.CategoryID
                                     select new HospitalModel
                                     {
@@ -75,7 +75,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         public ActionResult UpDataHospital(int id = 2)
         {
             var hospitalSearchAll = (from a in DB.Hospitals
-                                     join b in DB.Citys on a.AddressArea equals b.CityID
+                                     join b in DB.Cities on a.AddressArea equals b.CityID
                                      join c in DB.Categories on a.CategoryID equals c.CategoryID
                                      where a.HospitalID == id
                                      select new HospitalModel
@@ -109,7 +109,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         //新增
         public ActionResult CreatHospital()
         {
-            var hospitalCitys = from a in DB.Citys select a;
+            var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }

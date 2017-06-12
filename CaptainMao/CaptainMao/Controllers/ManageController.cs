@@ -11,7 +11,7 @@ using CaptainMao.Filters;
 
 namespace CaptainMao.Controllers
 {
-    [AuthorizeMao(Roles ="Master")]
+    [AuthorizeMao]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
