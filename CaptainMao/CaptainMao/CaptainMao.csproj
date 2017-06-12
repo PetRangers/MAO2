@@ -335,7 +335,6 @@
     <Content Include="Areas\Article\Views\Article\Create.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
     <Content Include="Areas\Article\Views\Article\Comment.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Upload.ashx" />
     <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
@@ -367,7 +366,6 @@
     <Content Include="Areas\Hospital\Views\web.config" />
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
@@ -388,6 +386,7 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -403,8 +402,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
-    <Content Include="Scripts\jqcloud-1.0.4.js" />
-    <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1064,10 +1061,12 @@
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\Article\Controllers\ReportController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
