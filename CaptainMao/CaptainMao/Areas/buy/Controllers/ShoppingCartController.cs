@@ -16,6 +16,7 @@ namespace CaptainMao.Areas.buy.Controllers
         // GET: buy/ShoppingCart
         public ActionResult Index()
         {
+            ViewBag.city = fun.Logic_GetAllCity();
             return View();
         }
 

@@ -12,24 +12,21 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class FourStore
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public FourStore()
         {
-            this.Merchandises = new HashSet<Merchandise>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int Order_ID { get; set; }
-        public string user_ID { get; set; }
-        public int merchandise_Volume { get; set; }
-        public System.DateTime Order_Createdate { get; set; }
-        public bool Order_Fitness { get; set; }
-        public int DeliveryLocation { get; set; }
+        public int BranchID { get; set; }
+        public string Compete { get; set; }
+        public string UnifiedNummerering { get; set; }
+        public string Branch { get; set; }
+        public string BranchAddress { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
-        public virtual FourStore FourStore { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
