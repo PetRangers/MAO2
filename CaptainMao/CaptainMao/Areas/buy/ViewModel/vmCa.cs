@@ -39,6 +39,7 @@ namespace CaptainMao.Areas.buy.ViewModel
 
     public class vmShoppingCar_Mer {
 
+        public int cartID { get; set; }
 
         [DisplayName("商品編號")]
         public int Merchandise_ID { get; set; }

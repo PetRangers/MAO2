@@ -34,21 +34,27 @@
     float:left;background:white;
 }
 .chatTitle{
+    width:300px;
     background:#0f55e5;
     font-size:20px;
     color:white;
 }
 .frame{
-    background:#e0e0de;
+    background:rgba(247, 237, 205, 1);
     height:400px;
+    width:300px;
     overflow:hidden;
     padding:0;
+
 }
 .frame > div:last-of-type{
-    position:absolute;bottom:5px;width:100%;display:flex;
+    position:absolute;
+    bottom:5px;
+    width:300px;
+    display:flex;
 }
-#chatul {
-    width:100%;
+.chatul {
+    width:310px;
     list-style-type: none;
     padding:18px;
     position:absolute;

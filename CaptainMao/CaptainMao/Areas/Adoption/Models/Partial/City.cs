@@ -7,10 +7,10 @@ using System.Web;
 
 namespace CaptainMao.Models
 {
-    [MetadataType(typeof(CitysMetadata))]
+    [MetadataType(typeof(CitiesMetadata))]
     public partial class City
     {
-        public class CitysMetadata
+        public class CitiesMetadata
         {
             public int CityID { get; set; }
             [DisplayName("居住都市")]
