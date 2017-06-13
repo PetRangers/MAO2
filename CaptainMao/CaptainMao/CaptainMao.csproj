@@ -382,7 +382,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
