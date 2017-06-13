@@ -7,34 +7,35 @@
 }
 
 @section script{
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#myCarousel').carousel({
-                interval: 4000
+            $(function () {
+                $.ajax({
+                    url: '@Url.Action("HighPop")',
+                    type: 'Get',
+                    dataType: 'json',
+                    success: SetValue
+                });
             });
+            var tu = $('#tb');
+            tu.empty;
+            var f = $(document.createDocumentFragment());
+            function SetValue(data) {
+                $.each(data, function (index, value) {
+                    var t1 = $('<td></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h4 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
+                    var row = $('<tr></tr>').append(t1);
+                    f.append(row);
+                })
+                tu.append(f);
+            };
+            $('#tb').on('click', '.a', function () {
 
-            var clickEvent = false;
-            $('#myCarousel').on('click', '.nav a', function () {
-                clickEvent = true;
-                $('.nav li').removeClass('active');
-                $(this).parent().addClass('active');
-            }).on('slid.bs.carousel', function (e) {
-                if (!clickEvent) {
-                    var count = $('.nav').children().length - 1;
-                    var current = $('.nav li.active');
-                    current.removeClass('active').next().addClass('active');
-                    var id = parseInt(current.data('slide-to'));
-                    if (count == id) {
-                        $('.nav li').first().addClass('active');
-                    }
-                }
-                clickEvent = false;
-            });
-        });
+            })
+        })
     </script>
     }
 @section style{
-
     <style>
         .title {
             overflow: hidden;
@@ -82,20 +83,6 @@
         .meta h4:hover{
             color:rgba(0,0,0,.87);
         }
-        /*控制滑動圖片*/
-        #myCarousel .nav a small{
-            display:block;
-        }
-        #myCarousel .nav{
-            background:#eee;
-        }
-        #myCarousel .nav a{
-            border-radius:0px;
-        }
-        .nav-pills>li[data-slide-to="0"].active a { background-color: #16a085; }
-        .nav-pills>li[data-slide-to="1"].active a { background-color: #e67e22; }
-        .nav-pills>li[data-slide-to="2"].active a { background-color: #2980b9; }
-        .nav-pills>li[data-slide-to="3"].active a { background-color: #8e44ad; }
     </style>
     }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -128,57 +115,6 @@
                 }
             </div>
         </div>
-        @*<div style="background-color:#ff6a00" class="drawingpin">*@
-        <div class="container">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-
-                    <div class="item active">
-                        <img src="~/images/33725431546_cc653802ce_h.jpg">
-                        <div class="carousel-caption">
-                            <h3>Headline</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-                        </div>
-                    </div><!-- End Item -->
-
-                    <div class="item">
-                        <img src="~/images/33725431546_cc653802ce_h.jpg">
-                        <div class="carousel-caption">
-                            <h3>Headline</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-                        </div>
-                    </div><!-- End Item -->
-
-                    <div class="item">
-                        <img src="~/images/33725431546_cc653802ce_h.jpg">
-                        <div class="carousel-caption">
-                            <h3>Headline</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-                        </div>
-                    </div><!-- End Item -->
-
-                    <div class="item">
-                        <img src="~/images/33725431546_cc653802ce_h.jpg">
-                        <div class="carousel-caption">
-                            <h3>Headline</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                        </div>
-                    </div><!-- End Item -->
-
-                </div><!-- End Carousel Inner -->
-
-                <ul class="nav nav-pills nav-justified">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-                    <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
-                    <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
-                    <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
-                </ul>
-
-            </div><!-- End Carousel -->
-        </div>
-        @*</div>*@
         <div class="row">
             <div class="col-lg-9">
                 <div style="background-color:burlywood" class="drawingpin">
@@ -190,7 +126,7 @@
                                 <div class="card">
                                     <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><img class="card-img-top" src="@Html.DisplayFor(a=>item.ContentText)" /></a>
                                     <div class="card-block">
-                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="card-title">[@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
+                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="card-title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">[@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
                                         <div class="meta">
                                             <h4>瀏覽人數 ： @Html.DisplayFor(a => item.Number)</h4>
                                         </div>
@@ -201,9 +137,19 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col-lg-3">
                 <div style="background-color:burlywood" class="drawingpin">
+                    <div class="highPop">
+                        <table>
+                            <thead>
+                                <tr>最新發表</tr>
+                            </thead>
+                            <tbody id="tb">
 
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
