@@ -215,6 +215,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\buy\css\Create.css" />
+    <Content Include="Areas\buy\css\Create.min.css" />
     <Content Include="Areas\buy\css\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -290,6 +292,7 @@
     <Content Include="images\C3.jpg" />
     <Content Include="images\C4.jpg" />
     <Content Include="images\C6.jpg" />
+    <Content Include="images\captain.png" />
     <Content Include="images\cat.png" />
     <Content Include="images\cat2.png" />
     <Content Include="images\catdog.png" />
@@ -338,7 +341,6 @@
     <Content Include="Areas\Article\Views\Article\Create.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
     <Content Include="Areas\Article\Views\Article\Comment.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Upload.ashx" />
     <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
@@ -370,7 +372,6 @@
     <Content Include="Areas\Hospital\Views\web.config" />
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
@@ -381,7 +382,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
@@ -392,7 +392,11 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="fonts\GOODDC__.TTF" />
+    <Content Include="Areas\Article\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
+	<Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
@@ -410,8 +414,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
-    <Content Include="Scripts\jqcloud-1.0.4.js" />
-    <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1073,13 +1075,16 @@
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\AdpReportViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\Article\Controllers\ReportController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />

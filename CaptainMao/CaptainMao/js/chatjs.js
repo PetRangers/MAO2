@@ -17,7 +17,7 @@ $(document).ready(function () {
             $('#chatdiv').append('<div class="childdiv nextchat"></div>');
 
             $(this).find('#targetID').val(id);
-            $(this).find('.chatTitle').text(name);
+            $(this).find('.targetName').text(name);
             me.avatar = $(this).find('#userPhoto').val();
             you.avatar = img;
         })
@@ -25,27 +25,27 @@ $(document).ready(function () {
     });
 
     //展開縮小
-    //var flag = false;
-    //$('.frame').hide();
-    //$('.frame >div').hide();
-    //$('#chatdiv').on('click', '.chatTitle', function () {
-    //    var frame = $(this).siblings('.frame');
-       
-    //    if(!flag) {
-    //        flag = true;
-            
-    //        frame.slideDown(1000, function () {
-    //            frame.children('ul').show();
-    //            frame.children('div').show();
-    //        });
-    //    }
-    //    else {
-    //        flag = false;
-    //        frame.children('ul').hide();
-    //        frame.children('div').hide();
-    //        frame.slideToggle(1000, function () { });            
-    //    } 
-    //})
+    $('#chatdiv').on('click', '.chatTitle', function () {
+        var frame = $(this).siblings('.frame');
+        var space = $(this).siblings('.space');
+        var flag = $(this).attr('data-show');
+        if(flag != 'true') {
+            $(this).attr('data-show','true');
+            space.slideToggle(1000, function () { });
+            frame.slideDown(1000, function () {
+                frame.children('ul').show();
+                frame.children('div').show();
+            });            
+        }
+        else {
+            $(this).attr('data-show', 'false');
+            frame.children('ul').hide();
+            frame.children('div').hide();
+            space.slideDown(1000, function () {});
+            frame.slideToggle(1000, function () {
+            });
+        } 
+    })
 
     //建立與Server端的Hub的物件，注意Hub的開頭字母一定要為小寫
     var chat = $.connection.chatHub;
@@ -67,8 +67,8 @@ $(document).ready(function () {
     chat.client.insertChat = function ( text) {
         var control = "";
         var date = formatAMPM(new Date());
-        control = '<li style="width:100%;">' +
-                          '<div class="msj-rta macro">' +
+        control = '<li style="width:100%">' +
+                          '<div class="msj-rta macro" style="height:73px">' +
                           '<div class="text text-l">' +
                           '<p>' + text + '</p>' +
                           '<p><small>' + date + '</small></p>' +
@@ -83,7 +83,7 @@ $(document).ready(function () {
         var control = "";
         var date = formatAMPM(new Date());
         control = '<li style="width:100%">' +
-                          '<div class="msj macro">' +
+                          '<div class="msj macro" style="height:73px">' +
                           '<div class="avatar"><img class="img-circle" style="width:100%;" src="' + img + '" /></div>' +
                           '<div class="text text-r">' +
                           '<p>' + text + '</p>' +
@@ -110,7 +110,7 @@ $(document).ready(function () {
                 $('#chatdiv').append('<div class="childdiv nextchat"></div>');
 
                 $(this).find('#targetID').val(who);
-                $(this).find('.chatTitle').text(name);  
+                $(this).find('.targetName').text(name);
                 me.avatar = $(this).find('#userPhoto').val();
 
                 $(this).find('.chatul').append(control);

@@ -78,5 +78,6 @@ namespace CaptainMao.Areas.Adoption.Controllers
             ViewBag.userNickName = userNickName;
             return View();
         }
+
     }
 }

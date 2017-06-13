@@ -285,6 +285,32 @@ namespace CaptainMao.Areas.Adoption.Controllers
             return View(result);
         }
 
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        public ActionResult GetReport()
+        {
+            AdpReportViewModel data = new AdpReportViewModel();
+
+            List<AdpReport> adps = new List<AdpReport>();
+            int Total = db.Adoptions.Count();
+            int CateCount = db.Categories.Count();
+            for (int i = 1; i <= CateCount; i++)
+            {
+                AdpReport adp = new AdpReport();
+                adp.CategoryName = db.Categories.Where(a => a.CategoryID == i).Select(a => a.CategoryName).First();
+                double count = db.Adoptions.Where(a => a.CategoryID == i).Count();
+                adp.Share = count / Total;
+                adps.Add(adp);
+            }
+            data.AdpReports = adps;
+
+            return Json(data,JsonRequestBehavior.AllowGet);
+        }
+
+        //NoView function
         public ActionResult Email(int id)
         {
             var UserID = User.Identity.GetUserId();
@@ -299,7 +325,10 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
             //Gmial 的 smtp 必需要使用 SSL
             MySmtp.EnableSsl = true;
-
+            //string emailContent = "<h3>" + user.LastName + " " + user.FirstName + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" +
+            //            "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
+            //            "'>確認電子郵件</a></p>";
+            //await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
             var adoption = db.Adoptions.Find(id);
             string Email = adoption.AspNetUser.Email;
             //發送Email

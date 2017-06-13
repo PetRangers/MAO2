@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adoption">
           <Key>
             <PropertyRef Name="AdoptionID" />
@@ -48,8 +48,8 @@
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="TitleCategoryID" Type="int" Nullable="false" />
           <Property Name="ContentText" Type="nvarchar(max)" />
-          <Property Name="CreateDateTime" Type="datetime" />
-          <Property Name="LastChDateTime" Type="datetime" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastChDateTime" Type="datetime" Nullable="false" />
           <Property Name="Number" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -919,8 +919,7 @@
             <End Role="UserPet" EntitySet="UserPet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -973,8 +972,8 @@
           <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TitleCategoryID" Type="Int32" Nullable="false" />
           <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastChDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="LastChDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Number" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Article_AspNetUsers" FromRole="Article" ToRole="AspNetUsers" />
@@ -1774,7 +1773,7 @@
             <End Role="sType" EntitySet="sTypes" />
           </AssociationSet>
           <FunctionImport Name="DeleteToMerchandise_Type_View">
-            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EditToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
