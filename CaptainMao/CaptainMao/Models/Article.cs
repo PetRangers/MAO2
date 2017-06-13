@@ -26,8 +26,8 @@ namespace CaptainMao.Models
         public string Title { get; set; }
         public int TitleCategoryID { get; set; }
         public string ContentText { get; set; }
-        public Nullable<System.DateTime> CreateDateTime { get; set; }
-        public Nullable<System.DateTime> LastChDateTime { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
+        public System.DateTime LastChDateTime { get; set; }
         public Nullable<int> Number { get; set; }
         public bool IsDeleted { get; set; }
     

@@ -27,10 +27,13 @@
         }
 
             #display > .row > div > div {
-                height: 400px;
+                height: 460px;
                 font-size:20px;
             }
 
+        .noValue {
+            color:white;
+        }
     </style>
 }
 
@@ -70,37 +73,39 @@
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
-        <div id="search" class="drawingpin row">
-            <div><h2>條件搜尋</h2></div>
-            <div class="col-md-6">
-                <button class="btn btn-default" id="CateSearch" data-target="#cateSearch" data-toggle="modal">
-                    @if (ViewBag.category != null)
+        <div id="search" class="drawingpin">
+            <div class="row">
+                <div class="col-md-12"><h2>條件搜尋</h2></div>
+                <div class="col-md-6">
+                    <button class="btn btn-default" id="CateSearch" data-target="#cateSearch" data-toggle="modal">
+                        @if (ViewBag.category != null)
+                        {
+                            @ViewBag.category
+                        }
+                        else
+                        {
+                            @:寵物類別
+                }
+                    </button>
+                    <button class="btn btn-default" id="CitySearch" data-target="#citySearch" data-toggle="modal">
+                        @if (ViewBag.city != null)
+                        {
+                            @ViewBag.city
+                        }
+                        else
+                        {
+                            @:居住城市
+                }
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    @using (Html.BeginForm("AdoptionWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
-                        @ViewBag.category
+                        <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
+                        <input type="text" id="txtsearch" name="txtsearch" />
+                        <a href=@Url.Action("AdoptionWish", "Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
                     }
-                    else
-                    {
-                        @:寵物類別
-                }
-                </button>
-                <button class="btn btn-default" id="CitySearch" data-target="#citySearch" data-toggle="modal">
-                    @if (ViewBag.city != null)
-                    {
-                        @ViewBag.city
-                    }
-                    else
-                    {
-                        @:居住城市
-                }
-                </button>
-            </div>
-            <div class="col-md-6">
-                @using (Html.BeginForm("AdoptionWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
-                {
-                    <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
-                    <input type="text" id="txtsearch" name="txtsearch" />
-                    <a href=@Url.Action("AdoptionWish", "Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
-                }
+                </div>
             </div>
         </div>
         <br />
@@ -108,6 +113,7 @@
             <div class="row">
                 @foreach (var adoption in Model)
                 {
+                    int count = 0;
                     <div class="col-md-4">
                         <div class="thumbnail">
                             <div class="caption">
@@ -117,22 +123,34 @@
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Sex) : @Html.DisplayFor(a => adoption.Sex)</p>
                                 }
+                                else { count++; }
                                 @if (adoption.Build != null)
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Build) : @Html.DisplayFor(a => adoption.Build)</p>
                                 }
+                                else { count++; }
                                 @if (adoption.Age != null)
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Age) : @Html.DisplayFor(a => adoption.Age)</p>
                                 }
+                                else { count++; }
                                 @if (adoption.Hair != null)
                                 {
                                     <p>@Html.DisplayNameFor(a => adoption.Hair) : @Html.DisplayFor(a => adoption.Hair)</p>
                                 }
+                                else { count++; }
+
                                 <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.City.CityName)</p>
+
+                                @for (int i = 0; i < count; i++)
+                                {
+                                    <p class="noValue">a</p>
+                                }
                                 <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUser.NickName)</p>
-                                <p>@Html.DisplayNameFor(a => adoption.AspNetUser.PhoneNumber) : @Html.DisplayFor(a => adoption.AspNetUser.PhoneNumber)</p>
+                                <p>連絡電話 : @Html.DisplayFor(a => adoption.AspNetUser.PhoneNumber)</p>
                                 <p>@Html.DisplayNameFor(a => adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
+                                <a class="btn btn-success getchat" data-id="@adoption.AspNetUser.Id" data-name="@adoption.AspNetUser.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =adoption.AspNetUser.Id })">來聯絡我</a>
+
                             </div>
 
 

@@ -4,16 +4,44 @@
     //Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
-<style>
-    a {
-        font-size: 36px;
-    }
-</style>
+<script>
+    var HospitalID = 'int';
+    function ChangeThisID(HospitalID) {
 
+       
+    }
+</script>
 
 <h2>醫院列表</h2>
 
 @foreach (var a in Model)
-    {/*//顯示欄位 超連結*/
-            <a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>    }
+{/*//顯示欄位 超連結*/
+    @*<a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>*@    }
+   
 
+<table class="table table-bordered table-hover"  id="table1">
+    <thead>
+        <tr>
+            @*<th>醫院編號</th>*@
+            <th>醫院名稱</th>
+            <th>醫院地址</th>
+            <th>醫院區域</th>
+            <th>醫院電話</th>
+            <th>寵物種類</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Model 表示Controller傳過來的資料*@
+        @foreach (var _category in Model)
+        {
+            <tr target=_blank onclick="location.href='@Url.Action("HospitalSearchValue", "Hospital", new { HospitalID = _category.HospitalID })'">
+                <td style="display:none">@_category.HospitalID</td>
+                <td>@_category.HospitalName</td>
+                <td>@_category.HospitalAddress</td>
+                <td>@_category.AddressArea</td>
+                <td>@_category.HospitalPhone</td>
+                <td>@_category.CategoryID</td>
+            </tr>
+        }
+    </tbody>
+</table>

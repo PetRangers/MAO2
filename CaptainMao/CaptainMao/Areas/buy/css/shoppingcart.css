@@ -1,0 +1,25 @@
+#cityselect {
+  overflow-y: scroll;
+  height: 500px;
+}
+.panel-heading {
+  color: blue;
+}
+article > div > div {
+  position: relative;
+}
+article > div > div #merchandise_Volume {
+  width: 100px;
+}
+article > div > div button {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 3px;
+  margin: auto;
+  width: 200px;
+}
+#cityMap {
+  height: 600px;
+  width: 100%;
+}

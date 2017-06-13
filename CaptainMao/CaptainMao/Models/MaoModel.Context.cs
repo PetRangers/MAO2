@@ -37,20 +37,23 @@ namespace CaptainMao.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Board> Boards { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<City> Citys { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Hospital> Hospitals { get; set; }
         public virtual DbSet<HospitalCategoryDetail> HospitalCategoryDetails { get; set; }
+        public virtual DbSet<LoginLog> LoginLogs { get; set; }
         public virtual DbSet<Scorce> Scorces { get; set; }
         public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
         public virtual DbSet<UserPet> UserPets { get; set; }
-        public virtual DbSet<Merchandise> Merchandises { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<FourStore> FourStores { get; set; }
         public virtual DbSet<shoppingcart> shoppingcarts { get; set; }
         public virtual DbSet<sType> sTypes { get; set; }
         public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<Merchandise> Merchandises { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Merchandise_Order_View> Merchandise_Order_View { get; set; }
     
         public virtual int DeleteToMerchandise_Type_View(Nullable<int> merchandiseID)
         {

@@ -1,8 +1,10 @@
 ﻿@model CaptainMao.Areas.buy.ViewModel.vmShoppingCar_Mer
-    @{ 
+@{
     ViewBag.Title = "Main";
 }
-
+@section style{
+    <link href="~/Areas/buy/css/shoppingcart.css" rel="stylesheet" />
+}
 <!--aside側欄 article主欄-->
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -10,84 +12,163 @@
     @Html.Partial("Aside")
     <!-------------------asideEnd------------------->
 </aside>
-<article class="col-lg-9 col-sm-11" >
+<article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
-    <div  ng-app="MaoApp" ng-controller="MainController">
+    <div ng-app="MaoApp" ng-controller="MainController">
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="height:700px;background-color:#fff266" class="drawingpin">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(c => c.Store_Name)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
-                        <th>@Html.DisplayNameFor(c=>c.Merchandise_Photo)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Price)</th>
-                        <th>@Html.DisplayNameFor(c => c.merchandise_Volume)</th>
-                        <th>總價</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="shopping in shopps">
-                        <td>{{shopping.Store_Name}} </td>
-                        <td>{{ shopping.Merchandise_ID}}</td>
-                        <td>{{shopping.Merchandise_Name}}</td>
-                        
-                        @*<img src='@Url.Action("PixbyID", "zPublicFunction", new { id = shopping.Merchandise_ID})' class="img-circle" width="80" />*@
-                        <td> <img ng-src="data:image/JPEG;base64,{{shopping.Merchandise_Photo}}" height="80" width="80" class="img-circle"/></td>
-                        <td>{{shopping.Merchandise_Price }}</td>
-                        <td>@Html.EditorFor(c=>c.merchandise_Volume,new { htmlAttributes=new { ng_model = "shopping.merchandise_Volume" ,max=100,min=1, ng_change  = "myFunc()" } })</td>
-                        <td>{{shopping.merchandise_Volume*shopping.Merchandise_Price}}</td>
-                    </tr>
-                    
-                </tbody>
-
-            </table>
-            <button class="btn btn-primary pull-right">確認</button>
-
+        <div style="background-color:#fff266" class="drawingpin panel panel-primary">
+            <div class="row panel-heading">
+                <div class="col-lg-2">@Html.DisplayNameFor(c => c.Store_Name)</div>
+                <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_ID)</div>
+                <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Name)</div>
+                <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Photo)</div>
+                <div class="col-lg-1">@Html.DisplayNameFor(c => c.Merchandise_Price)</div>
+                <div class="col-lg-3">
+                    <div class="col-lg-5">@Html.DisplayNameFor(c => c.merchandise_Volume)</div>
+                    <div class="col-lg-5">總價</div>
+                </div>
+            </div>
+            <div class="row panel-body" ng-repeat="item in items">
+                <div class="col-lg-2"><span class="ng-hide">{{item.cartID}}</span> {{item.Store_Name}} </div>
+                <div class="col-lg-2">{{ item.Merchandise_ID}}</div>
+                <div class="col-lg-2">{{item.Merchandise_Name}}</div>
+                <div class="col-lg-2"> <img ng-src="data:image/JPEG;base64,{{item.Merchandise_Photo}}" height="80" width="80" class="img-circle" /></div>
+                <div class="col-lg-1">{{item.Merchandise_Price }}</div>
+                <div class="col-lg-3">
+                    <div class="col-lg-5">@Html.EditorFor(c => c.merchandise_Volume, new { htmlAttributes = new { ng_model = "item.merchandise_Volume", max = 100, min = 1, ng_change = "myFunchang(item)" } })</div>
+                    <div class="col-lg-5"> {{item.merchandise_Volume*item.Merchandise_Price}}  <span ng-click="myFunDelete(item)" class="btn btn-danger glyphicon glyphicon-remove"></span></div>
+                </div>
+            </div>
+            <button class="btn btn-primary">總計:{{getTotal()}}  下一步</button>
         </div>
-        <div style="height:700px;background-color:burlywood" class="drawingpin">
 
+
+    <div id="divMap" style="background-color:burlywood" class="drawingpin">
+        <div class="row">
+            <div class="panel  panel-primary col-lg-5">
+                @{
+                    SelectList select = new SelectList(ViewBag.city, "CityID", "CityName");
+                }
+                <div class="page-header">請選擇預定寄貨縣市 @Html.DropDownList("Citys", select)</div>
+                <ul id="cityselect" class="panel-body"></ul>
+                您預計送達的商店為:<div class="UserAddress"></div>
+            </div>
+
+            <div class="col-lg-7">
+                <iframe id="cityMap" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
+                        src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
+            </div>
         </div>
-        <div style="height:700px;background-color:#b6ff00" class="drawingpin">
-
-        </div>
-        <div style="height:700px;background-color:#ff6a00" class="drawingpin">
-
+        <div class="row">
+            <button class="btn btn-primary pull-right">下一步</button>
         </div>
     </div>
+    <div style="height:700px;background-color:#ea8a8a" class="drawingpin">
+        @using (Html.BeginForm("CreateOrder", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal" }))
+        {  <div>請輸入取貨人姓名:</div>
+            <input />
+            <div>確認地址</div>
+            <input readonly="readonly" class="UserAddress"/>
+        }
+        <div>您的商品</div>
+        <div class="col-lg-2">@Html.DisplayNameFor(c => c.Store_Name)</div>
+        <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_ID)</div>
+        <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Name)</div>
+        <div class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Photo)</div>
+        <div class="col-lg-1">@Html.DisplayNameFor(c => c.Merchandise_Price)</div>
+        <div class="col-lg-3">
+            <div class="col-lg-5">@Html.DisplayNameFor(c => c.merchandise_Volume)</div>
+            <div class="col-lg-5">總價</div>
+        </div>
+        <div class="row" ng-repeat="item in items">
+            <div class="col-lg-2"><span class="ng-hide">{{item.cartID}}</span> {{item.Store_Name}} </div>
+            <div class="col-lg-2">{{ item.Merchandise_ID}}</div>
+            <div class="col-lg-2">{{item.Merchandise_Name}}</div>
+            <div class="col-lg-1">{{item.Merchandise_Price }}</div>
+            <div class="col-lg-3">
+                <div class="col-lg-5">{{item.merchandise_Volume}}</div>
+                <div class="col-lg-5"> {{item.merchandise_Volume*item.Merchandise_Price}} </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-------------------articleEnd------------------->
 </article>
 
-@section script{
+
+
+
+
+
+
+@section script
+        {
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
 <script>
     var app = angular.module('MaoApp', []);
-    app.controller('MainController', function ($scope, $http) {
-        //抓實體網址
-      @*var httpurl = "@Url.RouteUrl("buy_default", new { httproute = "", controller = "PublicAPI" }, "http")"*@
-        var httpurl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "http")";
+            app.controller('MainController', function ($scope, $http) {
+                @*抓訂單實體網址*@
+        var httpurl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "http")';
         loadData();
-
+        @*初始設定*@
         function loadData()
         {
-            $http.get(httpurl).then(function (response) { $scope.shopps = response.data; });
+            $http.get(httpurl).then(function(response) { $scope.items = response.data;
+            });
         }
-
-        $scope.myFunc = function () {
-            alert(this);
-
-
-
-
-            $http.put(httpurl, $scope.shopps).then(function (reponse) {
+        @*更換儲存*@
+        $scope.myFunchang = function(item) {
+            $http.put(httpurl, item).then(function() {
                 $scope.shopps = "";
-                loadData();
-            })
+                                    loadData();
+                                })
         }
+                            @*刪除*@
+        $scope.myFunDelete = function(item) {
+            $http.delete(httpurl + "/" + item.cartID).then(function() {
+                $scope.shopps = "";
+                                    loadData();
+                                })
+        }
+                            @*總計*@
+      $scope.getTotal = function () {
+                            var total = 0;
+                            for (var i = 0; i < $scope.items.length; i++) {
+                            var product = $scope.items[i];
+                            total += (product.Merchandise_Price * product.merchandise_Volume);
+                            }
+                            return total;
+                            }
+      });
+$(document).ready(function () {
 
-    });
+                            CitysChange();
+                            $(document).on('change', '#Citys', CitysChange);
 
+                            function CitysChange() {
+                            //alert($(this).find("option:selected").text());
+                            $.getJSON("../zPublicFunction/returnJson_selectFourStore", { city: $('#Citys').find("option:selected").text() },
+                            function (data) {
+                            var dof = $(document.createDocumentFragment());
+
+                            $.each(data, function (ind, value) {
+                            var add = value.BranchAddress.split("、")[0];
+
+                            var typeLi = $('<li></li>').text(add).addClass("list-group-item").
+                            mouseenter(function () {
+                            var address = "http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=" + $(this).text() + "&z=16&output=embed&t=";
+                            $('#cityMap').attr("src", address);
+                            }).click(function () {
+                                $('.UserAddress').text($(this).text()).val($(this).text());
+                                
+                            });
+                            dof.append(typeLi);
+                            });
+                            $('#cityselect').html(dof);
+                            })
+                            }
+                            })
 </script>
 }
 

@@ -35,15 +35,16 @@ namespace CaptainMao
         }
 
         //發送訊息至特定使用者
-        public void sendMessage(string ToID, string message)
+        public void sendMessage(string ToID, string message, string senderPhoto)
         {
             message = HttpUtility.HtmlEncode(message);
 
-            //var fromName = UserHandler.ConnectedIds.Where(p => p.Key == Context.ConnectionId).FirstOrDefault().Value;
-            //var toName = UserHandler.ConnectedIds.Where(p => p.Key == ToId).FirstOrDefault().Value;
+            var FromID = Context.User.Identity.GetUserId();
+            var FromName = db.AspNetUsers.Where(u => u.Id == FromID).Select(u => u.NickName).First();
+
             ToID = db.AspNetUsers.Where(u => u.Id == ToID).Select(u => u.UserName).First();
-            Clients.Caller.insertChat("me",message);
-            Clients.User(ToID).insertChat("other",message);
+            Clients.Caller.insertChat(message);
+            Clients.User(ToID).sendChat(message, FromID, senderPhoto, FromName);
         }
 
         //當使用者斷線時呼叫

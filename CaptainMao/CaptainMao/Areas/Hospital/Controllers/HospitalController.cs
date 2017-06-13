@@ -1,4 +1,5 @@
 ﻿using CaptainMao.Areas.Hospital.Models.ViewModel;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace CaptainMao.Areas.Hospital.Controllers
     {
         global::CaptainMao.Models.MaoEntities DB = new CaptainMao.Models.MaoEntities();
         // GET: Hospital/Hospital
+
+        public ActionResult Aside()
+        {
+            return View();
+        }
         public ActionResult HospitalSearchCity()
         {
-            var hospitalCitys = from a in DB.Citys select a;
+            var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
@@ -44,17 +50,18 @@ namespace CaptainMao.Areas.Hospital.Controllers
             return PartialView( _hospitalSearchCity.ToList());
         }
 
-        public ActionResult HospitalSearchValue(int HospitalID = 1)
+        public ActionResult HospitalSearchValue(int HospitalID = 2)
         {
 
             var hospitalSearchValue = from a in DB.Hospitals
-                                          //join b in DB.Citys on a.AddressArea equals b.CityID
+                                          //join b in DB.Cities on a.AddressArea equals b.CityID
                                           //join c in DB.Categories on a.CategoryID equals c.CategoryID
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
                                       join c in DB.Categories on b.CategoryID equals c.CategoryID
                                       where a.HospitalID == HospitalID
                                       select new HospitalModel
                                       {
+                                          HospitalID = a.HospitalID,
                                           HospitalName = a.HospitalName,
                                           HospitalAddress = a.HospitalAddress,
                                           HospitalPhone = a.HospitalPhone,
@@ -81,44 +88,75 @@ namespace CaptainMao.Areas.Hospital.Controllers
             {
                 Model = aa;
             }
+            //預存給評分用的資料
+            ViewBag.HospitalName = Model.HospitalName;
+            ViewBag.HospitalID = HospitalID;
 
-
-            var getStarSUM = from a in DB.Hospitals
-                             group a by new { a.AddressArea } into g
+            var getStarSUM = from a in DB.Scorces
+                             group a by new { a.Scorce1 } into g
                              select new { g.Key, Count = g.Count() };
 
-            string zS = "";
-            string xS = "";
-            string cS = "";
+            string S1 = "";
+            string S2 = "";
+            string S3 = "";
+            string S4 = "";
+            string S5 = "";
+
+
             foreach (var item in getStarSUM)
             {
-                if (item.Key.AddressArea == 1)
+                if (item.Key.Scorce1 == 1)
                 {
-                    zS = item.Count.ToString();
+                    S1 = item.Count.ToString();
                 }
-                if (item.Key.AddressArea == 2)
+                if (item.Key.Scorce1 == 2)
                 {
-                    xS = item.Count.ToString();
+                    S2 = item.Count.ToString();
                 }
-                if (item.Key.AddressArea == 6)
+                if (item.Key.Scorce1 == 3)
                 {
-                    cS = item.Count.ToString();
+                   S3 = item.Count.ToString();
+                }
+                if (item.Key.Scorce1 == 4)
+                {
+                    S4 = item.Count.ToString();
+                }
+                if (item.Key.Scorce1 == 5)
+                {
+                    S5 = item.Count.ToString();
                 }
 
             }
-            ViewBag.zS = zS;
-            ViewBag.xS = xS;
-            ViewBag.cS = cS;
+            ViewBag.S1 = S1;
+            ViewBag.S2 = S2;
+            ViewBag.S3 = S3;
+            ViewBag.S4 = S4;
+            ViewBag.S5 = S5;
 
-            return View("~/Areas/Hospital/Views/Hospital/HospitalSearchValue.cshtml", Model);
+            var getId = hospitalSearchValue.First().HospitalID;
+
+            var GetAddress = from a in DB.Hospitals
+                             where a.HospitalID == getId
+                             select a;
+
+            ViewBag.MapL = "台北市大安區復興南路一段390號";
+            ViewBag.EndMap = GetAddress.First().HospitalAddress;
+
+            return View(Model);
+        }
+        public ActionResult ShowThisNote(int HospitalID = 2)
+        {
+            var getThisAllItem = from item in DB.Scorces
+                                 where item.HospitalID == HospitalID
+                                 select item;
+
+            return PartialView(getThisAllItem.ToList());
         }
 
+
         //地圖
-        public ActionResult Map()
-        {
-            ViewBag.MapLF = "{ lat: 25.0853115, lng: 121.59111029999997 }";
-            ViewBag.MapL = 25.0853115;
-            ViewBag.MapF = 121.59111029999997;
+        public ActionResult Map(int HospitalID = 2)
+        {            
             return PartialView("~/Areas/Hospital/Views/Hospital/Map.cshtml");
         }
         public ActionResult ListToHospital()
@@ -145,27 +183,51 @@ namespace CaptainMao.Areas.Hospital.Controllers
         [HttpPost]
         public ActionResult ListToNote(HospitalNoteModel model)
         {
-            var ListToNote = from a in DB.Scorces
-                             where a.UserID == model.UserID
-                             select a;
-            if (ListToNote.Count() > 0)
+            //var ListToNote = from a in DB.Scorces
+            //                 where a.UserID == model.UserID
+            //                 select a;
+            //if (ListToNote.Count() > 0)
+            //{
+            //    if (model.UserID == ListToNote.First().UserID)
+            //    {
+            //        return Content("<script>alert('您已經給予評價過了唷！');</script>");
+            //    }
+            //}
+            var GetUser = User.Identity.GetUserId();
+            try
             {
-                if (model.UserID == ListToNote.First().UserID)
+                CaptainMao.Models.AspNetUser AspNetUser = new CaptainMao.Models.AspNetUser();
+                var GetAspNetUser = from a in DB.AspNetUsers where a.Id == GetUser select a;
+                foreach (var User in GetAspNetUser)
                 {
-                    return Content("<script>alert('您已經給予評價過了唷！');</script>");
+                    AspNetUser = User;
                 }
+
+                CaptainMao.Models.Hospital Hospital = new CaptainMao.Models.Hospital();
+                var GetHospital = from a in DB.Hospitals where a.HospitalID == model.HospitalID select a;
+                foreach (var item in GetHospital)
+                {
+                    Hospital = item;
+                }
+
+                var UpdateItem = new CaptainMao.Models.Scorce
+                {
+                    UserID =AspNetUser.NickName,
+                    HospitalID = model.HospitalID,
+                    Scorce1 = model.Score,
+                    Date = model.Date,
+                    NoteValue = model.NoteValue,
+                    Hospital = Hospital,
+                    AspNetUser = AspNetUser
+                };
+                DB.Scorces.Add(UpdateItem);
+                DB.SaveChanges();
             }
-            var UpdateItem = new CaptainMao.Models.Scorce
+            catch
             {
-                UserID = model.UserID,
-                HospitalID = model.HospitalID,
-                Scorce1 = model.Score,
-                Date = model.Date,
-                NoteValue = model.NoteValue
-            };
-            DB.Scorces.Add(UpdateItem);
-            DB.SaveChanges();
-            return RedirectToAction("ListToHospital");
+
+            }
+            return RedirectToAction("HospitalSearchValue", new { HospitalID = model.HospitalID });
         }
 
     }

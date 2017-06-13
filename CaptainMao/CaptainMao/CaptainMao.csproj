@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -123,8 +122,8 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -216,11 +215,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\buy\css\Index.css">
-      <DependentUpon>Index.less</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.css">
+      <DependentUpon>Create.less</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\css\Index.min.css">
-      <DependentUpon>Index.css</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.min.css">
+      <DependentUpon>Create1.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.css">
+      <DependentUpon>shoppingcart.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.min.css">
+      <DependentUpon>shoppingcart.css</DependentUpon>
     </Content>
     <Content Include="Areas\buy\css\shoppingIndex.css">
       <DependentUpon>shoppingIndex.less</DependentUpon>
@@ -234,7 +239,6 @@
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
     <Content Include="Areas\buy\Views\Store\Create.cshtml" />
@@ -291,6 +295,7 @@
     <Content Include="images\C3.jpg" />
     <Content Include="images\C4.jpg" />
     <Content Include="images\C6.jpg" />
+    <Content Include="images\captain.png" />
     <Content Include="images\cat.png" />
     <Content Include="images\cat2.png" />
     <Content Include="images\catdog.png" />
@@ -339,7 +344,6 @@
     <Content Include="Areas\Article\Views\Article\Create.cshtml" />
     <Content Include="Areas\Article\Views\Article\Show.cshtml" />
     <Content Include="Areas\Article\Views\Article\Comment.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Upload.ashx" />
     <Content Include="Areas\Article\Views\Article\Aside.cshtml" />
     <Content Include="Areas\Article\Views\Article\Poster.cshtml" />
     <Content Include="Areas\Article\Views\Article\Edit.cshtml" />
@@ -357,7 +361,6 @@
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
@@ -371,7 +374,6 @@
     <Content Include="Areas\Hospital\Views\web.config" />
     <Content Include="Areas\Article\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Article\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Article\Views\Article\TableCloud.cshtml" />
     <Content Include="Areas\Article\Views\Article\EditComment.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\About.cshtml" />
     <Content Include="Areas\buy\Views\ShoppingCart\Index.cshtml" />
@@ -382,9 +384,9 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Article\Views\Article\Show2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -392,6 +394,15 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\GOODDC__.TTF" />
+    <Content Include="Areas\Article\Views\Report\Index.cshtml" />
+    <Content Include="Areas\buy\css\Create.less" />
+    <Content Include="Areas\buy\css\shoppingcart.less" />
+    <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
+	<Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -407,8 +418,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
     <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
-    <Content Include="Scripts\jqcloud-1.0.4.js" />
-    <Content Include="Scripts\jqcloud-1.0.4.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\Mao.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -978,6 +987,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery-ui-tc.min.js" />
     <Content Include="Scripts\jquery.unveil.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
@@ -1056,6 +1067,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
@@ -1063,17 +1075,20 @@
     <Compile Include="Areas\Adoption\Models\IRepository.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\Adoption.cs" />
     <Compile Include="Areas\Adoption\Models\Partial\AdpWish.cs" />
-    <Compile Include="Areas\Adoption\Models\Partial\Citys.cs" />
+    <Compile Include="Areas\Adoption\Models\Partial\City.cs" />
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\AdpReportViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\Article\Controllers\ReportController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
     <Compile Include="Areas\Article\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
@@ -1099,6 +1114,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Filters\AuthorizeMaoAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1161,6 +1177,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FourStore.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1169,6 +1188,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\LoginLog.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1186,6 +1208,9 @@
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Merchandise.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Merchandise_Order_View.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
@@ -1277,6 +1302,7 @@
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Shared\_Chat.cshtml" />
+    <Content Include="Views\Account\Inactivated.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

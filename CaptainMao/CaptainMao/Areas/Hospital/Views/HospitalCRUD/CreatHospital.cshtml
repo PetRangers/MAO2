@@ -6,6 +6,19 @@
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
+<script>
+
+    function checkForm() {
+        var SaveCategory;
+        for (var i = 1; i < 6; i++) {
+            var one = document.getElementById('Category'+i);
+            if (one.checked) {
+                document.getElementById("CategoryList").value += i +"|";
+            }            
+        }
+    }
+</script>
+
 
 <!--aside側欄 article主欄-->
 
@@ -21,32 +34,32 @@
         <!--顏色請自己放在Css內 這只是樣板-->
         <div style="height:750px;background-color:#fff266" class="drawingpin">
             <h2>新增醫院</h2>
-            <form method="post" action="~/HospitalCRUD/CreatHospital" class="form-horizontal">
+            <form method="post" action="~/HospitalCRUD/CreatHospital" class="form-horizontal" onsubmit="return checkForm(this);">
                 @*<div class="form-group" style="display:none">
-                    <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
-                    </div>
-                </div>*@
+                        <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
+                        </div>
+                    </div>*@
                 <div class="form-group">
                     <label for="HospitalName"
                            class="col-sm-2 control-label">醫院名稱</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="HospitalName"  />
+                        <input type="text" class="form-control" name="HospitalName" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="HospitalAddress"
                            class="col-sm-2 control-label">醫院地址</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="HospitalAddress"  />
+                        <input type="text" class="form-control" name="HospitalAddress" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="AddressArea"
                            class="col-sm-2 control-label">醫院區域</label>
                     <div class="col-sm-10">
-                        <li class="form-control" name="AddressArea">@Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity, new { @onchange = "CheckThis()" })</li>
+                        @Html.DropDownList("AddressArea", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity)
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,14 +73,23 @@
                     <label for="PetRace"
                            class="col-sm-2 control-label">寵物種類</label>
                     <div class="col-sm-10">
-                        <input type="checkbox" value="CategoryID"  class="form-control" name="PetRace" />
+                        <fieldset>
+                            <input type="checkbox" value="1" id="Category1" name="Category1" />狗
+                            <input type="checkbox" value="2" id="Category2" name="Category2" />貓
+                            <input type="checkbox" value="3" id="Category3" name="Category3" />鳥
+                            <input type="checkbox" value="4" id="Category4" name="Category4" />兔
+                            <input type="checkbox" value="5" id="Category5" name="Category5" />鼠
+                            <input type="checkbox" value="6" id="Category6" name="Category6" />綜合
+                        </fieldset>
+
                     </div>
+                    <input type="hidden" id="CategoryList" name="CategoryList" />
                 </div>
                 <div class="form-group">
                     <label for="BusinessHours"
                            class="col-sm-2 control-label">營業時間</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="BusinessHours"  />
+                        <input type="text" class="form-control" name="BusinessHours" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,21 +103,21 @@
                     <label for="OutpatientProject"
                            class="col-sm-2 control-label">專業科目</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="OutpatientProject"  />
+                        <input type="text" class="form-control" name="OutpatientProject" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="Equipment"
                            class="col-sm-2 control-label">醫院設備</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Equipment"/>
+                        <input type="text" class="form-control" name="Equipment" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="WebAddress"
                            class="col-sm-2 control-label">醫院網址</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="WebAddress"  />
+                        <input type="text" class="form-control" name="WebAddress" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -119,7 +141,7 @@
                 </div>
             </form>
         </div>
-     
+
     </div>
     <!-------------------articleEnd------------------->
 </article>

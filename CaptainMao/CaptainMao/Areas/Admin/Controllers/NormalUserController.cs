@@ -65,7 +65,6 @@ namespace CaptainMao.Areas.Admin.Controllers
                 LastName =aspUser.LastName,
                 LockoutEnabled =aspUser.LockoutEnabled,
                 LockoutEndDateUtc =aspUser.LockoutEndDateUtc,
-                LoginCount =aspUser.LoginCount,
                 NickName =aspUser.NickName,
                 PhoneNumber =aspUser.PhoneNumber,
                 PhoneNumberConfirmed =aspUser.PhoneNumberConfirmed,
@@ -73,7 +72,9 @@ namespace CaptainMao.Areas.Admin.Controllers
                 UserName =aspUser.UserName,
                 Photo = "data:image /; base64," + Convert.ToBase64String(aspUser.Photo)
             };
-            
+            user.LoginCount = db.LoginLogs.Where(u => u.UserId == aspUser.Id).Count();
+            //user.LoginTime = db.LoginLogs.Where(u => u.UserId == aspUser.Id).OrderByDescending(u => u.LoginTime).First().LoginTime;
+
             return View(user);
         }
 
@@ -100,47 +101,45 @@ namespace CaptainMao.Areas.Admin.Controllers
         }
 
         // GET: Admin/NormalUser/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            if (aspUser == null)
+            {
+                return HttpNotFound();
+            }
+            NormalUserDetailViewModel user = new NormalUserDetailViewModel
+            {
+                AccessFailedCount=aspUser.AccessFailedCount,
+                DateRegistered =aspUser.DateRegistered,
+                Id =aspUser.Id,
+                EmailConfirmed =aspUser.EmailConfirmed,
+                Experience =aspUser.Experience,
+                FirstName =aspUser.FirstName,
+                LastName =aspUser.LastName,
+                LockoutEnabled =aspUser.LockoutEnabled,
+                LockoutEndDateUtc =aspUser.LockoutEndDateUtc,
+                NickName =aspUser.NickName,
+                PhoneNumber =aspUser.PhoneNumber,
+                PhoneNumberConfirmed =aspUser.PhoneNumberConfirmed,
+                TwoFactorEnabled =aspUser.TwoFactorEnabled,
+                UserName =aspUser.UserName,
+                Photo = "data:image /; base64," + Convert.ToBase64String(aspUser.Photo)
+            };
+            user.LoginCount = db.LoginLogs.Where(u => u.UserId == aspUser.Id).Count();
+            //user.LoginTime = db.LoginLogs.Where(u => u.UserId == aspUser.Id).OrderByDescending(u => u.LoginTime).First().LoginTime;
+
+            return View(user);
         }
 
         // POST: Admin/NormalUser/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, NormalUserDetailViewModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Details", model.Id);
         }
 
-        // GET: Admin/NormalUser/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/NormalUser/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

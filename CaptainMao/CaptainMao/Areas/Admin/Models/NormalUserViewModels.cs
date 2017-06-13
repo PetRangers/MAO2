@@ -79,6 +79,9 @@ namespace CaptainMao.Areas.Admin.Models
         [Display(Name = "登入次數")]
         public Nullable<int> LoginCount { get; set; }
 
+        [Display(Name = "上次登入時間")]
+        public  Nullable<DateTime> LoginTime { get; set; }
+
         [Display(Name = "經驗值")]
         public Nullable<int> Experience { get; set; }
 

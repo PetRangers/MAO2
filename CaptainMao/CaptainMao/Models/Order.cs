@@ -17,17 +17,19 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.Merchandises = new HashSet<Merchandise>();
+            this.Merchandise_Order_View = new HashSet<Merchandise_Order_View>();
         }
     
         public int Order_ID { get; set; }
-        public string user_ID { get; set; }
-        public int merchandise_Volume { get; set; }
-        public System.DateTime Order_Createdate { get; set; }
         public bool Order_Fitness { get; set; }
+        public string user_ID { get; set; }
+        public System.DateTime Order_Createdate { get; set; }
+        public int DeliveryLocation { get; set; }
+        public string DeliveryName { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual FourStore FourStore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        public virtual ICollection<Merchandise_Order_View> Merchandise_Order_View { get; set; }
     }
 }

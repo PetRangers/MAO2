@@ -24,11 +24,12 @@ namespace CaptainMao.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.Boards = new HashSet<Board>();
             this.Comments = new HashSet<Comment>();
-            this.Merchandises = new HashSet<Merchandise>();
-            this.Orders = new HashSet<Order>();
+            this.LoginLogs = new HashSet<LoginLog>();
             this.Scorces = new HashSet<Scorce>();
             this.UserPets = new HashSet<UserPet>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.Merchandises = new HashSet<Merchandise>();
+            this.Orders = new HashSet<Order>();
         }
     
         public string Id { get; set; }
@@ -66,9 +67,7 @@ namespace CaptainMao.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Merchandise> Merchandises { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<LoginLog> LoginLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Scorce> Scorces { get; set; }
         public virtual StoreInfo StoreInfo { get; set; }
@@ -76,5 +75,9 @@ namespace CaptainMao.Models
         public virtual ICollection<UserPet> UserPets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Merchandise> Merchandises { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

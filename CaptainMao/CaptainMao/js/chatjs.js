@@ -1,7 +1,7 @@
 ﻿     
 $(document).ready(function () {
     var me = {};
-    me.avatar = $('#userPhoto').val();
+    me.avatar = "";
 
     var you = {};
     you.avatar = "";
@@ -10,64 +10,46 @@ $(document).ready(function () {
         var id = $(this).attr('data-id');
         var name = $(this).attr('data-name');
         var img = $(this).attr('data-img');
-        $('#targetID').val(id);
-        $('.chatTitle').text(name);
-        you.avatar = img;
+
+        $(".nextchat").load("../../Shared/_Chat", function () {
+            //alert("complete");
+            $(this).removeClass('nextchat');
+            $('#chatdiv').append('<div class="childdiv nextchat"></div>');
+
+            $(this).find('#targetID').val(id);
+            $(this).find('.targetName').text(name);
+            me.avatar = $(this).find('#userPhoto').val();
+            you.avatar = img;
+        })
+        
     });
 
-
-    var flag = false;
-    $('.frame').hide();
-    $('.frame >div').hide();
-    $('.chatTitle').click(function () {
-        var frame = $('.frame');
-       
-        if(!flag) {
-            flag = true;
-            
+    //展開縮小
+    $('#chatdiv').on('click', '.chatTitle', function () {
+        var frame = $(this).siblings('.frame');
+        var space = $(this).siblings('.space');
+        var flag = $(this).attr('data-show');
+        if(flag != 'true') {
+            $(this).attr('data-show','true');
+            space.slideToggle(1000, function () { });
             frame.slideDown(1000, function () {
-                $('.frame > ul').show();
-                $('.frame >div').show();
-            });
+                frame.children('ul').show();
+                frame.children('div').show();
+            });            
         }
         else {
-            flag = false;
-            $('.frame > ul').hide();
-            $('.frame >div').hide();
-            frame.slideToggle(1000, function () { });            
+            $(this).attr('data-show', 'false');
+            frame.children('ul').hide();
+            frame.children('div').hide();
+            space.slideDown(1000, function () {});
+            frame.slideToggle(1000, function () {
+            });
         } 
     })
-
-    var userID = "";
-    var nickName = "";
-
-    userID = $('#userID').val();
-    nickName = $('#userNickName').val();
 
     //建立與Server端的Hub的物件，注意Hub的開頭字母一定要為小寫
     var chat = $.connection.chatHub;
 
-    //取得所有上線清單
-    //chat.client.getList = function (userList) {
-    //    var docFrag = $(document.createDocumentFragment());
-    //    $.each(userList, function (index, data) {
-    //        var option = $("<option></option>").val(data.id).text(data.name).attr("id", data.id);
-    //        docFrag.append(option);
-    //    });
-
-    //    $("#box").append(docFrag);
-    //}
-
-    ////新增一筆上線人員
-    //chat.client.addList = function (id, name) {
-    //    var option = $("<option></option>").val(id).text(name).attr("id", id);
-    //    $("#box").append(option);
-    //}
-
-    //移除一筆上線人員
-    //chat.client.removeList = function (id) {
-    //    $("#" + id).remove();
-    //}
 
     formatAMPM = function (date) {
         var hours = date.getHours();
@@ -80,42 +62,73 @@ $(document).ready(function () {
         return strTime;
     }
 
-    chat.client.insertChat = function (who, text) {
+    var chatting = "";
+
+    chat.client.insertChat = function ( text) {
         var control = "";
         var date = formatAMPM(new Date());
-
-        if (who == "me") {
-
-            control = '<li style="width:100%;">' +
-                              '<div class="msj-rta macro">' +
-                              '<div class="text text-l">' +
-                              '<p>' + text + '</p>' +
-                              '<p><small>' + date + '</small></p>' +
-                              '</div>' +
-                              '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + me.avatar + '" /></div>' +
-                              '</li>';
-            $('#chatul').append(control);
-        } else {
-            control = '<li style="width:100%">' +
-                            '<div class="msj macro">' +
-                            '<div class="avatar"><img class="img-circle" style="width:100%;" src="' + you.avatar + '" /></div>' +
-                            '<div class="text text-r">' +
-                            '<p>' + text + '</p>' +
-                            '<p><small>' + date + '</small></p>' +
-                            '</div>' +
-                            '</div>' +
-                            '</li>';
-            $('#chatul').append(control);
-            
-        }
+        control = '<li style="width:100%">' +
+                          '<div class="msj-rta macro" style="height:73px">' +
+                          '<div class="text text-l">' +
+                          '<p>' + text + '</p>' +
+                          '<p><small>' + date + '</small></p>' +
+                          '</div>' +
+                          '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + me.avatar + '" /></div>' +
+                          '</li>';
+            chatting.find('.chatul').append(control);
     }
 
-    $(".mytext").on("keyup", function (e) {
+    chat.client.sendChat = function (text, who, img, name) {
+      
+        var control = "";
+        var date = formatAMPM(new Date());
+        control = '<li style="width:100%">' +
+                          '<div class="msj macro" style="height:73px">' +
+                          '<div class="avatar"><img class="img-circle" style="width:100%;" src="' + img + '" /></div>' +
+                          '<div class="text text-r">' +
+                          '<p>' + text + '</p>' +
+                          '<p><small>' + date + '</small></p>' +
+                          '</div>' +
+                          '</div>' +
+                          '</li>';
+
+        var exist = false;
+        $('.frame').each(function () {
+            var id = $(this).find('#targetID').val();
+
+            if (id == who) {
+                $(this).find('.chatul').append(control);
+                exist = true;
+            }
+        });
+
+        if (!exist)
+        {
+            $(".nextchat").load("../../Shared/_Chat", function () {
+                //alert("complete");
+                $(this).removeClass('nextchat');
+                $('#chatdiv').append('<div class="childdiv nextchat"></div>');
+
+                $(this).find('#targetID').val(who);
+                $(this).find('.targetName').text(name);
+                me.avatar = $(this).find('#userPhoto').val();
+
+                $(this).find('.chatul').append(control);
+            })
+        }
+        //$('.frame').find('.chatul').append(control);
+        //$('#targetID').val(who);
+
+        
+    }
+
+    $(document).on("keyup",".mytext", function (e) {
         if (e.which == 13) {
             var text = $(this).val();
-            var id = $('#targetID').val();
+            var id = $(this).parents('.frame').find('#targetID').val();
             if (text !== "" || id != "") {
-                chat.server.sendMessage(id, text);
+                chat.server.sendMessage(id, text, me.avatar);
+                chatting = $(this).parents('.frame');
                 $(this).val('');
             }
         }

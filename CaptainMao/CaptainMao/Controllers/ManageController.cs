@@ -11,7 +11,7 @@ using CaptainMao.Filters;
 
 namespace CaptainMao.Controllers
 {
-    [AuthorizeMao(Roles ="Master")]
+    [AuthorizeMao]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -285,14 +285,14 @@ namespace CaptainMao.Controllers
             ViewBag.userPhoto = "data:image /; base64," + Convert.ToBase64String(user.Photo);
 
             UpdateProfileViewModel model = new UpdateProfileViewModel();
-            
-            model.Email = user.Email ;
+
+            model.Email = user.Email;
             model.Email = user.UserName;
             model.LastName = user.LastName;
             model.FirstName = user.FirstName;
             model.NickName = user.NickName;
             model.PhoneNumber = user.PhoneNumber;
-            
+
             return View(model);
         }
 
