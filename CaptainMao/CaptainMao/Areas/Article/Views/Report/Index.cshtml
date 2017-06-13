@@ -1,75 +1,54 @@
 ﻿
 @{
-    ViewBag.Title = "Report";
-    Layout = null;
+    ViewBag.Title = "文章圖表顯示";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>CKEditor檔案管理</title>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@section script{
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-</head>
-<body>
-    
-        <!-------------------articleOpen------------------->
-        <div>
-            <!--顏色請自己放在Css內 這只是樣板-->
-            <div style="height:70px;background-color:#fff266" class="drawingpin">
 
-            </div>
-            <div style="background-color:burlywood" class="drawingpin">
-                <div id="container" class="highcharts-container" style="height:410px;margin:0 2em;clear:both;min-width:600px">
-
-                </div>
-            </div>
-        </div>
-        <!-------------------articleEnd------------------->
     <script>
         var chart;
         $(document).ready(function () {
-            chart = new Highcharts.chart({
-                chart: {
-                    renderTo: 'container',
-                    defaultSeriesType: 'areaspline',
-                    events: {
-                        load: GetReportData
-                    }
-                },
-                title: {
-                    text: 'HighCharts使用Demo'
-                },
-                xAxis: {
-                    categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-                }, yAxis: {
-                    title: {
-                        text: '數量'
-                    }
-                },
-                tooltip: {
-                    formatter: function () {
-                        return '類別1:' + this.points[0].y + '<br/>類別2:' + this.points[1].y;
+                chart = new Highcharts.chart({
+                    chart: {
+                        renderTo: 'container',
+                        defaultSeriesType: 'areaspline',
+                        events: {
+                            load: GetReportData
+                        }
                     },
-                    shared: true,
-                    crosshairs: true
-                },
-                series: [{
-                    name: '類別1',
-                    data: [],
-                    fillOpacity: 0.5
-                }, {
-                    name: '類別2',
-                    data: [],
-                    fillOpacity: 0.4
-                }]
+                    title: {
+                        text: '文章發表管理'
+                    },
+                    xAxis: {
+                        categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                    }, yAxis: {
+                        title: {
+                            text: '文章數量'
+                        }
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return '版面:貓  ' + this.points[0].y + '<br/>版面:狗 ' + this.points[1].y;
+                        },
+                        shared: true,
+                        crosshairs: true
+                    },
+                    series: [{
+                        name: '貓',
+                        data: [],
+                        fillOpacity: 0.5
+                    }, {
+                        name: '狗',
+                        data: [],
+                        fillOpacity: 0.4
+                    }]
+                });
             });
-        });
+
         function GetReportData() {
             $.ajax({
                 url: '@Url.Action("Report")',
@@ -83,7 +62,29 @@
                 cache: false
             });
         }
-    </script>
-</body>
-</html>
+</script>
+    }
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:70px;background-color:#fff266" class="drawingpin">
+            <div class="navbar-left">
+                @Html.ActionLink("主版", "Board","Article", null, new { @class = "btn btn-info" })
+                @Html.ActionLink("文章列表", "Index","Article",null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+        <div style="background-color:burlywood" class="drawingpin">
+            <div id="container" class="highcharts-container" style="height:410px;margin:0 2em;clear:both;min-width:600px">
+
+            </div>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
 

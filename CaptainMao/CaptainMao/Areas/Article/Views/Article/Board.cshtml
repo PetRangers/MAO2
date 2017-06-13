@@ -10,29 +10,40 @@
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(function () {
-                $.ajax({
-                    url: '@Url.Action("HighPop")',
-                    type: 'Get',
-                    dataType: 'json',
-                    success: SetValue
-                });
-            });
-            var tu = $('#tb');
-            tu.empty;
-            var f = $(document.createDocumentFragment());
-            function SetValue(data) {
-                $.each(data, function (index, value) {
-                    var t1 = $('<td></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h4 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
-                    var row = $('<tr></tr>').append(t1);
-                    f.append(row);
-                })
-                tu.append(f);
-            };
-            $('#tb').on('click', '.a', function () {
+            loadBoard(1);
+            
+            $('.list-group').on('click', 'li', function () {
+                loadBoard($(this).data('cid'));
 
+                $('.list-group>li').removeClass('active');
+                $(this).addClass('active');
             })
-        })
+
+            function loadBoard(id) {
+                $.getJSON('@Url.Action("HighPop")', { 'BoardID': id }, function (datas) {
+                    var tu = $('#tb');
+                    tu.empty();
+                    var f = $(document.createDocumentFragment());
+                    $.each(datas, function (index,value) {
+                        var t1 = $('<td ></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h4 style="width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
+                        var row = $('<tr ></tr>').append(t1);
+                        f.append(row);
+                    })
+                    tu.append(f);
+                })
+            }
+
+            $.ajax({ 'url': '@Url.Action("BoardCategory")', 'type': 'get', 'dataType': 'json' }).done(function (data) {
+                var f = $(document.createDocumentFragment());
+                $.each(data,function (idx, value) {
+                    var categoryName = value.BoardName;
+                    var categoryID = value.BoardID;
+                    var s1 = $('<li></li>').text(categoryName).attr('data-cid', categoryID).addClass('btn btn-info');
+                    f.append(s1);
+                })
+                $('.list').append(f).css('cursor', 'pointer');
+            })
+        });
     </script>
     }
 @section style{
@@ -83,6 +94,7 @@
         .meta h4:hover{
             color:rgba(0,0,0,.87);
         }
+
     </style>
     }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -137,13 +149,20 @@
                     </div>
                 </div>
             </div>
-            
             <div class="col-lg-3">
                 <div style="background-color:burlywood" class="drawingpin">
-                    <div class="highPop">
+                    <div>
+                        <h2>最新文章</h2>
+                        <ul class="list-group list">
+
+                        </ul>
+                    </div>
+                    <div>
                         <table>
                             <thead>
-                                <tr>最新發表</tr>
+                                <tr>
+                                   <td ></td> 
+                                </tr>
                             </thead>
                             <tbody id="tb">
 

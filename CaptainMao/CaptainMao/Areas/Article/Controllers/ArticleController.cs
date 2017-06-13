@@ -356,16 +356,16 @@ namespace CaptainMao.Areas.Article.Controllers
                 return Json(new { IsSuccess = false, Message = "Can't find file by file name." });
             }
         }
-        public ActionResult HighPop()
+        public ActionResult BoardCategory()
         {
-            //article=db.Articles.Where(a=>a.IsDeleted!=true).OrderByDescending(a => a.CreateDateTime).Take(10).ToList();
-            var json =( from x in db.Articles where x.IsDeleted!=true orderby x.CreateDateTime descending
-                       select new
-                       {
-                           ArticleID = x.ArticleID,
-                           Title = x.Title
-                       }).Take(10);
-            return Json(json.ToList(), JsonRequestBehavior.AllowGet);
+            var board = db.Boards.Select(a => new { BoardID = a.BoardID, BoardName = a.BoardName });
+            return Json(board.ToList(),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult HighPop(int boardID)
+        {
+            var article = db.Articles.Where(a => a.IsDeleted != true && a.BoardID == boardID).OrderByDescending(a => a.CreateDateTime)
+                .Select(a => new { ArticleID = a.ArticleID, Title = a.Title }).Take(10);
+            return Json(article.ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }
