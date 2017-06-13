@@ -392,6 +392,9 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1058,6 +1061,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
@@ -1280,6 +1284,7 @@
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Shared\_Chat.cshtml" />
+    <Content Include="Views\Account\Inactivated.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -138,6 +138,13 @@ namespace CaptainMao.Controllers
                     };
                     db.LoginLogs.Add(login);
                     await db.SaveChangesAsync();
+
+                    
+                    if (userRole.Contains("Inactivated"))
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        return RedirectToAction("Inactivated", "Account", new { area = "" });
+                    }
                     if (userRole.Contains("Store"))
                     {
                         return RedirectToAction("Index", "Store", new { area = "buy" });
@@ -606,7 +613,14 @@ namespace CaptainMao.Controllers
         }
 
 
-        
+        // GET: /Account/Inactivated
+        [AllowAnonymous]
+        public ActionResult Inactivated()
+        {
+            return View();
+        }
+
+
 
         private class reCaptchaResponse
         {
