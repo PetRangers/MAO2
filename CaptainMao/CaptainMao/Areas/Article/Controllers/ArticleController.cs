@@ -367,5 +367,11 @@ namespace CaptainMao.Areas.Article.Controllers
                 .Select(a => new { ArticleID = a.ArticleID, Title = a.Title }).Take(10);
             return Json(article.ToList(), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetUserImage(string id)
+        {
+            var photo = db.AspNetUsers.Where(u => u.Id == id).Select(u => u.Photo).First();
+            byte[] img = photo;
+            return File(img, "image/jpeg");
+        }
     }
 }
