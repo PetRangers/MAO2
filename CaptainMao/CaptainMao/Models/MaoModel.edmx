@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -937,7 +937,8 @@
             <End Role="UserPet" EntitySet="UserPet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1263,8 +1264,6 @@
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
           <NavigationProperty Name="FourStore" Relationship="Self.FK_Order_FourStore" FromRole="Order" ToRole="FourStore" />
           <NavigationProperty Name="Merchandises" Relationship="Self.Merchandise_Order_View" FromRole="Order" ToRole="Merchandise" />
-          <Property Name="DeliveryLocation" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FourStore" Relationship="MaoModel.FK_Order_FourStore" FromRole="Order" ToRole="FourStore" />
         </EntityType>
         <EntityType Name="shoppingcart">
           <Key>
@@ -1815,41 +1814,13 @@
             <End Role="sType" EntitySet="sTypes" />
           </AssociationSet>
           <FunctionImport Name="DeleteToMerchandise_Type_View">
-          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
             <Parameter Name="sTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="FourStores" EntityType="MaoModel.FourStore" />
-          <AssociationSet Name="FK_Order_FourStore" Association="MaoModel.FK_Order_FourStore">
-            <End Role="FourStore" EntitySet="FourStores" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="FourStore">
-          <Key>
-            <PropertyRef Name="BranchID" />
-          </Key>
-          <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Compete" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UnifiedNummerering" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Branch" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BranchAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="MaoModel.FK_Order_FourStore" FromRole="FourStore" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK_Order_FourStore">
-          <End Type="MaoModel.FourStore" Role="FourStore" Multiplicity="1" />
-          <End Type="MaoModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FourStore">
-              <PropertyRef Name="BranchID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="DeliveryLocation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2130,7 +2101,6 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MaoModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="DeliveryLocation" ColumnName="DeliveryLocation" />
                 <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="user_ID" ColumnName="user_ID" />
                 <ScalarProperty Name="merchandise_Volume" ColumnName="merchandise_Volume" />
@@ -2194,17 +2164,6 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
           <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
-          <EntitySetMapping Name="FourStores">
-            <EntityTypeMapping TypeName="MaoModel.FourStore">
-              <MappingFragment StoreEntitySet="FourStore">
-                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
-                <ScalarProperty Name="Branch" ColumnName="Branch" />
-                <ScalarProperty Name="UnifiedNummerering" ColumnName="UnifiedNummerering" />
-                <ScalarProperty Name="Compete" ColumnName="Compete" />
-                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
