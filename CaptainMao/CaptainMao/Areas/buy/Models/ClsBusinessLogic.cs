@@ -224,7 +224,7 @@ namespace CaptainMao.Areas.buy.Models
         }
 
         public IEnumerable<CaptainMao.Models.City> Logic_GetAllCity() {
-            return DB.Citys;
+            return DB.Cities;
         }
 
     }
