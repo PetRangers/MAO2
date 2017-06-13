@@ -36,7 +36,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             {
                 ViewBag.search = search;
             }
-            return PartialView(db.Citys.ToList());
+            return PartialView(db.Cities.ToList());
         }
 
         public ActionResult CateForWish(int? cityid, string search)
@@ -63,7 +63,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             {
                 ViewBag.search = search;
             }
-            return PartialView(db.Citys.ToList());
+            return PartialView(db.Cities.ToList());
         }
 
         public ActionResult Chat()

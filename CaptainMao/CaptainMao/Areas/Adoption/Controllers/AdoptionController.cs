@@ -43,7 +43,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             if (cityid != null)
             {
                 adoptions = adoptions.Where(a => a.CityID == cityid);
-                var city = db.Citys.Where(c => c.CityID == cityid).Select(c => c.CityName).ToList();
+                var city = db.Cities.Where(c => c.CityID == cityid).Select(c => c.CityName).ToList();
                 ViewBag.city = city[0];
             }
             return View(adoptions.OrderByDescending(a => a.PostDate).ToList().ToPagedList(page ?? 1, 6));
@@ -56,7 +56,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             vm.adoption = db.Adoptions.Find(id);
 
             vm.category = db.Categories.Find(vm.adoption.CategoryID);
-            vm.city = db.Citys.Find(vm.adoption.CityID);
+            vm.city = db.Cities.Find(vm.adoption.CityID);
             return View(vm);
         }
 
@@ -71,7 +71,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult CreateAdoption()
         {
             ViewBag.Category = db.Categories.ToList();
-            ViewBag.City = db.Citys.ToList();
+            ViewBag.City = db.Cities.ToList();
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult CreateAdoption(CaptainMao.Models.Adoption pet, HttpPostedFileBase PetImage)
         {
             ViewBag.Category = db.Categories.ToList();
-            ViewBag.City = db.Citys.ToList();
+            ViewBag.City = db.Cities.ToList();
 
             if (PetImage != null)
             {
@@ -140,7 +140,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         {
             var adoption = db.Adoptions.Find(id);
             ViewBag.Category = db.Categories.ToList();
-            ViewBag.City = db.Citys.ToList();
+            ViewBag.City = db.Cities.ToList();
 
             return View(adoption);
         }
@@ -206,7 +206,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             if (cityid != null)
             {
                 wishs = wishs.Where(a => a.CityID == cityid);
-                var city = db.Citys.Where(c => c.CityID == cityid).Select(c => c.CityName).ToList();
+                var city = db.Cities.Where(c => c.CityID == cityid).Select(c => c.CityName).ToList();
                 ViewBag.city = city[0];
             }
             return View(wishs.OrderByDescending(a => a.PostDate).ToList().ToPagedList(page ?? 1,6));
@@ -215,7 +215,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         public ActionResult CreateAdpWish()
         {
             ViewBag.Category = db.Categories.ToList();
-            ViewBag.City = db.Citys.ToList();
+            ViewBag.City = db.Cities.ToList();
             return View();
         }
 

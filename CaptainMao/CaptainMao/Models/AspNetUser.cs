@@ -24,6 +24,7 @@ namespace CaptainMao.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.Boards = new HashSet<Board>();
             this.Comments = new HashSet<Comment>();
+            this.LoginLogs = new HashSet<LoginLog>();
             this.Merchandises = new HashSet<Merchandise>();
             this.Orders = new HashSet<Order>();
             this.Scorces = new HashSet<Scorce>();
@@ -65,6 +66,8 @@ namespace CaptainMao.Models
         public virtual ICollection<Board> Boards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoginLog> LoginLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Merchandise> Merchandises { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

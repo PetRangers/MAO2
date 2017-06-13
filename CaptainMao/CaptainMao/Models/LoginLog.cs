@@ -12,14 +12,13 @@ namespace CaptainMao.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class shoppingcart
+    public partial class LoginLog
     {
-        public int cartID { get; set; }
-        public string userID { get; set; }
-        public int Merchandise_ID { get; set; }
-        public int merchandise_Volume { get; set; }
-        public System.DateTime DateCreated { get; set; }
+        public int LoginId { get; set; }
+        public string UserId { get; set; }
+        public System.DateTime LoginTime { get; set; }
+        public string LoginIP { get; set; }
     
-        public virtual Merchandise Merchandise { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

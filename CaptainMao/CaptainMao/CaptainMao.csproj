@@ -236,6 +236,9 @@
     <Content Include="Areas\buy\Views\Store\Index.cshtml" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
+    <Content Include="Areas\Hospital\Image\mai.png" />
+    <Content Include="Areas\Hospital\Image\main2.png" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
@@ -353,10 +356,9 @@
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Index.cshtml" />
-    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\web.config" />
@@ -381,6 +383,11 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Hospital\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Hospital\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1143,6 +1150,9 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\FourStore.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hospital.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1151,6 +1161,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUtilities.cs" />
+    <Compile Include="Models\LoginLog.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MaoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1187,6 +1200,9 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategory.cs">
@@ -1267,7 +1283,6 @@
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
-    <Folder Include="Areas\Hospital\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
