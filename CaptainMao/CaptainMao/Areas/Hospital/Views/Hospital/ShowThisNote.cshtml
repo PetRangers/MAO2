@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ShowThisNote";
+}
+
+@*<h2>ShowThisNote</h2>*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>評分者</th>
+            <th>評語</th>
+            <th>星等</th>
+            <th>評分時間</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.AspNetUser.NickName</td>
+                <td>@item.NoteValue</td>
+                <td>@item.Scorce1</td>
+                <td>@item.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

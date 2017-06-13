@@ -73,11 +73,11 @@
                                     <ul>
                                         <li class="dropdown-header">尋找新家</li>
                                         <li class="divider"></li>
-                                        <li></li>
-                                        <li>領養列表</li>
-                                        <li>尋找新主人</li>
-                                        <li>領養心願</li>
-                                        <li>新增心願</li>
+                                        <li>@Html.ActionLink("個人管理", "AdoptionManage","Adoption",new{area = "Adoption"}, null)</li>
+                                        <li>@Html.ActionLink("領養列表", "Index","Adoption",new{area = "Adoption"}, null)</li>
+                                        <li>@Html.ActionLink("尋找新主人", "CreateAdoption","Adoption",new{area = "Adoption"}, null)</li>
+                                        <li>@Html.ActionLink("領養心願", "AdoptionWish","Adoption",new{area = "Adoption"}, null)</li>
+                                        <li>@Html.ActionLink("新增心願", "CreateAdpWish","Adoption",new{area = "Adoption"}, null)</li>
                                     </ul>
                                 </li>
                                 

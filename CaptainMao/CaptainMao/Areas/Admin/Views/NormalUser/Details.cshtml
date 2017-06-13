@@ -47,10 +47,10 @@
                         <h4 class="blue">
                             <span class="middle">@Model.LastName @Model.FirstName</span>
 
-                            <span class="label label-purple arrowed-in-right">
+                            @*<span class="label label-purple arrowed-in-right">
                                 <i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
                                 online
-                            </span>
+                            </span>*@
                         </h4>
 
                         <div class="profile-user-info">
@@ -86,17 +86,22 @@
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 上次登入 </div>
-
                                 <div class="profile-info-value">
                                     <span>3 hours ago</span>
                                 </div>
                             </div>
                         
                             <div class="profile-info-row">
+                                <div class="profile-info-name"> 經驗值 </div>
+                                <div class="profile-info-value">
+                                    <span>@Html.DisplayFor(m => m.Experience)</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
                                 <div class="profile-info-name">
                                     <i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
                                 </div>
-
                                 <div class="profile-info-value">
                                     <a href="#">Find me on Facebook</a>
                                 </div>
@@ -111,40 +116,48 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
                         <span class="profile-picture">
-                            <img class="editable img-responsive" alt=" Avatar" id="avatar2" src="@Model.Photo">
+                            <img name="avatar2" id="UserPhotoPreview" class="editable img-responsive" src="@Model.Photo" alt="無圖片可供預覽" />
                         </span>
-
+                        
                         <div class="space space-4"></div>
+                        
+                        
 
-                        <a href="#" class="btn btn-sm btn-block btn-success">
-                            <i class="ace-icon fa fa-commenting-o bigger-110"></i>
-                            <span class="bigger-110">傳送訊息</span>
-                        </a>
                     </div><!-- /.col -->
 
                     <div class="col-xs-12 col-sm-9">
                         <h4 class="blue">
-                            <span class="middle">@Model.LastName @Model.FirstName</span>
-
-                            <span class="label label-purple arrowed-in-right">
-                                <i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
-                                online
-                            </span>
+                            <span class="middle">ID: @Model.Id</span>
                         </h4>
 
+
                         <div class="profile-user-info">
+
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 帳號 </div>
-
                                 <div class="profile-info-value">
-                                    <span>@Model.UserName</span>
+                                    <span>@Html.DisplayFor(m => m.UserName)</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 姓 </div>
+                                <div class="profile-info-value">
+                                    <span>@Html.DisplayFor(m => m.LastName)</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 名 </div>
+                                <div class="profile-info-value">
+                                    <span>@Html.DisplayFor(m => m.FirstName)</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 暱稱 </div>
                                 <div class="profile-info-value">
-                                    <span>@Model.NickName</span>
+                                    <span>@Html.DisplayFor(m => m.NickName)</span>
                                 </div>
                             </div>
 
@@ -152,28 +165,33 @@
                                 <div class="profile-info-name"> 註冊日期 </div>
 
                                 <div class="profile-info-value">
-                                    <span>@Model.DateRegistered</span>
+                                    <span>@Html.DisplayFor(m => m.DateRegistered)</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 登入次數 </div>
                                 <div class="profile-info-value">
-                                    <span>@Model.LoginCount</span>
+                                    <span>@Html.DisplayFor(m => m.LoginCount)</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 上次登入 </div>
-
                                 <div class="profile-info-value">
-                                    <span>3 hours ago</span>
+                                    <span>@Html.DisplayFor(m => m.LoginTime)</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 經驗值 </div>
+                                <div class="profile-info-value">
+                                    <span>@Html.DisplayFor(m => m.Experience)</span>
                                 </div>
                             </div>
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 帳號鎖定功能 </div>
-
                                 <div class="profile-info-value">
                                     @{
                                         if (Model.LockoutEnabled)
@@ -218,7 +236,7 @@
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> 手機 </div>
                                 <div class="profile-info-value">
-                                    <span>@Model.PhoneNumber</span>
+                                    <span>@Html.DisplayFor(m=>m.PhoneNumber)</span>
                                 </div>
                                 <div class="profile-info-value">
                                     @{

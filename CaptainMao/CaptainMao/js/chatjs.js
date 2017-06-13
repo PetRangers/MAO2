@@ -67,8 +67,8 @@ $(document).ready(function () {
     chat.client.insertChat = function ( text) {
         var control = "";
         var date = formatAMPM(new Date());
-        control = '<li style="width:100%;">' +
-                          '<div class="msj-rta macro">' +
+        control = '<li style="width:100%">' +
+                          '<div class="msj-rta macro" style="height:73px">' +
                           '<div class="text text-l">' +
                           '<p>' + text + '</p>' +
                           '<p><small>' + date + '</small></p>' +
@@ -83,7 +83,7 @@ $(document).ready(function () {
         var control = "";
         var date = formatAMPM(new Date());
         control = '<li style="width:100%">' +
-                          '<div class="msj macro">' +
+                          '<div class="msj macro" style="height:73px">' +
                           '<div class="avatar"><img class="img-circle" style="width:100%;" src="' + img + '" /></div>' +
                           '<div class="text text-r">' +
                           '<p>' + text + '</p>' +

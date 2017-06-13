@@ -17,12 +17,24 @@ namespace CaptainMao.Areas.Article.Controllers
         [HttpPost]
         public ActionResult Report()
         {
-            //var date=db.Articles.Where(a=>a.CreateDateTime==DateTime.Now.GetDateTimeFormats("2017/1").Count())
             ViewModel.ReportViewModel data = new ViewModel.ReportViewModel();
-            data.Category1 = Enumerable.Range(0, 100).OrderBy(a => Guid.NewGuid()).Take(12).ToList();
-            data.Category2 = Enumerable.Range(0, 100).OrderBy(a => Guid.NewGuid()).Take(12).ToList();
 
+            List<int> countList1 = new List<int>();
+            List<int> countList2 = new List<int>();
+            for (int i = 1; i <= 12; i++)
+            {
+                int board1 = db.Articles.Where(a =>a.BoardID==1 && a.CreateDateTime.Month == i).Count();
+                int board2 = db.Articles.Where(a => a.BoardID == 2 && a.CreateDateTime.Month == i).Count();
+                countList1.Add(board1);
+                countList2.Add(board2);
+            }
+            data.Category1 = countList1;
+            data.Category2 = countList2;
             return Json(data);
+        }
+        public ActionResult Aside()
+        {
+            return PartialView();
         }
     }
 }
