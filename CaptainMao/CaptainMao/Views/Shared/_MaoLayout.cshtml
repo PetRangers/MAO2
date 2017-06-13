@@ -14,6 +14,8 @@
 
     @Styles.Render("~/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+
     <link href="~/css/main.css" rel="stylesheet" />
     <link href="~/css/chat.css" rel="stylesheet" />
     @RenderSection("style", false)
@@ -49,47 +51,63 @@
                                 <li class="col-sm-2"></li>
                                 <li class="col-sm-2">
                                     <ul>
-                                        <li class="dropdown-header">毛孩購物</li>
-                                        <li class="divider"></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
-                                        <li class="dropdown-header">快樂跳舞</li>
-                                        <li class="divider"></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-2">
-                                    <ul>
                                         <li class="dropdown-header">七嘴八舌</li>
                                         <li class="divider"></li>
+                                        <li><a href="@Url.Action("Board","Article",new { area="Article"})" >哈拉主版</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">毛孩購物</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("汪孩商品", "Index", "Shopping", new { area = "buy", CategoryID = "1" }, null)</li>
+                                        <li>@Html.ActionLink("貓孩商品", "Index", "Shopping", new { area = "buy", CategoryID = "2" }, null)</li>
+                                        <li>@Html.ActionLink("鳥兒商品", "Index", "Shopping", new { area = "buy", CategoryID = "3" }, null)</li>
+                                        <li>@Html.ActionLink("兔兔商品", "Index", "Shopping", new { area = "buy", CategoryID = "4" }, null)</li>
+                                        <li>@Html.ActionLink("鼠鼠商品", "Index", "Shopping", new { area = "buy", CategoryID = "5" }, null)</li>
 
                                     </ul>
                                 </li>
                                 <li class="col-sm-2">
                                     <ul>
-                                        <li class="dropdown-header">美食醫院</li>
+                                        <li class="dropdown-header">尋找新家</li>
                                         <li class="divider"></li>
+                                        <li></li>
+                                        <li>領養列表</li>
+                                        <li>尋找新主人</li>
+                                        <li>領養心願</li>
+                                        <li>新增心願</li>
                                     </ul>
                                 </li>
+                                
+                                <li class="col-sm-2">
+                                    <ul>
+                                        <li class="dropdown-header">毛孩醫院</li>
+                                        <li class="divider"></li>
+                                        <li>醫院區域</li>
+                                        <li>寵物種類</li>
+                                    </ul>
+                                </li>
+                         
                                 <li class="col-sm-2"></li>
                             </ul>
                         </li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
-                        <li><a href="@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" class="dropdown-toggle" title="毛孩領養">尋找新家<br /><br />領養專區</a></li>
                         <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
-                        <li><a href="#" class="dropdown-toggle" title="毛孩地圖">美食醫院<br /><br />查詢專區</a></li>
+                        <li><a href="@Url.Action("index","Shopping",new { area="buy"})" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
+                        <li><a href="@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" class="dropdown-toggle" title="毛孩領養">尋找新家<br /><br />領養專區</a></li>
+                        <li><a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" class="dropdown-toggle" title="毛孩地圖">毛孩醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
-                            <ul class="dropdown-menu" role="menu">
+                        <li >
+                            <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
+                            @*<ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Action</a></li>
                                 <li><a href="#">Another action</a></li>
                                 <li><a href="#">Something else here</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
-                            </ul>
+                            </ul>*@
                         </li>
                         @Html.Partial("_LoginPartial")
                     </ul>
@@ -107,24 +125,22 @@
                     @Html.ActionLink("回首頁", "Index", "CaptainMao", new { area = "" }, new { @title = "回首頁" })
                 </li>
                 <li>
-                    <a href="/about" title="Go to About Us section">毛孩購物</a>
+                    <a href="@Url.Action("Board","Article",new { area="Article"})" title="七嘴八舌">七嘴八舌</a>
                 </li>
                 <li>
-                    <a href="/resume" title="Navigate to Jonathan Adcox IT Resume">快樂跳舞</a>
+                    <a href="@Url.Action("index","Shopping",new { area="buy"})" title="毛孩購物">毛孩購物</a>
                 </li>
-
                 <li>
-                    <a href="/resume" title="Navigate to Jonathan Adcox IT Resume">七嘴八舌</a>
+                    <a href="@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" title="尋找新家">尋找新家</a>
                 </li>
-
                 <li>
-                    <a href="/portfolio" title="Navigate to 'Our Services' section">美食醫院</a>
+                    <a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" title="毛孩醫院">毛孩醫院</a>
                 </li>
                 <li id="user" class="hidden-md hidden-lg toggle">
-                    <span class="fa fa-user"></span>
+                     <a href="@Url.Action("Login","Account")" class="fa fa-user"></a>
                 </li>
                 <li id="shopping" class="hidden-md hidden-lg toggle">
-                    <span class="fa fa-lg fa-cart-plus"></span>
+                    <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})" class="fa fa-lg fa-cart-plus"></a>
                 </li>
 
             </ul>

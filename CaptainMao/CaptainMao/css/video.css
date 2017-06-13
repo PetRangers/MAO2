@@ -8,17 +8,39 @@
 .homepage-hero-module .filter {
     z-index: 100;
     position: absolute;
-    background: rgba(0, 0, 0, 0.4);
-    width:300px;
-    height:300px;
-    left:10%;top:40%;
-    line-height:300px;
+    filter:grayscale(50%);
+    width:150px;
+    height:150px;
+    top:82%;
+    line-height:150px;
     color:white;
     font-size:5em;
     text-align:center;
     border-radius: 150px;
-    
+    transition:1.5s;    
+        
 }
+    .homepage-hero-module .filter img {
+    border-radius:100px;
+        transition:1.5s;    
+    }
+
+ .homepage-hero-module .filter >div:nth-child(2){
+     background-color:rgba(0,0,0,0.1);
+     height:80vh;
+     
+}
+
+
+    .homepage-hero-module .filter:hover {
+    filter:grayscale(0%);
+    top:0%;
+    }
+
+
+
+
+
 .homepage-hero-module video {
     position: absolute;
     z-index: 0;
@@ -31,3 +53,45 @@
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
 }
+
+
+
+
+
+.card {
+  width: 500px;
+  height: 150px;
+  border-radius: 5px;
+  /*background-color: white;*/
+  background-color:blanchedalmond;
+  position: relative;
+  overflow: hidden;
+  margin-bottom:10px;
+  position:relative;
+}
+    .card > div {
+    background-color:cadetblue;
+    height:300px;
+    width:300px;
+    transform:rotate(-45deg);
+    left:-180px;
+    position:absolute;
+    }
+
+    .card > img {
+        height:100px;
+        width:100px;
+        background-color:azure;
+        border-radius:30px;
+        position:absolute;
+        left:30px;
+        top:30px;
+    }
+    .card > h2 {
+   color:cadetblue;
+            }
+        .card > h3 {
+   color:#0094ff;
+   font-size:0.8em;
+   
+            }

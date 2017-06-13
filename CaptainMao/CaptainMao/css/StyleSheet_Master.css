@@ -1,8 +1,8 @@
 /*文字設定*/
 @import url(//fonts.googleapis.com/earlyaccess/cwtexyen.css);
 @font-face {
-  font-family: 'Sensations and Qualities';
-  src: url('../fonts/Sensations and Qualities.ttf') format('truetype');
+  font-family: 'GOODDC__';
+  src: url('../fonts/GOODDC__.TTF') format('truetype');
 }
 /*動物填滿圖*/
 @font-face {
@@ -47,7 +47,7 @@ body a:hover {
 }
 .navbar .navbar-brand {
   font-size: 4em;
-  font-family: 'Sensations and Qualities';
+  font-family: Caveat;
 }
 .navbar .navbar-header {
   margin-left: 50px !important;
@@ -138,9 +138,19 @@ body a:hover {
   display: block;
   padding: 3px 5px;
 }
+.mega-dropdown-menu > li {
+  font-size: 20px;
+}
+.mega-dropdown-menu > li:nth-child(2) {
+  text-align: right;
+}
+.mega-dropdown-menu > li:nth-child(3),
+.mega-dropdown-menu > li:nth-child(4) {
+  text-align: center;
+}
 .mega-dropdown-menu .dropdown-header {
   font-size: 18px;
-  padding: 5px 60px 5px 5px;
+  /*padding: 5px 60px 5px 5px;*/
   line-height: 30px;
   font-weight: bolder;
 }
@@ -330,7 +340,8 @@ footer {
 }
 .dropdown-menu li a {
   color: #ffffff;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  transition: 1s;
 }
 .sidebar-nav li a {
   color: #5d2c2c;
@@ -350,11 +361,12 @@ footer {
   font-size: 2.5em;
 }
 .dropdown-menu li a:hover {
-  color: #8a0e0b;
+  color: #343434;
+  background-color: rgba(247, 237, 205, 0.8);
   font-weight: bold;
 }
 .mega-dropdown-menu .dropdown-header {
-  color: #8a0e0b;
+  color: #fcf8e3;
   font-size: 2em;
 }
 /*左側*/
