@@ -27,11 +27,11 @@
         }
 
             #display > .row > div > div {
-                height: 410px;
+                height: 460px;
                 font-size:20px;
             }
 
-        .space {
+        .noValue {
             color:white;
         }
     </style>
@@ -139,15 +139,18 @@
                                     <p>@Html.DisplayNameFor(a => adoption.Hair) : @Html.DisplayFor(a => adoption.Hair)</p>
                                 }
                                 else { count++; }
+
                                 <p>@Html.DisplayNameFor(a => adoption.CityID) : @Html.DisplayFor(a => adoption.City.CityName)</p>
 
                                 @for (int i = 0; i < count; i++)
                                 {
-                                    <p class="space">a</p>
+                                    <p class="noValue">a</p>
                                 }
                                 <p>@Html.DisplayNameFor(a => adoption.UserID) : @Html.DisplayFor(a => adoption.AspNetUser.NickName)</p>
                                 <p>連絡電話 : @Html.DisplayFor(a => adoption.AspNetUser.PhoneNumber)</p>
                                 <p>@Html.DisplayNameFor(a => adoption.PostDate) : @Html.DisplayFor(a => adoption.PostDate)</p>
+                                <a class="btn btn-success getchat" data-id="@adoption.AspNetUser.Id" data-name="@adoption.AspNetUser.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =adoption.AspNetUser.Id })">來聯絡我</a>
+
                             </div>
 
 
