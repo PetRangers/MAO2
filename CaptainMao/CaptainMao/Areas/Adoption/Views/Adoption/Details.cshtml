@@ -27,77 +27,77 @@
     <!-------------------articleOpen------------------->
         <div class="thumbnail drawingpin">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <img src="@Url.Action("GetImage","Adoption",new { id =Model.adoption.AdoptionID })" />
                 </div>
 
-                <div class="col-md-7 form-horizontal">
+                <div class="col-md-6 form-horizontal">
                     <div class="caption">
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Name,new { @class = "col-sm-2"})
-                            <div class="col-sm-10">                          
+                            @Html.LabelFor(a => a.adoption.Name,new { @class = "col-sm-3"})
+                            <div class="col-sm-9">                          
                                 @Html.DisplayFor(a => a.adoption.Name)
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Sex, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.adoption.Sex, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.adoption.Sex)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.category.CategoryName, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.category.CategoryName, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.category.CategoryName)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Build, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.adoption.Build, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.adoption.Build)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Age, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.adoption.Age, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.adoption.Age)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.city.CityName, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.city.CityName, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.city.CityName)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Hair, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.adoption.Hair, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.adoption.Hair)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.Description, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(a => a.adoption.Description, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.DisplayFor(a => a.adoption.Description)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.NormalUser.LastName, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
-                                @Html.DisplayFor(a => a.adoption.NormalUser.LastName)
+                            @Html.LabelFor(a => a.NickName, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
+                                @Html.DisplayFor(a => a.NickName)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.NormalUser.Phone, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
-                                @Html.DisplayFor(a => a.adoption.NormalUser.Phone)
+                            @Html.LabelFor(a => a.PhoneNumber, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
+                                @Html.DisplayFor(a => a.PhoneNumber)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(a => a.adoption.NormalUser.Email, new { @class = "col-sm-2" })
-                            <div class="col-sm-10">
-                                @Html.DisplayFor(a => a.adoption.NormalUser.Email)
+                            @Html.LabelFor(a => a.Email, new { @class = "col-sm-3" })
+                            <div class="col-sm-9">
+                                @Html.DisplayFor(a => a.Email)
                             </div>
                         </div>
                     </div>

@@ -6,17 +6,60 @@
     <link href='@Url.Action("video.css","css")' rel="stylesheet" />
 }
 @section script{
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script>
+        $('.filter').hover(function () { $(this).find('img').css('box-shadow', '0px 0px 100px #fff'); },
+                               function () { $(this).find('img').css('box-shadow', 'none'); })
+
+    </script>
 }
 
 <div class="homepage-hero-module">
-    <div class="filter">第一組</div>
+    <div class="filter">
+        <img src="~/images/captain.png"  />
+        <div>
+            <div class="card">
+                <div></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png"/>
+                <h2>簡大鈞</h2>
+                <h3>身分驗證</h3>
+            </div>
+            <div class="card">
+                <div></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" />
+                <h2>蔡忠庭</h2>
+                <h3>購物商城</h3>
+            </div>
+            <div class="card">
+                <div></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" />
+                <h2>陳威廷</h2>
+                <h3>心願表</h3>
+            </div>
+            <div class="card">
+                <div></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" />
+                <h2>陳俊翰</h2>
+                <h3>討論區</h3>
+            </div>
+            <div class="card">
+                <div></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" />
+                <h2>陳嘉佩</h2>
+                <h3>寵物醫院</h3>
+            </div>
+        </div>
+    </div>
+
+
     <video autoplay loop>
         <source src='@Url.Action("Dog-Lovers.mp4","video")' type="video/mp4" />
     </video>
 </div>
 
-<article >
-    <div >
+<article>
+    <div>
         <iframe src='@Url.Action("WebForm1.aspx","Areas/WebForm")' width="550" height="600" frameborder=0 scrolling="no"></iframe>
     </div>
 </article>
+

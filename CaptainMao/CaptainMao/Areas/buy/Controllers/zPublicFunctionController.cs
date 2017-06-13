@@ -1,6 +1,7 @@
 ﻿using CaptainMao.Areas.buy.Models;
 using CaptainMao.Areas.buy.ViewModel;
 using CaptainMao.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,19 +30,15 @@ namespace CaptainMao.Areas.buy.Controllers
             return File(fun.Logic_getMerchandisePhoto(id), "image/jpeg");
         }
 
-        [NonAction]
-        public void AddCart(int Merchandise_ID)
+        
+        public ActionResult returnJson_selectFourStore(string city)
         {
-            if (Session["user_identity"] == null)
-            {
-                RedirectToAction("index", "Login");
-            }
-            else {
-
-             
-            }
+            return Json(fun.Logic_GetStore(city), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult returnJson_selectCitys() {
 
-
+            return Json(fun.Logic_GetAllCity(), JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

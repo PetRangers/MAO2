@@ -34,6 +34,21 @@ namespace CaptainMao.Areas.Article.Controllers
             article = article.Where(a => a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
             return View(article.ToList().ToPagedList(page ?? 1, 10));
         }
+        public ActionResult Master(int? page,int? titleCategoryID,int? boardID)
+        {
+            var id = User.Identity.GetUserId();
+            var article = db.Articles.Where(a=>a.Board.MasterUserID==id).Select(a => a);
+            if (titleCategoryID != null)
+            {
+                article = article.Where(a => a.TitleCategoryID == titleCategoryID && a.IsDeleted != true);
+            }
+            if (boardID != null)
+            {
+                article = article.Where(a => a.BoardID == boardID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
+            }
+            article = article.Where(a => a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
+            return View(article.ToList().ToPagedList(page ?? 1,10));
+        }
         [ChildActionOnly]
         public ActionResult BoardCategories()
         {
@@ -45,11 +60,13 @@ namespace CaptainMao.Areas.Article.Controllers
             BoardViewModel board = new BoardViewModel();
             string imgpath = "";
             board.article = db.Articles.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(6);
+            
             foreach (var item in board.article)
             {
                 imgpath = GetImgPath(item.ContentText);
                 item.ContentText = imgpath;
             }
+            board.board = db.Boards.ToList();
             return View(board);
         }
 
@@ -91,7 +108,7 @@ namespace CaptainMao.Areas.Article.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.error = "請先登入";
+                    return RedirectToAction("Login", "Account", new { area = "" });
                 }
             }
             return View();
@@ -109,6 +126,7 @@ namespace CaptainMao.Areas.Article.Controllers
 
             commentVM.comment = db.Comments.Where(a => a.ArticleID == articleID && a.IsDeleted!=true);
             commentVM.article = db.Articles.Where(a => a.ArticleID == articleID);
+            commentVM.board = db.Boards.ToList();
             return View(commentVM); 
         }
         public ActionResult Comment(int? articleID)
@@ -137,7 +155,7 @@ namespace CaptainMao.Areas.Article.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.error = "請先登入";
+                    return RedirectToAction("Login", "Account",new { area=""});
                 }
             }
             return View();
@@ -338,10 +356,22 @@ namespace CaptainMao.Areas.Article.Controllers
                 return Json(new { IsSuccess = false, Message = "Can't find file by file name." });
             }
         }
-
-        public ActionResult TableCloud()
+        public ActionResult BoardCategory()
         {
-            return PartialView();
+            var board = db.Boards.Select(a => new { BoardID = a.BoardID, BoardName = a.BoardName });
+            return Json(board.ToList(),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult HighPop(int boardID)
+        {
+            var article = db.Articles.Where(a => a.IsDeleted != true && a.BoardID == boardID).OrderByDescending(a => a.CreateDateTime)
+                .Select(a => new { ArticleID = a.ArticleID, Title = a.Title }).Take(10);
+            return Json(article.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetUserImage(string id)
+        {
+            var photo = db.AspNetUsers.Where(u => u.Id == id).Select(u => u.Photo).First();
+            byte[] img = photo;
+            return File(img, "image/jpeg");
         }
     }
 }

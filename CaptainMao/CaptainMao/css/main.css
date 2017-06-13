@@ -1,9 +1,12 @@
-﻿aside {
+﻿main {
+min-height:90vh;
+}
+aside {
   display: block;
 }
 aside .panel {
   box-shadow: -2px 5px 10px;
-  width:160px;
+  width:130px;
   position: fixed;
   z-index: 805;
 }
@@ -19,6 +22,7 @@ article {
   padding: 10px 0px;
   background-color: rgba(49, 44, 38, 0.38);
   background-image: url("../images/texture.png");
+
 }
 article>div{
     min-height:800px;
@@ -40,3 +44,22 @@ footer {
   background-position: center;
   clear: both;
 }
+
+ .div_left_bottom {
+            margin-left:40px;
+            width: Auto;
+            float: left;
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            z-index: 20;
+            height:428px;
+            /*border: 2px solid #69c;*/
+            _position: absolute; /* position fixed for IE6 */
+        }
+
+.childdiv{
+      margin-left:5px;
+      float:left;
+  }
+

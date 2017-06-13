@@ -16,7 +16,7 @@ namespace CaptainMao.Areas.buy.Models
         IMao<CaptainMao.Models.Type> _Type = new ClsMao<CaptainMao.Models.Type>();
         IMao<sType> _sType = new ClsMao<sType>();
         IMao<StoreUser> _store = new ClsMao<StoreUser>();
-        IMao<Order> _order = new ClsMao<Order>();
+        IMao<shoppingcart> _shoppingcart = new ClsMao<shoppingcart>();
 
         /*尋找商品*/
         public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_typeID_stypeID vm)
@@ -157,7 +157,7 @@ namespace CaptainMao.Areas.buy.Models
             vm.sType_ID = vm.sType_ID == null ? new string[] { } : vm.sType_ID;
             return vm;
         }
-
+        /*商店編輯*/
         public vmCa_Mer_stype Logic_returnEdit_CaMerSty(int Merchandise_ID,string store_ID) {
             vmCa_Mer_stype vm = new vmCa_Mer_stype();
             Logic_returnNewCa_Mer(vm);
@@ -168,18 +168,64 @@ namespace CaptainMao.Areas.buy.Models
             vm.sType_ID = vm._Merchandise.sTypes.Select(s => s.sType_ID.ToString()).ToArray();
             return vm;
         }
-
+        /*商品刪除*/
         public void Logic_MerchandiseDelete(int Merchandise_ID) {
             DB.DeleteToMerchandise_Type_View(Merchandise_ID);
             _merchandise.DeletebyID(Merchandise_ID);
         }
-
-
-        public void Logic_AddOrder(string user_identity, int Merchandise_ID) {
-
-            
-
-
+        /*新增至購物車*/
+        public void Logic_AddShopping(string user_identity, int Merchandise_ID) {
+            shoppingcart sh = new shoppingcart();
+            sh.DateCreated = DateTime.UtcNow;
+            sh.Merchandise_ID = Merchandise_ID;
+            sh.merchandise_Volume = 1;
+            sh.userID = user_identity;
+            _shoppingcart.Create(sh);
         }
+        /*列出購物車*/
+        public IEnumerable<vmShoppingCar_Mer> Logic_GetShoppingCart(string identityID) {
+            List<vmShoppingCar_Mer> vmlist = new List<vmShoppingCar_Mer>();
+            var shopping =  DB.shoppingcarts.Where(c => c.userID.Equals(identityID));
+
+            foreach (var _sh in shopping)
+            {
+                vmShoppingCar_Mer vm = new vmShoppingCar_Mer();
+                vm.Merchandise_ID = _sh.Merchandise_ID;
+                vm.Merchandise_Name = _sh.Merchandise.Merchandise_Name;
+                vm.Merchandise_Price = _sh.Merchandise.Merchandise_Price;
+                vm.merchandise_Volume = _sh.merchandise_Volume;
+                vm.Merchandise_Photo = _sh.Merchandise.Merchandise_Photo;
+                vm.cartID = _sh.cartID;
+                vm.Store_ID = _sh.Merchandise.Store_ID;
+                vm.Store_Name = DB.AspNetUsers.Where(c => c.Id == _sh.Merchandise.Store_ID).Select(c => c.StoreInfo.StoreName).First();
+                vmlist.Add(vm);
+            }
+            return vmlist;
+        }
+        /*修改購物車內容*/
+        public void Logic_PutShoppingCart(vmShoppingCar_Mer vm,string identityID)
+        {
+            shoppingcart _shopp = new shoppingcart();
+            _shopp.Merchandise_ID = vm.Merchandise_ID;
+            _shopp.merchandise_Volume = vm.merchandise_Volume;
+            _shopp.userID = identityID;
+            _shopp.cartID = vm.cartID;
+            _shopp.DateCreated = DateTime.UtcNow;
+            _shoppingcart.Edit(_shopp);
+        }
+        /*取消商品*/
+        public void Logic_DeleteShoppingCart(int cartID)
+        {
+            _shoppingcart.DeletebyID(cartID);
+        }
+        /*回傳所有超商資料*/
+        public IEnumerable<CaptainMao.Models.FourStore> Logic_GetStore(string city) {
+            return DB.FourStores.Where(c=>c.BranchAddress.Contains(city));
+        }
+
+        public IEnumerable<CaptainMao.Models.City> Logic_GetAllCity() {
+            return DB.Cities;
+        }
+
     }
 }

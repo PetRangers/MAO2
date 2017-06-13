@@ -1,0 +1,141 @@
+﻿@model CaptainMao.Areas.buy.ViewModel.vmShoppingCar_Mer
+    @{ 
+        ViewBag.Title = "Main";
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div ng-app="MaoApp" ng-controller="MainController">
+        <!--顏色請自己放在Css內 這只是樣板-->
+        <div style="height:700px;background-color:#fff266" class="drawingpin">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(c => c.Store_Name)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_Photo)</th>
+                        <th>@Html.DisplayNameFor(c => c.Merchandise_Price)</th>
+                        <th>@Html.DisplayNameFor(c => c.merchandise_Volume)</th>
+                        <th>總價</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>
+                            <span class="ng-hide">{{item.cartID}}</span>
+                            {{item.Store_Name}}
+                        </td>
+                        <td>{{ item.Merchandise_ID}}</td>
+                        <td>{{item.Merchandise_Name}}</td>
+                        <td> <img ng-src="data:image/JPEG;base64,{{item.Merchandise_Photo}}" height="80" width="80" class="img-circle" /></td>
+                        <td>{{item.Merchandise_Price }}</td>
+                        <td>@Html.EditorFor(c => c.merchandise_Volume, new { htmlAttributes = new { ng_model = "item.merchandise_Volume", max = 100, min = 1, ng_change = "myFunchang(item)" } })</td>
+                        <td> {{item.merchandise_Volume*item.Merchandise_Price}} </td>
+                        <td><button ng-click="myFunDelete(item)" class="btn btn-danger glyphicon glyphicon-remove"></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary pull-right">下一步</button>
+
+        </div>
+
+        <div style="height:700px;background-color:burlywood" class="drawingpin">
+            <div class="col-lg-2">
+                <div>請選擇預定寄貨縣市</div>
+                @{
+                    SelectList select = new SelectList(ViewBag.city, "CityID", "CityName");
+                }
+                <div>
+                    @Html.DropDownList("Citys", select)
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <ul id="cityselect" class="list-group"></ul>
+            </div>
+            <div class="col-lg-7">
+                <iframe id="cityMap" height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' 
+                        src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
+            </div>
+
+
+
+
+        </div>
+        <div style="height:700px;background-color:#b6ff00" class="drawingpin">
+
+        </div>
+        <div style="height:700px;background-color:#ff6a00" class="drawingpin">
+
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
+@section script{
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script>
+    var app = angular.module('MaoApp', []);
+    app.controller('MainController', function ($scope, $http) {
+        @*抓訂單實體網址*@
+        var httpurl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "http")';
+        loadData();
+        @*初始設定*@
+        function loadData()
+        {
+            $http.get(httpurl).then(function (response) { $scope.items = response.data; });
+        }
+        @*更換儲存*@
+        $scope.myFunchang = function (item) {
+            $http.put(httpurl, item).then(function () {
+                $scope.shopps = "";
+                loadData();
+            })
+        }
+        @*刪除*@
+        $scope.myFunDelete = function (item) {
+            $http.delete(httpurl + "/" + item.cartID).then(function () {
+                $scope.shopps = "";
+                loadData();
+            })
+        }
+        });
+
+    $(document).ready(function(){
+
+        $('#Citys').change(function () {
+            //alert($(this).find("option:selected").text());
+            $.getJSON("../zPublicFunction/returnJson_selectFourStore", { city: $(this).find("option:selected").text() },
+                function (data) {
+                    var dof = $(document.createDocumentFragment());
+
+                    $.each(data, function (ind, value) {
+                        var add = value.BranchAddress.split("、")[0];
+
+                        var typeLi = $('<li></li>').text(add).addClass("list-group-item").click(function () {
+
+
+                            var address = "http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=" + $(this).text() + "&z=16&output=embed&t=";
+                            alert(address);
+                            $('#cityMap').attr("src", address);
+                        });
+                        dof.append(typeLi);
+                    });
+                    $('#cityselect').html(dof);
+                })
+        })
+    })
+
+</script>
+}
+
+
+

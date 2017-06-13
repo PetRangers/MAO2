@@ -1,5 +1,6 @@
 ﻿@model CaptainMao.Areas.Article.Models.CommentViewModel
 @using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = "討論區";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -31,6 +32,17 @@
         })
     </script>
 }
+@section style{
+    <style>
+        .imgtitle{
+            width:100px; 
+            margin-right:15px;
+        }
+        .title{
+            height:100px;
+        }
+    </style>
+    }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -51,8 +63,11 @@
                 <div class="col-lg-12">
                     <div style="background-color:burlywood" class="drawingpin">
                         <div class="row">
-                            <h2>[@Html.DisplayFor(model => model.article.First().TitleCategory.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
-                            <h3>@Html.DisplayFor(model => model.article.First().AspNetUser.NickName)</h3>
+                            <div class="title">
+                                <img src="@Url.Action("GetUserImage",new { id=Model.article.First().AspNetUser.Id})" class="img-thumbnail thum pull-left imgtitle" />
+                                <h2>[@Html.DisplayFor(model => model.article.First().TitleCategory.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
+                                <h3>@Html.DisplayFor(model => model.article.First().AspNetUser.NickName)</h3>
+                            </div>
                             <div class="text-right">
                                 <h5>@Html.DisplayNameFor(model => model.article.First().CreateDateTime) : @Html.DisplayFor(model => model.article.First().CreateDateTime)</h5>
                             </div>
@@ -60,12 +75,11 @@
                                 <p>@Html.Raw(HttpUtility.HtmlDecode(Model.article.First().ContentText))</p>
                             </div>
                             <div>
-                                <p class="navbar-left">
+                                <p class="pull-left">
                                     <a href="#" onclick="javascript:history.back()" class="btn btn-primary glyphicon glyphicon-arrow-left">回上一頁</a>
                                 </p>
-                                <p class="navbar-right">
+                                <p class="pull-right">
                                     <a href="@Url.Action("Comment","Article",new { area="Article",articleID=Model.article.First().ArticleID})" class="btn btn-warning  glyphicon glyphicon-pencil">回覆</a>
-                                    @*@Html.ActionLink("回覆", "Comment", new { articleID = Model.article.First().ArticleID }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })*@
                                 </p>
                             </div>
                         </div>
@@ -74,24 +88,28 @@
                         @foreach (var item in Model.comment)
                         {
                             <div style="background-color:burlywood" class="drawingpin">
-                                <div>
-                                    <h3>@item.AspNetUser.NickName</h3>
-                                </div>
-                                <div class="text-right">
-                                    <h5>@Html.DisplayNameFor(a => a.comment.First().NewDateTime) : @item.NewDateTime</h5>
-                                </div>
-                                <div class="thumbnail">
-                                    <p>@Html.Raw(HttpUtility.HtmlDecode(@item.ContentText))</p>
-                                </div>
-                                <div class="text-right">
-                                    @{
-                                        string id = User.Identity.GetUserId();
-                                        string posterid = item.PosterID;
-                                        if (id == posterid)
-                                        {
-                                            @Html.ActionLink("修改", "EditComment", new { commentID = item.CommentID }, new { @class = "btn btn-info glyphicon glyphicon-pencil" }) @Html.ActionLink("刪除", "DelComment", new { commentID = item.CommentID }, new { @class = "btn btn-danger glyphicon glyphicon-remove Del" })
+                                <div class="row">
+                                    <div class="title">
+                                        <img src="@Url.Action("GetUserImage",new { id=item.AspNetUser.Id})" class="img-thumbnail pull-left imgtitle" />
+                                        <h3>@item.AspNetUser.NickName</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <h5>@Html.DisplayNameFor(a => a.comment.First().NewDateTime) : @item.NewDateTime</h5>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <p>@Html.Raw(HttpUtility.HtmlDecode(@item.ContentText))</p>
+                                    </div>
+                                    <div class="text-right">
+                                        @{
+                                            string id = User.Identity.GetUserId();
+                                            string posterid = item.PosterID;
+                                            string msid = item.Article.Board.MasterUserID;
+                                            if (msid == id || id == posterid)
+                                            {
+                                                @Html.ActionLink("修改", "EditComment", new { commentID = item.CommentID }, new { @class = "btn btn-info glyphicon glyphicon-pencil" }) @Html.ActionLink("刪除", "DelComment", new { commentID = item.CommentID }, new { @class = "btn btn-danger glyphicon glyphicon-remove Del" })
+                                            }
                                         }
-                                    }
+                                    </div>
                                 </div>
                             </div>
                           }

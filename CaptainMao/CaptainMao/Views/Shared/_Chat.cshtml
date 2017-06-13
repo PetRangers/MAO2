@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+@using CaptainMao.Models;
+@using System.Linq;
+
+<div class="space" hidden></div>
+<div class="chatTitle" data-show="true">
+    <span class="targetName">聊天尚未開始</span>    
+</div>
+<div class="frame">
+    @{
+        MaoEntities db = new MaoEntities();
+        string userID = User.Identity.GetUserId();
+        string userNickName = "";
+        if (userID != null)
+        {
+            userNickName = db.AspNetUsers.Where(u => u.Id == userID).Select(u => u.NickName).First();
+        }
+
+    }
+    @{
+        if (userID == null)
+        {
+            <div>
+                <h3 class="col-lg-offset-4">請先登入</h3>
+            </div>
+
+        }
+        else
+        {
+            <input type="hidden" id="userID" value="@userID" />
+            <input type="hidden" id="userNickName" value="@userNickName" />
+                <input type="hidden" id="targetID" value="" />
+                <input type="hidden" id="userPhoto" value="@Url.Action("GetUserImage","Adoption",new { id =userID, area = "Adoption" })" />
+                <ul class="chatul"></ul>
+                <div>
+
+                    <div class="msj-rta macro" style="margin:auto">
+                        <div class="text text-r" style="background:whitesmoke !important">
+                            <input class="mytext" placeholder="Type a message" />
+                        </div>
+                    </div>
+                </div>
+        }
+    }
+
+</div>
+

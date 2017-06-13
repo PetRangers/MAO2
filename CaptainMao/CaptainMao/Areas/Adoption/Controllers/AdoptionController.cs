@@ -54,7 +54,9 @@ namespace CaptainMao.Areas.Adoption.Controllers
         {
             AdoptionViewModel vm = new AdoptionViewModel();
             vm.adoption = db.Adoptions.Find(id);
-
+            vm.NickName = vm.adoption.AspNetUser.NickName;
+            vm.PhoneNumber = vm.adoption.AspNetUser.PhoneNumber;
+            vm.Email = vm.adoption.AspNetUser.Email;
             vm.category = db.Categories.Find(vm.adoption.CategoryID);
             vm.city = db.Cities.Find(vm.adoption.CityID);
             return View(vm);
@@ -70,6 +72,11 @@ namespace CaptainMao.Areas.Adoption.Controllers
         // GET: Adoption/Adoption/Create
         public ActionResult CreateAdoption()
         {
+            var UserID = User.Identity.GetUserId();
+            if (UserID == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Cities.ToList();
             return View();
@@ -82,11 +89,11 @@ namespace CaptainMao.Areas.Adoption.Controllers
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Cities.ToList();
 
+            pet.RegistrationUserID = User.Identity.GetUserId();
+            pet.PostDate = DateTime.Now;
+
             if (PetImage != null)
             {
-                string strPath = Request.PhysicalApplicationPath + @"Images\" + PetImage.FileName;
-                PetImage.SaveAs(strPath);
-
                 var ImgSize = PetImage.ContentLength;
                 byte[] ImgByte = new byte[ImgSize];
                 PetImage.InputStream.Read(ImgByte, 0, ImgSize);
@@ -105,8 +112,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
                 {
                     pet.Sex = "~不明~";
                 }
-                pet.RegistrationUserID = "QWE";
-                pet.PostDate = DateTime.Now;
+
                 dbAdoption.Create(pet);
                 return RedirectToAction("index");
             }
@@ -173,7 +179,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
                 adoption.PostDate = DateTime.Now;
                 dbAdoption.Update(adoption);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("AdoptionManage");
             }
 
             return View();
@@ -185,7 +191,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             var adoption = db.Adoptions.Find(id);
             db.Adoptions.Remove(adoption);
             db.SaveChanges();
-            //dbContext.Delete(adoption);
+            //dbAdoption.Delete(adoption);
             return RedirectToAction("AdoptionManage");
         }
 
@@ -214,6 +220,11 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
         public ActionResult CreateAdpWish()
         {
+            var UserID = User.Identity.GetUserId();
+            if (UserID == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             ViewBag.Category = db.Categories.ToList();
             ViewBag.City = db.Cities.ToList();
             return View();
@@ -224,7 +235,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
         {
             if (wish != null)
             {
-                wish.UserID = "QWE";
+                wish.UserID = User.Identity.GetUserId();
                 wish.PostDate = DateTime.Now;
                 dbAdpWish.Create(wish);
                 return RedirectToAction("AdoptionWish");
@@ -233,6 +244,37 @@ namespace CaptainMao.Areas.Adoption.Controllers
             return View();
         }
 
+        public ActionResult EditWish(int id)
+        {
+            var adoption = db.AdpWishes.Find(id);
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.City = db.Cities.ToList();
+
+            return View(adoption);
+        }
+
+        // POST: Adoption/Adoption/Edit/5
+        [HttpPost]
+        public ActionResult EditWish(CaptainMao.Models.AdpWish adoption)
+        {                 
+            if (ModelState.IsValid)
+            {
+                adoption.PostDate = DateTime.Now;
+                dbAdpWish.Update(adoption);
+
+                return RedirectToAction("AdoptionManage");
+            }
+
+            return View();
+        }
+
+        public ActionResult DeleteWish(int id)
+        {
+            var adoption = db.AdpWishes.Find(id);
+            db.AdpWishes.Remove(adoption);
+            db.SaveChanges();
+            return RedirectToAction("AdoptionManage");
+        }
         public ActionResult WishJoin(int id)
         {
             var wish = db.AdpWishes.Find(id);
@@ -243,8 +285,39 @@ namespace CaptainMao.Areas.Adoption.Controllers
             return View(result);
         }
 
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        public ActionResult GetReport()
+        {
+            AdpReportViewModel data = new AdpReportViewModel();
+
+            List<AdpReport> adps = new List<AdpReport>();
+            int Total = db.Adoptions.Count();
+            int CateCount = db.Categories.Count();
+            for (int i = 1; i <= CateCount; i++)
+            {
+                AdpReport adp = new AdpReport();
+                adp.CategoryName = db.Categories.Where(a => a.CategoryID == i).Select(a => a.CategoryName).First();
+                double count = db.Adoptions.Where(a => a.CategoryID == i).Count();
+                adp.Share = count / Total;
+                adps.Add(adp);
+            }
+            data.AdpReports = adps;
+
+            return Json(data,JsonRequestBehavior.AllowGet);
+        }
+
+        //NoView function
         public ActionResult Email(int id)
         {
+            var UserID = User.Identity.GetUserId();
+            if (UserID == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             System.Net.Mail.SmtpClient MySmtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
 
             //設定你的帳號密碼
@@ -252,7 +325,10 @@ namespace CaptainMao.Areas.Adoption.Controllers
 
             //Gmial 的 smtp 必需要使用 SSL
             MySmtp.EnableSsl = true;
-
+            //string emailContent = "<h3>" + user.LastName + " " + user.FirstName + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" +
+            //            "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
+            //            "'>確認電子郵件</a></p>";
+            //await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
             var adoption = db.Adoptions.Find(id);
             string Email = adoption.AspNetUser.Email;
             //發送Email
@@ -261,5 +337,13 @@ namespace CaptainMao.Areas.Adoption.Controllers
             MySmtp.Dispose();
             return RedirectToAction("Index");
         }
+
+        public ActionResult GetUserImage(string id)
+        {
+            var photo = db.AspNetUsers.Where(u => u.Id == id).Select(u => u.Photo).First();
+            byte[] img = photo;
+            return File(img, "image/jpeg");
+        }
+
     }
 }
