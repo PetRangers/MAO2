@@ -33,7 +33,7 @@ namespace CaptainMao.Models
         public Nullable<System.DateTime> Merchandiser_Editdata { get; set; }
         public string Store_ID { get; set; }
         public int CategoryID { get; set; }
-        public string Merchandise_Photo_Address { get; set; }
+ //       public string Merchandise_Photo_Address { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Category Category { get; set; }
