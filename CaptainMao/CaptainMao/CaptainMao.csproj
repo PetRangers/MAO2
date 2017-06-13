@@ -396,6 +396,7 @@
     <Content Include="fonts\GOODDC__.TTF" />
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
+    <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1071,6 +1072,7 @@
     <Compile Include="Areas\Adoption\Models\Repository.cs" />
     <Compile Include="Areas\Adoption\ViewModel\AdoptionViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\Adoption_WishViewModel.cs" />
+    <Compile Include="Areas\Adoption\ViewModel\AdpReportViewModel.cs" />
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />

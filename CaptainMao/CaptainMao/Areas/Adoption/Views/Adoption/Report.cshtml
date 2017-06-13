@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+@section style{
+    <style>
+        .drawingpin{
+            background-color:burlywood;
+        }
+    </style>
+    }
+@section script{
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+    <script>
+
+        var CategoryName;
+
+        $(document).ready(function () {
+
+            GetReportData();
+
+            function GetReportData() {
+                $.ajax({
+                    url: '@Url.Action("GetReport")',
+                    type: 'POST',
+                    //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
+                    //有兩個屬性可以用
+                    success: function (data) {
+                        $.each(data, function (idx, value) {
+                            AdpData = value[0].CategoryName;
+                           
+
+                            //=====================================
+                            $('#container').highcharts({
+                                chart: {
+                                    plotBackgroundColor: null,
+                                    plotBorderWidth: null,
+                                    plotShadow: false,
+                                },
+                                title: {
+                                    text: '2017年領養寵物種類占比率'
+                                },
+                                tooltip: {
+                                    headerFormat: '{series.name}<br>',
+                                    pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                            enabled: true,
+                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                            style: {
+                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                            }
+                                        }
+                                    }
+                                },
+                                series: [{
+                                    type: 'pie',
+                                    name: '領養寵物種類占比',
+                                    data: [
+                                        [value[0].CategoryName, value[0].Share],
+                                        [value[1].CategoryName, value[1].Share],
+                                        [value[2].CategoryName, value[2].Share],
+                                        [value[3].CategoryName, value[3].Share],
+                                        [value[4].CategoryName, value[4].Share],
+                                        [value[5].CategoryName, value[5].Share]
+                                    ]
+                                }]
+                            });
+                            //=====================================
+
+                        })                     
+                    },
+                    cache: false
+                })
+            }
+
+                $('#container').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                    },
+                    title: {
+                        text: '2017年領養寵物種類占比率'
+                    },
+                    tooltip: {
+                        headerFormat: '{series.name}<br>',
+                        pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: '領養寵物種類占比',
+                        data: [
+                            [CategoryName[0], Share[0]],
+                            [CategoryName[1], Share[1]],
+                            [CategoryName[2], Share[2]],
+                            [CategoryName[3], Share[3]],
+                            [CategoryName[4], Share[4]],
+                            [CategoryName[5], Share[5]]
+                        ]
+                    }]
+                });
+            
+        });
+
+    </script>
+}
+
+<!--aside側欄 article主欄-->
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-lg-9 col-sm-11">
+    <!-------------------articleOpen------------------->
+    <div>
+        <div class="drawingpin">
+            <div id="container" style="min-width:400px;height:700px"></div>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>
+
