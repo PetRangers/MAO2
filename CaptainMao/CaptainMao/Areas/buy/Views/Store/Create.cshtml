@@ -57,6 +57,7 @@
                         @{
                             SelectList select = new SelectList(Model._Category, "CategoryID", "CategoryName");
                         }
+                        
                         @Html.DropDownListFor(c => c._Merchandise.CategoryID, select, new { @class = "form-control", id = "_Category" })
                     </div>
                 </div>

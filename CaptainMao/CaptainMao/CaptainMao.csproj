@@ -215,13 +215,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\buy\css\Create.css" />
-    <Content Include="Areas\buy\css\Create.min.css" />
-    <Content Include="Areas\buy\css\Index.css">
-      <DependentUpon>Index.less</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.css">
+      <DependentUpon>Create.less</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\css\Index.min.css">
-      <DependentUpon>Index.css</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.min.css">
+      <DependentUpon>Create1.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.css">
+      <DependentUpon>shoppingcart.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.min.css">
+      <DependentUpon>shoppingcart.css</DependentUpon>
     </Content>
     <Content Include="Areas\buy\css\shoppingIndex.css">
       <DependentUpon>shoppingIndex.less</DependentUpon>
@@ -235,7 +239,6 @@
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
     <Content Include="Areas\buy\Views\Store\Create.cshtml" />
@@ -358,7 +361,6 @@
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
@@ -395,6 +397,8 @@
     </Content>
     <Content Include="fonts\GOODDC__.TTF" />
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
+    <Content Include="Areas\buy\css\Create.less" />
+    <Content Include="Areas\buy\css\shoppingcart.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1164,6 +1168,9 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FourStore.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1197,6 +1204,9 @@
     <Compile Include="Models\Merchandise.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Merchandise_Order_View.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1214,6 +1224,9 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategory.cs">
