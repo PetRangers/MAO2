@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f68b760130c34214b051387c0c81a7e5" Name="Diagram1" ZoomLevel="70">
-        <EntityTypeShape EntityType="MaoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Adoption" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.AdpWish" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Article" Width="1.5" PointX="7.5" PointY="27" IsExpanded="true" />
@@ -22,7 +21,6 @@
         <EntityTypeShape EntityType="MaoModel.LoginLog" Width="1.5" PointX="5.25" PointY="38.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.Scorce" Width="1.5" PointX="8.25" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.StoreInfo" Width="1.5" PointX="5.25" PointY="44.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaoModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.TitleCategory" Width="1.5" PointX="5.25" PointY="28" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.UserPet" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MaoModel.FourStore" Width="1.5" PointX="10.25" PointY="32.125" IsExpanded="true" />

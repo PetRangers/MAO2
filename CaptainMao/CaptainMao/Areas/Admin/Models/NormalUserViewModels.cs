@@ -80,6 +80,7 @@ namespace CaptainMao.Areas.Admin.Models
         public Nullable<int> LoginCount { get; set; }
 
         [Display(Name = "上次登入時間")]
+        [DataType(DataType.DateTime)]
         public  Nullable<DateTime> LoginTime { get; set; }
 
         [Display(Name = "經驗值")]

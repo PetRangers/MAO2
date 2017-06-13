@@ -17,7 +17,8 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -400,7 +401,7 @@
     <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
-	<Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
@@ -1174,9 +1175,6 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\FourStore.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1230,9 +1228,6 @@
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sType.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TitleCategory.cs">
