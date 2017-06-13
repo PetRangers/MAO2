@@ -58,7 +58,7 @@
                                     <td><a href="@Url.Action("Index", "Article", new { area = "Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
                                     <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
                                     <td>
-                                        <a href="@Url.Action("Show2", "Article", new { area = "Article", articleID = @item.ArticleID })"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
+                                        <a href="@Url.Action("Show", "Article", new { area = "Article", articleID = @item.ArticleID })"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
                                     </td>
                                     <td>@Html.DisplayFor(a => item.AspNetUser.NickName)</td>
                                     <td>

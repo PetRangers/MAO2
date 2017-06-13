@@ -34,17 +34,6 @@ namespace CaptainMao.Areas.Article.Controllers
             article = article.Where(a => a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
             return View(article.ToList().ToPagedList(page ?? 1, 10));
         }
-        public ActionResult Show2(int? page, int? commentID)
-        {
-            var comment = db.Comments.Select(a => a);
-
-            if (commentID != null)
-            {
-                comment = comment.Where(a => a.CommentID == commentID && a.IsDeleted != true);
-            }
-            comment = comment.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Article.LastChDateTime);
-            return View(comment.ToList().ToPagedList(page ?? 1, 10));
-        }
         public ActionResult Master(int? page,int? titleCategoryID,int? boardID)
         {
             var id = User.Identity.GetUserId();
@@ -367,10 +356,16 @@ namespace CaptainMao.Areas.Article.Controllers
                 return Json(new { IsSuccess = false, Message = "Can't find file by file name." });
             }
         }
-
-        public ActionResult TableCloud()
+        public ActionResult HighPop()
         {
-            return PartialView();
+            //article=db.Articles.Where(a=>a.IsDeleted!=true).OrderByDescending(a => a.CreateDateTime).Take(10).ToList();
+            var json =( from x in db.Articles where x.IsDeleted!=true orderby x.CreateDateTime descending
+                       select new
+                       {
+                           ArticleID = x.ArticleID,
+                           Title = x.Title
+                       }).Take(10);
+            return Json(json.ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }

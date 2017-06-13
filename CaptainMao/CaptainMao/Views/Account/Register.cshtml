@@ -9,12 +9,12 @@
 </h3>
 <h3 style="text-align:center">@ViewBag.Title</h3>
 
-<div class="container bootstrap snippet">
+
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Panel title</h3>
+                    <h3 class="panel-title">會員註冊表</h3>
                     <span class="pull-right">
                         <!-- Tabs -->
                         <ul class="nav panel-tabs">
@@ -34,9 +34,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </div>
-</div>
+
 
 @section Style {
     <style>
@@ -83,6 +83,7 @@
 }
 
 @section Script {
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
             document.getElementById("UserPhoto").onchange = function () {
                 var reader = new FileReader();

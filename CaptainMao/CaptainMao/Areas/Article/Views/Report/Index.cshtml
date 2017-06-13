@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CKEditor檔案管理</title>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+</head>
+<body>
+    
+        <!-------------------articleOpen------------------->
+        <div>
+            <!--顏色請自己放在Css內 這只是樣板-->
+            <div style="height:70px;background-color:#fff266" class="drawingpin">
+
+            </div>
+            <div style="background-color:burlywood" class="drawingpin">
+                <div id="container" class="highcharts-container" style="height:410px;margin:0 2em;clear:both;min-width:600px">
+
+                </div>
+            </div>
+        </div>
+        <!-------------------articleEnd------------------->
+    <script>
+        var chart;
+        $(document).ready(function () {
+            chart = new Highcharts.chart({
+                chart: {
+                    renderTo: 'container',
+                    defaultSeriesType: 'areaspline',
+                    events: {
+                        load: GetReportData
+                    }
+                },
+                title: {
+                    text: 'HighCharts使用Demo'
+                },
+                xAxis: {
+                    categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                }, yAxis: {
+                    title: {
+                        text: '數量'
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '類別1:' + this.points[0].y + '<br/>類別2:' + this.points[1].y;
+                    },
+                    shared: true,
+                    crosshairs: true
+                },
+                series: [{
+                    name: '類別1',
+                    data: [],
+                    fillOpacity: 0.5
+                }, {
+                    name: '類別2',
+                    data: [],
+                    fillOpacity: 0.4
+                }]
+            });
+        });
+        function GetReportData() {
+            $.ajax({
+                url: '@Url.Action("Report")',
+                type: 'POST',
+                //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
+                //有兩個屬性可以用
+                success: function (result) {
+                    chart.series[0].setData(result.Category1);
+                    chart.series[1].setData(result.Category2);
+                },
+                cache: false
+            });
+        }
+    </script>
+</body>
+</html>
+
