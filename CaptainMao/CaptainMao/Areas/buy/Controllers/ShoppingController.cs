@@ -18,11 +18,9 @@ namespace CaptainMao.Areas.buy.Controllers
         
         public ActionResult Index(vmCaID_typeID_stypeID vm)
         {
-            if (User.Identity.GetUserId() == null || Session["user_identity"] ==null)
-            {
+            if (Session["user_identity"] == null) {
                 Session["user_identity"] = Guid.NewGuid().ToString();
             }
-
             IEnumerable<Merchandise> selectMer =fun.Logic_SelectMerchandise(vm);
             return View(selectMer);
         }

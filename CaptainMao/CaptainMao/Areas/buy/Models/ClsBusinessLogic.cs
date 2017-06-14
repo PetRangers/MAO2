@@ -185,9 +185,9 @@ namespace CaptainMao.Areas.buy.Models
             _shoppingcart.Create(sh);
         }
         /*列出購物車*/
-        public IEnumerable<vmShoppingCar_Mer> Logic_GetShoppingCart(string identityID) {
+        public IEnumerable<vmShoppingCar_Mer> Logic_GetShoppingCart(string identityID,string loginID="login") {
             List<vmShoppingCar_Mer> vmlist = new List<vmShoppingCar_Mer>();
-            var shopping =  DB.shoppingcarts.Where(c => c.userID.Equals(identityID));
+            var shopping =  DB.shoppingcarts.Where(c => c.userID.Equals(identityID)||c.userID.Equals(loginID));
 
             foreach (var _sh in shopping)
             {
@@ -216,30 +216,34 @@ namespace CaptainMao.Areas.buy.Models
             _shoppingcart.Edit(_shopp);
         }
         /*取消商品*/
-        public void Logic_DeleteShoppingCart(int cartID)
+        public void Logic_DeleteShoppingCart(int cartID, string identityID, string loginID="login")
         {
-            _shoppingcart.DeletebyID(cartID);
+            var mer= DB.shoppingcarts.Where(c => c.userID == identityID || c.userID==loginID);
+            
+            DB.shoppingcarts.Remove(mer.Where(c => c.cartID == cartID).First());
+            DB.SaveChanges();
         }
         /*回傳所有超商資料*/
-        public IEnumerable<CaptainMao.Models.FourStore> Logic_GetStore(string city) {
-            return DB.FourStores.Where(c=>c.Branch.Contains(city));
+        public IEnumerable<vmFourStore> Logic_GetStore(int cityID) {
+           var city = DB.Cities.Find(cityID).CityName;
+            return DB.FourStores.Where(c=>c.Branch.Contains(city)).
+                Select(c=>new vmFourStore {Compete= c.Compete ,BranchAddress= c.BranchAddress,BranchID= c.BranchID});
         }
-        public IEnumerable<CaptainMao.Models.City> Logic_GetAllCity() {
+        public IEnumerable<CaptainMao.Models.City> Logic_GetAllCities() {
             return DB.Cities;
         }
-        /*有登入時*/
    
         private int CreateOrder(Order order) {
              _order.Create(order);
             return order.Order_ID;
         }
         /*後登入時*/
-        public void Logic_CreateOrder(string UserID,  string name, int FourStore, string session = "-1") {
+        public void Logic_CreateOrder(string UserID,  string name, int FourStore, string session ) {
 
-            using (var transaction = DB.Database.BeginTransaction())
-            {
-                try
-                {
+            //using (var transaction = DB.Database.BeginTransaction())
+            //{
+                //try
+                //{
                     Order order = new Order();
                     order.DeliveryLocation = FourStore;
                     order.DeliveryName = name;
@@ -248,7 +252,7 @@ namespace CaptainMao.Areas.buy.Models
                     order.user_ID = UserID;
                     int OrderID = CreateOrder(order);
 
-                    var shoppingcart = DB.shoppingcarts.Where(s => s.cartID.Equals(session) || s.cartID.Equals(UserID));
+                    var shoppingcart = DB.shoppingcarts.Where(s => s.userID.Equals(session) || s.userID.Equals(UserID));
                     foreach (var shop in shoppingcart)
                     {
                         Merchandise_Order_View mer = new Merchandise_Order_View();
@@ -259,12 +263,42 @@ namespace CaptainMao.Areas.buy.Models
                         DB.shoppingcarts.Remove(shop);
                     }
                     DB.SaveChanges();
-                    transaction.Commit();
+                    //transaction.Commit();
+                //}
+                //catch {
+                //    transaction.Rollback();
+                //}
+            //}
+        }
+
+        public IEnumerable<vmNewOrder> Logic_NewOrder(string StoreID) {
+            List<vmNewOrder> NewOlist = new List<vmNewOrder>();
+            
+            var storeMer = DB.Orders.Where(s => s.Merchandise_Order_View.Any(x => x.Merchandise.Store_ID == StoreID));
+
+            foreach(var _storeMer in storeMer) {
+                vmNewOrder NewO = new vmNewOrder();
+                NewO.BranchAddress = _storeMer.FourStore.BranchAddress;
+                NewO.DeliveryName = _storeMer.DeliveryName;
+                NewO.Order_Createdate =  _storeMer.Order_Createdate;
+                NewO.Order_Fitness = _storeMer.Order_Fitness;
+                NewO.Order_ID = _storeMer.Order_ID;
+                NewO.user_ID = _storeMer.AspNetUser.FirstName +"**";
+
+                var _storeM = _storeMer.Merchandise_Order_View;
+                List<vmNewOrderMer> _merlist = new List<vmNewOrderMer>();
+                foreach (var _store in _storeM) {
+                    vmNewOrderMer _mer = new vmNewOrderMer();
+                    _mer.Merchandise_ID = _store.Merchandise_ID;
+                    _mer.Merchandise_Name =_store.Merchandise.Merchandise_Name;                    
+                    _mer.merchandise_Volume = _store.merchandise_Volume;
+                    _mer.Merchandise_Price = _store.Merchandise.Merchandise_Price *_mer.merchandise_Volume;
+                    _merlist.Add(_mer);
                 }
-                catch {
-                    transaction.Rollback();
-                }
+                NewO.mer = _merlist;
+                NewOlist.Add(NewO);
             }
+            return NewOlist;
         }
     }
 }
