@@ -7,21 +7,63 @@
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 @section script{
+    <script>
+        $(document).ready(function () {
+            loadBoard(1);
 
-    }
+            $('.list-group').on('click', 'li', function () {
+                loadBoard($(this).data('cid'));
+
+                $('.list-group>li').removeClass('active');
+                $(this).addClass('active');
+            })
+
+            function loadBoard(id) {
+                $.getJSON('@Url.Action("HighPop")', { 'BoardID': id }, function (datas) {
+                    var tu = $('#tb2');
+                    tu.empty();
+                    var f = $(document.createDocumentFragment());
+                    $.each(datas, function (index, value) {
+                        var t1 = $('<td ></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h3 style="width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
+                        var row = $('<tr ></tr>').append(t1);
+                        f.append(row);
+                    })
+                    tu.append(f);
+                })
+            }
+
+            $.ajax({ 'url': '@Url.Action("BoardCategory")', 'type': 'get', 'dataType': 'json' }).done(function (data) {
+                var f = $(document.createDocumentFragment());
+                $.each(data, function (idx, value) {
+                    var categoryName = value.BoardName;
+                    var categoryID = value.BoardID;
+                    var s1 = $('<li></li>').text(categoryName).attr('data-cid', categoryID).addClass('btn btn-info');
+                    f.append(s1);
+                })
+                $('.list').append(f).css('cursor', 'pointer');
+            })
+        });
+    </script>
+}
 @section style{
     <style>
-        .title {
+        .title1 {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            width:200px;
+            width: 200px;
         }
-        tr>th{
-            text-align:center;
+        tr > th {
+            text-align: center;
+            color:purple;
+            font-size:20px;
+        }
+        tr >td{
+            color:forestgreen;
+            font-size:20px;
         }
     </style>
-    }
+}
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -38,7 +80,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-9">
                 <div style="background-color:burlywood" class="drawingpin">
                     <div class="navbar-left">
                         @Html.Action("BoardCategories")
@@ -59,9 +101,12 @@
                             {
                                 <tr id="tb">
                                     <td><a href="@Url.Action("Index", "Article", new { area = "Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
-                                    <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
                                     <td>
-                                        <a href="@Url.Action("Show", "Article", new { area = "Article", articleID = @item.ArticleID })"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
+                                        @Html.DisplayFor(a => item.Board.BoardName)
+
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Show", "Article", new { area = "Article", articleID = @item.ArticleID })"><p class="title1">@Html.DisplayFor(a => item.Title)</p></a>
                                     </td>
                                     <td>@Html.DisplayFor(a => item.AspNetUser.NickName)</td>
                                     <td>
@@ -72,7 +117,7 @@
                                     </td>
                                     <td>@Html.DisplayFor(a => item.LastChDateTime)</td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                     </table>
                     <div class="text-center">
@@ -90,8 +135,27 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-lg-3">
+                <div style="background-color:burlywood" class="drawingpin">
+                    <h2>最新發表文章</h2>
+                    <ul class="list-group list">
 
+                    </ul>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tb2">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>

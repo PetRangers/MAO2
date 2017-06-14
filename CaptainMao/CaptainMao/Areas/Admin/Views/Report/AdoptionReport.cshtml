@@ -1,20 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Report";
-    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+    ViewBag.Title = "AdoptionReport";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 @section style{
     <style>
-        .drawingpin{
-            background-color:burlywood;
+        .drawingpin {
+            background-color: burlywood;
         }
     </style>
-    }
+}
 @section script{
-<script src="~/Scripts/jquery-3.1.1.min.js"></script>
-
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-
     <script>
 
         var CategoryName;
@@ -25,14 +24,12 @@
 
             function GetReportData() {
                 $.ajax({
-                    url: '@Url.Action("GetReport")',
+                    url: '@Url.Action("GetAdoptionReport")',
                     type: 'POST',
                     //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
                     //有兩個屬性可以用
                     success: function (data) {
                         $.each(data, function (idx, value) {
-                            AdpData = value[0].CategoryName;
-                           
 
                             //=====================================
                             $('#container').highcharts({
@@ -76,7 +73,7 @@
                             });
                             //=====================================
 
-                        })                     
+                        })
                     },
                     cache: false
                 })
@@ -121,7 +118,7 @@
                         ]
                     }]
                 });
-            
+
         });
 
     </script>
@@ -129,12 +126,13 @@
 
 <!--aside側欄 article主欄-->
 
-<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+<aside class="col-sm-3 col-xs-12">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
     <!-------------------asideEnd------------------->
 </aside>
-<article class="col-lg-9 col-sm-11">
+
+<article class="col-sm-9  col-xs-12">
     <!-------------------articleOpen------------------->
     <div>
         <div class="drawingpin">
@@ -143,4 +141,5 @@
     </div>
     <!-------------------articleEnd------------------->
 </article>
+
 

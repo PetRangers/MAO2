@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "文章圖表顯示";
-    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+    ViewBag.Title = "文章報表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section script{
@@ -50,7 +50,7 @@
 
         function GetReportData() {
             $.ajax({
-                url: '@Url.Action("Report")',
+                url: '@Url.Action("GetArticleReport")',
                 type: 'POST',
                 //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
                 //有兩個屬性可以用
@@ -61,29 +61,22 @@
                 cache: false
             });
         }
-</script>
-    }
-<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
+    </script>
+}
+<aside class="col-sm-3 col-xs-12">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
     <!-------------------asideEnd------------------->
 </aside>
-<article class="col-lg-9 col-sm-11">
+<article class="col-sm-9  col-xs-12">
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="height:70px;background-color:#fff266" class="drawingpin">
-            <div class="navbar-left">
-                @Html.ActionLink("主版", "Board","Article", null, new { @class = "btn btn-info" })
-                @Html.ActionLink("文章列表", "Index","Article",null, new { @class = "btn btn-info" })
-            </div>
-        </div>
-        <div style="background-color:burlywood" class="drawingpin">
-            <div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:600px">
+        <div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
 
-            </div>
         </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>
+
 

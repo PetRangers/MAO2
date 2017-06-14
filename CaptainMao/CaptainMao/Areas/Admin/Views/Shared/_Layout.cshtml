@@ -9,6 +9,7 @@
     <link href="~/Content/jquery-ui-tc.min.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui-tc.structure.min.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui-tc.theme.min.css" rel="stylesheet" />
+    <link href="~/css/chat.css" rel="stylesheet" />
     @RenderSection("style", required: false)
     <style>
         body {
@@ -20,6 +21,23 @@
             background-color:saddlebrown;
             color:white;
         }
+
+         .div_left_bottom {
+            margin-left:40px;
+            width: Auto;
+            float: left;
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            z-index: 20;
+            height:428px;
+            /*border: 2px solid #69c;*/
+            _position: absolute; /* position fixed for IE6 */
+        }
+         .childdiv{
+            margin-left:5px;
+            float:left;
+         }
     </style>
 
 </head>
@@ -56,14 +74,12 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">網站管理 <span class="caret"></span></a>
                             <ul role="menu" class="dropdown-menu" aria-labelledby="drop1">
-                                <li role="presentation">
-                                    <a href="#">討論版管理</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#">商城管理</a>
-                                </li>
+                                
                                 <li role="presentation">
                                     @Html.ActionLink("網站監控", "Monitor", "WebMonitor", new { area = "Admin" }, null)
+                                </li>
+                                <li role="presentation">
+                                    @Html.ActionLink("網站報表", "ArticleReport", "Report")
                                 </li>
                             </ul>
                         </li>
@@ -82,14 +98,21 @@
                 </div>
             </div>
         </div>
+    @*聊天*@
+    <div id="chatdiv" class="div_left_bottom row">
+        <div class="childdiv nextchat">
+            <input id="chaturl" type="hidden" value="@Url.Action("_Chat","Shared",new { Area = ""})" />
+        </div>
+    </div>
 
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-ui-tc.min.js"></script>
-   
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/js/chatjs.js"></script>
     @RenderSection("script", required: false)
-
 
 </body>
 </html>
