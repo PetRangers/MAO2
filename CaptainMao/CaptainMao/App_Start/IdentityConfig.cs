@@ -103,6 +103,11 @@ namespace CaptainMao
             await MessageResource.CreateAsync(new PhoneNumber(to),
                                               from: new PhoneNumber(from),
                                               body: body);
+
+            ////Twilio試用帳號只能註冊一支電話。為了保險起見，直接把註冊的電話寫死在這裡。
+            //await MessageResource.CreateAsync(new PhoneNumber("+886 963 394 231"),
+            //                                  from: new PhoneNumber(from),
+            //                                  body: body);
         }
     }
 

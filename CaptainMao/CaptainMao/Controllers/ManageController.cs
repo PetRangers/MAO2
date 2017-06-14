@@ -118,17 +118,34 @@ namespace CaptainMao.Controllers
                 return View(model);
             }
             // 產生並傳送 Token
+            //var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            //if (UserManager.SmsService != null)
+            //{
+            //    var message = new IdentityMessage
+            //    {
+            //        Destination = model.Number,
+            //        Body = "您的安全碼為: " + code
+            //    };
+            //    await UserManager.SmsService.SendAsync(message);
+            //}
+            //return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+
+            //================================
+            //寄送訊息前先將號碼轉成適當格式
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
             if (UserManager.SmsService != null)
             {
+                //轉換電話格式
+                var formattedNumber = "+886"+" " + model.Number.Substring(1,3)+" "+model.Number.Substring(4,3)+" "+model.Number.Substring(7,3);
                 var message = new IdentityMessage
                 {
-                    Destination = model.Number,
+                    Destination = formattedNumber,
                     Body = "您的安全碼為: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+
         }
 
         //
@@ -197,8 +214,8 @@ namespace CaptainMao.Controllers
 
         //
         // POST: /Manage/RemovePhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);

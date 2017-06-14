@@ -398,7 +398,6 @@
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
-    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <Content Include="Areas\buy\css\StoreCreate.less" />
     <Content Include="Areas\buy\Views\Store\NewOrder.cshtml" />
