@@ -10,6 +10,8 @@
     <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
     <script>
         $(document).ready(function () {
+            loadBoard(1);
+
             $('.Del').on('click', function (e) {
                 e.preventDefault();
                 var targerUrl = $(this).attr('href');
@@ -29,16 +31,49 @@
                     }
                 })
             })
-        })
+
+            $('.list-group').on('click', 'li', function () {
+                loadBoard($(this).data('cid'));
+
+                $('.list-group>li').removeClass('active');
+                $(this).addClass('active');
+            })
+
+            function loadBoard(id) {
+                $.getJSON('@Url.Action("HighPop")', { 'BoardID': id }, function (datas) {
+                    var tu = $('#tb');
+                    tu.empty();
+                    var f = $(document.createDocumentFragment());
+                    $.each(datas, function (index, value) {
+                        var t1 = $('<td ></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h3 style="width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
+                        var row = $('<tr ></tr>').append(t1);
+                        f.append(row);
+                    })
+                    tu.append(f);
+                })
+            }
+
+            $.ajax({ 'url': '@Url.Action("BoardCategory")', 'type': 'get', 'dataType': 'json' }).done(function (data) {
+                var f = $(document.createDocumentFragment());
+                $.each(data, function (idx, value) {
+                    var categoryName = value.BoardName;
+                    var categoryID = value.BoardID;
+                    var s1 = $('<li></li>').text(categoryName).attr('data-cid', categoryID).addClass('btn btn-info');
+                    f.append(s1);
+                })
+                $('.list').append(f).css('cursor', 'pointer');
+            })
+        });
     </script>
 }
 @section style{
     <style>
         .imgtitle{
             width:100px; 
-            margin-right:15px;
+            height:90px;
+            margin-right:20px;
         }
-        .title{
+        .title1{
             height:100px;
         }
     </style>
@@ -63,7 +98,7 @@
                 <div class="col-lg-12">
                     <div style="background-color:burlywood" class="drawingpin">
                         <div class="row">
-                            <div class="title">
+                            <div class="title1">
                                 <img src="@Url.Action("GetUserImage",new { id=Model.article.First().AspNetUser.Id})" class="img-thumbnail thum pull-left imgtitle" />
                                 <h2>[@Html.DisplayFor(model => model.article.First().TitleCategory.TitleCategoryName)]@Html.DisplayFor(model => model.article.First().Title)</h2>
                                 <h3>@Html.DisplayFor(model => model.article.First().AspNetUser.NickName)</h3>
@@ -92,6 +127,8 @@
                                     <div class="title">
                                         <img src="@Url.Action("GetUserImage",new { id=item.AspNetUser.Id})" class="img-thumbnail pull-left imgtitle" />
                                         <h3>@item.AspNetUser.NickName</h3>
+                                        <br />
+                                        <br />
                                     </div>
                                     <div class="text-right">
                                         <h5>@Html.DisplayNameFor(a => a.comment.First().NewDateTime) : @item.NewDateTime</h5>
@@ -118,7 +155,22 @@
             </div>
             <div class="col-lg-3">
                 <div style="background-color:burlywood" class="drawingpin">
+                    <h2>最新發表文章</h2>
+                    <ul class="list-group list">
 
+                    </ul>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tb">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
