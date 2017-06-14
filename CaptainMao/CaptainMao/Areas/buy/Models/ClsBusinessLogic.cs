@@ -300,5 +300,10 @@ namespace CaptainMao.Areas.buy.Models
             }
             return NewOlist;
         }
+
+
+        public AspNetUser Logic_ReUser(string User) {
+            return DB.AspNetUsers.Where(c => c.Email == User).First() ;
+        }
     }
 }

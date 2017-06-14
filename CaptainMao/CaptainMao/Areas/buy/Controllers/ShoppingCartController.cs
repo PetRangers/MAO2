@@ -37,9 +37,16 @@ namespace CaptainMao.Areas.buy.Controllers
             }
             fun.Logic_CreateOrder(User.Identity.GetUserId(), name, FourStore, session);
 
+            string emailContent =
+                "<h3>" + fun.Logic_ReUser(User.Identity.GetUserName()) + "您好</h3>" +
+                "<p>您已在毛孩隊長購買商品，請在留意貨品出貨日期，謝謝!</p>";
+
             var service = new EmailService();
-            IdentityMessage message = new IdentityMessage { Body = "fuckfuckfuck", Destination = User.Identity.GetUserName(), Subject = "fuckfuckfuck" };
+            IdentityMessage message = new IdentityMessage { Body = emailContent, Destination = User.Identity.GetUserName(),
+                Subject = "毛孩隊長購物商城-成功購物通知" };
             await service.SendAsync(message);
+
+
 
 
 

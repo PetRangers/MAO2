@@ -396,7 +396,6 @@
     </Content>
     <Content Include="fonts\GOODDC__.TTF" />
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
-    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
@@ -406,6 +405,7 @@
     <Content Include="Areas\Admin\Views\Report\ArticleReport.cshtml" />
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
+    <Content Include="Areas\buy\Views\Store\Report.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1094,6 +1094,7 @@
     <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
+    <Compile Include="Areas\buy\Controllers\ReportController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
