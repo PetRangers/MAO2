@@ -4,17 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CaptainMao.Areas.Adoption.ViewModel;
+using CaptainMao.Models;
 
 namespace CaptainMao.Areas.Admin.Controllers
 {
     public class ReportController : Controller
     {
-        CaptainMao.Models.MaoEntities db = new CaptainMao.Models.MaoEntities();
+        MaoEntities db = new MaoEntities();
         // GET: Admin/Report
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult ArticleReport()
         {
             return View();
@@ -36,11 +33,7 @@ namespace CaptainMao.Areas.Admin.Controllers
             data.Category1 = countList1;
             data.Category2 = countList2;
             return Json(data);
-        }
-        public ActionResult Aside()
-        {
-            return PartialView();
-        }
+        }      
 
         public ActionResult AdoptionReport()
         {
@@ -65,10 +58,10 @@ namespace CaptainMao.Areas.Admin.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-    }
-}
 
-t
-        
+        public ActionResult Aside()
+        {
+            return PartialView();
+        }
     }
 }
