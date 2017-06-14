@@ -620,8 +620,7 @@ namespace CaptainMao.Controllers
             return View();
         }
 
-
-
+        
         private class reCaptchaResponse
         {
             [JsonProperty("success")]
