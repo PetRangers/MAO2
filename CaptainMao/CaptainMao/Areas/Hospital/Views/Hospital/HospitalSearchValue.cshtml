@@ -32,23 +32,24 @@
     function mouseover() {
         var q = parseInt(event.currentTarget.id)
         for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764.jpg" }
+        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
     }
     function mouseout() {
         var q = parseInt(event.currentTarget.id)
         for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" }
+        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png" }
     }
     function mouseclick() {
         var q = parseInt(event.currentTarget.id)
         for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" }
+        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
         for (var i = 1; i <= 5; i++) {
             document.getElementById(i + "idimg").onmouseover = null;
             document.getElementById(i + "idimg").onmouseout = null;
             document.getElementById(i + "idimg").onclick = null;
         }
-        document.getElementById("idsp").innerHTML = "<p>可獲得 " + q + "個毛孩子 </p>";
+
+        document.getElementById("Score").value = q;
         document.getElementById("butck").onclick = buttonclick;
         document.getElementById("butck").style = "display:black";
     }
@@ -57,7 +58,7 @@
             document.getElementById(i + "idimg").onmouseover = mouseover;
             document.getElementById(i + "idimg").onmouseout = mouseout;
             document.getElementById(i + "idimg").onclick = mouseclick;
-            document.getElementById(i + "idimg").src = "/Areas/Hodpital/Image/Cats_Angels_Kittens_487764.jpg";
+            document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png";
         }
         document.getElementById("idsp").innerHTML = "";
         document.getElementById("butck").style = "display:none";
@@ -71,52 +72,115 @@
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
-    @*@Html.Partial("Aside")*@
+    @Html.Partial("Aside")
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="height:auto;background-color:#fff266" class="drawingpin">
-            一星：@ViewBag.zS
-            二星：@ViewBag.xS
-            六星：@ViewBag.cS
-            @*@foreach (var item in Model)
-                {*@
+        <div style="overflow:auto;background-color:#fff266" class="drawingpin">
             <h2> @Model.HospitalName</h2>
-            <h4>醫院地址:</h4><p>@Model.HospitalAddress</p>
-            <h4>醫院區域:</h4><p>@Model.AddressArea</p>
-            <h4>醫院電話:</h4><p>@Model.HospitalPhone</p>
-            <h4>寵物種類:</h4><p>@ViewBag.SetName</p>
-            <h4>營業時間:</h4><p>@Model.BusinessHours</p>
-            <h4>急診時間:</h4><p>@Model.Emergency</p>
-            <h4>專業科目:</h4><p>@Model.OutpatientProject</p>
-            <h4>醫院設備:</h4><p>@Model.Equipment</p>
-            <h4>醫院網址:</h4><p>@Model.WebAddress</p>
-            <h4>線上問診:</h4><p>@Model.OnlineConsultation</p>
-            <h4>醫院地圖:</h4><p>@Model.Map</p>
-            @*}*@
-            @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml");}
+            <div class="form-group">
+                <label for="HospitalAddress"
+                       class="col-sm-2 control-label">醫院地址</label>
+                <div class="col-sm-10">
+                    <p>@Model.HospitalAddress</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="AddressArea"
+                       class="col-sm-2 control-label">醫院區域</label>
+                <div class="col-sm-10">
+                    <p>@Model.AddressArea</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="HospitalPhone"
+                       class="col-sm-2 control-label">醫院電話</label>
+                <div class="col-sm-10">
+                    <p>@Model.HospitalPhone</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="PetRace"
+                       class="col-sm-2 control-label">寵物種類</label>
+                <div class="col-sm-10">
+                    <fieldset>
+                        <p>@ViewBag.SetName</p>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="BusinessHours"
+                       class="col-sm-2 control-label">營業時間</label>
+                <div class="col-sm-10">
+                    <p>@Model.BusinessHours</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Emergency"
+                       class="col-sm-2 control-label">急診時間</label>
+                <div class="col-sm-10">
+                    <p>@Model.Emergency</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="OutpatientProject"
+                       class="col-sm-2 control-label">專業科目</label>
+                <div class="col-sm-10">
+                    <p>@Model.OutpatientProject</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Equipment"
+                       class="col-sm-2 control-label">醫院設備</label>
+                <div class="col-sm-10">
+                    <p>@Model.Equipment</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="WebAddress"
+                       class="col-sm-2 control-label">醫院網址</label>
+                <div class="col-sm-10">
+                    <p>@Model.WebAddress</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="OnlineConsultation"
+                       class="col-sm-2 control-label">地圖</label>
+                <div class="col-sm-10">
+                    <div></div>
+                    @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml",new { HospitalID  = Model.HospitalID });}
+                </div>
+            </div>
 
         </div>
-        <div style="height:500px;background-color:burlywood" class="drawingpin">
+        <div style="height:auto;background-color:burlywood" class="drawingpin">
 
-            <h2>ListToNote</h2>
-            <form method="post" action="~/Hospital/ListToNote" onsubmit="return checkForm(this);">
-                <h2>@*@ViewBag.HospitalName*@ - @ViewBag.HospitalID</h2>
+            <h2>@ViewBag.HospitalName - 評分</h2>
+            一星：@ViewBag.S1
+            二星：@ViewBag.S2
+            三星：@ViewBag.S3
+            四星：@ViewBag.S4
+            五星：@ViewBag.S5
+
+
+
+
+            <form method="post" action="~/Hospital/Hospital/ListToNote" onsubmit="return checkForm(this);">
+                <h2></h2>
                 <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
                 <table>
                     <tr>
-                        <th>評分者</th>
-                        <td><input type="text" id="UserID" name="UserID" /></td>
                         <th>星等</th>
                         <td>
-                            <img id="1idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
-                            <img id="2idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
-                            <img id="3idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
-                            <img id="4idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
-                            <img id="5idimg" src="~/Areas/Hodpital/Image/Cats_Angels_Kittens_487764001.jpg" style="width:100px" />
+                            <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                            <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                            <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                            <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                            <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                            <input type="hidden" id="Score" name="Score" />
                         </td>
                     </tr>
                     <tr>
@@ -128,22 +192,11 @@
                     </tr>
                 </table>
             </form>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>評分者</th>
-                        <th>評語</th>
-                        <th>星等</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @*@foreach (var item in Model)
-                        {
-                            <tr></tr>
-                        }*@
-                </tbody>
+            @*//載入評分的清單*@
+            <table class="table table-striped">
+                @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
             </table>
+
         </div>
     </div>
     <!-------------------articleEnd------------------->

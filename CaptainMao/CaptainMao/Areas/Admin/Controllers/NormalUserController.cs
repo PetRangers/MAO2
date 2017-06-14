@@ -101,47 +101,107 @@ namespace CaptainMao.Areas.Admin.Controllers
         }
 
         // GET: Admin/NormalUser/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            var userLogin = db.LoginLogs.Where(u => u.UserId == aspUser.Id);
+            if (aspUser == null)
+            {
+                return HttpNotFound();
+            }
+            NormalUserDetailViewModel user = new NormalUserDetailViewModel
+            {
+                AccessFailedCount=aspUser.AccessFailedCount,
+                DateRegistered =aspUser.DateRegistered,
+                Id =aspUser.Id,
+                EmailConfirmed =aspUser.EmailConfirmed,
+                Experience =aspUser.Experience,
+                FirstName =aspUser.FirstName,
+                LastName =aspUser.LastName,
+                LockoutEnabled =aspUser.LockoutEnabled,
+                LockoutEndDateUtc =aspUser.LockoutEndDateUtc,
+                NickName =aspUser.NickName,
+                PhoneNumber =aspUser.PhoneNumber,
+                PhoneNumberConfirmed =aspUser.PhoneNumberConfirmed,
+                TwoFactorEnabled =aspUser.TwoFactorEnabled,
+                UserName =aspUser.UserName,
+                Photo = "data:image /; base64," + Convert.ToBase64String(aspUser.Photo)
+            };
+            //user.LoginTime = userLogin.OrderByDescending(u => u.LoginTime).First().LoginTime;
+
+            return View(user);
         }
 
         // POST: Admin/NormalUser/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, NormalUserDetailViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(model);
+            }
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            var userLogin = db.LoginLogs.Where(u => u.UserId == aspUser.Id);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpPostedFileBase file = Request.Files["UserPhoto"];
+            if (file.FileName != "")
             {
-                return View();
+                byte[] _photo = IdentityUtilities.LoadUploadedFile(file);
+                aspUser.Photo = _photo;
             }
+
+            aspUser.UserName = model.UserName;
+            aspUser.Email = model.UserName;
+            aspUser.AccessFailedCount = model.AccessFailedCount;
+            aspUser.DateRegistered = model.DateRegistered;
+            aspUser.EmailConfirmed = model.EmailConfirmed;
+            aspUser.Experience = model.Experience;
+            aspUser.FirstName = model.FirstName;
+            aspUser.LastName = model.LastName;
+            aspUser.LockoutEnabled = model.LockoutEnabled;
+            aspUser.LockoutEndDateUtc = model.LockoutEndDateUtc;
+            aspUser.NickName = model.NickName;
+            aspUser.PhoneNumber = model.PhoneNumber;
+            aspUser.PhoneNumberConfirmed = model.PhoneNumberConfirmed;
+            aspUser.TwoFactorEnabled = model.TwoFactorEnabled;
+
+            //if (model.LoginTime!=null)
+            //{
+            //    userLogin.OrderByDescending(u => u.LoginTime).First().LoginTime = model.LoginTime;
+            //}
+            db.SaveChanges();
+
+            TempData["result"]  = "修改成功!";
+            return RedirectToAction("Edit", "NormalUser", new { area = "Admin", id = model.Id});
         }
 
-        // GET: Admin/NormalUser/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Admin/NormalUser/SetAuth/5
+        public ActionResult SetAuth(string id)
         {
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            var userLogin = db.LoginLogs.Where(u => u.UserId == aspUser.Id);
+            if (aspUser == null)
+            {
+                return HttpNotFound();
+            }
+            
             return View();
         }
 
-        // POST: Admin/NormalUser/Delete/5
+        // POST: Admin/NormalUser/SetAuth/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult SetAuth(string id, NormalUserDetailViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                return View(model);
+            }
+            
+            db.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            TempData["result"] = "修改成功!";
+            return RedirectToAction("Edit", "NormalUser", new { area = "Admin", id = model.Id });
         }
+
     }
 }

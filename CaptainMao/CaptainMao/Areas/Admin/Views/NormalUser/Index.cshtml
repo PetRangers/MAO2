@@ -1,15 +1,24 @@
 ﻿@model IEnumerable<CaptainMao.Areas.Admin.Models.NormalUserViewModel>
 
-<h2>一般會員管理</h2>
-
-@Html.ActionLink("新增會員", "Create", null, htmlAttributes: new{ @class="btn btn-info" })
+<div class="row">
+    <div class="col-sm-10">
+        <h4>一般會員管理</h4>
+    </div>
+    <div class="col-sm-2">
+        @Html.ActionLink("新增會員", "Create", null, htmlAttributes: new { @class = "ui-button ui-widget ui-corner-all" })
+    </div>
+</div>
 <hr/>
+
 <table id="example" class="display nowrap" cellspacing="0"  width="100%">
 
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
@@ -22,9 +31,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateRegistered)
@@ -43,6 +49,9 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
+                    <img height="100" src="@item.Photo" alt="無圖片可供預覽" />
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
@@ -55,15 +64,12 @@
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
-                    <img height="100" src="@item.Photo" alt="無圖片可供預覽" />
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.DateRegistered)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class="btn btn-primary"}) 
-                    @Html.ActionLink("Details", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "btn btn-success" }) 
-                    @Html.ActionLink("Delete", "Delete", "NormalUser", new { area = "Admin" }, new { id=item.Id, @class = "btn btn-danger" })
+                    @Html.ActionLink("編輯", "Edit", "NormalUser", new { area = "Admin", id = item.Id }, new {  @class= "ui-button ui-widget ui-corner-all" }) 
+                    @Html.ActionLink("詳細", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "ui-button ui-widget ui-corner-all" }) 
+                    
                 </td>
             </tr>
         }

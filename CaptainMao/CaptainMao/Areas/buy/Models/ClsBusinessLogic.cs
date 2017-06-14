@@ -17,6 +17,8 @@ namespace CaptainMao.Areas.buy.Models
         IMao<sType> _sType = new ClsMao<sType>();
         IMao<StoreUser> _store = new ClsMao<StoreUser>();
         IMao<shoppingcart> _shoppingcart = new ClsMao<shoppingcart>();
+        IMao<Merchandise_Order_View> _merchOrder = new ClsMao<Merchandise_Order_View>();
+        IMao<Order> _order = new ClsMao<Order>();
 
         /*尋找商品*/
         public IEnumerable<Merchandise> Logic_SelectMerchandise(vmCaID_typeID_stypeID vm)
@@ -220,12 +222,49 @@ namespace CaptainMao.Areas.buy.Models
         }
         /*回傳所有超商資料*/
         public IEnumerable<CaptainMao.Models.FourStore> Logic_GetStore(string city) {
-            return DB.FourStores.Where(c=>c.BranchAddress.Contains(city));
+            return DB.FourStores.Where(c=>c.Branch.Contains(city));
         }
-
         public IEnumerable<CaptainMao.Models.City> Logic_GetAllCity() {
             return DB.Cities;
         }
+        /*有登入時*/
+   
+        private int CreateOrder(Order order) {
+             _order.Create(order);
+            return order.Order_ID;
+        }
+        /*後登入時*/
+        public void Logic_CreateOrder(string UserID,  string name, int FourStore, string session = "-1") {
 
+            using (var transaction = DB.Database.BeginTransaction())
+            {
+                try
+                {
+                    Order order = new Order();
+                    order.DeliveryLocation = FourStore;
+                    order.DeliveryName = name;
+                    order.Order_Fitness = true;
+                    order.Order_Createdate = DateTime.UtcNow;
+                    order.user_ID = UserID;
+                    int OrderID = CreateOrder(order);
+
+                    var shoppingcart = DB.shoppingcarts.Where(s => s.cartID.Equals(session) || s.cartID.Equals(UserID));
+                    foreach (var shop in shoppingcart)
+                    {
+                        Merchandise_Order_View mer = new Merchandise_Order_View();
+                        mer.Merchandise_ID = shop.Merchandise_ID;
+                        mer.merchandise_Volume = shop.merchandise_Volume;
+                        mer.Order_ID = OrderID;
+                        _merchOrder.Create(mer);
+                        DB.shoppingcarts.Remove(shop);
+                    }
+                    DB.SaveChanges();
+                    transaction.Commit();
+                }
+                catch {
+                    transaction.Rollback();
+                }
+            }
+        }
     }
 }

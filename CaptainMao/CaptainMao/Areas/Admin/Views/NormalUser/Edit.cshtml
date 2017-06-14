@@ -1,0 +1,190 @@
+﻿@model CaptainMao.Areas.Admin.Models.NormalUserDetailViewModel
+
+@using (Html.BeginForm("Edit", "NormalUser", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <div class="container bootstrap snippet">
+        <div class="row ng-scope">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <div class="pv-lg">
+                            <img name="avatar2" id="UserPhotoPreview" class="center-block img-responsive img-thumbnail thumb96" src="@Model.Photo" alt="無圖片可供預覽" />
+                        </div>
+                        <br />
+                        <input type="file" name="UserPhoto" id="UserPhoto" class="btn btn-sm btn-block btn-success" />
+                        <script>
+                            document.getElementById("UserPhoto").onchange = function () {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    // get loaded data and render thumbnail.
+                                    document.getElementById("UserPhotoPreview").src = e.target.result;
+                                };
+                                // read the image file as a data URL.
+                                reader.readAsDataURL(this.files[0]);
+                            };
+                        </script>
+
+                        <h3 class="m0 text-bold">@Model.LastName @Model.FirstName</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <div class="btn-group dropdown" uib-dropdown="dropdown">
+                                <button class="btn btn-link dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button>
+                                <ul class="dropdown-menu dropdown-menu-right animated fadeInLeft" role="menu">
+                                    <li>
+                                        <a href=""><span>Send by message</span></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><span>Share contact</span></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><span>Block contact</span></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><span class="text-warning">Delete contact</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="h4 text-center text-primary">編輯會員檔案</div>
+                        <div class="row pv-lg">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Id)</label>
+                                    <div class="col-sm-9 control-label" style="text-align:left">
+                                        @Html.DisplayFor(m => m.Id)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="LastName">@Html.DisplayNameFor(m => m.LastName)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="FirstName">@Html.DisplayNameFor(m => m.FirstName)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="NickName">@Html.DisplayNameFor(m => m.NickName)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.NickName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="DateRegistered">@Html.DisplayNameFor(m => m.DateRegistered)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.DateRegistered, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="UserName">@Html.DisplayNameFor(m => m.UserName)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="EmailConfirmed">@Html.DisplayNameFor(m => m.EmailConfirmed)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.EmailConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="PhoneNumber">@Html.DisplayNameFor(m => m.PhoneNumber)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="PhoneNumberConfirmed">@Html.DisplayNameFor(m => m.PhoneNumberConfirmed)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.PhoneNumberConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="TwoFactorEnabled">@Html.DisplayNameFor(m => m.TwoFactorEnabled)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.TwoFactorEnabled, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="LockoutEnabled">@Html.DisplayNameFor(m => m.LockoutEnabled)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.LockoutEnabled, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="LockoutEndDateUtc">@Html.DisplayNameFor(m => m.LockoutEndDateUtc)</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-2">
+                                        <button class="btn btn-info" type="submit">修改</button>
+                                    </div>
+                                    <div class="col-sm-offset-1 col-sm-2">
+                                        <button class="btn btn-default" type="reset">重設</button>
+                                    </div>
+                                </div>
+
+                                @if (@TempData["result"] != null)
+                                {
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-success  alert-dismissible">
+                                            @TempData["result"]
+                                        </div>
+                                    </div>
+                                } 
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Style{
+    <style>
+        body {
+            margin-top: 20px;
+            background: #f5f7fa;
+        }
+
+        .panel.panel-default {
+            border-top-width: 3px;
+        }
+
+        .panel {
+            box-shadow: 0 3px 1px -2px rgba(0,0,0,.14),0 2px 2px 0 rgba(0,0,0,.098),0 1px 5px 0 rgba(0,0,0,.084);
+            border: 0;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .thumb96 {
+            width: 350px !important;
+        }
+
+    </style>
+}

@@ -13,7 +13,7 @@
 
         $.ajax({
             url: "/Hospital/_HospitalSearchCity",//要把資料丟去哪一個Action的路徑
-            type: "POST",//資料傳遞的方式
+            type: "POST",//資料傳遞的方式C:\Users\III\Desktop\MAO2\CaptainMao\CaptainMao\Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml
             data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace },//要帶去給Action的資料名稱:資料內容
             dataType: "text",//設定格式 可能是Json
             traditional: true,//是否改為同步
@@ -35,10 +35,9 @@
     </div>
     <ul class="list-group">
         <li class="list-group-item"><a href="@Url.Action("CreatHospital",new { })">新增</a></li>
-        <li class="list-group-item"><a>查詢所有</a></li>
-        <li class="list-group-item"><a href="#">查詢</a></li>
-        <li class="list-group-item">@Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity, new { @onchange = "CheckThis()" })</li>
-        <li class="list-group-item">  @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)@ViewBag.HospitalPetRace)</li>
+        <li class="list-group-item"><a href="@Url.Action("Index",new { })">查詢</a></li>
+        @*<li class="list-group-item">@Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity, new { @onchange = "CheckThis()" })</li>
+        <li class="list-group-item">  @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)@ViewBag.HospitalPetRace)</li>*@
         @*資料型態為IEnumerable<SelectListItem>的資料，來源是後端丟出的ViewBag.HospitalCity，並透過 new { @onchange = "CheckThis()" }這段註冊一個會去呼叫CheckThis()的onchange事件*@
     </ul>
     <ul></ul>

@@ -8,6 +8,7 @@
     function ChangeList() {
         var clicktbn = $('#HospitalCity').val();
         var clicktbnRace = $('#HospitalPetRace').val();
+      
 
         $.ajax({
             url: "/Hospital/Hospital/_HospitalSearchCity",
@@ -17,7 +18,7 @@
             traditional: true,
             success: function (data) {
                 //alert("1");
-                $('#_HospitalCity').load("/Hospital/Hospital/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace });//路徑增加Hospital
+                $('#_HospitalCity').load("/Hospital/Hospital/_HospitalSearchCity", { 'CityID': clicktbn, 'CategoryID': clicktbnRace });//路徑增加Hospital
             },
             error: function (XMLHttpRequest) {
                 alert(XMLHttpRequest.responseText);
@@ -36,23 +37,16 @@
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="height:300px;background-color:#fff266" class="drawingpin">
+        <div style="height:auto;background-color:#fff266" class="drawingpin">
             @*<form action="~/Hospital/_HospitalSearchCity" method="post">*@
             <h2>醫院查詢</h2>
             @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
             @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
             <input type="text" />
-            <div>
-                <input id="" type="button" value="搜尋" onclick="ChangeList()" />
-            </div>
-            @*</form>*@
-
+            <div><input id="" type="button" value="搜尋" onclick="ChangeList()" />   </div>
         </div>
-        <div style="height:500px;background-color:burlywood" class="drawingpin">
+        <div style="overflow:auto;background-color:burlywood" class="drawingpin">
             <div id="_HospitalCity" name="_HospitalCity"></div>
-
-            @*@Html.Action("_HospitalSearchCity", "Hospital", new { CityID = 3})*@
-
         </div>
     </div>
     <!-------------------articleEnd------------------->

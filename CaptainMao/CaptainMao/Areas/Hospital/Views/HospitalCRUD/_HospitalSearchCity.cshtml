@@ -1,4 +1,5 @@
-﻿@*@model IEnumerable<CaptainMao.Models.Hospital>*@
+﻿
+@*@model IEnumerable<CaptainMao.Models.Hospital>*@
 @{
     ViewBag.Title = "HospitalSearch";
     //Layout = "~/Views/Shared/_MaoLayout.cshtml";
@@ -8,18 +9,29 @@
     var HospitalID = 'int';
     function ChangeThisID(HospitalID) {
 
-       
+        $.ajax({
+            url: "/Hospital/HospitalCRUD/UpDataGetHospital",
+            type: "Post",
+            data: { 'HospitalID': HospitalID},
+            dataType: "text",
+            traditional: true,
+            success: function () {
+                $('#_HospitalUPDate').load("/Hospital/HospitalCRUD/UpDataGetHospital", { "HospitalID": HospitalID});//路徑增加Hospital
+            },
+            error: function (XMLHttpRequest) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
     }
 </script>
 
-<h2>醫院列表</h2>
+@*<h2>醫院列表</h2>*@
 
-@foreach (var a in Model)
-{/*//顯示欄位 超連結*/
-    @*<a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>*@    }
-   
+@*@foreach (var a in Model)
+    {/*//顯示欄位 超連結*/
+       }*@
 
-<table class="table table-bordered table-hover"  id="table1">
+<table class="table table-bordered table-hover" id="table1">
     <thead>
         <tr>
             @*<th>醫院編號</th>*@
@@ -34,13 +46,14 @@
         @*Model 表示Controller傳過來的資料*@
         @foreach (var _category in Model)
         {
-            <tr target=_blank onclick="location.href='@Url.Action("HospitalSearchValue", "Hospital", new { HospitalID = _category.HospitalID })'">
+            
+            <tr target=_blank onclick="ChangeThisID(@_category.HospitalID);">
                 <td style="display:none">@_category.HospitalID</td>
                 <td>@_category.HospitalName</td>
                 <td>@_category.HospitalAddress</td>
                 <td>@_category.AddressArea</td>
                 <td>@_category.HospitalPhone</td>
-                <td>@_category.CategoryID</td>
+                <td>@_category.CategoryList</td>
             </tr>
         }
     </tbody>

@@ -26,12 +26,16 @@ namespace CaptainMao.Areas.buy.Controllers
         public ActionResult Aside() {
             return PartialView();
         }
-
-        [AuthorizeMao]
-        public ActionResult CreateOrder()
+        [HttpPost]
+        [AuthorizeMao(Roles ="Normal")]
+        public ActionResult CreateOrder(string name, int FourStore)
         {
-            if (Session["user_identity"]!=null) {
+            string session ="1";
+            if (Session["user_identity"] != null) {
+                session = Session["user_identity"].ToString();
             }
+            fun.Logic_CreateOrder(User.Identity.GetUserId(), name, FourStore, session);
+
             return View();
         }
     }

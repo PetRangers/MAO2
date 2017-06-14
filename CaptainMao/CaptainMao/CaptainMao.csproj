@@ -17,7 +17,8 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -215,13 +216,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\buy\css\Create.css" />
-    <Content Include="Areas\buy\css\Create.min.css" />
-    <Content Include="Areas\buy\css\Index.css">
-      <DependentUpon>Index.less</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.css">
+      <DependentUpon>Create.less</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\css\Index.min.css">
-      <DependentUpon>Index.css</DependentUpon>
+    <Content Include="Areas\buy\css\Create1.min.css">
+      <DependentUpon>Create1.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.css">
+      <DependentUpon>shoppingcart.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\shoppingcart.min.css">
+      <DependentUpon>shoppingcart.css</DependentUpon>
     </Content>
     <Content Include="Areas\buy\css\shoppingIndex.css">
       <DependentUpon>shoppingIndex.less</DependentUpon>
@@ -235,7 +240,6 @@
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
     <Content Include="Areas\buy\Views\Store\Create.cshtml" />
@@ -358,7 +362,6 @@
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
@@ -394,8 +397,13 @@
     </Content>
     <Content Include="fonts\GOODDC__.TTF" />
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
+    <Content Include="Areas\buy\css\Create.less" />
+    <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
+    <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1060,6 +1068,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
@@ -1199,6 +1208,9 @@
     <Compile Include="Models\Merchandise.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Merchandise_Order_View.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
@@ -1285,6 +1297,7 @@
     <Content Include="Views\Account\_RegisterStoreUser.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Shared\_Chat.cshtml" />
+    <Content Include="Views\Account\Inactivated.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
