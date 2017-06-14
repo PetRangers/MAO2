@@ -9,6 +9,8 @@ using CaptainMao.Areas.Adoption.ViewModel;
 using PagedList;
 using PagedList.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CaptainMao.Areas.Adoption.Controllers
 {
@@ -311,30 +313,30 @@ namespace CaptainMao.Areas.Adoption.Controllers
         }
 
         //NoView function
-        public ActionResult Email(int id)
+        public async Task<ActionResult> Email(int id)
         {
             var UserID = User.Identity.GetUserId();
             if (UserID == null)
             {
                 return RedirectToAction("Login", "Account", new { Area = "" });
             }
-            System.Net.Mail.SmtpClient MySmtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+            var user = db.AspNetUsers.Where(u => u.Id == UserID).First();
+            var emailTo = db.Adoptions.Find(id).AspNetUser;
+                                
 
-            //設定你的帳號密碼
-            MySmtp.Credentials = new System.Net.NetworkCredential("captainmao114@gmail.com", "gogoP@ssw0rd");
+            string callbackUrl = "http://localhost:52326/Adoption/Adoption/Details/" + id;
+            string emailContent = "<h3>" + emailTo.LastName + " " + emailTo.FirstName + "您好，</h3>" +
+                                                      "<p>有其他的用戶對您的小寵物有興趣，請您盡快與他聯絡</p>" +
+                                                      "<p>聯絡人:" + user.LastName + " " + user.FirstName + "</p>"+
+                                                      "<p>聯絡電話:" + user.PhoneNumber + "</p>" +
+                                                      "<p>請按一下此連結確認小寵物的資訊 <a href='" + callbackUrl +
+                                                      "'>確認小寵物</a></p>";
+            var service = new EmailService();
+            IdentityMessage message = new IdentityMessage { Body = emailContent, Destination = emailTo.Email, Subject = "【毛孩隊長寵物生活網】領養通知信" };
+            await service.SendAsync(message);
 
-            //Gmial 的 smtp 必需要使用 SSL
-            MySmtp.EnableSsl = true;
-            //string emailContent = "<h3>" + user.LastName + " " + user.FirstName + "您好，</h3>" + "<p>歡迎您加入毛孩隊長寵物生活網!</p>" +
-            //            "<p>請按一下此連結確認您的帳戶 <a href='" + callbackUrl +
-            //            "'>確認電子郵件</a></p>";
-            //await UserManager.SendEmailAsync(user.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
-            var adoption = db.Adoptions.Find(id);
-            string Email = adoption.AspNetUser.Email;
-            //發送Email
-            MySmtp.Send("captainmao114@gmail.com", Email, "毛孩隊長",
-                        "親愛的用戶您好，有其他用戶領養您的寵物 "+ "http://localhost:52326/Adoption/Adoption/Details/" + id +"，請您盡速回覆，謝謝。");
-            MySmtp.Dispose();
+            //await UserManager.SendEmailAsync(emailTo.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
+         
             return RedirectToAction("Index");
         }
 
@@ -344,6 +346,19 @@ namespace CaptainMao.Areas.Adoption.Controllers
             byte[] img = photo;
             return File(img, "image/jpeg");
         }
+
+        //private ApplicationUserManager _userManager;
+        //public ApplicationUserManager UserManager
+        //{
+        //    get
+        //    {
+        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    }
+        //    private set
+        //    {
+        //        _userManager = value;
+        //    }
+        //}
 
     }
 }

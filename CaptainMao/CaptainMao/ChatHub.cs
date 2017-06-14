@@ -24,6 +24,10 @@ namespace CaptainMao
         {
             var userName = Context.User.Identity.Name;
             var userID = Context.User.Identity.GetUserId();
+            if (userID == null || userName == null)
+            {
+                return base.OnConnected();
+            }
             var userNickName = db.AspNetUsers.Where(u => u.UserName == userName).Select(u => u.NickName).First();
             //User is null then Identity and Name too.
             
@@ -53,7 +57,10 @@ namespace CaptainMao
             var userID = Context.User.Identity.GetUserId();
             //當使用者離開時，移除在清單內的 ConnectionId
             //Clients.All.removeList(userID);
-            UserHandler.ConnectedIds.Remove(userID);
+            if (userID != null)
+            {
+                UserHandler.ConnectedIds.Remove(userID);
+            }
             return base.OnDisconnected(stopCalled);
         }
     }
