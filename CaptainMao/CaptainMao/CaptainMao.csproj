@@ -402,6 +402,8 @@
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ArticleReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">

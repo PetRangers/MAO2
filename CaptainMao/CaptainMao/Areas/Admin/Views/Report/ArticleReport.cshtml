@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "文章圖表顯示";
+    ViewBag.Title = "文章報表";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -50,7 +50,7 @@
 
         function GetReportData() {
             $.ajax({
-                url: '@Url.Action("Report")',
+                url: '@Url.Action("GetArticleReport")',
                 type: 'POST',
                 //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
                 //有兩個屬性可以用
@@ -61,8 +61,8 @@
                 cache: false
             });
         }
-</script>
-    }
+    </script>
+}
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
@@ -72,10 +72,11 @@
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-            <div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
+        <div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
 
-            </div>
+        </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>
+
 
