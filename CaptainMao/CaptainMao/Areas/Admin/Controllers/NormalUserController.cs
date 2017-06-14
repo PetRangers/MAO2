@@ -171,6 +171,35 @@ namespace CaptainMao.Areas.Admin.Controllers
             //}
             db.SaveChanges();
 
+            TempData["result"]  = "修改成功!";
+            return RedirectToAction("Edit", "NormalUser", new { area = "Admin", id = model.Id});
+        }
+
+        // GET: Admin/NormalUser/SetAuth/5
+        public ActionResult SetAuth(string id)
+        {
+            var aspUser = db.AspNetUsers.Where(u=>u.Id == id).First();
+            var userLogin = db.LoginLogs.Where(u => u.UserId == aspUser.Id);
+            if (aspUser == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View();
+        }
+
+        // POST: Admin/NormalUser/SetAuth/5
+        [HttpPost]
+        public ActionResult SetAuth(string id, NormalUserDetailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            db.SaveChanges();
+
+            TempData["result"] = "修改成功!";
             return RedirectToAction("Edit", "NormalUser", new { area = "Admin", id = model.Id });
         }
 
