@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -385,7 +384,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
@@ -396,14 +394,14 @@
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\GOODDC__.TTF" />
-    <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <Content Include="Areas\buy\css\Create.less" />
     <Content Include="Areas\buy\css\shoppingcart.less" />
-    <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ArticleReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1068,6 +1066,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
@@ -1084,7 +1083,6 @@
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
-    <Compile Include="Areas\Article\Controllers\ReportController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />

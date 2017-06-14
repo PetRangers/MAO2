@@ -10,8 +10,8 @@ $(document).ready(function () {
         var id = $(this).attr('data-id');
         var name = $(this).attr('data-name');
         var img = $(this).attr('data-img');
-
-        $(".nextchat").load("../../Shared/_Chat", function () {
+        var url = $('#chaturl').val();
+        $(".nextchat").load(url, function () {
             //alert("complete");
             $(this).removeClass('nextchat');
             $('#chatdiv').append('<div class="childdiv nextchat"></div>');
