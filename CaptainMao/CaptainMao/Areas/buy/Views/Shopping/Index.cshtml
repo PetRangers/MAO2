@@ -32,17 +32,20 @@
                     <div class="row">
                         <div class="col-sm-1">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
                         <div class="col-sm-2">
-                       
 
-                                @Html.ActionLink( _model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID },null)
+
+                            @Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)
                         </div>
                         @{
                             string url = "";
-                            if (Convert.IsDBNull(_model.Merchandise_Photo))
+                            try
                             {
-                                url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                if (_model.Merchandise_Photo.Length >0)
+                                {
+                                    url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                }
                             }
-                            else
+                            catch
                             {
                                 url = _model.Merchandise_Photo_Address;
                             }
@@ -62,6 +65,7 @@
 
     <!-------------------articleEnd------------------->
 </article>
+
 
 
 

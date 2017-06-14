@@ -14,6 +14,7 @@ namespace CaptainMao.Models
     
     public partial class Merchandise_Order_View
     {
+        public int id { get; set; }
         public int Order_ID { get; set; }
         public int Merchandise_ID { get; set; }
         public int merchandise_Volume { get; set; }
