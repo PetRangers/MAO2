@@ -49,13 +49,13 @@
                                 <td class="text-primary">
                                     @if (Model.PhoneNumber != null)
             {
-                                        @Html.ActionLink("修改", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" }) 
+                                        @Html.ActionLink("新增", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" }) 
                                         <span> or </span>
                                         @Html.ActionLink("移除", "RemovePhoneNumber", "Manage", null, new { @class = "btn btn-default" })
                                     }
                                     else
                                     {
-                                        @Html.ActionLink("新增", "AddPhoneNumber")
+                                        @Html.ActionLink("新增", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" })
                                     }
                                 </td>
                             </tr>
@@ -87,7 +87,7 @@
                                         using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                         {
                                             @Html.AntiForgeryToken()
-                                            <text>已啟用
+                                            <text><span class="text-success">已啟用</span>
                                                 <input type="submit" value="停用" class="btn btn-default" />
                                             </text>
                                         }
@@ -97,12 +97,12 @@
                                         using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                         {
                                             @Html.AntiForgeryToken()
-                                            <text>已停用
-                                                <input type="submit" value="啟用" class="btn btn-default" />
+                                            <text><span class="text-danger">已停用</span>
+    <input type="submit" value="啟用" class="btn btn-default" />
                                             </text>
-                                        }
-                                    }
-                                </td>
+    }
+}
+</td>
                             </tr>
                         </tbody>
                     </table>
