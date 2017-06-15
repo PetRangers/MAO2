@@ -304,7 +304,7 @@
     <Content Include="images\C3.jpg" />
     <Content Include="images\C4.jpg" />
     <Content Include="images\C6.jpg" />
-    <Content Include="images\captain.png" />
+    <Content Include="images\captain1.png" />
     <Content Include="images\captain2.png" />
     <Content Include="images\cat.png" />
     <Content Include="images\cat2.png" />
@@ -412,13 +412,12 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-
-	 <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
-	<Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
+    <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
