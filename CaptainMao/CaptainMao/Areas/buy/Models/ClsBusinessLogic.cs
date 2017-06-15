@@ -273,10 +273,11 @@ namespace CaptainMao.Areas.buy.Models
 
         public IEnumerable<vmNewOrder> Logic_NewOrder(string StoreID) {
             List<vmNewOrder> NewOlist = new List<vmNewOrder>();
-            
+            //找出有包含商家的訂單
             var storeMer = DB.Orders.Where(s => s.Merchandise_Order_View.Any(x => x.Merchandise.Store_ID == StoreID));
 
             foreach(var _storeMer in storeMer) {
+
                 vmNewOrder NewO = new vmNewOrder();
                 NewO.BranchAddress = _storeMer.FourStore.BranchAddress;
                 NewO.DeliveryName = _storeMer.DeliveryName;
@@ -288,16 +289,19 @@ namespace CaptainMao.Areas.buy.Models
                 var _storeM = _storeMer.Merchandise_Order_View;
                 List<vmNewOrderMer> _merlist = new List<vmNewOrderMer>();
                 foreach (var _store in _storeM) {
-                    vmNewOrderMer _mer = new vmNewOrderMer();
-                    _mer.Merchandise_ID = _store.Merchandise_ID;
-                    _mer.Merchandise_Name =_store.Merchandise.Merchandise_Name;                    
-                    _mer.merchandise_Volume = _store.merchandise_Volume;
-                    _mer.Merchandise_Price = _store.Merchandise.Merchandise_Price *_mer.merchandise_Volume;
-                    _merlist.Add(_mer);
+                    if (_store.Merchandise.Store_ID == StoreID) { //因訂單內還會有其他商家的商品故再判斷一次
+                        vmNewOrderMer _mer = new vmNewOrderMer();
+                        _mer.Merchandise_ID = _store.Merchandise_ID;
+                        _mer.Merchandise_Name = _store.Merchandise.Merchandise_Name;
+                        _mer.merchandise_Volume = _store.merchandise_Volume;
+                        _mer.Merchandise_Price = _store.Merchandise.Merchandise_Price * _mer.merchandise_Volume;
+                        _merlist.Add(_mer);
+                    }
                 }
                 NewO.mer = _merlist;
                 NewOlist.Add(NewO);
             }
+
             return NewOlist;
         }
 
@@ -305,5 +309,36 @@ namespace CaptainMao.Areas.buy.Models
         public AspNetUser Logic_ReUser(string User) {
             return DB.AspNetUsers.Where(c => c.Email == User).First() ;
         }
+
+        public IEnumerable<vmNewReport> Logic_NewReport(string StoreID) {
+            List<vmNewReport> vmlist = new List<vmNewReport>() ;
+            //找出所有商家的訂單
+            var storeMer = DB.Orders.Where(s => s.Merchandise_Order_View.Any(x => x.Merchandise.Store_ID == StoreID));
+            
+            foreach (var store in storeMer) {//每筆的訂單
+                foreach (var _store in store.Merchandise_Order_View) { //訂單內的明細
+                    if (_store.Merchandise.Store_ID == StoreID) { 
+                        if (!vmlist.Any(xxx => xxx.Merchandise_Name.Contains(_store.Merchandise.Merchandise_Name)))
+                        {
+                            vmNewReport vm = new vmNewReport();
+                            vm.merchandise_Volume = _store.merchandise_Volume;
+                            vm.Merchandise_Name = _store.Merchandise.Merchandise_Name;
+                            vmlist.Add(vm);
+                        }
+                        else {
+                            var vm = vmlist.Where(x=>x.Merchandise_Name ==_store.Merchandise.Merchandise_Name).First();
+                            vmlist.Remove(vm);
+                            vm.merchandise_Volume += _store.merchandise_Volume;
+                            vmlist.Add(vm);
+                        }
+                    }
+
+                }
+            }
+
+            return vmlist;
+        }
+
+        
     }
 }

@@ -1093,7 +1093,6 @@
     <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
-    <Compile Include="Areas\buy\Controllers\ReportController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
