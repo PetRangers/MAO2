@@ -8,17 +8,18 @@
     function ChangeList() {
         var clicktbn = $('#HospitalCity').val();
         var clicktbnRace = $('#HospitalPetRace').val();
+        var clicktHosName = $('#HosName').val();
       
 
         $.ajax({
             url: "/Hospital/Hospital/_HospitalSearchCity",
             type: "POST",
-            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace },
+            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace ,'HosName' : clicktHosName},
             dataType: "text",
             traditional: true,
             success: function (data) {
                 //alert("1");
-                $('#_HospitalCity').load("/Hospital/Hospital/_HospitalSearchCity", { 'CityID': clicktbn, 'CategoryID': clicktbnRace });//路徑增加Hospital
+                $('#_HospitalCity').load("/Hospital/Hospital/_HospitalSearchCity", { 'CityID': clicktbn, 'CategoryID': clicktbnRace ,'HosName' : clicktHosName});//路徑增加Hospital
             },
             error: function (XMLHttpRequest) {
                 alert(XMLHttpRequest.responseText);
@@ -38,11 +39,10 @@
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
         <div style="height:auto;background-color:#fff266" class="drawingpin">
-            @*<form action="~/Hospital/_HospitalSearchCity" method="post">*@
             <h2>醫院查詢</h2>
             @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
             @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
-            <input type="text" />
+            <input type="text" id="HosName" name="HosName" value=""/>
             <div><input id="" type="button" value="搜尋" onclick="ChangeList()" />   </div>
         </div>
         <div style="overflow:auto;background-color:burlywood" class="drawingpin">

@@ -118,10 +118,9 @@ namespace CaptainMao.Areas.buy.Controllers
             return View(fun.Logic_NewOrder(User.Identity.GetUserId()));
         }
 
-
         public ActionResult Report()
         {
-            return View();
+            return View(fun.Logic_NewReport(User.Identity.GetUserId()));
         }
              
 

@@ -3,10 +3,15 @@
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<link rel="stylesheet" type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+
 <script>
-    //function CheckThis() {
-    //    ChangeList();
-    //}
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
 
     function SelectThis() {
         var clicktbn = $('#HospitalCity').val();
@@ -52,108 +57,10 @@
             </div>
             <div style="height:950px;background-color:burlywood" class="drawingpin">
                 <div id="_HospitalUPDate" name="_HospitalUPDate"></div>
-
-                <!--<form method="post" action="~/HospitalCRUD/UpDataHospital" class="form-horizontal">
-                    @*<div class="form-group" style="display:none">
-                            <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
-                            </div>
-                        </div>*@
-                    <div class="form-group">
-                        <label for="HospitalName"
-                               class="col-sm-2 control-label">醫院名稱</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="HospitalName" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="HospitalAddress"
-                               class="col-sm-2 control-label">醫院地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="HospitalAddress" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="AddressArea"
-                               class="col-sm-2 control-label">醫院區域</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)@ViewBag.HospitalCity)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="HospitalPhone"
-                               class="col-sm-2 control-label">醫院電話</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="HospitalPhone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="PetRace"
-                               class="col-sm-2 control-label">寵物種類</label>
-                        <div class="col-sm-10">
-                             @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)@ViewBag.HospitalPetRace)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="BusinessHours"
-                               class="col-sm-2 control-label">營業時間</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="BusinessHours" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Emergency"
-                               class="col-sm-2 control-label">急診時間</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Emergency" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="OutpatientProject"
-                               class="col-sm-2 control-label">專業科目</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="OutpatientProject" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Equipment"
-                               class="col-sm-2 control-label">醫院設備</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Equipment" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="WebAddress"
-                               class="col-sm-2 control-label">醫院網址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="WebAddress" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="OnlineConsultation"
-                               class="col-sm-2 control-label">線上問診</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="OnlineConsultation" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="OnView"
-                               class="col-sm-2 control-label">OnView</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="OnView" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" class="btn btn-default">修改</button>
-                            <button type="submit" class="btn btn-default">刪除</button>
-                        </div>
-                    </div>
-
-                </form>-->
+             
             </div>
         </div>
-        <!-------------------articleEnd------------------->
     </article>
 </div>
+<!-------------------articleEnd------------------->
+ 
