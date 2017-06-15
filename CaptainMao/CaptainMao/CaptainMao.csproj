@@ -369,7 +369,6 @@
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\web.config" />
@@ -405,7 +404,12 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
-    <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
+	<Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1096,7 +1100,6 @@
     <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
-    <Compile Include="Areas\buy\Controllers\ReportController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
@@ -1222,7 +1225,6 @@
     <Compile Include="Models\Partial\Article.cs" />
     <Compile Include="Models\Partial\Comment.cs" />
     <Compile Include="Models\Partial\TitleCategories.cs" />
-    <Compile Include="ChatHub.cs" />
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>

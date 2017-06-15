@@ -39,6 +39,12 @@ namespace CaptainMao.Areas.buy.Controllers
 
             return Json(fun.Logic_GetAllCities(), JsonRequestBehavior.AllowGet);
         }
-        
+
+        public ActionResult returnJson_selectMer() {
+
+            return Json(fun.Logic_NewReport(User.Identity.GetUserId()), JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

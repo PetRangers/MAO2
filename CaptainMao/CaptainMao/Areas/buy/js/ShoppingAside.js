@@ -60,9 +60,7 @@ function fun_asidesAjax(e) {
 
 
 function f1(e) {
-
    stype.show();
-        
     }
     function f2() {
         stype.hide();
