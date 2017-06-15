@@ -10,6 +10,7 @@ using PagedList;
 using Microsoft.Security.Application;
 using System.IO;
 using Microsoft.AspNet.Identity;
+using BotDetect.Web.Mvc;
 
 namespace CaptainMao.Areas.Article.Controllers
 {
@@ -77,7 +78,7 @@ namespace CaptainMao.Areas.Article.Controllers
             {
                 imgpath = contentText.Split(new string[] { "src=\"" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(new string[] { "\"" }, StringSplitOptions.RemoveEmptyEntries)[0];
             }
-            imgpath = imgpath != ""  ? imgpath : "\\images\\catdog.png";
+            imgpath = imgpath != ""  ? imgpath : "\\images\\unnamed.jpg";
             return imgpath;
         }
 
@@ -89,7 +90,8 @@ namespace CaptainMao.Areas.Article.Controllers
         }
         //建立文章
         [HttpPost]
-        public ActionResult Create(CaptainMao.Models.Article article)
+        [CaptchaValidation("CaptchaCode","ExampleCaptcha","Incorrect CAPTCHA code!")]
+        public ActionResult Create(CaptainMao.Models.Article article,bool captchaValid)
         {
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
@@ -112,6 +114,13 @@ namespace CaptainMao.Areas.Article.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult GetValidateCode(string codeClass)
+        {
+            ValidateCode vCode = new ValidateCode();
+            string code = vCode.CreateValidateCode(5);
+            byte[] bytes = vCode.CreateValidateGraphic(code);
+            return File(bytes, @"image/jpeg");
         }
         //秀文章內容
         [HttpGet]
@@ -165,10 +174,15 @@ namespace CaptainMao.Areas.Article.Controllers
             return PartialView();
         }
         //顯示使用者的發佈的文章
-        public ActionResult Poster(int? page, string posterID)
+        public ActionResult Poster(int? page, string posterID,int? titleCategoryID)
         {
             posterID = User.Identity.GetUserId();
-            var article = db.Articles.Where(a =>a.PosterID==posterID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
+            var article = db.Articles.Select(a => a);
+            if (titleCategoryID != null)
+            {
+                article = article.Where(a => a.TitleCategoryID == titleCategoryID && a.IsDeleted != true);
+            }
+            article = article.Where(a => a.PosterID == posterID && a.IsDeleted != true).OrderByDescending(a => a.LastChDateTime);
             return View(article.ToList().ToPagedList(page ?? 1, 10));
         }
         //修改文章前用ID找文章
