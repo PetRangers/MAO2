@@ -98,6 +98,11 @@ namespace CaptainMao.Areas.buy.ViewModel
         public string Merchandise_Name { get; set; }
     }
 
+    public class vmNewReport {
+        public int merchandise_Volume { get; set; }
+
+        public string Merchandise_Name { get; set; }
+    }
 
 
 }

@@ -1,23 +1,65 @@
-﻿
+﻿@model IEnumerable<CaptainMao.Areas.buy.ViewModel.vmNewReport>
 @{
     ViewBag.Title = "Report";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
+@section script{
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
 
-<aside class="col-sm-3 col-xs-12">
+        //=====================================
+
+        $(document).ready(function () {
+            var data=[];
+
+            $.getJSON('@Url.Action("returnJson_selectMer", "zPublicFunction")', function (returndata) {
+
+                $.each(returndata, function (index, value) {
+                    data.push([value.Merchandise_Name, value.merchandise_Volume])
+                    //取值
+                });
+                var chart = {               //先建立一個圖後再給值
+                    chart: { type: 'pie', options3d: { enabled: true, alpha: 45 } },    //chart
+                    title: { text: '熱門商品' },            
+                    subtitle: {
+                        text: '商品銷售圖'
+                    },
+                    plotOptions: {
+                        pie: {
+                            innerSize: 100,
+                            depth: 45
+                        }
+                    },
+                    series: [{
+                        name: "銷售數量",
+                        deta:[]
+                     }]
+                };
+
+                chart.series[0].data = data; //第一個圖表下的data
+                $('#container').highcharts(chart);
+
+            })
+          
+        })
+
+        //=====================================
+    </script>
+}
+
+<aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
     @Html.Partial("Aside")
     <!-------------------asideEnd------------------->
 </aside>
-<article class="col-sm-9  col-xs-12">
+<article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        @*<div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
-
-        </div>*@
         <div class="drawingpin" style="background-color:antiquewhite">
-            <iframe width="933" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiZGI5MjYyZjYtODhjYy00NGUyLWFiYjEtMjhlZmY4ZDU4MWQzIiwidCI6ImUwMjQzMTFmLWE3MjUtNGEyNC1hN2U2LTMyOTNhMjFkZWZmZCIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+            <div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
+
+            </div>
         </div>
     </div>
     <!-------------------articleEnd------------------->
