@@ -25,23 +25,23 @@
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
                         <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
-                        <td>@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</td>
+                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var _model in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(c=>_model.Merchandise_ID)</td>
+                        <tr @( _model.Merchandise_Fitness ? String.Empty : "class=danger" )>
+                           <td>@Html.DisplayFor(c => _model.Merchandise_ID)</td>
                             <td>@Html.DisplayFor(c => _model.Merchandise_Name)</td>
                             <td><img src='@Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID})' class="img-circle" width="80" /></td>
                             <td>@Html.DisplayFor(c => _model.Merchandise_Price)</td>
                             <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
-                            <td>@Html.DisplayFor(c=>_model.Merchandise_Fitness)</td>
+                            <td>@Html.DisplayFor(c => _model.Merchandise_Fitness)</td>
                             <td>
                                 <button>快速修改</button>
-                                @Html.ActionLink("修改","Edit","Store",new { Merchandise_ID =_model.Merchandise_ID},new{@class= "btn btn-primary" })
+                                @Html.ActionLink("修改", "Edit", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
                                 @Html.ActionLink("刪除", "Delete", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
                             </td>
                         </tr>
@@ -54,8 +54,15 @@
 </article>
 
 @section style{
+    <style>
+        .danger{
+            background-color:#6b6366;
+        }
+    </style>
+  
 }
 @section script{
-
+<script src="~/Scripts/jquery-3.1.1.js"></script>
 <script>console.log(@ViewBag.Message)</script>
+
 }
