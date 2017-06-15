@@ -63,6 +63,7 @@ body a:hover {
   position: fixed;
   top: 0;
   right: .5%;
+  display: none;
 }
 .navbar .btn-dark {
   border-radius: 0;
@@ -268,7 +269,10 @@ body a:hover {
     left: 0px;
   }
   #sidebar-wrapper .sidebar-nav {
-    padding-top: 10%;
+    padding-top: 15%;
+  }
+  .navbar #menu-toggle {
+    display: block ;
   }
 }
 aside {
@@ -382,8 +386,8 @@ footer {
 .social ul li a:visited {
   background-color: rgba(45, 38, 30, 0.46);
 }
-.sidebar-nav li:first-child a {
-  background-color: #865d00;
+.sidebar-nav li:first-child:before {
+  background-color: rgba(59, 83, 195, 0.59);
 }
 .sidebar-nav li:nth-child(2):before {
   background-color: #74c2d0;

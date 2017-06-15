@@ -117,16 +117,10 @@
         <!-- 右邊側欄-->
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <span id="user" class="hidden-md hidden-lg toggle">
-                    <a href="@Url.Action("Login","Account")" class="fa fa-user "></a>
-                    <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})" class="fa fa-lg fa-cart-plus"></a>
-                </span>
-                <li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>
+                
+                @*<li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>*@
                 <li class="sidebar-brand">
-                    <a><strong>毛孩隊長</strong></a>
-                </li>
-                <li>
-                    @Html.ActionLink("回首頁", "Index", "CaptainMao", new { area = "" }, new { @title = "回首頁" })
+                    <a>CaptainMao</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Board","Article",new { area="Article"})" title="七嘴八舌">七嘴八舌</a>
@@ -140,7 +134,12 @@
                 <li>
                     <a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" title="毛孩醫院">毛孩醫院</a>
                 </li>
-
+                <li>
+                    <a href="@Url.Action("Login","Account")"><span class="fa fa-user "></span>會員</a>
+                    </li>
+                <li>
+                    <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})" ><span class="fa fa-lg fa-cart-plus"></span>購物車</a>
+                </li>
             </ul>
         </nav>
         <!-- 左邊側欄-->

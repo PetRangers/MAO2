@@ -8,17 +8,18 @@
 @section script{
 <script src="~/Scripts/jquery-3.1.1.js"></script>
     <script>
-        $('.filter').hover(function () { $(this).find('img').css('box-shadow', '0px 0px 100px #fff'); },
-                               function () { $(this).find('img').css('box-shadow', 'none'); })
-        $('.card').hover(function () { $(this).find('div').css('transform', 'rotate(0deg)') },
-                                function () { $(this).find('div').css('transform', 'rotate(45deg)');})
-
+        $('.filter').hover(function () { $(this).find('img:eq(0)').css({ 'box-shadow': '0px 0px 900px #fff', "transform":"rotate(3600deg)"}); },
+            function () { $(this).find('img:eq(0)').css({ 'box-shadow': 'none', "transform":"rotate(0deg)" }); })
+        //$('.card').hover(function () { $(this).find('div').css('transform', 'rotate(0deg)') },
+        //                        function () { $(this).find('div').css('transform', 'rotate(45deg)');})
+        $('.card').hover(function () { $(this).find('div').css('width', '90%') },
+                               function () { $(this).find('div').css('width', '0%');})
     </script>
-}
+} 
 
 <div class="homepage-hero-module">
     <div class="filter">
-        <img src="~/images/captain.png"  />
+        <img  src="~/images/captain2.png"  />
         <div>
             <div class="card">
                 <div></div>
