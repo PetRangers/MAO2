@@ -27,8 +27,8 @@ namespace CaptainMao.Areas.Admin.Models
         [Display(Name = "討論版版主")]
         public bool IsMaster { get; set; }
 
-        [Display(Name = "管理版面")]
-        public string MasterOfBoards { get; set; }
+        //[Display(Name = "管理版面")]
+        //public string MasterOfBoards { get; set; }
 
         [Display(Name = "商店會員")]
         public bool IsStore { get; set; }
@@ -38,5 +38,11 @@ namespace CaptainMao.Areas.Admin.Models
 
         [Display(Name = "停權中")]
         public bool IsInactivated { get; set; }
+
+        [Display(Name = "狗版版主")]
+        public bool IsBoardDogMaster { get; set; }
+
+        [Display(Name = "貓版版主")]
+        public bool IsBoardCatMaster { get; set; }
     }
 }

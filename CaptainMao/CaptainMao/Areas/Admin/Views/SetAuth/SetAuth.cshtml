@@ -3,8 +3,7 @@
 <h2>設置權限</h2>
 <hr />
 
-
-                    <table>
+                    <table id="example" class="display nowrap" cellspacing="0"  width="100%">
                         <thead>
                             <tr>
                                 <th>
@@ -14,10 +13,10 @@
                                     @Html.DisplayNameFor(model => model.Name)
                                 </th>
                                 <th>
-                                    權限設置
+                                    權限
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.MasterOfBoards)
+                                    管理討論區
                                 </th>
                                 <th>
                                     編輯
@@ -27,38 +26,62 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                using (Html.BeginForm("EditAuth", "SetAuth", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-                                {
+                                //using (Html.BeginForm("EditAuth", "SetAuth", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                                //{
+                                @*<form action=@Url.Action("EditAuth", "SetAuth", new { area="Admin" }) method="post" novalidate>*@
+
                                     <tr>
                                         <td>
-                                            
-                                            @Html.EditorFor(modelItem => item.UserName)
+                                            @Html.DisplayFor(modelItem => item.UserName)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.Name)
+                                            @Html.DisplayFor(modelItem => item.Name)
                                             <span class="badge" data-toggle="tooltip" title="@Html.DisplayNameFor(model => model.Experience)">
-                                               @Html.EditorFor(modelItem => item.Experience)
+                                                @Html.DisplayFor(modelItem => item.Experience)
                                             </span>
                                         </td>
                                         <td>
-                                            <div class="row">@Html.DisplayNameFor(model => model.IsAdmin): @Html.EditorFor(modelItem => item.IsAdmin)</div>
-                                            <div class="row">@Html.DisplayNameFor(model => model.IsMaster): @Html.EditorFor(modelItem => item.IsMaster)</div>
-                                            <div class="row">@Html.DisplayNameFor(model => model.IsStore): @Html.EditorFor(modelItem => item.IsStore)</div>
-                                            <div class="row">@Html.DisplayNameFor(model => model.IsNormal): @Html.EditorFor(modelItem => item.IsNormal)</div>
-                                            <div class="row">@Html.DisplayNameFor(model => model.IsInactivated): @Html.EditorFor(modelItem => item.IsInactivated)</div>
+                                            @if (item.IsAdmin)
+                                            {
+                                                <label class="label label-warning" role="alert">@Html.DisplayNameFor(model => model.IsAdmin)</label>
+                                            }
+                                            @if (item.IsMaster)
+                                            {
+                                                <label class="label label-info" role="alert">@Html.DisplayNameFor(model => model.IsMaster)</label>
+                                            }
+                                            @if (item.IsStore)
+                                            {
+                                                <label class="label label-success" role="alert">@Html.DisplayNameFor(model => model.IsStore)</label>
+                                            }
+                                            @if (item.IsNormal)
+                                            {
+                                                <label class="label label-primary" role="alert">@Html.DisplayNameFor(model => model.IsNormal)</label>
+                                            }
+                                            @if (item.IsInactivated)
+                                            {
+                                                <label class="label label-danger" role="alert">@Html.DisplayNameFor(model => model.IsInactivated)</label>
+                                            }
+
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.Id, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.EditorFor(modelItem => item.MasterOfBoards, new { htmlAttributes = new { @class = "form-control" } })
+                                            @if (item.IsBoardDogMaster)
+                                            {
+                                                <label class="badge info" role="alert">@Html.DisplayNameFor(model => model.IsBoardDogMaster)</label>
+                                            }
+                                            @if (item.IsBoardCatMaster)
+                                            {
+                                                <label class="badge info" role="alert">@Html.DisplayNameFor(model => model.IsBoardCatMaster)</label>
+                                            }
                                         </td>
                                         <td>
-                                            @*<a href=@Url.Action("EditAuth", "SetAuth", new { m=item }, "POST") title="修改">修改</a>
-                                            @Html.ActionLink("修改", "EditAuth", "SetAuth", new { m=item },null)*@
-                                            <button class="btn btn-info" type="submit">修改</button><button class="btn btn-default" type="reset">重設</button>
+                                            @*<a href=@Url.Action("EditAuth", "SetAuth", new { m=item }, "POST") title="修改">修改</a>*@
+                                                @Html.ActionLink("編輯", "EditAuth", "SetAuth", new { id=item.Id },new { @class= "btn btn-info" })
+                                            @*<button class="btn btn-info" type="submit">修改</button><button class="btn btn-default" type="reset">重設</button>*@
                                         </td>
                                     </tr>
-                                }
-
+                                   
+                                @*</form>*@
+                                @*}*@
                             }
 
                         </tbody>

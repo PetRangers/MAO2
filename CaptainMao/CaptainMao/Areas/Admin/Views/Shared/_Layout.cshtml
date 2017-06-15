@@ -9,7 +9,7 @@
     <link href="~/Content/jquery-ui-tc.min.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui-tc.structure.min.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui-tc.theme.min.css" rel="stylesheet" />
-    <link href="~/css/chat.css" rel="stylesheet" />
+    
     @RenderSection("style", required: false)
     <style>
         body {
@@ -23,22 +23,7 @@
             font-size:150%;
         }
 
-         .div_left_bottom {
-            margin-left:40px;
-            width: Auto;
-            float: left;
-            position: fixed;
-            left: 0px;
-            bottom: 0px;
-            z-index: 20;
-            height:428px;
-            /*border: 2px solid #69c;*/
-            _position: absolute; /* position fixed for IE6 */
-        }
-         .childdiv{
-            margin-left:5px;
-            float:left;
-         }
+         
     </style>
 
 </head>
@@ -110,9 +95,7 @@
 
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-ui-tc.min.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-    <script src="/signalr/hubs"></script>
-    <script src="~/js/chatjs.js"></script>
+    
     @RenderSection("script", required: false)
 
 </body>
