@@ -366,7 +366,6 @@
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\web.config" />
@@ -396,9 +395,11 @@
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
-	<Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1209,7 +1210,6 @@
     <Compile Include="Models\Partial\Article.cs" />
     <Compile Include="Models\Partial\Comment.cs" />
     <Compile Include="Models\Partial\TitleCategories.cs" />
-    <Compile Include="ChatHub.cs" />
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>

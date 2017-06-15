@@ -63,11 +63,16 @@
         document.getElementById("idsp").innerHTML = "";
         document.getElementById("butck").style = "display:none";
     }
-
-
-
-
 </script>
+<style>
+    label, th, td {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20PX;
+    }
+</style>
 <!--aside側欄 article主欄-->
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -81,79 +86,70 @@
         <!--顏色請自己放在Css內 這只是樣板-->
         <div style="overflow:auto;background-color:#fff266" class="drawingpin">
             <h2> @Model.HospitalName</h2>
-            <div class="form-group">
-                <label for="HospitalAddress"
-                       class="col-sm-2 control-label">醫院地址</label>
+            <div class="row">
+                <label for="HospitalAddress" class="col-sm-2 control-label">醫院地址</label>
                 <div class="col-sm-10">
                     <p>@Model.HospitalAddress</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="AddressArea"
-                       class="col-sm-2 control-label">醫院區域</label>
+            <div class="row">
+                <label for="AddressArea" class="col-sm-2 control-label">醫院區域</label>
                 <div class="col-sm-10">
                     <p>@Model.AddressArea</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="HospitalPhone"
-                       class="col-sm-2 control-label">醫院電話</label>
+            <div class="row">
+                <label for="HospitalPhone" class="col-sm-2 control-label">醫院電話</label>
                 <div class="col-sm-10">
                     <p>@Model.HospitalPhone</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="PetRace"
-                       class="col-sm-2 control-label">寵物種類</label>
+            <div class="row">
+                <label for="PetRace" class="col-sm-2 control-label">寵物種類</label>
                 <div class="col-sm-10">
                     <fieldset>
                         <p>@ViewBag.SetName</p>
                     </fieldset>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="BusinessHours"
-                       class="col-sm-2 control-label">營業時間</label>
+            <div class="row">
+                <label for="BusinessHours" class="col-sm-2 control-label">營業時間</label>
                 <div class="col-sm-10">
                     <p>@Model.BusinessHours</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="Emergency"
-                       class="col-sm-2 control-label">急診時間</label>
+            <div class="row">
+                <label for="Emergency" class="col-sm-2 control-label">急診時間</label>
                 <div class="col-sm-10">
                     <p>@Model.Emergency</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="OutpatientProject"
-                       class="col-sm-2 control-label">專業科目</label>
+            <div class="row">
+                <label for="OutpatientProject" class="col-sm-2 control-label">專業科目</label>
                 <div class="col-sm-10">
                     <p>@Model.OutpatientProject</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="Equipment"
-                       class="col-sm-2 control-label">醫院設備</label>
+            <div class="row">
+                <label for="Equipment" class="col-sm-2 control-label">醫院設備</label>
                 <div class="col-sm-10">
                     <p>@Model.Equipment</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="WebAddress"
-                       class="col-sm-2 control-label">醫院網址</label>
+            <div class="row">
+                <label for="WebAddress" class="col-sm-2 control-label">醫院網址</label>
                 <div class="col-sm-10">
-                    <p>@Model.WebAddress</p>
+                    <a href="@Model.WebAddress">@Model.WebAddress</a>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="OnlineConsultation"
-                       class="col-sm-2 control-label">地圖</label>
+            <div class="row">
+                <label for="OnlineConsultation" class="col-sm-2 control-label">地圖</label>
                 <div class="col-sm-10">
-                    <div></div>
-                    @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml",new { HospitalID  = Model.HospitalID });}
                 </div>
             </div>
+            @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml", new { HospitalID = Model.HospitalID });}
+
+
 
         </div>
         <div style="height:auto;background-color:burlywood" class="drawingpin">
@@ -171,30 +167,33 @@
             <form method="post" action="~/Hospital/Hospital/ListToNote" onsubmit="return checkForm(this);">
                 <h2></h2>
                 <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
-                <table>
-                    <tr>
-                        <th>星等</th>
-                        <td>
-                            <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                            <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                            <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                            <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                            <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                            <input type="hidden" id="Score" name="Score" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>評語</th>
-                        <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="送出評分" /></td>
-                    </tr>
-                </table>
             </form>
             @*//載入評分的清單*@
             <table class="table table-striped">
                 @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
+            </table>
+            <table>
+                <tr>
+                    <th>我要評分</th>
+                <tr>
+                <tr>
+                    <th>星等</th>
+                    <td>
+                        <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                        <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                        <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                        <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                        <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                        <input type="hidden" id="Score" name="Score" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>評語</th>
+                    <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
+                </tr>
+                <tr class="align-center">
+                    <td><input type="submit" value="送出評分" /></td>
+                </tr>
             </table>
 
         </div>

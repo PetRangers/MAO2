@@ -36,11 +36,11 @@
             <h2>新增醫院</h2>
             <form method="post" action="~/HospitalCRUD/CreatHospital" class="form-horizontal" onsubmit="return checkForm(this);">
                 @*<div class="form-group" style="display:none">
-                        <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
-                        </div>
-                    </div>*@
+                <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="HospitalID" value="@Model.HospitalID" />
+                </div>
+            </div>*@
                 <div class="form-group">
                     <label for="HospitalName"
                            class="col-sm-2 control-label">醫院名稱</label>
@@ -129,9 +129,9 @@
                 </div>
                 <div class="form-group">
                     <label for="OnView"
-                           class="col-sm-2 control-label">OnView</label>
+                           class="col-sm-2 control-label">顯示狀態</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="OnView" />
+                        <input type="text" class="form-control" name="OnView" value="1" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -139,6 +139,8 @@
                         <button type="submit" class="btn btn-default">新增</button>
                     </div>
                 </div>
+          
+
             </form>
         </div>
 
