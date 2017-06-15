@@ -106,10 +106,26 @@ namespace CaptainMao.Areas.buy.Controllers
             }
         }
 
-        [AuthorizeMao(Roles = "store")]
+        [AuthorizeMao(Roles = "Store")]
         public ActionResult Delete(int Merchandise_ID) {
             fun.Logic_MerchandiseDelete(Merchandise_ID);
             return RedirectToAction("Index");
         }
+
+        [AuthorizeMao(Roles = "Store")]
+        public ActionResult NewOrder() {
+
+            return View(fun.Logic_NewOrder(User.Identity.GetUserId()));
+        }
+
+
+        public ActionResult Report()
+        {
+            return View();
+        }
+             
+
+
+
     }
 }

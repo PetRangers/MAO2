@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,7 +17,7 @@ namespace CaptainMao.Areas.buy.Controllers
         // GET: buy/ShoppingCart
         public ActionResult Index()
         {
-            ViewBag.city = fun.Logic_GetAllCity();
+            ViewBag.city = fun.Logic_GetAllCities();
             return View();
         }
 
@@ -27,12 +28,31 @@ namespace CaptainMao.Areas.buy.Controllers
             return PartialView();
         }
 
-        [AuthorizeMao]
-        public ActionResult CreateOrder()
+        [AuthorizeMao(Roles ="Normal")]
+        public async Task<ActionResult> CreateOrder(string name, int FourStore)
         {
-            if (Session["user_identity"]!=null) {
+            string session = "login" ;
+            if (Session["user_identity"] != null) {
+                session = Session["user_identity"].ToString();
             }
-            return View();
+            fun.Logic_CreateOrder(User.Identity.GetUserId(), name, FourStore, session);
+
+            string emailContent =
+                "<h3>" + fun.Logic_ReUser(User.Identity.GetUserName()) + "您好</h3>" +
+                "<p>您已在毛孩隊長購買商品，請在留意貨品出貨日期，謝謝!</p>";
+
+            var service = new EmailService();
+            IdentityMessage message = new IdentityMessage { Body = emailContent, Destination = User.Identity.GetUserName(),
+                Subject = "毛孩隊長購物商城-成功購物通知" };
+            await service.SendAsync(message);
+
+
+
+
+
+            return RedirectToAction("Index","Shopping");
         }
+
+
     }
 }

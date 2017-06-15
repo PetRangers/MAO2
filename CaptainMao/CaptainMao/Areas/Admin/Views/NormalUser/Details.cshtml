@@ -32,14 +32,16 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
                         <span class="profile-picture">
-                            <img class="editable img-responsive" alt=" Avatar" id="avatar2" src="@Model.Photo">
+                            <img class="editable img-responsive" alt="無照片" id="avatar2" src="@Model.Photo">
                         </span>
 
-                        <div class="space space-4"></div>
+                        @*<div class="space space-4"></div>*@
                     
-                        <a href="#" class="btn btn-sm btn-block btn-success">
+                        <a class="btn btn-sm btn-block btn-success getchat" data-id="@Model.Id" data-name="@Model.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =Model.Id, area="Adoption" })">
                             <i class="ace-icon fa fa-commenting-o bigger-110"></i>
                             <span class="bigger-110">傳送訊息</span>
+
+
                         </a>
                     </div><!-- /.col -->
 

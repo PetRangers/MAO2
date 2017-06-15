@@ -6,7 +6,7 @@
     /*產生aside滑動事件*/
     $("aside").hover(f1, f2).
         find("#firstpane .menu_head").mouseover(fun_asideshow).
-        next("div.menu_body").hover(f1).
+        next("div.menu_body").hover(f1).stop(true, true).
         find("a").mouseover(fun_asidesAjax);
         
 });

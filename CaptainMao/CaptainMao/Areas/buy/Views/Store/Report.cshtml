@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+}
+
+<aside class="col-sm-3 col-xs-12">
+    <!-------------------asideOpen------------------->
+    @Html.Partial("Aside")
+    <!-------------------asideEnd------------------->
+</aside>
+<article class="col-sm-9  col-xs-12">
+    <!-------------------articleOpen------------------->
+    <div>
+        <!--顏色請自己放在Css內 這只是樣板-->
+        @*<div id="container" class="highcharts-container" style="height:700px;margin:0 2em;clear:both;min-width:700px">
+
+        </div>*@
+        <div class="drawingpin" style="background-color:antiquewhite">
+            <iframe width="933" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiZGI5MjYyZjYtODhjYy00NGUyLWFiYjEtMjhlZmY4ZDU4MWQzIiwidCI6ImUwMjQzMTFmLWE3MjUtNGEyNC1hN2U2LTMyOTNhMjFkZWZmZCIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+    <!-------------------articleEnd------------------->
+</article>

@@ -373,5 +373,10 @@ namespace CaptainMao.Areas.Article.Controllers
             byte[] img = photo;
             return File(img, "image/jpeg");
         }
+        public ActionResult GetArticle()
+        {
+
+            return View();
+        }
     }
 }

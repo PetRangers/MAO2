@@ -25,7 +25,7 @@
                     tu.empty();
                     var f = $(document.createDocumentFragment());
                     $.each(datas, function (index,value) {
-                        var t1 = $('<td ></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h4 style="width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
+                        var t1 = $('<td ></td>').html('<a href="@Url.Action("Show")/?articleID=' + value.ArticleID + '"><h3 style="width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="title">' + value.Title + '</h4></a>');
                         var row = $('<tr ></tr>').append(t1);
                         f.append(row);
                     })
@@ -138,7 +138,7 @@
                                 <div class="card">
                                     <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><img class="card-img-top" src="@Html.DisplayFor(a=>item.ContentText)" /></a>
                                     <div class="card-block">
-                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="card-title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">[@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
+                                        <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><h4 class="card-title" >[@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)]@Html.DisplayFor(a => item.Title)</h4></a>
                                         <div class="meta pull-right">
                                             <h4>瀏覽人數 ： @Html.DisplayFor(a => item.Number)</h4>
                                         </div>
@@ -151,12 +151,10 @@
             </div>
             <div class="col-lg-3">
                 <div style="background-color:burlywood" class="drawingpin">
-                    <div>
                         <h2>最新發表文章</h2>
                         <ul class="list-group list">
 
                         </ul>
-                    </div>
                     <div>
                         <table>
                             <thead>

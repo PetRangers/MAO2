@@ -215,13 +215,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\buy\css\Create.css" />
-    <Content Include="Areas\buy\css\Create.min.css" />
-    <Content Include="Areas\buy\css\Index.css">
-      <DependentUpon>Index.less</DependentUpon>
+    <Content Include="Areas\buy\css\shoppingcart.css">
+      <DependentUpon>shoppingcart.less</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\css\Index.min.css">
-      <DependentUpon>Index.css</DependentUpon>
+    <Content Include="Areas\buy\css\shoppingcart.min.css">
+      <DependentUpon>shoppingcart.css</DependentUpon>
     </Content>
     <Content Include="Areas\buy\css\shoppingIndex.css">
       <DependentUpon>shoppingIndex.less</DependentUpon>
@@ -229,13 +227,19 @@
     <Content Include="Areas\buy\css\shoppingIndex.min.css">
       <DependentUpon>shoppingIndex.css</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\css\StoreCreate.css">
+      <DependentUpon>StoreCreate.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\css\StoreCreate.min.css">
+      <DependentUpon>StoreCreate.css</DependentUpon>
+    </Content>
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\buy\js\ShoppingCart.js" />
     <Content Include="Areas\buy\js\ShoppingIndex.js" />
     <Content Include="Areas\buy\js\storeCreateIndex.js" />
     <Content Include="Areas\buy\js\jquery.validate.js" />
     <Content Include="Areas\buy\Views\Shopping\Aside.cshtml" />
-    <Content Include="Areas\buy\css\Index.less" />
     <Content Include="Areas\buy\Views\Store\Aside.cshtml" />
     <Content Include="Areas\buy\css\shoppingIndex.less" />
     <Content Include="Areas\buy\Views\Store\Create.cshtml" />
@@ -358,7 +362,6 @@
     <Content Include="Areas\Login\Views\web.config" />
     <Content Include="Areas\buy\Views\_ViewStart.cshtml" />
     <Content Include="Areas\buy\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\buy\css\Create.less" />
     <Content Include="css\StyleSheet_Master.less" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\Aside.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\CreatHospital.cshtml" />
@@ -381,7 +384,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Index.cshtml" />
     <Content Include="Areas\Article\Views\Article\Master.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
     <EntityDeploy Include="Models\MaoModel.edmx">
@@ -393,12 +395,16 @@
     </Content>
     <Content Include="fonts\GOODDC__.TTF" />
     <Content Include="Areas\Article\Views\Report\Index.cshtml" />
-    <Content Include="Areas\Article\Views\Report\Aside.cshtml" />
-    <Content Include="Areas\Adoption\Views\Adoption\Report.cshtml" />
+    <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
-    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
-    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\buy\css\StoreCreate.less" />
+    <Content Include="Areas\buy\Views\Store\NewOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ArticleReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
+    <Content Include="Areas\buy\Views\Store\Report.cshtml" />
+	   <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
@@ -1064,6 +1070,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
@@ -1080,7 +1087,6 @@
     <Compile Include="Areas\Adoption\ViewModel\WishViewModel.cs" />
     <Compile Include="Areas\Article\ArticleAreaRegistration.cs" />
     <Compile Include="Areas\Article\Controllers\ArticleController.cs" />
-    <Compile Include="Areas\Article\Controllers\ReportController.cs" />
     <Compile Include="Areas\Article\Models\Ipository.cs" />
     <Compile Include="Areas\Article\Models\pository.cs" />
     <Compile Include="Areas\Article\ViewModel\BoardViewModel.cs" />
@@ -1088,6 +1094,7 @@
     <Compile Include="Areas\Article\ViewModel\ReportViewModel.cs" />
     <Compile Include="Areas\buy\buyAreaRegistration.cs" />
     <Compile Include="Areas\buy\Controllers\PublicAPIController.cs" />
+    <Compile Include="Areas\buy\Controllers\ReportController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
@@ -1202,6 +1209,9 @@
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Merchandise.cs">
+      <DependentUpon>MaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Merchandise_Order_View.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">

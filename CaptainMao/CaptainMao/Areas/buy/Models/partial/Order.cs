@@ -17,8 +17,7 @@ namespace CaptainMao.Models
             public int Order_ID { get; set; }
             [DisplayName("帳號")]
             public int user_ID { get; set; }
-            [DisplayName("商品數量")]
-            public int merchandise_Volume { get; set; }
+
             [DisplayName("訂單建立時間")]
             public System.DateTime Order_Createdate { get; set; }
             [DisplayName("訂單狀態")]

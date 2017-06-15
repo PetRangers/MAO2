@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 @section style{
-<link href="~/Areas/buy/css/Create.css" rel="stylesheet" />
+<link href="~/Areas/buy/css/StoreCreate.css" rel="stylesheet" />
     }
 
 <!--aside側欄 article主欄-->
@@ -57,6 +57,7 @@
                         @{
                             SelectList select = new SelectList(Model._Category, "CategoryID", "CategoryName");
                         }
+                        
                         @Html.DropDownListFor(c => c._Merchandise.CategoryID, select, new { @class = "form-control", id = "_Category" })
                     </div>
                 </div>
