@@ -119,7 +119,11 @@ namespace CaptainMao.Areas.buy.Controllers
         }
 
 
-
+        public ActionResult Report()
+        {
+            return View();
+        }
+             
 
 
 
