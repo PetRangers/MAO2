@@ -232,7 +232,21 @@ namespace CaptainMao.Areas.buy.Models
         public IEnumerable<CaptainMao.Models.City> Logic_GetAllCities() {
             return DB.Cities;
         }
-   
+
+        public bool Logic_shoppingHaveEvery(string Session, string UserID) {
+            var x = DB.shoppingcarts.Where(s => s.userID == Session || s.userID == UserID);
+            try
+            {
+                x.First();
+                return true;
+            }
+            catch {
+                return false;
+            }           
+            
+        }
+
+
         private int CreateOrder(Order order) {
              _order.Create(order);
             return order.Order_ID;
@@ -240,10 +254,10 @@ namespace CaptainMao.Areas.buy.Models
         /*後登入時*/
         public void Logic_CreateOrder(string UserID,  string name, int FourStore, string session ) {
 
-            //using (var transaction = DB.Database.BeginTransaction())
-            //{
-                //try
-                //{
+            using (var transaction = DB.Database.BeginTransaction())
+            {
+                try
+                {
                     Order order = new Order();
                     order.DeliveryLocation = FourStore;
                     order.DeliveryName = name;
@@ -263,12 +277,13 @@ namespace CaptainMao.Areas.buy.Models
                         DB.shoppingcarts.Remove(shop);
                     }
                     DB.SaveChanges();
-                    //transaction.Commit();
-                //}
-                //catch {
-                //    transaction.Rollback();
-                //}
-            //}
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         public IEnumerable<vmNewOrder> Logic_NewOrder(string StoreID) {
@@ -317,7 +332,8 @@ namespace CaptainMao.Areas.buy.Models
             
             foreach (var store in storeMer) {//每筆的訂單
                 foreach (var _store in store.Merchandise_Order_View) { //訂單內的明細
-                    if (_store.Merchandise.Store_ID == StoreID) { 
+                    if (_store.Merchandise.Store_ID == StoreID)
+                    {  //因訂單內還會有其他商家的商品故再判斷一次
                         if (!vmlist.Any(xxx => xxx.Merchandise_Name.Contains(_store.Merchandise.Merchandise_Name)))
                         {
                             vmNewReport vm = new vmNewReport();
