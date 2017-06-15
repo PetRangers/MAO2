@@ -404,8 +404,11 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
-	   <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -43,16 +43,40 @@ namespace CaptainMao.Areas.Hospital.Controllers
             var SaveCategoryID = string.IsNullOrWhiteSpace(CategoryID.ToString()) ? "" : CategoryID.ToString();
             var SaveHosName = string.IsNullOrWhiteSpace(HosName) ? "" : HosName;
 
+            var _hospitalSearchCity = from a in DB.Hospitals select a;
+            if (SaveAddressArea != "")
+            {
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+            }
+            if (SaveHosName != "")
+            {
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+            }
 
-            var _hospitalSearchCity = from a in DB.Hospitals
+
+            if (SaveHosName != "")
+            {
+                _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      //where
-                                      //(string.IsNullOrWhiteSpace(CityID.ToString()) ? a.AddressArea.ToString() == CityID.ToString() : true) &&
-                                      //(string.IsNullOrWhiteSpace(CategoryID.ToString()) ? b.CategoryID.ToString() == CategoryID.ToString() : true) &&
-                                      // (string.IsNullOrWhiteSpace(HosName) ? a.HospitalName.Contains(HosName) : true)
-                                      where a.AddressArea.ToString() == SaveAddressArea && b.CategoryID.ToString() == SaveCategoryID && a.HospitalName.Contains(SaveHosName)
-                                      select a;       
+                                      where b.CategoryID.ToString() == SaveCategoryID
+                                      select a;
 
+                if (SaveAddressArea != "")
+                {
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+                }
+                if (SaveHosName != "")
+                {
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+                }
+            }
+            
+            //var _hospitalSearchCity = from a in DB.Hospitals
+            //join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID                                     
+            //where a.AddressArea.ToString() == SaveAddressArea && b.CategoryID.ToString() == SaveCategoryID && a.HospitalName.Contains(SaveHosName)
+            //select a;
+
+            //LINQ Expression 語法     
 
             ViewBag.Item = _hospitalSearchCity;
 

@@ -3,10 +3,15 @@
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<link rel="stylesheet" type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+
 <script>
-    //function CheckThis() {
-    //    ChangeList();
-    //}
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
 
     function SelectThis() {
         var clicktbn = $('#HospitalCity').val();

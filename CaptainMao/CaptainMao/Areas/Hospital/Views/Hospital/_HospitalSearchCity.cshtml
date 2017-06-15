@@ -6,27 +6,33 @@
 
 <script>
     var HospitalID = 'int';
-    function ChangeThisID(HospitalID) {
-
-       
-    }
+    function ChangeThisID(HospitalID) { }
 </script>
+<style>
+    label, th, td {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20PX;
+    }
+</style>
 
 <h2>醫院列表</h2>
 
 @foreach (var a in Model)
 {/*//顯示欄位 超連結*/
     @*<a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>*@    }
-   
 
-<table id="example" class="display nowrap" cellspacing="0"  width="100%">
+
+<table class="table table-bordered table-hover" id="table1">
     <thead>
         <tr>
             @*<th>醫院編號</th>*@
             <th>醫院名稱</th>
             <th>醫院地址</th>
-            <th>醫院區域</th>
             <th>醫院電話</th>
+            <th>專業科目</th>
             <th>營業時間</th>
         </tr>
     </thead>
@@ -38,8 +44,8 @@
                 <td style="display:none">@_category.HospitalID</td>
                 <td>@_category.HospitalName</td>
                 <td>@_category.HospitalAddress</td>
-                <td>@_category.AddressArea</td>
                 <td>@_category.HospitalPhone</td>
+                <td>@_category.OutpatientProject</td>
                 <td>@_category.BusinessHours</td>
             </tr>
         }

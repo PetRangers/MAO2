@@ -58,7 +58,7 @@
             document.getElementById(i + "idimg").onmouseover = mouseover;
             document.getElementById(i + "idimg").onmouseout = mouseout;
             document.getElementById(i + "idimg").onclick = mouseclick;
-            document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png";
+            document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png";
         }
         document.getElementById("idsp").innerHTML = "";
         document.getElementById("butck").style = "display:none";
@@ -185,7 +185,8 @@
                         <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
                         <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
                         <input type="hidden" id="Score" name="Score" />
-                    </td>
+                        <input type="button" value="重選星等" onclick="buttonclick()" />
+                    </td>                    
                 </tr>
                 <tr>
                     <th>評語</th>
