@@ -20,6 +20,7 @@
         .navbar{
             background-color:#5f2800;
             color:white;
+            font-size:150%;
         }
 
          .div_left_bottom {
@@ -67,7 +68,7 @@
                                     <a href="#">商店會員管理</a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="#">權限設置</a>
+                                    @Html.ActionLink("權限設置", "SetAuth", "SetAuth", new { area = "Admin" }, null)
                                 </li>
                             </ul>
                         </li>

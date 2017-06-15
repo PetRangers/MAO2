@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CaptainMao.Areas.Admin.Models.SetAuthViewModel>
+
+<h2>設置權限</h2>
+<hr />
+
+
+                    <table  id="example" class="display nowrap" cellspacing="0"  width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Experience)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsAdmin)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsMaster)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MasterOfBoards)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsStore)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsNormal)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsInactivated)
+                                </th>
+                                <th>
+                                    編輯
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                using (Html.BeginForm("Edit", "NormalUser", new { id = item.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Experience)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.IsMaster, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.MasterOfBoards, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.IsStore, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.IsNormal, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.IsInactivated, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info" type="submit">修改</button><button class="btn btn-default" type="reset">重設</button>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+
+                        </tbody>
+                    </table>
+                
+                
+
+
+@section Style{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        div.container {
+            max-width: 1200px
+        }
+    </style>
+}
+
+@section Script{
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+    <script type="text/javascript" class="init">
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      responsive: true
+                  });
+              });
+    </script>
+
+}
