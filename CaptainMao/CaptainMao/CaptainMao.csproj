@@ -404,8 +404,12 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
-	   <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
+	<Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1071,8 +1075,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\NormalUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SetAuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebMonitorController.cs" />
     <Compile Include="Areas\Admin\Models\NormalUserViewModels.cs" />
+    <Compile Include="Areas\Admin\Models\SetAuthViewModel.cs" />
     <Compile Include="Areas\Adoption\AdoptionAreaRegistration.cs" />
     <Compile Include="Areas\Adoption\Controllers\AdoptionController.cs" />
     <Compile Include="Areas\Adoption\Controllers\ControlController.cs" />

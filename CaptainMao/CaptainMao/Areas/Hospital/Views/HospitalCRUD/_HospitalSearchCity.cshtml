@@ -5,6 +5,18 @@
     //Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 
+<style>
+    label, th, td ,text,p{
+        font-size: 20px; 
+    }
+</style>
+
+@*<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">*@
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">*@
+
 <script>
     var HospitalID = 'int';
     function ChangeThisID(HospitalID) {
@@ -23,7 +35,14 @@
             }
         });
     }
+
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+    
 </script>
+    
+
 
 @*<h2>醫院列表</h2>*@
 
@@ -31,7 +50,8 @@
     {/*//顯示欄位 超連結*/
        }*@
 
-<table class="table table-bordered table-hover" id="table1">
+
+<table class="table table-bordered table-hover" id="example" name="example">
     <thead>
         <tr>
             @*<th>醫院編號</th>*@
@@ -46,7 +66,7 @@
         @*Model 表示Controller傳過來的資料*@
         @foreach (var _category in Model)
         {
-            
+
             <tr target=_blank onclick="ChangeThisID(@_category.HospitalID);">
                 <td style="display:none">@_category.HospitalID</td>
                 <td>@_category.HospitalName</td>
