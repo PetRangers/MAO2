@@ -4,7 +4,7 @@
 <hr />
 
 
-                    <table  id="example" class="display nowrap" cellspacing="0"  width="100%">
+                    <table>
                         <thead>
                             <tr>
                                 <th>
@@ -14,25 +14,10 @@
                                     @Html.DisplayNameFor(model => model.Name)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Experience)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsAdmin)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsMaster)
+                                    權限設置
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.MasterOfBoards)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsStore)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsNormal)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IsInactivated)
                                 </th>
                                 <th>
                                     編輯
@@ -42,37 +27,33 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                using (Html.BeginForm("Edit", "NormalUser", new { id = item.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                using (Html.BeginForm("EditAuth", "SetAuth", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.UserName)
+                                            
+                                            @Html.EditorFor(modelItem => item.UserName)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            @Html.EditorFor(modelItem => item.Name)
+                                            <span class="badge" data-toggle="tooltip" title="@Html.DisplayNameFor(model => model.Experience)">
+                                               @Html.EditorFor(modelItem => item.Experience)
+                                            </span>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Experience)
+                                            <div class="row">@Html.DisplayNameFor(model => model.IsAdmin): @Html.EditorFor(modelItem => item.IsAdmin)</div>
+                                            <div class="row">@Html.DisplayNameFor(model => model.IsMaster): @Html.EditorFor(modelItem => item.IsMaster)</div>
+                                            <div class="row">@Html.DisplayNameFor(model => model.IsStore): @Html.EditorFor(modelItem => item.IsStore)</div>
+                                            <div class="row">@Html.DisplayNameFor(model => model.IsNormal): @Html.EditorFor(modelItem => item.IsNormal)</div>
+                                            <div class="row">@Html.DisplayNameFor(model => model.IsInactivated): @Html.EditorFor(modelItem => item.IsInactivated)</div>
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(modelItem => item.IsMaster, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td>
+                                            @Html.EditorFor(modelItem => item.Id, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.EditorFor(modelItem => item.MasterOfBoards, new { htmlAttributes = new { @class = "form-control" } })
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.IsStore, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(modelItem => item.IsNormal, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(modelItem => item.IsInactivated, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td>
+                                            @*<a href=@Url.Action("EditAuth", "SetAuth", new { m=item }, "POST") title="修改">修改</a>
+                                            @Html.ActionLink("修改", "EditAuth", "SetAuth", new { m=item },null)*@
                                             <button class="btn btn-info" type="submit">修改</button><button class="btn btn-default" type="reset">重設</button>
                                         </td>
                                     </tr>
