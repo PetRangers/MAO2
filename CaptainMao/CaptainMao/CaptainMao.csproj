@@ -369,7 +369,6 @@
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\HospitalSearchValue.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Map.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\web.config" />
@@ -405,6 +404,8 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
+	   <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1218,7 +1219,6 @@
     <Compile Include="Models\Partial\Article.cs" />
     <Compile Include="Models\Partial\Comment.cs" />
     <Compile Include="Models\Partial\TitleCategories.cs" />
-    <Compile Include="ChatHub.cs" />
     <Compile Include="Models\Scorce.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>

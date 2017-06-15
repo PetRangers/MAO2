@@ -52,7 +52,9 @@ namespace CaptainMao.Areas.Hospital.Controllers
                                           HospitalAddress = a.HospitalAddress,
                                           AddressArea = c.CityName,
                                           HospitalPhone = a.HospitalPhone,
-                                          CategoryList = d.CategoryName
+                                          BusinessHours = a.BusinessHours,
+                                          CategoryList = d.CategoryName,
+                                          OnView=a.OnView
                                       };
 
             //for (int i = 0; i < _hospitalSearchCity.Count(); i++)
@@ -386,13 +388,13 @@ namespace CaptainMao.Areas.Hospital.Controllers
             }
             catch (Exception ex)
             {
-
+                
             }
 
             return RedirectToAction("Index", "Hospital/HospitalCRUD");
         }
         //刪除
-        public ActionResult RemoveHospital(int id = 0)
+        public ActionResult RemoveHospital(int id = 2)
         {
             var removeHospital = (from a in DB.Hospitals
                                   where a.HospitalID == id
@@ -402,7 +404,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             removeHospital.OnView = "0";
             DB.SaveChanges();
 
-            return RedirectToAction("Index", "Hospital/HospitalCRUD");
+            return RedirectToAction("Index", "HospitalCRUD");
 
         }
     }

@@ -19,7 +19,7 @@
     @*<a href="@Url.Action("HospitalSearchValue",new { HospitalID = a.HospitalID })" target=_blank> @a.HospitalName</a>*@    }
    
 
-<table class="table table-bordered table-hover"  id="table1">
+<table id="example" class="display nowrap" cellspacing="0"  width="100%">
     <thead>
         <tr>
             @*<th>醫院編號</th>*@
@@ -27,7 +27,7 @@
             <th>醫院地址</th>
             <th>醫院區域</th>
             <th>醫院電話</th>
-            <th>寵物種類</th>
+            <th>營業時間</th>
         </tr>
     </thead>
     <tbody>
@@ -40,8 +40,9 @@
                 <td>@_category.HospitalAddress</td>
                 <td>@_category.AddressArea</td>
                 <td>@_category.HospitalPhone</td>
-                <td>@_category.CategoryID</td>
+                <td>@_category.BusinessHours</td>
             </tr>
         }
     </tbody>
 </table>
+

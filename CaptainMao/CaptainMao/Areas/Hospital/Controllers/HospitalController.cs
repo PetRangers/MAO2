@@ -21,12 +21,14 @@ namespace CaptainMao.Areas.Hospital.Controllers
         {
             var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
+            HospitalText.Add(new SelectListItem() { Text ="請選擇城市", Value = "" });
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
             ViewBag.HospitalCity = HospitalText;
 
             var hospitalSearchPetRace = from a in DB.Categories select a;
             List<SelectListItem> HospitalTextRace = new List<SelectListItem>();
+            HospitalTextRace.Add(new SelectListItem() { Text ="請選擇寵物", Value ="" });
             foreach (var b in hospitalSearchPetRace)
             { HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
             ViewBag.HospitalPetRace = HospitalTextRace;
@@ -35,14 +37,22 @@ namespace CaptainMao.Areas.Hospital.Controllers
         }
 
         [HttpPost]
-        public ActionResult _HospitalSearchCity(int CityID = 1, int CategoryID = 1)
+        public ActionResult _HospitalSearchCity(string CityID ="", string CategoryID = "",string HosName = "")
         {
-            //string chack = string.IsNullOrEmpty(CityID.ToString()) ? "1" : CityID.ToString();
+            var SaveAddressArea = string.IsNullOrWhiteSpace(CityID.ToString()) ? "" : CityID.ToString();
+            var SaveCategoryID = string.IsNullOrWhiteSpace(CategoryID.ToString()) ? "" : CategoryID.ToString();
+            var SaveHosName = string.IsNullOrWhiteSpace(HosName) ? "" : HosName;
+
 
             var _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      where a.AddressArea == CityID && b.CategoryID == CategoryID
-                                      select a;
+                                      //where
+                                      //(string.IsNullOrWhiteSpace(CityID.ToString()) ? a.AddressArea.ToString() == CityID.ToString() : true) &&
+                                      //(string.IsNullOrWhiteSpace(CategoryID.ToString()) ? b.CategoryID.ToString() == CategoryID.ToString() : true) &&
+                                      // (string.IsNullOrWhiteSpace(HosName) ? a.HospitalName.Contains(HosName) : true)
+                                      where a.AddressArea.ToString() == SaveAddressArea && b.CategoryID.ToString() == SaveCategoryID && a.HospitalName.Contains(SaveHosName)
+                                      select a;       
+
 
             ViewBag.Item = _hospitalSearchCity;
 
@@ -215,7 +225,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                     UserID =AspNetUser.NickName,
                     HospitalID = model.HospitalID,
                     Scorce1 = model.Score,
-                    Date = model.Date,
+                    Date = DateTime.Now.ToString(),
                     NoteValue = model.NoteValue,
                     Hospital = Hospital,
                     AspNetUser = AspNetUser
