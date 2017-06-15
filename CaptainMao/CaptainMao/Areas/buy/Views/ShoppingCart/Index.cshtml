@@ -101,11 +101,6 @@
 </article>
 
 
-
-
-
-
-
 @section script
         {
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -119,7 +114,14 @@
             //初始設定
             function loadData() {
                 $http.get(httpurl).then(function (response) {
-                    $scope.items = response.data;
+                    if (response.data.length > 0) {
+                        $scope.items = response.data;
+                    }
+                    else {
+                        var u = '@Url.RouteUrl("buy_default", new {controller = "Shopping",area="buy"}, "http")';
+                         location.href =u;
+                        alert("目前尚無商品，確認後回到購物首頁")
+                    }
                 });
             }
             //更換儲存

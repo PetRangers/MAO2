@@ -4,6 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using CaptainMao.Models;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace CaptainMao.Areas.Article.Models
 {

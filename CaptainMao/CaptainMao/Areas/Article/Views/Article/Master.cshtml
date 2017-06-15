@@ -90,7 +90,7 @@
                     @foreach (var item in Model)
                     {
                         <tr id="tb">
-                            <td><a href="@Url.Action("Index","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
+                            <td><a href="@Url.Action("Master","Article",new { area="Article", titleCategoryID = @item.TitleCategoryID })">@Html.DisplayFor(a => item.TitleCategory.TitleCategoryName)</a></td>
                             <td>@Html.DisplayFor(a => item.Board.BoardName)</td>
                             <td>
                                 <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
@@ -105,7 +105,7 @@
                 </tbody>
             </table>
             <div class="text-center">
-                @Html.PagedListPager(Model, page => Url.Action("Master", new { page, posterID = Request.QueryString["posterID"] }), new PagedListRenderOptions
+                @Html.PagedListPager(Model, page => Url.Action("Master", new { page, titleCategoryID = Request.QueryString["titleCategoryID"], posterID = Request.QueryString["posterID"] }), new PagedListRenderOptions
            {
                LinkToFirstPageFormat = "<< 第一頁",
                LinkToPreviousPageFormat = "< 前一頁",
