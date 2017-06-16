@@ -47,7 +47,7 @@ namespace CaptainMao.Areas.buy.Controllers
             IdentityMessage message = new IdentityMessage { Body = emailContent, Destination = User.Identity.GetUserName(),
                 Subject = "毛孩隊長購物商城-成功購物通知" };
             await service.SendAsync(message);
-
+            TempData["ok"] = "購買成功！";
             return RedirectToAction("Index","Shopping");
         }
 

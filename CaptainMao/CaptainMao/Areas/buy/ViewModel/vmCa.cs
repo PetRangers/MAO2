@@ -61,6 +61,7 @@ namespace CaptainMao.Areas.buy.ViewModel
         public int merchandise_Volume { get; set; }
         [DisplayName("商品圖片")]
         public byte[] Merchandise_Photo { get; set; }
+        public string Merchandise_Photo_Address { get; set; }
         [DisplayName("商店編號")]
         public string Store_ID { get; set; }
         [DisplayName("商店名稱")]

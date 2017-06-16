@@ -23,56 +23,87 @@ namespace CaptainMao.Areas.Hospital.Controllers
         {
             var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
+            HospitalText.Add(new SelectListItem() { Text = "請選擇城市", Value = "" });
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
             ViewBag.HospitalCity = HospitalText;
 
             var hospitalSearchPetRace = from a in DB.Categories select a;
             List<SelectListItem> HospitalTextRace = new List<SelectListItem>();
+            HospitalTextRace.Add(new SelectListItem() { Text = "請選擇寵物", Value = "" });
             foreach (var b in hospitalSearchPetRace)
             { HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
             ViewBag.HospitalPetRace = HospitalTextRace;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult _HospitalSearchCity(int CityID = 1, int CategoryID = 1)
+        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "")
         {
-            //string chack = string.IsNullOrEmpty(CityID.ToString()) ? "1" : CityID.ToString();
 
-            var _hospitalSearchCity = from a in DB.Hospitals
-                                      join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      join c in DB.Cities on a.AddressArea equals c.CityID
-                                      join d in DB.Categories on b.CategoryID equals d.CategoryID
-                                      where a.AddressArea == CityID && b.CategoryID == CategoryID && a.OnView == "1"
-                                      select new HospitalModel
-                                      {
-                                          HospitalID = a.HospitalID,
-                                          HospitalName = a.HospitalName,
-                                          HospitalAddress = a.HospitalAddress,
-                                          AddressArea = c.CityName,
-                                          HospitalPhone = a.HospitalPhone,
-                                          BusinessHours = a.BusinessHours,
-                                          CategoryList = d.CategoryName,
-                                          OnView=a.OnView
-                                      };
+            var SaveAddressArea = string.IsNullOrWhiteSpace(CityID.ToString()) ? "" : CityID.ToString();
+            var SaveCategoryID = string.IsNullOrWhiteSpace(CategoryID.ToString()) ? "" : CategoryID.ToString();
+            var SaveHosName = string.IsNullOrWhiteSpace(HosName) ? "" : HosName;
 
-            //for (int i = 0; i < _hospitalSearchCity.Count(); i++)
-            //{
-
-            //}
-           
-            foreach(var Item in _hospitalSearchCity)
+            var _hospitalSearchCity = from a in DB.Hospitals select a;
+            if (SaveAddressArea != "")
             {
-                Item.CategoryList += Item.CategoryName;
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+            }
+            if (SaveHosName != "")
+            {
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
             }
 
 
+            if (SaveCategoryID != "")
+            {
+                _hospitalSearchCity = from a in DB.Hospitals
+                                      join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
+                                      where b.CategoryID.ToString() == SaveCategoryID
+                                      select a;
+
+                if (SaveAddressArea != "")
+                {
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+                }
+                if (SaveHosName != "")
+                {
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+                }
+            }
 
             ViewBag.Item = _hospitalSearchCity;
-
-
             return PartialView(_hospitalSearchCity.ToList());
+
+            //string chack = string.IsNullOrEmpty(CityID.ToString()) ? "1" : CityID.ToString();
+            //var _hospitalSearchCity = from a in DB.Hospitals
+            //                          join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
+            //                          join c in DB.Cities on a.AddressArea equals c.CityID
+            //                          join d in DB.Categories on b.CategoryID equals d.CategoryID
+            //                          where a.AddressArea == CityID && b.CategoryID == CategoryID && a.OnView == "1"
+            //                          select new HospitalModel
+            //                          {
+            //                              HospitalID = a.HospitalID,
+            //                              HospitalName = a.HospitalName,
+            //                              HospitalAddress = a.HospitalAddress,
+            //                              AddressArea = c.CityName,
+            //                              HospitalPhone = a.HospitalPhone,
+            //                              BusinessHours = a.BusinessHours,
+            //                              CategoryList = d.CategoryName,
+            //                              OnView=a.OnView
+            //                          };
+
+
+            //foreach(var Item in _hospitalSearchCity)
+            //{
+            //    Item.CategoryList += Item.CategoryName;
+            //}
+            
+            //ViewBag.Item = _hospitalSearchCity;
+            
+            //return PartialView(_hospitalSearchCity.ToList());
         }
 
         public ActionResult HospitalSearchValue(int HospitalID = 2)
@@ -120,6 +151,11 @@ namespace CaptainMao.Areas.Hospital.Controllers
         {
             var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
+            HospitalText.Add(new SelectListItem() { Text = "請選擇城市", Value = "" });
+            foreach (var b in hospitalCitys)
+            { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
+            ViewBag.HospitalCity = HospitalText;
+
             foreach (var b in hospitalCitys)
             {
                 HospitalText.Add(new SelectListItem()
@@ -132,25 +168,34 @@ namespace CaptainMao.Areas.Hospital.Controllers
 
             var hospitalSearchPetRace = from a in DB.Categories select a;
             List<SelectListItem> HospitalTextRace = new List<SelectListItem>();
+            HospitalTextRace.Add(new SelectListItem() { Text = "請選擇寵物", Value = "" });
             foreach (var b in hospitalSearchPetRace)
             { HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
             ViewBag.HospitalPetRace = HospitalTextRace;
 
-            var hospitalSearchAll = from a in DB.Hospitals
-                                    join b in DB.Cities on a.AddressArea equals b.CityID
-                                    join c in DB.Categories on a.CategoryID equals c.CategoryID
-                                    where a.OnView == "1"
-                                    select new HospitalModel
-                                    {
-                                        HospitalID = a.HospitalID,
-                                        HospitalName = a.HospitalName,
-                                        HospitalAddress = a.HospitalAddress,
-                                        AddressArea = b.CityName,
-                                        HospitalPhone = a.HospitalPhone,
-                                        CategoryName = c.CategoryName
-                                    };
+            return View();
+            
+            
 
-            return View(hospitalSearchAll.ToList());
+            //foreach (var b in hospitalSearchPetRace)
+            //{ HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
+            //ViewBag.HospitalPetRace = HospitalTextRace;
+
+            //var hospitalSearchAll = from a in DB.Hospitals
+            //                        join b in DB.Cities on a.AddressArea equals b.CityID
+            //                        join c in DB.Categories on a.CategoryID equals c.CategoryID
+            //                        where a.OnView == "1"
+            //                        select new HospitalModel
+            //                        {
+            //                            HospitalID = a.HospitalID,
+            //                            HospitalName = a.HospitalName,
+            //                            HospitalAddress = a.HospitalAddress,
+            //                            AddressArea = b.CityName,
+            //                            HospitalPhone = a.HospitalPhone,
+            //                            CategoryName = c.CategoryName
+            //                        };
+
+            //return View(hospitalSearchAll.ToList());
         }
 
 

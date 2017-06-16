@@ -66,7 +66,9 @@ function f1(e) {
         stype.hide();
     }
 
-
+    function Success() {
+        alert("已將您的商品加入購物車");
+    }
 
 
 //function changeIndex() {

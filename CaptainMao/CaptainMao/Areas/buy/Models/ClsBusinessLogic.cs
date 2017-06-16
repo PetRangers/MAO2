@@ -27,18 +27,18 @@ namespace CaptainMao.Areas.buy.Models
             //依照網址去找尋所需要呈現的商品
             if (vm.sType_ID.HasValue)
             {
-                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.sType_ID == vm.sType_ID));
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.sType_ID == vm.sType_ID)&&s.Merchandise_Fitness==true);
             }
             else if (vm.Type_ID.HasValue)
             {
-                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.Type_ID == vm.Type_ID));
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s => s.sTypes.Any(ss => ss.Type_ID == vm.Type_ID)&&s.Merchandise_Fitness==true);
             }
             else if (vm.CategoryID.HasValue)
             {
-                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
+                selectMer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(x=>x.Merchandise_Fitness==true);
             }
             else {
-                selectMer = _merchandise.GetAll();
+                selectMer = _merchandise.GetAll().Where(x=>x.Merchandise_Fitness==true);
             }
             return selectMer;
         }
@@ -54,7 +54,7 @@ namespace CaptainMao.Areas.buy.Models
         public IEnumerable<vm_sType> Logic_Type_selectsType(vmCaID_typeID_stypeID vm)
         {
             //搜尋所有該寵物分類的商品
-            var mer = _Category.GetbyID((int)vm.CategoryID).Merchandises;
+            var mer = _Category.GetbyID((int)vm.CategoryID).Merchandises.Where(s=>s.Merchandise_Fitness==true);
             List<vm_sType> vmlist = new List<vm_sType>();
              
             //利用搜尋出來的商品去找他所有的小分類
@@ -139,6 +139,16 @@ namespace CaptainMao.Areas.buy.Models
             return _merchandise.GetbyID(num).Merchandise_Photo;
         }
 
+        public void Logic_MerchandiseEdit2(Merchandise vm) {
+            var mer = _merchandise.GetbyID(vm.Merchandise_ID);
+            mer.Merchandiser_Editdata = DateTime.UtcNow;
+            mer.Merchandise_Fitness = vm.Merchandise_Fitness;
+            mer.Merchandise_Name = vm.Merchandise_Name;
+            mer.Merchandise_Price = vm.Merchandise_Price;
+            _merchandise.Edit(mer);
+        }
+
+
         //根據storeID去找Merchandises
         public IEnumerable<Merchandise> Logic_SelectStoreMerch(string id) {
             return DB.Merchandises.Where(x=>x.Store_ID ==id);
@@ -197,6 +207,7 @@ namespace CaptainMao.Areas.buy.Models
                 vm.Merchandise_Price = _sh.Merchandise.Merchandise_Price;
                 vm.merchandise_Volume = _sh.merchandise_Volume;
                 vm.Merchandise_Photo = _sh.Merchandise.Merchandise_Photo;
+                vm.Merchandise_Photo_Address = _sh.Merchandise.Merchandise_Photo_Address;
                 vm.cartID = _sh.cartID;
                 vm.Store_ID = _sh.Merchandise.Store_ID;
                 vm.Store_Name = DB.AspNetUsers.Where(c => c.Id == _sh.Merchandise.Store_ID).Select(c => c.StoreInfo.StoreName).First();

@@ -3,67 +3,105 @@
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
-<script>
-    function checkForm() {
-        if ($('#UserID').val() == "") {
-            alert("請輸入發言人");
-            return false;
-        }
-        if ($('#Score').val() == "") {
-            alert("請選擇星等評價");
-            return false;
-        }
-        if ($('#NoteValue').val() == "") {
-            if (confirm("請輸入留言")) {
-                return true;
-            } else {
+
+@section script{
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script>
+        function checkForm() {
+            if ($('#UserID').val() == "") {
+                alert("請輸入發言人");
                 return false;
             }
+            if ($('#Score').val() == "") {
+                alert("請選擇星等評價");
+                return false;
+            }
+            if ($('#NoteValue').val() == "") {
+                if (confirm("請輸入留言")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
-    }
-    window.onload = function poto() {
+        window.onload = function poto() {
 
-        for (var i = 1; i <= 5; i++) {
-            document.getElementById(i + "idimg").onmouseover = mouseover;
-            document.getElementById(i + "idimg").onmouseout = mouseout;
-            document.getElementById(i + "idimg").onclick = mouseclick;
+            for (var i = 1; i <= 5; i++) {
+                document.getElementById(i + "idimg").onmouseover = mouseover;
+                document.getElementById(i + "idimg").onmouseout = mouseout;
+                document.getElementById(i + "idimg").onclick = mouseclick;
+            }
+        };
+        function mouseover() {
+            var q = parseInt(event.currentTarget.id)
+            for (var i = 1; i <= q; i++)
+            { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
         }
-    };
-    function mouseover() {
-        var q = parseInt(event.currentTarget.id)
-        for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
-    }
-    function mouseout() {
-        var q = parseInt(event.currentTarget.id)
-        for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png" }
-    }
-    function mouseclick() {
-        var q = parseInt(event.currentTarget.id)
-        for (var i = 1; i <= q; i++)
-        { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
-        for (var i = 1; i <= 5; i++) {
-            document.getElementById(i + "idimg").onmouseover = null;
-            document.getElementById(i + "idimg").onmouseout = null;
-            document.getElementById(i + "idimg").onclick = null;
+        function mouseout() {
+            var q = parseInt(event.currentTarget.id)
+            for (var i = 1; i <= q; i++)
+            { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png" }
         }
+        function mouseclick() {
+            var q = parseInt(event.currentTarget.id)
+            for (var i = 1; i <= q; i++)
+            { document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/mai.png" }
+            for (var i = 1; i <= 5; i++) {
+                document.getElementById(i + "idimg").onmouseover = null;
+                document.getElementById(i + "idimg").onmouseout = null;
+                document.getElementById(i + "idimg").onclick = null;
+            }
 
-        document.getElementById("Score").value = q;
-        document.getElementById("butck").onclick = buttonclick;
-        document.getElementById("butck").style = "display:black";
-    }
-    function buttonclick() {
-        for (var i = 1; i <= 5 ; i++) {
-            document.getElementById(i + "idimg").onmouseover = mouseover;
-            document.getElementById(i + "idimg").onmouseout = mouseout;
-            document.getElementById(i + "idimg").onclick = mouseclick;
-            document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png";
+            document.getElementById("Score").value = q;
+            document.getElementById("butck").onclick = buttonclick;
+            document.getElementById("butck").style = "display:black";
         }
-        document.getElementById("idsp").innerHTML = "";
-        document.getElementById("butck").style = "display:none";
-    }
-</script>
+        function buttonclick() {
+            for (var i = 1; i <= 5 ; i++) {
+                document.getElementById(i + "idimg").onmouseover = mouseover;
+                document.getElementById(i + "idimg").onmouseout = mouseout;
+                document.getElementById(i + "idimg").onclick = mouseclick;
+                document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png";
+            }
+            document.getElementById("idsp").innerHTML = "";
+            document.getElementById("butck").style = "display:none";
+        };
+
+        $(document).ready(function () {
+            var chart = Highcharts.chart('container', {
+
+                title: {
+                    text: '總星等'
+                },
+
+                //subtitle: {
+                //    text: 'Plain'
+                //},
+
+                xAxis: {
+                    categories: ['1星', '2星', '3星', '4星', '5星']
+                },
+
+                chart: {
+                    inverted: false,
+                    polar: false
+                },
+
+                series: [{
+                    type: 'column',
+                    colorByPoint: true,
+                    data: [@ViewBag.S1, @ViewBag.S2, @ViewBag.S3,@ViewBag.S4,@ViewBag.S5],
+                    showInLegend: false
+                }]
+
+            });
+        })
+
+    </script>
+}
+
 <style>
     label, th, td {
         font-size: 20px;
@@ -84,9 +122,10 @@
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="overflow:auto;background-color:#fff266" class="drawingpin">
+        <div style="overflow:auto;background-color:rgb(178, 179, 250)" class="drawingpin">
             <h2> @Model.HospitalName</h2>
             <div class="row">
+
                 <label for="HospitalAddress" class="col-sm-2 control-label">醫院地址</label>
                 <div class="col-sm-10">
                     <p>@Model.HospitalAddress</p>
@@ -152,14 +191,54 @@
 
 
         </div>
-        <div style="height:auto;background-color:burlywood" class="drawingpin">
+        <div style="height:auto;background-color:#b9a1ee" class="drawingpin">
+            <div class="row">
+                <div class="col-sm-8">
+                    <table>
+                        <tr>
+                            <th>我要評分</th>
+                        <tr>
+                        <tr>
+                            <th>星等</th>
+                            <td>
+                                <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <input type="hidden" id="Score" name="Score" />
+                                <input type="button" value="重選星等" onclick="buttonclick()" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>評語</th>
+                            <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
+                        </tr>
+                        <tr class="align-center">
+                            <td><input type="submit" value="送出評分" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <h2 style="">@ViewBag.HospitalName - 評分</h2>
+                    <div id="container" style="height:250px">
 
-            <h2>@ViewBag.HospitalName - 評分</h2>
-            一星：@ViewBag.S1
-            二星：@ViewBag.S2
-            三星：@ViewBag.S3
-            四星：@ViewBag.S4
-            五星：@ViewBag.S5
+                    </div>
+
+                    一星：@ViewBag.S1
+                    ,二星：@ViewBag.S2
+                    ,三星：@ViewBag.S3
+                    ,四星：@ViewBag.S4
+                    ,五星：@ViewBag.S5
+
+
+
+
+                </div>
+
+
+
+            </div>
 
 
 
@@ -167,36 +246,12 @@
             <form method="post" action="~/Hospital/Hospital/ListToNote" onsubmit="return checkForm(this);">
                 <h2></h2>
                 <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
-            </form>
-            @*//載入評分的清單*@
-            <table class="table table-striped">
-                @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
-            </table>
-            <table>
-                <tr>
-                    <th>我要評分</th>
-                <tr>
-                <tr>
-                    <th>星等</th>
-                    <td>
-                        <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                        <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                        <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                        <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                        <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                        <input type="hidden" id="Score" name="Score" />
-                        <input type="button" value="重選星等" onclick="buttonclick()" />
-                    </td>                    
-                </tr>
-                <tr>
-                    <th>評語</th>
-                    <td colspan=4><textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea></td>
-                </tr>
-                <tr class="align-center">
-                    <td><input type="submit" value="送出評分" /></td>
-                </tr>
-            </table>
 
+                @*//載入評分的清單*@
+                <table class="table table-striped">
+                    @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
+                </table>
+            </form>
         </div>
     </div>
     <!-------------------articleEnd------------------->

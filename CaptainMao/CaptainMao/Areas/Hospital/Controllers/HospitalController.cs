@@ -54,7 +54,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             }
 
 
-            if (SaveHosName != "")
+            if (SaveCategoryID != "")
             {
                 _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
