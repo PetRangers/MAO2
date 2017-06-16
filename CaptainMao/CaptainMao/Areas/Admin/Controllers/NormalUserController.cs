@@ -189,7 +189,7 @@ namespace CaptainMao.Areas.Admin.Controllers
         }
 
         // POST: Admin/NormalUser/SetAuth/5
-        [HttpPost]
+        //[HttpPost]
         public ActionResult SetAuth(string id, NormalUserDetailViewModel model)
         {
             if (!ModelState.IsValid)

@@ -13,16 +13,17 @@
     font-family: 'catsvsdogsLT';
     src: url('../fonts/catsvsdogsLT.ttf') format('truetype');
 }
+
 .dogcat {
     font-family: 'catsvsdogsLT';
 }
 /*設定動畫*/
-.my_transition(@time:1s,@time2:1s,@anim:ease-in-out){
+.my_transition(@time: 1s,@time2: 1s,@anim: ease-in-out) {
     -webkit-transition: all @time @time2 @anim;
     -moz-transition: all @time @time2 @anim;
     -o-transition: all @time @time2 @anim;
     transition: all @time @time2 @anim;
-   }
+}
 
 
 *, *:before, *:after {
@@ -38,17 +39,19 @@ body {
     padding-top: 50px;
 
     #page {
-    background-image: url('../images/backimg.jpg');
+        background-image: url('../images/backimg.jpg');
     }
 
     a {
         font-size: 1.2em;
-        &:hover{
+
+        &:hover {
             text-decoration: none;
         }
     }
 }
-.navbar{
+
+.navbar {
     box-shadow: -2px 1px 2px;
     background-position: center center;
     background-repeat: no-repeat;
@@ -62,22 +65,27 @@ body {
         font-size: 4em;
         font-family: Caveat;
     }
+
     .navbar-header {
         margin-left: 50px !important;
     }
+
     .navbar-left {
         margin-left: 40px;
     }
+
     .navbar-right {
         margin-right: 60px;
     }
+
     #menu-toggle {
         z-index: 801;
         position: fixed;
         top: 0;
         right: .5%;
+        display: none;
     }
-/*左右下拉標籤*/
+    /*左右下拉標籤*/
     .btn-dark {
         border-radius: 0;
         display: block;
@@ -86,12 +94,12 @@ body {
         padding-bottom: 15px;
         text-align: center;
     }
+
     .btn {
         border-radius: 0px;
         overflow: hidden;
         border: none;
     }
-
 }
 /*左上角按鈕*/
 .accordion-toggle {
@@ -102,10 +110,11 @@ body {
     min-width: 50px;
 
 
-    &:hover,&:focus{
+    &:hover, &:focus {
         cursor: pointer;
     }
-    &:after{
+
+    &:after {
         font-family: 'FontAwesome';
         float: none;
         position: relative;
@@ -113,7 +122,7 @@ body {
     }
 
 
-     span:after{
+    span:after {
         /* symbol for "opening" panels */
         font-family: 'FontAwesome';
         /* essential for enabling glyphicon */
@@ -129,7 +138,7 @@ body {
         font-weight: 100;
         font-size: 100%;
         text-decoration: none;
-     }
+    }
 }
 
 /*--------------nav下拉選單--------------*/
@@ -147,7 +156,8 @@ body {
 .dropdown-toggle {
     top: 0px;
     .my_transition(0.4s,0s);
-    &:hover{
+
+    &:hover {
         top: -40px;
     }
 }
@@ -287,45 +297,59 @@ body {
     top: 50px;
     left: .5%;
     width: 50px;
-    ul li{
+
+    ul li {
         display: block;
         margin: 0;
     }
-    a{
+
+    a {
         .my_transition(0.3s,0s);
         display: block;
         font-size: 22px;
     }
 }
 
-@color_btn-inverse:#443226;
+@color_btn-inverse: #443226;
 /*---------------------*/
 @media screen and (max-width: 768px) {
-    aside> .panel {
+    aside > .panel {
         left: -110px;
         .my_transition(0.3s,0s);
-        &:hover{
-            left:0px;
+
+        &:hover {
+            left: 0px;
         }
     }
+
     #sidebar-wrapper {
         .sidebar-nav {
-            padding-top: 10%;
+            padding-top: 15%;
         }
-    } 
+    }
+
+    .navbar {
+        #menu-toggle {
+            display: block;
+        }
+    }
 }
-aside{
-    display:block;
+
+aside {
+    display: block;
+
     .panel {
         box-shadow: -2px 5px 10px;
         position: fixed;
         z-index: 805;
     }
+
     a {
         display: block;
         padding-left: 10px;
         color: #8a0e0b;
     }
+
     .list-group-item {
         background-color: rgba(247, 237, 205, 0.8);
     }
@@ -338,6 +362,7 @@ article {
     background-color: rgba(49, 44, 38, 0.38);
     background-image: url("../images/texture.png");
 }
+
 footer {
     height: 50px;
     background-image: url('../images/navbar.png');
@@ -350,45 +375,44 @@ footer {
     color: #ffffff;
 }
 
-    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .btn-inverse {
-        color: #fcf8e3;
-    }
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .btn-inverse {
+    color: #fcf8e3;
+}
 
-    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus,
-    .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus,
-    .btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active,
-    .navbar-collapse > ul > li:hover {
-        color: #fcf8e3;
-        font-size: 1.3em;
-        background-color: rgba(228, 147, 45, 0.22);
-    }
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus,
+.btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active,
+.navbar-collapse > ul > li:hover {
+    color: #fcf8e3;
+    font-size: 1.3em;
+    background-color: rgba(228, 147, 45, 0.22);
+}
 
 
 /*文字下拉*/
 .dropdown-menu {
     background-position: center bottom;
     background-color: rgba(49, 37, 1, 0);
-    padding-bottom:150px;
+    padding-bottom: 150px;
     background-image: url('../images/nav.png');
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: none;
     border: none;
-
 }
 
-    .dropdown-menu li a {
-        color: rgb(255, 255, 255);
-        font-size: 1.2em;
-        transition:1s;
-    }
+.dropdown-menu li a {
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+    transition: 1s;
+}
 
 .sidebar-nav li a {
     color: rgb(93, 44, 44);
     font-weight: bolder;
     text-shadow: 0px 0px 15px #e6d0e6;
- 
 }
+
 .sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus, .social ul li a:hover {
     color: #a94442;
     text-decoration: none;
@@ -398,8 +422,8 @@ footer {
 
 
 .dropdown-menu li a:hover {
-    color:#343434;
-    background-color:rgba(247, 237, 205, 0.8);
+    color: #343434;
+    background-color: rgba(247, 237, 205, 0.8);
     font-weight: bold;
 }
 
@@ -414,19 +438,21 @@ footer {
 .social ul li {
     background-color: rgba(45, 38, 30, 0.46);
     background-image: url("../images/texture.png");
-    a{
+
+    a {
         color: #FFF;
         background-color: rgba(45, 38, 30, 0.46);
         background-image: url("../images/texture.png");
     }
+
     a:visited {
-            background-color: rgba(45, 38, 30, 0.46);
-        }
+        background-color: rgba(45, 38, 30, 0.46);
+    }
 }
 
 
-.sidebar-nav li:first-child a {
-    background-color: #865d00;
+.sidebar-nav li:first-child:before {
+    background-color: rgba(59, 83, 195, 0.59);
 }
 
 .sidebar-nav li:nth-child(2):before {
@@ -510,4 +536,3 @@ footer {
     background: #e88845;
     border: 1px solid #e88845;
 }
-

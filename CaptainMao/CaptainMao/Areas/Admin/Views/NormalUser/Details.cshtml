@@ -523,6 +523,8 @@
 
 @section Style{
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    @*下面是聊天功能相關的css*@
+    <link href="~/css/chat.css" rel="stylesheet" />
     <style>
         body {
             margin-top: 20px;
@@ -1901,5 +1903,33 @@
         .btn.active span.glyphicon {
             opacity: 1;
         }
+
+        /*===================================
+           以下為聊天功能相關*/
+
+        .div_left_bottom {
+            margin-left: 40px;
+            width: Auto;
+            float: left;
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            z-index: 20;
+            height: 428px;
+            /*border: 2px solid #69c;*/
+            _position: absolute; /* position fixed for IE6 */
+        }
+
+        .childdiv {
+            margin-left: 5px;
+            float: left;
+        }
     </style>
 }
+
+@section Script{
+    @*下面3個是聊天功能相關的js*@
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="~/js/chatjs.js"></script>
+    }
