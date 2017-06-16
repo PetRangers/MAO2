@@ -4,11 +4,15 @@
 @{
 //ViewBag.Title = "Main";
 //Layout = "~/Views/Shared/_MaoLayout.cshtml";
-}
+}<style>
+    label, th, td ,text,p{
+        font-size: 20px;
+    }
+</style>
 <script>
     $(function () {
         var CategoryID1 = '@ViewBag.CategoryID1';
-        if (CategoryID1 ==1)
+        if (CategoryID1 == 1)
         { $('#Category1').prop("checked", true); }
         var CategoryID2 = '@ViewBag.CategoryID2';
         if (CategoryID2 == 1)
@@ -39,6 +43,7 @@
 </script>
 
 
+
 <!--aside側欄 article主欄-->
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -56,7 +61,6 @@
             <form method="post" action="~/HospitalCRUD/UpDataHospital" class="form-horizontal" onsubmit="return checkForm(this);">
                 @foreach (var Item in Model)
                 {
-
                     <div class="form-group" style="display:none">
                         <label for="HospitalID" class="col-sm-2 control-label ">醫院編號</label>
                         <div class="col-sm-10">
@@ -148,29 +152,32 @@
                             <input type="text" class="form-control" name="OnlineConsultation" value="@Item.OnlineConsultation" />
                         </div>
                     </div>
-                    @*<div class="form-group">
-                        <label for="OnView"
-                               class="col-sm-2 control-label">OnView</label>
+                    <div class="form-group">
+                        <label for="OnlineConsultation"
+                               class="col-sm-2 control-label">顯示狀態</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="OnView" value="@Item.OnView" />
+                            <input type="text" class="form-control" name="OnlineConsultation" value="@Item.OnView" />
                         </div>
-                    </div>*@
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <button type="submit" class="btn btn-default">修改</button>
+                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="隱藏" /></a>
+                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="顯示" /></a>
+                           
+                            @*<button type="submit" class="btn btn-default">刪除</button>*@
                         </div>
                     </div>
                 }
-                
             </form>
         </div>
-        @*<div style="height:500px;background-color:burlywood" class="drawingpin">
+
+
+    </div>
+    @*<div style="height:500px;background-color:burlywood" class="drawingpin">
 
         </div>*@
     </div>
     <!-------------------articleEnd------------------->
 </article>
-
-
-
-

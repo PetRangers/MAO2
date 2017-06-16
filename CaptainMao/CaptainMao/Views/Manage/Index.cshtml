@@ -1,72 +1,117 @@
 ﻿@model CaptainMao.Models.IndexViewModel
-@{
-    ViewBag.Title = "管理";
-}
-
-<h2>@ViewBag.Title.</h2>
-
+<h2>帳號設定與管理</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>變更帳戶設定</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>個人資料:</dt>
-        <dd>
-            @Html.ActionLink("修改", "UpdateProfile", "Manage", null, new { @class = "btn btn-default"})
-        </dd>
-        <dt>密碼:</dt>
-        <dd>
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("變更密碼", "ChangePassword", "Manage", null, new { @class = "btn btn-default" })
-            }
-            else
-            {
-                @Html.ActionLink("建立", "SetPassword", "Manage", null, new { @class = "btn btn-default" })
-            }
-        </dd>
 
-        <dt>電話號碼: @(Model.PhoneNumber ?? "None")</dt>
-        <dd>
-            @if (Model.PhoneNumber != null)
-            {
-                @Html.ActionLink("修改", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" })
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("移除", "RemovePhoneNumber", "Manage", null, new { @class = "btn btn-default" })
-            }
-            else
-            {
-                @Html.ActionLink("新增", "AddPhoneNumber")
-            }
-        </dd>
 
-        <dt>外部登入:</dt>
-        <dd>
-            @Model.Logins.Count 
-            @Html.ActionLink("管理", "ManageLogins", "Manage", null, new { @class = "btn btn-default" }) 
-        </dd>
-        <dt>雙因素驗證:</dt>
-        <dd>
-            @if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>已啟用
-                        <input type="submit" value="停用" class="btn btn-default" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>已停用
-                        <input type="submit" value="啟用" class="btn btn-default" />
-                        </text>
-                    }
-                }
-        </dd>
-    </dl>
+<div class="panel-body inf-content">
+    <div class="row">
+        <div class="col-md-10">
+            <strong>帳號設定</strong>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-condensed table-responsive table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-user text-primary"></span>
+                                    個人資料
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                @Html.ActionLink("修改", "UpdateProfile", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                    密碼
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                @if (Model.HasPassword)
+            {
+                                    @Html.ActionLink("變更密碼", "ChangePassword", "Manage", null, new { @class = "btn btn-default" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("建立", "SetPassword", "Manage", null, new { @class = "btn btn-default" })
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-phone text-primary"></span>
+                                    電話號碼: @(Model.PhoneNumber ?? "None")
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                @if (Model.PhoneNumber != null)
+            {
+                                    @Html.ActionLink("新增", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" })
+                                    <span> or </span>
+                                        @Html.ActionLink("移除", "RemovePhoneNumber", "Manage", null, new { @class = "btn btn-default" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("新增", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-default" })
+                                }
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-globe text-primary"></span>
+                                    外部登入
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                @Model.Logins.Count
+                                @Html.ActionLink("管理", "ManageLogins", "Manage", null, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-transfer text-primary"></span>
+                                    雙因素驗證
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                @if (Model.TwoFactor)
+                                {
+                                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <text>
+                                            <span class="text-success">已啟用</span>
+                                            <input type="submit" value="停用" class="btn btn-default" />
+                                        </text>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <text>
+                                            <span class="text-danger">已停用</span>
+                                            <input type="submit" value="啟用" class="btn btn-default" />
+                                        </text>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+

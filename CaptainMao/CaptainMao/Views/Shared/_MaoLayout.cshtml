@@ -19,7 +19,7 @@
     <link href="~/css/main.css" rel="stylesheet" />
     <link href="~/css/chat.css" rel="stylesheet" />
     @RenderSection("style", false)
-   
+
 </head>
 <body>
     <div id="page">
@@ -53,7 +53,7 @@
                                     <ul>
                                         <li class="dropdown-header">七嘴八舌</li>
                                         <li class="divider"></li>
-                                        <li><a href="@Url.Action("Board","Article",new { area="Article"})" >哈拉主版</a></li>
+                                        <li><a href="@Url.Action("Board","Article",new { area="Article"})">哈拉主版</a></li>
                                     </ul>
                                 </li>
 
@@ -73,14 +73,14 @@
                                     <ul>
                                         <li class="dropdown-header">尋找新家</li>
                                         <li class="divider"></li>
-                                        <li>@Html.ActionLink("個人管理", "AdoptionManage","Adoption",new{area = "Adoption"}, null)</li>
-                                        <li>@Html.ActionLink("領養列表", "Index","Adoption",new{area = "Adoption"}, null)</li>
-                                        <li>@Html.ActionLink("尋找新主人", "CreateAdoption","Adoption",new{area = "Adoption"}, null)</li>
-                                        <li>@Html.ActionLink("領養心願", "AdoptionWish","Adoption",new{area = "Adoption"}, null)</li>
-                                        <li>@Html.ActionLink("新增心願", "CreateAdpWish","Adoption",new{area = "Adoption"}, null)</li>
+                                        <li>@Html.ActionLink("個人管理", "AdoptionManage", "Adoption", new { area = "Adoption" }, null)</li>
+                                        <li>@Html.ActionLink("領養列表", "Index", "Adoption", new { area = "Adoption" }, null)</li>
+                                        <li>@Html.ActionLink("尋找新主人", "CreateAdoption", "Adoption", new { area = "Adoption" }, null)</li>
+                                        <li>@Html.ActionLink("領養心願", "AdoptionWish", "Adoption", new { area = "Adoption" }, null)</li>
+                                        <li>@Html.ActionLink("新增心願", "CreateAdpWish", "Adoption", new { area = "Adoption" }, null)</li>
                                     </ul>
                                 </li>
-                                
+
                                 <li class="col-sm-2">
                                     <ul>
                                         <li class="dropdown-header">毛孩醫院</li>
@@ -89,7 +89,7 @@
                                         <li>寵物種類</li>
                                     </ul>
                                 </li>
-                         
+
                                 <li class="col-sm-2"></li>
                             </ul>
                         </li>
@@ -99,15 +99,15 @@
                         <li><a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" class="dropdown-toggle" title="毛孩地圖">毛孩醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li >
+                        <li>
                             <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
                             @*<ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>*@
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>*@
                         </li>
                         @Html.Partial("_LoginPartial")
                     </ul>
@@ -117,16 +117,10 @@
         <!-- 右邊側欄-->
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <span id="user" class="hidden-md hidden-lg toggle">
-                    <a href="@Url.Action("Login","Account")" class="fa fa-user "></a>
-                    <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})" class="fa fa-lg fa-cart-plus"></a>
-                </span>
-                <li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>
+
+                @*<li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>*@
                 <li class="sidebar-brand">
-                    <a><strong>毛孩隊長</strong></a>
-                </li>
-                <li>
-                    @Html.ActionLink("回首頁", "Index", "CaptainMao", new { area = "" }, new { @title = "回首頁" })
+                    <a>CaptainMao</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Board","Article",new { area="Article"})" title="七嘴八舌">七嘴八舌</a>
@@ -140,7 +134,12 @@
                 <li>
                     <a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" title="毛孩醫院">毛孩醫院</a>
                 </li>
-
+                <li>
+                    <a href="@Url.Action("Login","Account")"><span class="fa fa-user "></span>會員</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","ShoppingCart",new { area="buy"})"><span class="fa fa-lg fa-cart-plus"></span>購物車</a>
+                </li>
             </ul>
         </nav>
         <!-- 左邊側欄-->
@@ -154,6 +153,7 @@
                     <li><a href="https://linkedin.com/in/blayderunner123" target="_blank" class="fa fa-lg fa-linkedin"></a></li>
                     <li><a href="skype:live:soldierupdesigns?call" class="fa fa-lg fa-skype" target="_blank"></a></li>
                     <li><a href="http://stackexchange.com/users/4992378/blayderunner123" target="_blank" class="fa fa-lg fa-stack-exchange"></a></li>
+                    <li><a href=@Url.Action("Index", "NormalUser", new { area = "Admin" }) title="網站管理者介面"><span class="fa fa-lg fa-empire"></span></a></li>
                 </ul>
             </div>
         </div>

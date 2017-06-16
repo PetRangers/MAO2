@@ -19,6 +19,8 @@ namespace CaptainMao
             //    defaults: new { controller = "Adoption", action = "Index", id = UrlParameter.Optional },
             //    namespaces: new[] { "CaptainMao.Areas.Adoption" }
             //    );
+            routes.IgnoreRoute("{*botdetect}",
+            new {botdetect=@"(.*)BotDetectCaptcha\.ashx"});
 
             routes.MapRoute(
                 name: "Default",

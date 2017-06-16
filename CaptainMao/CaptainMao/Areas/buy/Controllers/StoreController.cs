@@ -19,6 +19,7 @@ namespace CaptainMao.Areas.buy.Controllers
        [AuthorizeMao(Roles = "Store")]
         public ActionResult Index()
         {
+
              return View(fun.Logic_SelectStoreMerch(User.Identity.GetUserId())); 
         }
 
@@ -50,7 +51,7 @@ namespace CaptainMao.Areas.buy.Controllers
                 }
                 vm._Merchandise.Store_ID = User.Identity.GetUserId();
                 fun.Logic_MerchandiseSave(vm);
-                
+                TempData["ok"] = "建立成功";
                 return RedirectToAction("Index");
             }
             catch (Exception ex) {
@@ -96,6 +97,7 @@ namespace CaptainMao.Areas.buy.Controllers
                 }
                 vm._Merchandise.Store_ID = User.Identity.GetUserId();
                 fun.Logic_MerchandiseEdit(vm);
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -106,10 +108,33 @@ namespace CaptainMao.Areas.buy.Controllers
             }
         }
 
-        [AuthorizeMao(Roles = "store")]
+        [HttpPost]
+        public ActionResult Edit2(Merchandise vm) {
+             fun.Logic_MerchandiseEdit2(vm);
+            return RedirectToAction("Index");
+        }
+
+
+        [AuthorizeMao(Roles = "Store")]
         public ActionResult Delete(int Merchandise_ID) {
             fun.Logic_MerchandiseDelete(Merchandise_ID);
             return RedirectToAction("Index");
         }
+
+        [AuthorizeMao(Roles = "Store")]
+        public ActionResult NewOrder() {
+
+            return View(fun.Logic_NewOrder(User.Identity.GetUserId()));
+        }
+
+        [AuthorizeMao(Roles = "Store")]
+        public ActionResult Report()
+        {
+            return View(fun.Logic_NewReport(User.Identity.GetUserId()));
+        }
+             
+
+
+
     }
 }

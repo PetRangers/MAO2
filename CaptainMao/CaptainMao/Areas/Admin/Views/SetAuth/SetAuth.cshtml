@@ -1,0 +1,107 @@
+﻿@model IEnumerable<CaptainMao.Areas.Admin.Models.SetAuthViewModel>
+
+<h2>設置權限</h2>
+<hr />
+
+                    <table id="example" class="display nowrap" cellspacing="0"  width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    權限
+                                </th>
+                                <th>
+                                    管理討論區
+                                </th>
+                                <th>
+                                    編輯
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                            <span class="badge" data-toggle="tooltip" title="@Html.DisplayNameFor(model => model.Experience)">
+                                                @Html.DisplayFor(modelItem => item.Experience)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (item.IsAdmin)
+                                            {
+                                                <label class="label label-warning" role="alert">@Html.DisplayNameFor(model => model.IsAdmin)</label>
+                                            }
+                                            @if (item.IsMaster)
+                                            {
+                                                <label class="label label-info" role="alert">@Html.DisplayNameFor(model => model.IsMaster)</label>
+                                            }
+                                            @if (item.IsStore)
+                                            {
+                                                <label class="label label-success" role="alert">@Html.DisplayNameFor(model => model.IsStore)</label>
+                                            }
+                                            @if (item.IsNormal)
+                                            {
+                                                <label class="label label-primary" role="alert">@Html.DisplayNameFor(model => model.IsNormal)</label>
+                                            }
+                                            @if (item.IsInactivated)
+                                            {
+                                                <label class="label label-danger" role="alert">@Html.DisplayNameFor(model => model.IsInactivated)</label>
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @if (item.IsBoardDogMaster)
+                                            {
+                                                <label class="badge info" role="alert">@Html.DisplayNameFor(model => model.IsBoardDogMaster)</label>
+                                            }
+                                            @if (item.IsBoardCatMaster)
+                                            {
+                                                <label class="badge info" role="alert">@Html.DisplayNameFor(model => model.IsBoardCatMaster)</label>
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("編輯", "EditAuth", "SetAuth", new { id=item.Id },new { @class= "btn btn-info" })
+                                        </td>
+                                    </tr>
+                                   
+                            }
+
+                        </tbody>
+                    </table>
+                
+                
+
+
+@section Style{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        div.container {
+            max-width: 1200px
+        }
+    </style>
+}
+
+@section Script{
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+    <script type="text/javascript" class="init">
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      responsive: true
+                  });
+              });
+    </script>
+
+}

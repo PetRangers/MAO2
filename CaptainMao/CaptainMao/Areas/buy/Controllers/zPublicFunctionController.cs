@@ -31,14 +31,20 @@ namespace CaptainMao.Areas.buy.Controllers
         }
 
         
-        public ActionResult returnJson_selectFourStore(string city)
+        public ActionResult returnJson_selectFourStore(int cityID)
         {
-            return Json(fun.Logic_GetStore(city), JsonRequestBehavior.AllowGet);
+            return Json(fun.Logic_GetStore(cityID), JsonRequestBehavior.AllowGet);
         }
         public ActionResult returnJson_selectCitys() {
 
-            return Json(fun.Logic_GetAllCity(), JsonRequestBehavior.AllowGet);
+            return Json(fun.Logic_GetAllCities(), JsonRequestBehavior.AllowGet);
         }
-        
+
+        public ActionResult returnJson_selectMer() {
+
+            return Json(fun.Logic_NewReport(User.Identity.GetUserId()), JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

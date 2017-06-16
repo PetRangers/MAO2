@@ -6,7 +6,7 @@
     /*產生aside滑動事件*/
     $("aside").hover(f1, f2).
         find("#firstpane .menu_head").mouseover(fun_asideshow).
-        next("div.menu_body").hover(f1).
+        next("div.menu_body").hover(f1).stop(true, true).
         find("a").mouseover(fun_asidesAjax);
         
 });
@@ -60,15 +60,15 @@ function fun_asidesAjax(e) {
 
 
 function f1(e) {
-
    stype.show();
-        
     }
     function f2() {
         stype.hide();
     }
 
-
+    function Success() {
+        alert("已將您的商品加入購物車");
+    }
 
 
 //function changeIndex() {

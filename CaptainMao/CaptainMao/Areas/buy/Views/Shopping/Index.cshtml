@@ -32,17 +32,20 @@
                     <div class="row">
                         <div class="col-sm-1">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
                         <div class="col-sm-2">
-                       
 
-                                @Html.ActionLink( _model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID },null)
+
+                            @Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)
                         </div>
                         @{
                             string url = "";
-                            if (Convert.IsDBNull(_model.Merchandise_Photo))
+                            try
                             {
-                                url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                if (_model.Merchandise_Photo.Length >0)
+                                {
+                                    url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                }
                             }
-                            else
+                            catch
                             {
                                 url = _model.Merchandise_Photo_Address;
                             }
@@ -52,7 +55,8 @@
                         <div class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</div>
                         <div class="col-sm-2">
 
-                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST" , OnSuccess="Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                            
                         </div>
                     </div>
                             }
@@ -67,9 +71,15 @@
 
 
 
+
 @section script{
     <!--aside-->
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
-<script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+    <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+    <script>
+        if ('@TempData["ok"]' != '') {
+            alert('@TempData["ok"]');
+        }
 
+    </script>
 }
