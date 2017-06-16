@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -420,6 +419,7 @@
     <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
     <Content Include="Areas\Admin\Views\SetAuth\EditAuth.cshtml" />
+    <Content Include="Areas\buy\Views\User\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1113,6 +1113,7 @@
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
+    <Compile Include="Areas\buy\Controllers\UserController.cs" />
     <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
     <Compile Include="Areas\buy\Models\ClsBusinessLogic.cs" />
     <Compile Include="Areas\buy\Models\ClsMao.cs" />
