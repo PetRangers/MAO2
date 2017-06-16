@@ -412,13 +412,12 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-
-	 <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
-	<Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
+    <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1129,6 +1128,7 @@
     <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

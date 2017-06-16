@@ -115,13 +115,7 @@ namespace CaptainMao.Areas.Article.Controllers
             }
             return View();
         }
-        public ActionResult GetValidateCode(string codeClass)
-        {
-            ValidateCode vCode = new ValidateCode();
-            string code = vCode.CreateValidateCode(5);
-            byte[] bytes = vCode.CreateValidateGraphic(code);
-            return File(bytes, @"image/jpeg");
-        }
+       
         //秀文章內容
         [HttpGet]
         public ActionResult Show(int? articleID)
