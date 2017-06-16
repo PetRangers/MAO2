@@ -90,30 +90,31 @@ namespace CaptainMao.Areas.Article.Controllers
         }
         //建立文章
         [HttpPost]
-        [CaptchaValidation("CaptchaCode","ExampleCaptcha","Incorrect CAPTCHA code!")]
-        public ActionResult Create(CaptainMao.Models.Article article,bool captchaValid)
+        [AllowAnonymous]
+        [CaptchaValidation("CaptchaCode", "ExampleCaptcha","驗證碼輸入錯誤!")]
+        public ActionResult Create(CaptainMao.Models.Article article,string captchaValid)
         {
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    article.CreateDateTime = DateTime.Now;
-                    article.LastChDateTime = DateTime.Now;
-
-                    article.PosterID = User.Identity.GetUserId();
-                    article.Number = 0;
-
-                    articledb.Create(article);
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("Login", "Account", new { area = "" });
-                }
+                return View();
             }
-            return View();
+            try
+            {
+                article.CreateDateTime = DateTime.Now;
+                article.LastChDateTime = DateTime.Now;
+
+                article.PosterID = User.Identity.GetUserId();
+                article.Number = 0;
+
+                articledb.Create(article);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
        
         //秀文章內容

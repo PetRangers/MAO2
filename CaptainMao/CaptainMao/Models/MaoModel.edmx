@@ -165,9 +165,9 @@
           <Property Name="HospitalPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BusinessHours" Type="nvarchar" MaxLength="50" />
           <Property Name="Emergency" Type="nvarchar" MaxLength="50" />
-          <Property Name="OutpatientProject" Type="nvarchar" MaxLength="50" />
-          <Property Name="Equipment" Type="nvarchar" MaxLength="50" />
-          <Property Name="WebAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="OutpatientProject" Type="nvarchar(max)" />
+          <Property Name="Equipment" Type="nvarchar(max)" />
+          <Property Name="WebAddress" Type="nvarchar(max)" />
           <Property Name="OnlineConsultation" Type="nvarchar" MaxLength="50" />
           <Property Name="OnView" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Map" Type="nvarchar" MaxLength="50" />
@@ -1163,9 +1163,9 @@
           <Property Name="HospitalPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BusinessHours" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Emergency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OutpatientProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WebAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OutpatientProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OnlineConsultation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OnView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Map" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
