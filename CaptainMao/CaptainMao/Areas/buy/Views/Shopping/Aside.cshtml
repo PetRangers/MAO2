@@ -2,6 +2,7 @@
 
 
 <div id="firstpane" class="panel panel-primary">
+
     @foreach (var vm in Model)
     {
         <p class="menu_head panel-heading" id=@vm.CategoryID>
@@ -16,16 +17,20 @@
                 //從商品分類搜尋
                 foreach (var _vm in vm.Merchandises)
                 {
-                    //因商品具有多種小分類的特性
-                    var _ty = _vm.sTypes.Select(ty => ty.Type);
-                    foreach (var _sty in _ty)
+                    if (_vm.Merchandise_Fitness == true)
                     {
-                        //如果尚未在陣列內則儲存
-                        if (!strList.Contains(_sty.Type_Name))
+                        //因商品具有多種小分類的特性
+                        var _ty = _vm.sTypes.Select(ty => ty.Type);
+                        foreach (var _sty in _ty)
                         {
-                            strList[_sty.Type_ID] = _sty.Type_Name;
-                        };
+                            //如果尚未在陣列內則儲存
+                            if (!strList.Contains(_sty.Type_Name))
+                            {
+                                strList[_sty.Type_ID] = _sty.Type_Name;
+                            };
+                        }
                     }
+
                 }
                 //印出
                 for (int x = 1; x < strList.Length; x++)
@@ -33,13 +38,14 @@
                     if (strList[x] != null)
                     {
                         @Html.ActionLink(strList[x], "Index", "Shopping",
-                    new { CategoryID = @vm.CategoryID, Type_ID = x  },
-                    new { data_cate = @vm.CategoryID, data_type = x , @class = "list-group-item" })
+                    new { CategoryID = @vm.CategoryID, Type_ID = x },
+                    new { data_cate = @vm.CategoryID, data_type = x, @class = "list-group-item" })
                     };
                 }
-                }
+            }
         </div>
-}
+    }
+
 </div>
 <div id="sTypeArea">
 

@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.Facebook;
 using Owin;
 using CaptainMao.Models;
 
@@ -58,15 +59,15 @@ namespace CaptainMao
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "313803012391050",
+               appSecret: "4327ae5b5a46c5488ccbf78efed848f5");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "826624713833-5k6m3863i7kehf832tbe2dbdvkt8s563.apps.googleusercontent.com",
+                ClientSecret = "eFoROYm2olBMaVfR3NQs4xTm"
+            });
         }
     }
 }

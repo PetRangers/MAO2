@@ -16,15 +16,17 @@
     function SelectThis() {
         var clicktbn = $('#HospitalCity').val();
         var clicktbnRace = $('#HospitalPetRace').val();
+        var clicktHosName = $('#HosName').val();
+
 
         $.ajax({
             url: "/Hospital/HospitalCRUD/_HospitalSearchCity",
             type: "POST",
-            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace },
+            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace, 'HosName': clicktHosName },
             dataType: "text",
             traditional: true,
             success: function (data) {
-                $('#_HospitalCity').load("/Hospital/HospitalCRUD/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace });//路徑增加Hospital
+                $('#_HospitalCity').load("/Hospital/HospitalCRUD/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace ,'HosName' : clicktHosName});//路徑增加Hospital
             },
             error: function (XMLHttpRequest) {
                 alert(XMLHttpRequest.responseText);
@@ -44,18 +46,17 @@
         <!-------------------articleOpen------------------->
         <div>
             <!--顏色請自己放在Css內 這只是樣板-->
-            <div style="height:auto;background-color:#fff266" class="drawingpin" id="ShowMePlease" name="ShowMePlease">
-                <div><input id="" type="button" value="查詢所有" onclick="" /></div>
-                <div>
+            <div style="height:auto;background-color:rgb(178, 179, 250)" class="drawingpin" id="ShowMePlease" name="ShowMePlease">
+                <h4>
                     @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
                     @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
-                    <input type="text" />
+                    <input type="text"  id="HosName" name="HosName" value=""/>
                     <input id="" type="button" value="搜尋" onclick="SelectThis()" />
-                </div>
+                </h4>
                 <h2>醫院資料</h2>
-                <div id="_HospitalCity" name="_HospitalCity"></div>
+                <div id="_HospitalCity" name="_HospitalCity" ></div>
             </div>
-            <div style="height:950px;background-color:burlywood" class="drawingpin">
+            <div style="height:950px;background-color:#b9a1ee" class="drawingpin">
                 <div id="_HospitalUPDate" name="_HospitalUPDate"></div>
              
             </div>

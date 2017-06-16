@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -124,6 +124,9 @@
     <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
@@ -156,6 +159,7 @@
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -193,6 +197,10 @@
     </Reference>
     <Reference Include="Twilio.AspNet.Mvc, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Twilio.AspNet.Mvc.5.0.1\lib\net451\Twilio.AspNet.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivator.1.5.1\lib\net40\WebActivator.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -254,6 +262,7 @@
     <Content Include="Areas\buy\Views\Store\Index.cshtml" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
+    <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
@@ -297,32 +306,18 @@
     <Content Include="Global.asax" />
     <Content Include="images\0DQPb7DHZM.png" />
     <Content Include="images\33725431546_cc653802ce_h.jpg" />
-    <Content Include="images\B1.jpg" />
-    <Content Include="images\B3.jpg" />
     <Content Include="images\backimg.jpg" />
-    <Content Include="images\C1.jpg" />
-    <Content Include="images\C3.jpg" />
-    <Content Include="images\C4.jpg" />
-    <Content Include="images\C6.jpg" />
+
     <Content Include="images\captain1.png" />
     <Content Include="images\captain2.png" />
     <Content Include="images\cat.png" />
     <Content Include="images\cat2.png" />
     <Content Include="images\catdog.png" />
     <Content Include="images\catdog2.png" />
-    <Content Include="images\D1.jpg" />
-    <Content Include="images\D2.jpg" />
-    <Content Include="images\D3.jpg" />
-    <Content Include="images\D4.jpg" />
-    <Content Include="images\D5.jpg" />
-    <Content Include="images\D6.jpg" />
     <Content Include="images\drawingpin.png" />
     <Content Include="images\icon_127820_256.png" />
-    <Content Include="images\M2.jpg" />
-    <Content Include="images\M4.jpg" />
     <Content Include="images\nav.png" />
     <Content Include="images\navbar.png" />
-    <Content Include="images\R3.jpg" />
     <Content Include="images\texture.png" />
     <Content Include="images\unnamed.jpg" />
     <Content Include="images\wrip.jpg" />
@@ -418,6 +413,17 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
+    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
+    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
+    <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
+    <Content Include="Areas\Admin\Views\SetAuth\EditAuth.cshtml" />
+    <Content Include="Areas\buy\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
+    <Content Include="Areas\WebForm\ImageReader.ashx" />
+    <Content Include="Areas\WebForm\MerchandisePhoto.ashx" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1111,6 +1117,7 @@
     <Compile Include="Areas\buy\Controllers\ShoppingCartController.cs" />
     <Compile Include="Areas\buy\Controllers\ShoppingController.cs" />
     <Compile Include="Areas\buy\Controllers\StoreController.cs" />
+    <Compile Include="Areas\buy\Controllers\UserController.cs" />
     <Compile Include="Areas\buy\Controllers\zPublicFunctionController.cs" />
     <Compile Include="Areas\buy\Models\ClsBusinessLogic.cs" />
     <Compile Include="Areas\buy\Models\ClsMao.cs" />
@@ -1128,7 +1135,12 @@
     <Compile Include="Areas\Hospital\HodpitalAreaRegistration.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalModel.cs" />
     <Compile Include="Areas\Hospital\Models\ViewModel\HospitalNoteModel.cs" />
-    <Compile Include="ChatHub.cs" />
+    <Compile Include="Areas\WebForm\ImageReader.ashx.cs">
+      <DependentUpon>ImageReader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
+      <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1368,7 +1380,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52326</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52326/</IISUrl>
+          <IISUrl>https://localhost:44355/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -26,11 +26,7 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                //using (Html.BeginForm("EditAuth", "SetAuth", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-                                //{
-                                @*<form action=@Url.Action("EditAuth", "SetAuth", new { area="Admin" }) method="post" novalidate>*@
-
-                                    <tr>
+                                <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.UserName)
                                         </td>
@@ -74,14 +70,10 @@
                                             }
                                         </td>
                                         <td>
-                                            @*<a href=@Url.Action("EditAuth", "SetAuth", new { m=item }, "POST") title="修改">修改</a>*@
-                                                @Html.ActionLink("編輯", "EditAuth", "SetAuth", new { id=item.Id },new { @class= "btn btn-info" })
-                                            @*<button class="btn btn-info" type="submit">修改</button><button class="btn btn-default" type="reset">重設</button>*@
+                                            @Html.ActionLink("編輯", "EditAuth", "SetAuth", new { id=item.Id },new { @class= "btn btn-info" })
                                         </td>
                                     </tr>
                                    
-                                @*</form>*@
-                                @*}*@
                             }
 
                         </tbody>

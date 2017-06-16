@@ -6,6 +6,8 @@
 }
 @section style{
     <link href="~/Areas/buy/css/shoppingIndex.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
 }
 <!--aside側欄 article主欄-->
 
@@ -18,48 +20,54 @@
 
     <!-------------------articleOpen------------------->
     <div class="col-lg-12">
-        <div class="drawingpin  col-sm-12">
-            <div class="row">
-                <div class="col-sm-1">@Html.DisplayNameFor(c => c.First().Merchandise_ID)</div>
-                <div class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</div>
-                <div class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</div>
-                <div class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</div>
-                <div class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</div>
-            </div>
-            <div id="tbody ">
-                @foreach (var _model in Model)
-                {
-                    <div class="row">
-                        <div class="col-sm-1">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
-                        <div class="col-sm-2">
+        <div class="drawingpin">
+            <table id="example" class="display nowrap" cellspacing="0"  width="100%">
+                <thead>
+                    <tr>
+                        <td class="col-sm-1">@Html.DisplayNameFor(c => c.First().Merchandise_ID)</td>
+                        <td class="col-sm-3">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</td>
+                        <td class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</td>
+                        <td class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</td>
+                        <td class="col-sm-2">@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</td>
+                        <td class="col-sm-1"></td>
+                    </tr>
+                </thead>
+                <tbody id="tbody ">
+                    @foreach (var _model in Model)
+                    {
+                    <tr>
+                        <th class="col-sm-1">@Html.DisplayFor(c => _model.Merchandise_ID)</th>
+                        <th class="col-sm-3">
 
 
                             @Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)
-                        </div>
+                        </th>
                         @{
-                            string url = "";
-                            try
-                            {
-                                if (_model.Merchandise_Photo.Length >0)
+                                string url = "";
+                                try
                                 {
-                                    url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                    if (_model.Merchandise_Photo.Length > 0)
+                                    {
+                                        url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                    }
                                 }
-                            }
-                            catch
-                            {
-                                url = _model.Merchandise_Photo_Address;
-                            }
+                                catch
+                                {
+                                    url = _model.Merchandise_Photo_Address;
+                                }
                         }
-                        <div class="col-sm-2"><img src='@url' class="img-circle" width="80" height="80" /></div>
-                        <div class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Price)</div>
-                        <div class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</div>
-                        <div class="col-sm-2">
+                        <th class="col-sm-2"><img src='@url' class="img-circle" width="80" height="80" /></th>
+                        <th class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Price)</th>
+                        <th class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</th>
+                        <th class="col-sm-1">
 
-                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
-                        </div>
-                    </div>
-                            }
-            </div>
+                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+
+                        </th>
+                    </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -74,6 +82,24 @@
 @section script{
     <!--aside-->
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
-<script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+    <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
 
+
+    <script>
+        if ('@TempData["ok"]' != '') {
+            alert('@TempData["ok"]');
+        }
+    </script>
+
+
+<script type="text/javascript" class="init">
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      responsive: true
+                  });
+              });
+</script>
 }

@@ -26,6 +26,7 @@ namespace CaptainMao.Areas.buy.Controllers
         public void PostShoppingCart(int Merchandise_ID) {
             string id = User.Identity.GetUserId() != null ? User.Identity.GetUserId() : (string)HttpContext.Current.Session["user_identity"];
             fun.Logic_AddShopping(id, Merchandise_ID);
+            
         }
         //修改訂單
         [HttpPut]

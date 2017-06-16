@@ -44,7 +44,22 @@
                         <td>@Html.DisplayFor(c => c.Merchandise_ID)</td>
                         <td>@Html.DisplayFor(c => c.Merchandise_Name)</td>
                         <td>@Html.DisplayFor(c => c.Merchandise_Price)</td>
-                        <td><img src='@Url.Action("PixbyID", "zPublicFunction", new { id = Model.Merchandise_ID})' class="img-circle" width="500" /></td>
+                        @{
+                            string url = "";
+                            try
+                            {
+                                if (Model.Merchandise_Photo.Length > 0)
+                                {
+                                    url = Url.Action("PixbyID", "zPublicFunction", new { id = Model.Merchandise_ID });
+                                }
+                            }
+                            catch
+                            {
+                                url = Model.Merchandise_Photo_Address;
+                            }
+                        }
+
+                        <td><img src='@url' class="img-circle" width="500" /></td>
 
                         @if (Model.Merchandiser_Editdata != null)
                         {

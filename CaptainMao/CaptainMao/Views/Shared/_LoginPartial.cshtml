@@ -3,7 +3,7 @@
 {
     <ul class="nav navbar-nav navbar-right">
         @*先開放所有人能進入管理者介面，之後再改成只有管理者可進入*@
-        @if (true)
+        @if (User.IsInRole("Admin"))
         {
             <li><a href=@Url.Action("Index", "NormalUser", new { area = "Admin" }) title="網站管理者介面"><span class="fa fa-lg fa-empire"></span> 網站管理</a></li>
         }

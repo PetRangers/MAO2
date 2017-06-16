@@ -4,7 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
-
+@section style{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        .danger {
+            background-color: #6b6366;
+        }
+    </style>
+}
 <!--aside側欄 article主欄-->
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -16,53 +24,114 @@
 
     <!-------------------articleOpen------------------->
     <div class="col-lg-12">
-        <div style="height:700px;background-color:#fff266;" class="drawingpin">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_ID).ToHtmlString()</th>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Name)</th>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
-                        <th>@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var _model in Model)
+        <div style="background-color:#fff266;" class="drawingpin">
+                <table id="example" cellspacing="0"  width="100%" class="display nowrap">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_ID).ToHtmlString()</th>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_Name)</th>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</th>
+                            <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var _model in Model)
                     {
-                        <tr @( _model.Merchandise_Fitness ? String.Empty : "class=danger" )>
-                           <td>@Html.DisplayFor(c => _model.Merchandise_ID)</td>
-                            <td>@Html.DisplayFor(c => _model.Merchandise_Name)</td>
-                            <td><img src='@Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID})' class="img-circle" width="80" /></td>
-                            <td>@Html.DisplayFor(c => _model.Merchandise_Price)</td>
-                            <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
-                            <td>@Html.DisplayFor(c => _model.Merchandise_Fitness)</td>
-                            <td>
-                                <button>快速修改</button>
-                                @Html.ActionLink("修改", "Edit", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("刪除", "Delete", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
-                            </td>
+                      <tr @( _model.Merchandise_Fitness ? String.Empty : "class=danger" )>
+                                <td>@Html.DisplayFor(c => _model.Merchandise_ID)</td>
+                                @{
+                                    string url = "";
+                                    try
+                                    {
+                                        if (_model.Merchandise_Photo.Length > 0)
+                                        {
+                                            url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        url = _model.Merchandise_Photo_Address;
+                                    }
+                                }
+                                <td><img src='@url' class="img-circle" width="80" height="80" /></td>
+                                <td>@Html.DisplayFor(c => _model.Merchandise_Name)</td>
+                                <td>@Html.DisplayFor(c => _model.Merchandise_Price)</td>
+                                <td>@Html.DisplayFor(c => _model.Merchandise_Fitness)</td>
+                                <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
+                                <td>
+                                    <button id="btnEdit" class="btn btn-primary">快速修改</button>
+                                    @Html.ActionLink("修改", "Edit", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("刪除", "Delete", "Store", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary" })
+                                </td>
                         </tr>
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
         </div>
     </div>
     <!-------------------articleEnd------------------->
 </article>
 
-@section style{
-    <style>
-        .danger{
-            background-color:#6b6366;
-        }
-    </style>
-  
-}
-@section script{
-<script src="~/Scripts/jquery-3.1.1.js"></script>
-<script>console.log(@ViewBag.Message)</script>
 
+@section script{
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+<script>
+    $(function () {
+
+        $(document).on('click', "#btnEdit", function (e) {
+            e.preventDefault();
+            var num =1;
+            $(this).parents("tr").children('td:gt(1):lt(3)').each(
+                    function () {
+                        switch(num){
+                            case 1:
+                                var newtd = $('<input />').attr({ "size": "50" ,"maxlength":"50"}).val($(this).text());
+                                break;
+                            case 2:
+                                var newtd = $('<input />').attr({'size':'5','type':'number'}).val($(this).text().substr(3));
+                                break;
+                            case 3:
+                                $(this).children().removeAttr('disabled');
+                                break;
+                        }
+                        num++;
+                        $(this).html(newtd);
+                    });
+            $(this).text('完成').unbind().click(fun_Updata2);
+        })
+    })
+
+    function fun_Updata2(e) {
+        e.preventDefault();
+        var o1 = { 'Merchandise_ID': "", 'Merchandise_Name': "", 'Merchandise_Price': "", 'Merchandise_Fitness': "" };
+        var sib = $(this).parents("tr");
+        o1.Merchandise_ID = sib.children('td:eq(0)').text();
+        o1.Merchandise_Name = sib.children('td:eq(2)').children().val();
+        o1.Merchandise_Price = sib.children('td:eq(3)').children().val();
+        o1.Merchandise_Fitness = sib.children('td:eq(4)').children().prop('checked');
+
+        $.post('@Url.Action("Edit2", "Store")', o1, function (data) {
+           alert("修改完成");
+            location.reload();
+        })
+
+    }
+
+    if('@TempData["ok"]' != ''){
+        alert('@TempData["ok"]');
+    }
+</script>
+
+<script type="text/javascript" class="init">
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      responsive: true
+                  });
+              });
+</script>
 }
