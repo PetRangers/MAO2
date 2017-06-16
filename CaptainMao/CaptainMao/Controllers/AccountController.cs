@@ -129,6 +129,9 @@ namespace CaptainMao.Controllers
                     string userId = UserManager.FindByEmail(model.Email).Id;
                     var userRole = await UserManager.GetRolesAsync(userId);
 
+                    //每次成功登入，增加10點經驗值
+                    db.AspNetUsers.Where(u=>u.Id == userId).First().Experience += 10;
+
                     //添加登入紀錄
                     LoginLog login = new LoginLog
                     {
@@ -541,7 +544,9 @@ namespace CaptainMao.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //外部登入後一律導向首頁
+                    return RedirectToAction("Index", "CaptainMao", new { area=""});
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

@@ -44,9 +44,20 @@
                             <label class="btn btn-warning" for="IsAdmin">
                                 @Html.DisplayNameFor(model => model.IsAdmin)@Html.EditorFor(model => model.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })
                             </label>
-                            <label class="btn btn-info" for="IsMaster">
-                                @Html.DisplayNameFor(model => model.IsMaster)@Html.EditorFor(model => model.IsMaster, new { htmlAttributes = new { @class = "form-control" } })
-                            </label>
+
+                            @if(Model.Experience >= 1000)
+                            {
+                                <label class="btn btn-info" for="IsMaster">
+                                    @Html.DisplayNameFor(model => model.IsMaster)@Html.EditorFor(model => model.IsMaster, new { htmlAttributes = new { @class = "form-control" } })
+                                </label>
+                            }
+                            else if(Model.Experience < 1000)
+                            {
+                                <label class="btn btn-info disabled" for="IsMaster" data-toggle="tooltip" title="經驗值小於1000，無法取得版主權限">
+                                    @Html.DisplayNameFor(model => model.IsMaster)@Html.EditorFor(model => model.IsMaster, new { htmlAttributes = new { @class = "form-control", disabled="disabled" } })
+                                </label>
+                            }
+
                             <label class="btn btn-success" for="IsStore">
                                 @Html.DisplayNameFor(model => model.IsStore)@Html.EditorFor(model => model.IsStore, new { htmlAttributes = new { @class = "form-control" } })
                             </label>
@@ -63,12 +74,27 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">管理討論區</label>
                         <div class="col-md-10">
-                            <label class="btn btn-default" for="IsBoardDogMaster">
-                                @Html.DisplayNameFor(model => model.IsBoardDogMaster)@Html.EditorFor(model => model.IsBoardDogMaster, new { htmlAttributes = new { @class = "form-control" } })
-                            </label>
-                            <label class="btn btn-default" for="IsBoardCatMaster">
-                                @Html.DisplayNameFor(model => model.IsBoardCatMaster)@Html.EditorFor(model => model.IsBoardCatMaster, new { htmlAttributes = new { @class = "form-control" } })
-                            </label>
+
+                            @if (Model.IsMaster)
+                            {
+                                <label class="btn btn-default" for="IsBoardDogMaster">
+                                    @Html.DisplayNameFor(model => model.IsBoardDogMaster)@Html.EditorFor(model => model.IsBoardDogMaster, new { htmlAttributes = new { @class = "form-control" } })
+                                </label>
+                                <label class="btn btn-default" for="IsBoardCatMaster">
+                                    @Html.DisplayNameFor(model => model.IsBoardCatMaster)@Html.EditorFor(model => model.IsBoardCatMaster, new { htmlAttributes = new { @class = "form-control" } })
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="btn btn-default disabled" for="IsBoardDogMaster"  data-toggle="tooltip" title="尚未取得版主權限">
+                                    @Html.DisplayNameFor(model => model.IsBoardDogMaster)@Html.EditorFor(model => model.IsBoardDogMaster, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                </label>
+                                <label class="btn btn-default disabled" for="IsBoardCatMaster" data-toggle="tooltip" title="尚未取得版主權限">
+                                    @Html.DisplayNameFor(model => model.IsBoardCatMaster)@Html.EditorFor(model => model.IsBoardCatMaster, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                </label>
+                            }
+
+
                         </div>
                     </div>
                     <hr />
@@ -77,13 +103,13 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-sm-1">
                                     <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
                                 </div>
-                                <div class="col-md-1 col-md-offset-1">
+                                <div class="col-sm-1 col-sm-offset-1">
                                     <button class="btn btn-info" type="reset"><span class="glyphicon glyphicon glyphicon-repeat"></span> 重設</button>
                                 </div>
-                                <div class="col-md-1 col-md-offset-1">
+                                <div class="col-sm-1 col-sm-offset-1">
                                     <a href=@Url.Action("SetAuth", "SetAuth", new { area = "Admin" }) class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 返回列表</a>
                                 </div>
                             </div>

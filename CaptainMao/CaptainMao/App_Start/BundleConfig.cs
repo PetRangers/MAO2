@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Login
+namespace CaptainMao
 {
     public class BundleConfig
     {
@@ -18,7 +18,7 @@ namespace Login
             bundles.Add(new StyleBundle("~/css").Include(
                       "~/css/reset.css",
                       "~/Content/bootstrap.css",
-                     "~/Content/PagedList.css",
+                      "~/Content/PagedList.css",
                       "~/css/StyleSheet_Master.css"
                       ));
 

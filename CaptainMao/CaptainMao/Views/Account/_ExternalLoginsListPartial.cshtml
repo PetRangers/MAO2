@@ -18,8 +18,25 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用 @p.Caption 帳戶登入">@p.AuthenticationType</button>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (p.AuthenticationType == "Google")
+                        {
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                               <button type="submit" class="btn btn-lg btn-danger btn-block" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用 @p.Caption 帳戶登入">
+                                 <span class="fa fa-2x fa-google-plus"></span>
+                               </button>
+                            </div>
+                        }
+                        else if (p.AuthenticationType == "Facebook")
+                        {
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用 @p.Caption 帳戶登入">
+                                    <span class="fa fa-2x fa-facebook"></span>
+                                </button>
+                            </div>
+                        }
+                        
                     }
                 </p>
             </div>
