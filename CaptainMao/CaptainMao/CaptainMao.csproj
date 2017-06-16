@@ -246,6 +246,7 @@
     <Content Include="Areas\buy\Views\Store\Index.cshtml" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
+    <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
