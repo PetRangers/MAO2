@@ -57,7 +57,33 @@
             </section>
         </div>
     </div>*@
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '313803012391050',
+            xfbml: true,
+            version: 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+    };
 
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.9&appId=313803012391050";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
     <h2 style="text-align:center"><span class="fa fa-lg fa-user"></span></h2>
     <h2 style="text-align:center">@ViewBag.Title</h2>
@@ -65,14 +91,9 @@
         <div class="main">
             <h3>透過社群網站登入</h3>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-primary btn-block"><span class="fa fa-2x fa-facebook"></span></a>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-danger btn-block"><span class="fa fa-2x fa-google-plus"></span></a>
-                </div>
-            </div>
-            <div class="login-or">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+           </div>
+           <div class="login-or">
                 <hr class="hr-or"/>
                 <h3>使用本站帳戶登入。</h3>
             </div>
