@@ -92,7 +92,7 @@ namespace CaptainMao.Areas.Article.Controllers
         [HttpPost]
         [AllowAnonymous]
         [CaptchaValidation("CaptchaCode", "ExampleCaptcha","驗證碼輸入錯誤!")]
-        public ActionResult Create(CaptainMao.Models.Article article,string captchaValid)
+        public ActionResult Create(CaptainMao.Models.Article article)
         {
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
@@ -107,7 +107,8 @@ namespace CaptainMao.Areas.Article.Controllers
 
                 article.PosterID = User.Identity.GetUserId();
                 article.Number = 0;
-
+                db.AspNetUsers.Where(u => u.Id == article.PosterID).First().Experience += 20;
+                db.SaveChanges();
                 articledb.Create(article);
                 return RedirectToAction("Index");
             }

@@ -46,7 +46,6 @@ namespace CaptainMao.Models
         public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
-        public virtual DbSet<UserPet> UserPets { get; set; }
         public virtual DbSet<FourStore> FourStores { get; set; }
         public virtual DbSet<Merchandise> Merchandises { get; set; }
         public virtual DbSet<Merchandise_Order_View> Merchandise_Order_View { get; set; }
