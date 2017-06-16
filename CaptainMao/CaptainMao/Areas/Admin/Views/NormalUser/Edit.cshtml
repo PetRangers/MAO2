@@ -135,13 +135,22 @@
                                         @Html.EditorFor(m => m.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
+                                <hr />
+                                <br />
 
                                 <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-2">
-                                        <button class="btn btn-info" type="submit">修改</button>
-                                    </div>
-                                    <div class="col-sm-offset-1 col-sm-2">
-                                        <button class="btn btn-default" type="reset">重設</button>
+                                    <div class="col-md-offset-3 col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1">
+                                                <button class="btn btn-info" type="reset"><span class="glyphicon glyphicon glyphicon-repeat"></span> 重設</button>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1">
+                                                <a href=@Url.Action("Index", "NormalUser", new { area = "Admin" }) class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 返回列表</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
