@@ -52,12 +52,14 @@ namespace CaptainMao.Areas.Admin.Controllers
                 setAuth.IsNormal = roleList.Contains("Normal");
                 setAuth.IsInactivated = roleList.Contains("Inactivated");
 
-                string boardList = "";
-                foreach (var b in u.Boards)
-                {
-                    boardList += b.BoardName + " ";
-                }
-                setAuth.MasterOfBoards = boardList;
+                setAuth.IsBoardDogMaster = (db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID == u.Id) ? true : false;
+                setAuth.IsBoardCatMaster = (db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID == u.Id) ? true : false;
+                //string boardList = "";
+                //foreach (var b in u.Boards)
+                //{
+                //    boardList += b.BoardName + " ";
+                //}
+                //setAuth.MasterOfBoards = boardList;
 
                 setAuthList.Add(setAuth);
             }
@@ -66,25 +68,125 @@ namespace CaptainMao.Areas.Admin.Controllers
         }
 
 
-        // GET: Admin/Edit
-        [HttpPost]
-        public ActionResult EditAuth(SetAuthViewModel m)
+        // GET: Admin/EditAuth
+        [HttpGet]
+        public ActionResult EditAuth(string id)
         {
-            var user = db.AspNetUsers.Where(u => u.Id == m.Id).First();
-            var userRoles = db.AspNetRoles.Where(r=>r.AspNetUsers.Contains(user));
+            var user = db.AspNetUsers.Where(u => u.Id == id).First();
+
+            SetAuthViewModel setAuth = new SetAuthViewModel
+            {
+                Id=id,
+                Experience=user.Experience,
+                UserName=user.UserName
+            };
+            if (user.LastName != null)
+            {
+                setAuth.Name = user.LastName + " " + user.FirstName;
+            }
+            else
+            {
+                setAuth.Name = db.StoreInfoes.Where(s => s.StoreId == id).First().StoreName;
+            }
+            var uRoles = user.AspNetRoles;
+            List<string> roleList = new List<string>();
+            foreach (var r in uRoles)
+            {
+                roleList.Add(r.Name);
+            }
+            setAuth.IsAdmin = roleList.Contains("Admin");
+            setAuth.IsMaster = roleList.Contains("Master");
+            setAuth.IsStore = roleList.Contains("Store");
+            setAuth.IsNormal = roleList.Contains("Normal");
+            setAuth.IsInactivated = roleList.Contains("Inactivated");
+
+            setAuth.IsBoardDogMaster = (db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID == id) ? true : false;
+            setAuth.IsBoardCatMaster = (db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID == id) ? true : false;
+            //string boardList = "";
+            //foreach (var b in user.Boards)
+            //{
+            //    boardList += b.BoardName + " ";
+            //}
+            //setAuth.MasterOfBoards = boardList;
+            
+            return View(setAuth);
+        }
+
+        // GET: Admin/EditAuth
+        [HttpPost]
+        public ActionResult EditAuth(SetAuthViewModel model)
+        {
+            var user = db.AspNetUsers.Where(u => u.Id == model.Id).First();
+            user.Experience = model.Experience;
+
+            var userRoles = user.AspNetRoles.ToList();
             string roles = "";
             foreach (var r in userRoles)
             {
                 roles += r.Name;
             }
 
-            if (m.IsAdmin && !roles.Contains("Admin"))
+            if (model.IsAdmin && !roles.Contains("Admin"))
             {
-                db.AspNetUsers.Where(u => u.Id == m.Id).First().AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Admin").First());
+                user.AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Admin").First());
             }
-            else if (!m.IsAdmin && roles.Contains("Admin"))
+            else if (!model.IsAdmin && roles.Contains("Admin"))
             {
-                db.AspNetUsers.Where(u => u.Id == m.Id).First().AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Admin").First());
+                user.AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Admin").First());
+            }
+
+            if (model.IsMaster && !roles.Contains("Master"))
+            {
+                user.AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Master").First());
+            }
+            else if (!model.IsMaster && roles.Contains("Master"))
+            {
+                user.AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Master").First());
+            }
+
+            if (model.IsStore && !roles.Contains("Store"))
+            {
+                user.AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Store").First());
+            }
+            else if (!model.IsStore && roles.Contains("Store"))
+            {
+                user.AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Store").First());
+            }
+
+            if (model.IsNormal && !roles.Contains("Normal"))
+            {
+                user.AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Normal").First());
+            }
+            else if (!model.IsNormal && roles.Contains("Normal"))
+            {
+                user.AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Normal").First());
+            }
+
+            if (model.IsInactivated && !roles.Contains("Inactivated"))
+            {
+                user.AspNetRoles.Add(db.AspNetRoles.Where(r => r.Name == "Inactivated").First());
+            }
+            else if (!model.IsInactivated && roles.Contains("Inactivated"))
+            {
+                user.AspNetRoles.Remove(db.AspNetRoles.Where(r => r.Name == "Inactivated").First());
+            }
+
+            if (model.IsBoardDogMaster && (db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID != model.Id))
+            {
+                db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID = model.Id;
+            }
+            else if (!model.IsBoardDogMaster && (db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID == model.Id))
+            {
+                db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID = null;
+            }
+
+            if (model.IsBoardCatMaster && (db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID != model.Id))
+            {
+                db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID = model.Id;
+            }
+            else if (!model.IsBoardCatMaster && (db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID == model.Id))
+            {
+                db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID = null;
             }
 
             db.SaveChanges();
