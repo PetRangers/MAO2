@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-
+    <div class="col-lg-3">
             <asp:DataList ID="DataList1" runat="server" RepeatColumns="3" DataSourceID="SqlDataSource1" DataKeyField="Order_ID">
                 <ItemTemplate>
                     <div class="panel panel-primary">
@@ -40,7 +40,10 @@
                     <asp:SessionParameter SessionField="Identity" DefaultValue="" Name="user_ID"></asp:SessionParameter>
                 </SelectParameters>
             </asp:SqlDataSource>
+        </div>
+    <div class="col-lg-9">
 
+    </div>
 </body>
 <script src="../../Scripts/jquery-3.1.1.min.js"></script>
 <script src="../../Scripts/bootstrap.min.js"></script>

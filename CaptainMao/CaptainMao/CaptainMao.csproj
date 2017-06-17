@@ -335,7 +335,7 @@
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
     <Content Include="Areas\buy\Views\web.config" />
-    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\Index_I.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
@@ -419,6 +419,7 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

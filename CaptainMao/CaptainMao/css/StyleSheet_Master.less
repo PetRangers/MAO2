@@ -60,6 +60,7 @@ body {
     background-size: cover;
     border: none;
     background-color: @color_btn-inverse;
+    background-color:transparent;
 
     .navbar-brand {
         font-size: 4em;
@@ -280,17 +281,22 @@ body {
     bottom: .2%;
     z-index: 799;
     .my_transition(1s,0s);
-    border: none;
+
     background-color: @color_btn-inverse;
+    transform: rotate(0deg);
+    border-radius: 10px;
 
     &:hover, &:focus, &:active, &.active {
         background-color: rgb(51, 122, 183);
         border-radius: 30px;
+        transform: rotate(360deg);
     }
 }
-
+#to-top {
+    display: none;
+    transition: 1s;
+}
 /*左上角下拉選單*/
-
 .social {
     z-index: 881;
     position: fixed;

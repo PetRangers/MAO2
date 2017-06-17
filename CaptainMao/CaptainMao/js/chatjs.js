@@ -151,3 +151,15 @@ $(function () {
         }, delay);
     });
 })
+
+
+$(function () {
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > $(window).height()) {
+            $('#to-top').slideDown(500);
+        } else {
+            $('#to-top').slideUp(500);
+        }
+    }
+    )
+})
