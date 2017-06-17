@@ -136,3 +136,18 @@ $(document).ready(function () {
 
     $.connection.hub.start();
 });
+
+
+$(function () {
+    var timer;
+    var delay = 3000;
+    $('#shoppingCart').hover(function () {
+        $('#showOrder').css({ "width": "50", "color": "white" }).find("a").css("color", "white")
+
+        clearTimeout(timer);
+    }, function () {
+        timer = setTimeout(function () {            
+            $('#showOrder').css({ "width": "0", "color": "transparent" }).find("a").css("color", "transparent")
+        }, delay);
+    });
+})
