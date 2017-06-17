@@ -1133,7 +1133,6 @@
     <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
       <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
     </Compile>
-    <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
