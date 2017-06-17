@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44355</IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -1133,6 +1133,7 @@
     <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
       <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
