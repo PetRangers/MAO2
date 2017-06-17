@@ -288,6 +288,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="css\chat.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
@@ -1061,6 +1062,8 @@
     <Content Include="Scripts\plugins\sortable.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
