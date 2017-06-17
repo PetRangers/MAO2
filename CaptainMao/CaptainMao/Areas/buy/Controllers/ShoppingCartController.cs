@@ -21,8 +21,6 @@ namespace CaptainMao.Areas.buy.Controllers
                 return View();
         }
 
-
-
         [ChildActionOnly]
         public ActionResult Aside() {
             return PartialView();
