@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -398,13 +398,6 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
-    <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
-    <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\ShowThisNote.cshtml" />
-    <Content Include="Areas\Hospital\Views\Hospital\Aside.cshtml" />
-    <Content Include="Areas\Admin\Views\SetAuth\SetAuth.cshtml" />
-    <Content Include="Areas\Admin\Views\SetAuth\EditAuth.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
@@ -1140,6 +1133,7 @@
     <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
       <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
