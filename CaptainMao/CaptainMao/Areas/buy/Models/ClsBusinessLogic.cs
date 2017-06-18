@@ -187,12 +187,13 @@ namespace CaptainMao.Areas.buy.Models
         }
         /*新增至購物車*/
         public void Logic_AddShopping(string user_identity, int Merchandise_ID) {
-            shoppingcart sh = new shoppingcart();
-            sh.DateCreated = DateTime.UtcNow;
-            sh.Merchandise_ID = Merchandise_ID;
-            sh.merchandise_Volume = 1;
-            sh.userID = user_identity;
-            _shoppingcart.Create(sh);
+            DB.AddToCartMerchandise_Type_View(Merchandise_ID, user_identity);
+            //shoppingcart sh = new shoppingcart();
+            //sh.DateCreated = DateTime.UtcNow;
+            //sh.Merchandise_ID = Merchandise_ID;
+            //sh.merchandise_Volume = 1;
+            //sh.userID = user_identity;
+            //_shoppingcart.Create(sh);
         }
         /*列出購物車*/
         public IEnumerable<vmShoppingCar_Mer> Logic_GetShoppingCart(string identityID,string loginID="login") {

@@ -8,13 +8,15 @@ using System.Web.UI.WebControls;
 
 namespace CaptainMao.Areas.WebForm
 {
-    public partial class WebFormUser : System.Web.UI.Page
+    public partial class WebFormUser1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) {
+            if (!IsPostBack)
+            {
                 Session["Identity"] = User.Identity.GetUserId();
             }
         }
+
     }
 }

@@ -64,7 +64,7 @@
 
                 <div class="col-lg-7">
                     <iframe id="cityMap" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
-                            src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
+                            src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
                 </div>
             </div>
             <div class="row">
@@ -129,7 +129,7 @@
         var app = angular.module('MaoApp', []);
         app.controller('MainController', function ($scope, $http) {
             //抓訂單實體網址
-            var httpurl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "http")';
+            var httpurl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "https")';
             loadData();
             //初始設定
             function loadData() {
@@ -138,9 +138,9 @@
                         $scope.items = response.data;
                     }
                     else {
-                        var u = '@Url.RouteUrl("buy_default", new {controller = "Shopping",area="buy"}, "http")';
-                         location.href =u;
-                        alert("目前尚無商品，確認後回到購物首頁")
+                        var u = '@Url.RouteUrl("buy_default", new {controller = "Shopping",area="buy"}, "https")';
+                        alert("目前尚無商品，確認後回到購物首頁");
+                        location.href = u;
                     }
                 });
             }

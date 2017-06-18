@@ -1,42 +1,43 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebUserControl1.ascx.cs" Inherits="CaptainMao.Areas.WebForm.WebUserControl1" %>
 
-<asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1">
-    <EditItemTemplate>
-        Merchandise_Name:
-        <asp:TextBox Text='<%# Bind("Merchandise_Name") %>' runat="server" ID="Merchandise_NameTextBox" /><br />
-        Merchandise_Price:
-        <asp:TextBox Text='<%# Bind("Merchandise_Price") %>' runat="server" ID="Merchandise_PriceTextBox" /><br />
-        Order_ID:
-        <asp:TextBox Text='<%# Bind("Order_ID") %>' runat="server" ID="Order_IDTextBox" /><br />
-        merchandise_Volume:
-        <asp:TextBox Text='<%# Bind("merchandise_Volume") %>' runat="server" ID="merchandise_VolumeTextBox" /><br />
-        <asp:LinkButton runat="server" Text="更新" CommandName="Update" ID="UpdateButton" CausesValidation="True" />&nbsp;<asp:LinkButton runat="server" Text="取消" CommandName="Cancel" ID="UpdateCancelButton" CausesValidation="False" />
-    </EditItemTemplate>
-    <InsertItemTemplate>
-        Merchandise_Name:
-        <asp:TextBox Text='<%# Bind("Merchandise_Name") %>' runat="server" ID="Merchandise_NameTextBox" /><br />
-        Merchandise_Price:
-        <asp:TextBox Text='<%# Bind("Merchandise_Price") %>' runat="server" ID="Merchandise_PriceTextBox" /><br />
-        Order_ID:
-        <asp:TextBox Text='<%# Bind("Order_ID") %>' runat="server" ID="Order_IDTextBox" /><br />
-        merchandise_Volume:
-        <asp:TextBox Text='<%# Bind("merchandise_Volume") %>' runat="server" ID="merchandise_VolumeTextBox" /><br />
-        <asp:LinkButton runat="server" Text="插入" CommandName="Insert" ID="InsertButton" CausesValidation="True" />&nbsp;<asp:LinkButton runat="server" Text="取消" CommandName="Cancel" ID="InsertCancelButton" CausesValidation="False" />
-    </InsertItemTemplate>
-    <ItemTemplate>
-        Merchandise_Name:
-        <asp:Label Text='<%# Bind("Merchandise_Name") %>' runat="server" ID="Merchandise_NameLabel" /><br />
-        Merchandise_Price:
-        <asp:Label Text='<%# Bind("Merchandise_Price") %>' runat="server" ID="Merchandise_PriceLabel" /><br />
-        Order_ID:
-        <asp:Label Text='<%# Bind("Order_ID") %>' runat="server" ID="Order_IDLabel" /><br />
-        merchandise_Volume:
-        <asp:Label Text='<%# Bind("merchandise_Volume") %>' runat="server" ID="merchandise_VolumeLabel" /><br />
+      <asp:GridView CssClass="table table-bordered table-hover" ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
+            <Columns>
+                <asp:BoundField DataField="Order_ID" HeaderText="訂單編號" SortExpression="Order_ID" />
+                <asp:BoundField DataField="DeliveryName" HeaderText="收件者" SortExpression="DeliveryName"></asp:BoundField>
+                <asp:BoundField DataField="Order_Createdate" HeaderText="訂單建立日期" SortExpression="Order_Createdate" />
+                <asp:BoundField DataField="BranchAddress" HeaderText="寄貨地址" SortExpression="BranchAddress" />
+                <asp:TemplateField HeaderText="取消">
+                    <ItemTemplate>
+                        <asp:HyperLink runat="server" NavigateUrl='<%# "~/Areas/WebForm/WebFormUser.aspx?OrderID=" + Eval("Order_ID")%>' CssClass="btn btn-primary glyphicon glyphicon-search"></asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl='<%# "~/Areas/WebForm/WebUserCancel.aspx?OrderID="  + Eval("Order_ID")%>' CssClass="btn btn-primary glyphicon glyphicon-remove"></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <EditRowStyle BackColor="#999999"></EditRowStyle>
 
-    </ItemTemplate>
-</asp:FormView>
-<asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="Data Source=192.168.33.36;Initial Catalog=Mao;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT ShoppingNetwork.Merchandise.Merchandise_Name, ShoppingNetwork.Merchandise.Merchandise_Price, ShoppingNetwork.Merchandise_Order_View.Order_ID, ShoppingNetwork.Merchandise_Order_View.merchandise_Volume FROM ShoppingNetwork.Merchandise INNER JOIN ShoppingNetwork.Merchandise_Order_View ON ShoppingNetwork.Merchandise.Merchandise_ID = ShoppingNetwork.Merchandise_Order_View.Merchandise_ID WHERE (ShoppingNetwork.Merchandise_Order_View.Order_ID = @Order_ID)">
-    <SelectParameters>
-        <asp:QueryStringParameter QueryStringField="orderID" DefaultValue="1" Name="Order_ID"></asp:QueryStringParameter>
-    </SelectParameters>
-</asp:SqlDataSource>
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
+
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+
+            <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
+
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
+
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
+
+            <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
+
+            <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
+
+            <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
+
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
+        </asp:GridView>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server"
+            ConnectionString='<%$ ConnectionStrings:MaoWebformConnectionString %>'
+            SelectCommand="SELECT ShoppingNetwork.[Order].Order_ID, ShoppingNetwork.[Order].Order_Fitness, ShoppingNetwork.[Order].user_ID, ShoppingNetwork.[Order].DeliveryName, ShoppingNetwork.[Order].Order_Createdate, ShoppingNetwork.FourStore.BranchAddress FROM ShoppingNetwork.[Order] INNER JOIN ShoppingNetwork.FourStore ON ShoppingNetwork.[Order].DeliveryLocation = ShoppingNetwork.FourStore.BranchID WHERE (ShoppingNetwork.[Order].user_ID = @user_ID) AND (ShoppingNetwork.[Order].Order_Fitness = 1)">
+            <SelectParameters>
+                <asp:SessionParameter Name="user_ID" SessionField="Identity" />
+        </SelectParameters>
+    </asp:SqlDataSource>
