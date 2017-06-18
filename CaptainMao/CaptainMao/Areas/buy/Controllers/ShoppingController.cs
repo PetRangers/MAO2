@@ -36,9 +36,6 @@ namespace CaptainMao.Areas.buy.Controllers
         }
 
 
-
-
-
         [ChildActionOnly]
         public ActionResult Aside()
         {

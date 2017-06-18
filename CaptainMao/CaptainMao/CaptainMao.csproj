@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -264,6 +264,7 @@
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
     <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
     <Content Include="Areas\WebForm\WebFormUser.aspx" />
+    <Content Include="Areas\WebForm\WebUserCancel.aspx" />
     <Content Include="Areas\WebForm\WebUserControl1.ascx" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
@@ -1145,6 +1146,13 @@
     </Compile>
     <Compile Include="Areas\WebForm\WebFormUser.aspx.designer.cs">
       <DependentUpon>WebFormUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.designer.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\WebForm\WebUserControl1.ascx.cs">
       <DependentUpon>WebUserControl1.ascx</DependentUpon>
