@@ -35,6 +35,12 @@ namespace CaptainMao.Areas.buy.Controllers
             return View(selectMer);
         }
 
+        public ActionResult HotMer(string seach) {
+
+            return RedirectToAction("Index",fun.Logic_SeachMerchandise(seach));
+        }
+
+
 
         [ChildActionOnly]
         public ActionResult Aside()

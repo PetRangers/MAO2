@@ -249,6 +249,8 @@
     <Content Include="Areas\buy\css\StoreCreate.min.css">
       <DependentUpon>StoreCreate.css</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\images\autoicon.png" />
+    <Content Include="Areas\buy\images\go.png" />
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\buy\js\ShoppingCart.js" />
@@ -421,6 +423,7 @@
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\HotMer.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
