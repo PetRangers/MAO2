@@ -98,7 +98,7 @@
                         <li><a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" class="dropdown-toggle" title="毛孩地圖">毛孩醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <div id="showOrder"><a href='@Url.Content("~/Areas/WebForm/WebFormUser.aspx")' title="我的訂單"><i class="glyphicon glyphicon-list-alt"></i></a></div>
+                        <div id="showOrder"><a href='@Url.Action("Index", "User", new { area = "buy" })' title="我的訂單"><i class="glyphicon glyphicon-list-alt"></i></a></div>
                         <li>
                             <a id="shoppingCart" href="@Url.Action("Index", "ShoppingCart", new { area = "buy" })" title="購物車"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
                         </li>

@@ -40,24 +40,24 @@
                 {
                     url = _model.Merchandise_Photo_Address;
                 }
-        <div class="drawingpin">
-            <div class="row">
-                <div class="col-xs-2">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</div><div class="col-xs-6"><img src='@url' class="img-thumbnail" widdiv="300" height="300" /></div>
+            <div class="drawingpin col-sm-4">
+                <div class="row">
+                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</div><div class="col-xs-6"><img src='@url' class="img-thumbnail" widdiv="300" height="300" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_ID)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</div><div class="col-xs-6">@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Price)</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</div>
+                </div>
+                <div class="pull-right">@Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })</div>
             </div>
-            <div class="row">
-                <div class="col-xs-2">@Html.DisplayNameFor(c => c.First().Merchandise_ID)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</div><div class="col-xs-6">@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Price)</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2">@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</div>
-            </div>
-            <div class="pull-right">@Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })</div>
-        </div>
                     }
         </div>
 
