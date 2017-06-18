@@ -42,6 +42,11 @@ namespace CaptainMao.Areas.buy.Models
             }
             return selectMer;
         }
+
+        public IEnumerable<Merchandise> Logic_SeachMerchandise(string seach) {
+            var x = _merchandise.GetAll().Where(c => c.Merchandise_Name == seach);
+            return x;
+        }
         /*寵物分類回傳*/
         public IEnumerable<Category> Logic_GetAllCategory() {
             return _Category.GetAll();
