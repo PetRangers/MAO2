@@ -14,42 +14,58 @@ namespace CaptainMao.Areas.Admin.Controllers
         // GET: Admin/WebMonitor
         public ActionResult Monitor()
         {
-            //string[] xAxis = new string[]{"a", "b", "c", "d", "e", "f" };
-            //ViewBag.xAxis[0] = "a";
-            //ViewBag.xAxis[1] = "b";
-            //ViewBag.xAxis[2] = "c";
-            //ViewBag.xAxis[3] = "d";
-            //ViewBag.xAxis[4] = "e";
-            //ViewBag.xAxis[5] = "f";
-
-            //int[] yAxis = new int[]{2, 4, 6, 7, 5, 1 };
-            //ViewBag.yAxis[0] = 1;
-            //ViewBag.yAxis[1] = 2;
-            //ViewBag.yAxis[2] = 3;
-            //ViewBag.yAxis[3] = 4;
-            //ViewBag.yAxis[4] = 5;
-            //ViewBag.yAxis[5] = 6;
-
-
             return View();
         }
+
+        //以下是網站流量相關統計的方法
+        //設定監測登入人數的天數
+        public const int monitoredDays=30;
 
         public ActionResult loginCount()
         {
             var logins = db.LoginLogs.Select(l=>l.LoginTime).ToList();
             
-            List<int> loginWeeksAgo = new List<int>();
+            List<int> loginDaysAgo = new List<int>();
 
             foreach (var login in logins)
             {
-                int weeks = (int)(((DateTime.UtcNow - login).TotalDays)/7);
-                loginWeeksAgo.Add(weeks);
+                int days = (int)((DateTime.UtcNow - login).TotalDays);
+                loginDaysAgo.Add(days);
             }
-            int[] loginCounts = {0, 0, 0, 0, 0, 0, 0, 0};
-
-
-
-            return Json(loginWeeksAgo);
+            
+            int[] loginCounts = new int[monitoredDays];
+            string[] loginDates = new string[monitoredDays];
+            for (int i = 0; i < monitoredDays; i++)
+            {
+                loginCounts[monitoredDays - i - 1] = loginDaysAgo.Count(x => x == i);
+                loginDates[monitoredDays - i - 1] = DateTime.UtcNow.AddDays(-i).ToShortDateString();
+            }
+            var loginData = new { loginDates, loginCounts};
+            
+            return Json(loginData, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult personLoginCount()
+        {
+            var logins = (from l in db.LoginLogs
+                         where l.LoginTime>DateTime.UtcNow.AddDays(-monitoredDays)
+                         group l by l.LoginIP into g
+                         select new
+                         {
+                             user=g.Key,
+                             counts = g.Count()
+                         }).ToList();
+
+            int[] loginCounts = new int[monitoredDays];
+            string[] user = new string[monitoredDays];
+
+            foreach (var l in logins)
+            {
+                
+            }
+            
+            return Json(logins, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
