@@ -36,9 +36,20 @@ namespace CaptainMao.Areas.Admin.Controllers
 
         public ActionResult loginCount()
         {
-            var result = db.LoginLogs.Select(l=>l.LoginTime).ToList();
+            var logins = db.LoginLogs.Select(l=>l.LoginTime).ToList();
+            
+            List<int> loginWeeksAgo = new List<int>();
 
-            return Json(result);
+            foreach (var login in logins)
+            {
+                int weeks = (int)(((DateTime.UtcNow - login).TotalDays)/7);
+                loginWeeksAgo.Add(weeks);
+            }
+            int[] loginCounts = {0, 0, 0, 0, 0, 0, 0, 0};
+
+
+
+            return Json(loginWeeksAgo);
         }
     }
 }

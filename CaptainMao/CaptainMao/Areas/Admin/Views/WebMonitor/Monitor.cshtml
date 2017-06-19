@@ -47,6 +47,32 @@
 @section Script{
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
     <script>
+         @*var data = [];
+        $(document).ready(function () {
+
+            GetReportData();
+
+            function GetReportData() {
+                $.ajax({
+                    url: '@Url.Action("GetAdoptionReport")',
+                    type: 'POST',
+                    //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
+                    //有兩個屬性可以用
+                    success: function (datas) {
+                        $.each(datas, function (idx, adp) {
+                            $.each(adp, function (index, value) {
+                                data.push([value.CategoryName, value.Share])
+                            })
+
+                        })
+
+                        chart.series[0].data = data;
+                        $('#container').highcharts(chart);
+                    },
+                    cache: false
+                })
+            }*@
+
         var ctx = document.getElementById("myChart");
 
         var myChart = new Chart(ctx, {
