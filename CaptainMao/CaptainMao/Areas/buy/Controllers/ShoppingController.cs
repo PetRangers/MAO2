@@ -48,6 +48,13 @@ namespace CaptainMao.Areas.buy.Controllers
             return PartialView(fun.Logic_GetAllCategory());
         }
 
+
+        public ActionResult HotMer()
+        {
+            return View();
+        }
+
+
         public ActionResult About(int Merchandise_ID) {
 
             return View(fun.Logic_GetAllMerchandise(Merchandise_ID));
