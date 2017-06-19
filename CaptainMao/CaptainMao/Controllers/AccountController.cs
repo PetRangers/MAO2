@@ -106,12 +106,12 @@ namespace CaptainMao.Controllers
 
             //Google reCaptcha機器人驗證
             //先註解掉，以方便登入
-            //var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
-            //if (!captChaesponse.Success)
-            //{
-            //    ViewBag.CaptchaErrorMessage = "您未通過reCAPTCHA驗證";
-            //    return View();
-            //}
+            var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
+            if (!captChaesponse.Success)
+            {
+                ViewBag.CaptchaErrorMessage = "您未通過reCAPTCHA驗證";
+                return View();
+            }
 
             // go ahead and write code to validate username password against database
             //原本Login方法中的帳號驗證
@@ -128,6 +128,9 @@ namespace CaptainMao.Controllers
                 case SignInStatus.Success:
                     string userId = UserManager.FindByEmail(model.Email).Id;
                     var userRole = await UserManager.GetRolesAsync(userId);
+
+                    //每次成功登入，增加10點經驗值
+                    db.AspNetUsers.Where(u=>u.Id == userId).First().Experience += 10;
 
                     //添加登入紀錄
                     LoginLog login = new LoginLog
@@ -541,7 +544,9 @@ namespace CaptainMao.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //外部登入後一律導向首頁
+                    return RedirectToAction("Index", "CaptainMao", new { area=""});
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
