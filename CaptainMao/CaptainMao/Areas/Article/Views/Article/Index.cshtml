@@ -7,9 +7,23 @@
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
 @section script{
+<script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             loadBoard(1);
+
+            var bool = $('#del').val();
+            if (bool == "value") {
+                swal({
+                    title: "確認",
+                    text: "刪除成功!",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    confirmButtonClass: "btn-success",
+                    closeOnConfirm: false
+                })
+            }
 
             $('.list-group').on('click', 'li', function () {
                 loadBoard($(this).data('cid'));
@@ -46,6 +60,7 @@
     </script>
 }
 @section style{
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
         .title1 {
             overflow: hidden;
@@ -83,6 +98,7 @@
             <div class="col-lg-9">
                 <div style="background-color:burlywood" class="drawingpin">
                     <div class="navbar-left">
+                        <input type="hidden" value="@TempData["Delete"]" id="del" />
                         @Html.Action("BoardCategories")
                     </div>
                     <table class="table table-bordered table-hover" id="articletable">
