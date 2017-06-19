@@ -90,38 +90,34 @@ namespace CaptainMao.Areas.Article.Controllers
         }
         //建立文章
         [HttpPost]
-        [CaptchaValidation("CaptchaCode","ExampleCaptcha","Incorrect CAPTCHA code!")]
-        public ActionResult Create(CaptainMao.Models.Article article,bool captchaValid)
+        [AllowAnonymous]
+        [CaptchaValidation("CaptchaCode", "ExampleCaptcha","驗證碼輸入錯誤!")]
+        public ActionResult Create(CaptainMao.Models.Article article)
         {
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    article.CreateDateTime = DateTime.Now;
-                    article.LastChDateTime = DateTime.Now;
-
-                    article.PosterID = User.Identity.GetUserId();
-                    article.Number = 0;
-
-                    articledb.Create(article);
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("Login", "Account", new { area = "" });
-                }
+                return View();
             }
-            return View();
+            try
+            {
+                article.CreateDateTime = DateTime.Now;
+                article.LastChDateTime = DateTime.Now;
+
+                article.PosterID = User.Identity.GetUserId();
+                article.Number = 0;
+                db.AspNetUsers.Where(u => u.Id == article.PosterID).First().Experience += 20;
+                db.SaveChanges();
+                articledb.Create(article);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
-        //public ActionResult GetValidateCode(string codeClass)
-        //{
-        //    ValidateCode vCode = new ValidateCode();
-        //    string code = vCode.CreateValidateCode(5);
-        //    byte[] bytes = vCode.CreateValidateGraphic(code);
-        //    return File(bytes, @"image/jpeg");
-        //}
+       
         //秀文章內容
         [HttpGet]
         public ActionResult Show(int? articleID)
@@ -249,6 +245,13 @@ namespace CaptainMao.Areas.Article.Controllers
             db.Articles.Find(articleID).IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Poster");
+        }
+        //主板刪除
+        public ActionResult DelMaster(int? articleID)
+        {
+            db.Articles.Find(articleID).IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Master");
         }
         //刪除留言者評論
         public ActionResult DelComment(int? commentID)

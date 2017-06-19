@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -165,9 +165,9 @@
           <Property Name="HospitalPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BusinessHours" Type="nvarchar" MaxLength="50" />
           <Property Name="Emergency" Type="nvarchar" MaxLength="50" />
-          <Property Name="OutpatientProject" Type="nvarchar" MaxLength="50" />
-          <Property Name="Equipment" Type="nvarchar" MaxLength="50" />
-          <Property Name="WebAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="OutpatientProject" Type="nvarchar(max)" />
+          <Property Name="Equipment" Type="nvarchar(max)" />
+          <Property Name="WebAddress" Type="nvarchar(max)" />
           <Property Name="OnlineConsultation" Type="nvarchar" MaxLength="50" />
           <Property Name="OnView" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Map" Type="nvarchar" MaxLength="50" />
@@ -227,18 +227,6 @@
           </Key>
           <Property Name="TitleCategoryID" Type="int" Nullable="false" />
           <Property Name="TitleCategoryName" Type="nvarchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserPet">
-          <Key>
-            <PropertyRef Name="PetID" />
-          </Key>
-          <Property Name="PetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PetName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="PetSex" Type="bit" />
-          <Property Name="PetPhoto" Type="varbinary(max)" />
-          <Property Name="PetBirthday" Type="date" />
         </EntityType>
         <EntityType Name="FourStore">
           <Key>
@@ -725,36 +713,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPet_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserPet">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPet_Categories1">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="UserPet">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <Function Name="AddToCartMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
+          <Parameter Name="user_identity" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="DeleteToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MerchandiseID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="EditToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MerchandiseID" Type="int" Mode="In" />
-          <Parameter Name="sTypeID" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="InsertToMerchandise_Type_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -812,7 +776,6 @@
           <EntitySet Name="StoreInfo" EntityType="Self.StoreInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserPet" EntityType="Self.UserPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FourStore" EntityType="Self.FourStore" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="ShoppingNetwork" store:Type="Tables" />
           <EntitySet Name="Merchandise_Order_View" EntityType="Self.Merchandise_Order_View" Schema="ShoppingNetwork" store:Type="Tables" />
@@ -958,17 +921,8 @@
             <End Role="Type" EntitySet="Type" />
             <End Role="sType" EntitySet="sType" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPet_AspNetUsers" Association="Self.FK_UserPet_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserPet" EntitySet="UserPet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPet_Categories1" Association="Self.FK_UserPet_Categories1">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="UserPet" EntitySet="UserPet" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1104,7 +1058,6 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_AspNetUsers" FromRole="AspNetUsers" ToRole="Order" />
           <NavigationProperty Name="Scorces" Relationship="Self.FK_Scorce_AspNetUsers" FromRole="AspNetUsers" ToRole="Scorce" />
           <NavigationProperty Name="StoreInfo" Relationship="Self.FK_StoreInfo_AspNetUsers" FromRole="AspNetUsers" ToRole="StoreInfo" />
-          <NavigationProperty Name="UserPets" Relationship="Self.FK_UserPet_AspNetUsers" FromRole="AspNetUsers" ToRole="UserPet" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Board">
@@ -1127,7 +1080,6 @@
           <NavigationProperty Name="AdpWishes" Relationship="Self.FK_AdpWish_Categories" FromRole="Categories" ToRole="AdpWish" />
           <NavigationProperty Name="HospitalCategoryDetails" Relationship="Self.FK_HospitalCategoryDetails_Categories" FromRole="Categories" ToRole="HospitalCategoryDetails" />
           <NavigationProperty Name="Merchandises" Relationship="Self.FK_Merchandise_Categories" FromRole="Categories" ToRole="Merchandise" />
-          <NavigationProperty Name="UserPets" Relationship="Self.FK_UserPet_Categories1" FromRole="Categories" ToRole="UserPet" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -1163,9 +1115,9 @@
           <Property Name="HospitalPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BusinessHours" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Emergency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OutpatientProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WebAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OutpatientProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OnlineConsultation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OnView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Map" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1235,20 +1187,6 @@
           <Property Name="TitleCategoryID" Type="Int32" Nullable="false" />
           <Property Name="TitleCategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Articles" Relationship="Self.FK_Article_TitleCategories" FromRole="TitleCategories" ToRole="Article" />
-        </EntityType>
-        <EntityType Name="UserPet">
-          <Key>
-            <PropertyRef Name="PetID" />
-          </Key>
-          <Property Name="PetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PetName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="PetSex" Type="Boolean" />
-          <Property Name="PetPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PetBirthday" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserPet_AspNetUsers" FromRole="UserPet" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_UserPet_Categories1" FromRole="UserPet" ToRole="Categories" />
         </EntityType>
         <EntityType Name="FourStore">
           <Key>
@@ -1568,18 +1506,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPet_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserPet">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HospitalCategoryDetails_Categories">
           <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="HospitalCategoryDetails" Type="Self.HospitalCategoryDetail" Multiplicity="*" />
@@ -1600,18 +1526,6 @@
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Merchandise">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPet_Categories1">
-          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
-          <End Role="UserPet" Type="Self.UserPet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="UserPet">
               <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1740,7 +1654,6 @@
           <EntitySet Name="StoreInfoes" EntityType="Self.StoreInfo" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TitleCategories" EntityType="Self.TitleCategory" />
-          <EntitySet Name="UserPets" EntityType="Self.UserPet" />
           <EntitySet Name="FourStores" EntityType="Self.FourStore" />
           <EntitySet Name="Merchandises" EntityType="Self.Merchandise" />
           <EntitySet Name="Merchandise_Order_View" EntityType="Self.Merchandise_Order_View" />
@@ -1824,10 +1737,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="StoreInfo" EntitySet="StoreInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPet_AspNetUsers" Association="Self.FK_UserPet_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserPet" EntitySet="UserPets" />
-          </AssociationSet>
           <AssociationSet Name="FK_HospitalCategoryDetails_Categories" Association="Self.FK_HospitalCategoryDetails_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="HospitalCategoryDetails" EntitySet="HospitalCategoryDetails" />
@@ -1835,10 +1744,6 @@
           <AssociationSet Name="FK_Merchandise_Categories" Association="Self.FK_Merchandise_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Merchandise" EntitySet="Merchandises" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPet_Categories1" Association="Self.FK_UserPet_Categories1">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="UserPet" EntitySet="UserPets" />
           </AssociationSet>
           <AssociationSet Name="FK_Hospital_Citys" Association="Self.FK_Hospital_Citys">
             <End Role="Cities" EntitySet="Cities" />
@@ -1881,7 +1786,7 @@
             <End Role="sType" EntitySet="sTypes" />
           </AssociationSet>
           <FunctionImport Name="DeleteToMerchandise_Type_View">
-            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+          <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EditToMerchandise_Type_View">
             <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
@@ -1921,6 +1826,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="AddToCartMerchandise_Type_View">
+            <Parameter Name="MerchandiseID" Mode="In" Type="Int32" />
+            <Parameter Name="user_identity" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2170,19 +2079,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserPets">
-            <EntityTypeMapping TypeName="MaoModel.UserPet">
-              <MappingFragment StoreEntitySet="UserPet">
-                <ScalarProperty Name="PetID" ColumnName="PetID" />
-                <ScalarProperty Name="PetName" ColumnName="PetName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="PetSex" ColumnName="PetSex" />
-                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
-                <ScalarProperty Name="PetBirthday" ColumnName="PetBirthday" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FourStores">
             <EntityTypeMapping TypeName="MaoModel.FourStore">
               <MappingFragment StoreEntitySet="FourStore">
@@ -2278,7 +2174,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="DeleteToMerchandise_Type_View" FunctionName="MaoModel.Store.DeleteToMerchandise_Type_View" />
-          <FunctionImportMapping FunctionImportName="EditToMerchandise_Type_View" FunctionName="MaoModel.Store.EditToMerchandise_Type_View" />
           <FunctionImportMapping FunctionImportName="InsertToMerchandise_Type_View" FunctionName="MaoModel.Store.InsertToMerchandise_Type_View" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MaoModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MaoModel.Store.sp_creatediagram" />
@@ -2304,6 +2199,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MaoModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MaoModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="AddToCartMerchandise_Type_View" FunctionName="MaoModel.Store.AddToCartMerchandise_Type_View" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

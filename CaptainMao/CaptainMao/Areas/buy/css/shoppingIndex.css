@@ -23,11 +23,33 @@ aside #sTypeArea {
   z-index: 5;
   width: 160px;
   background-color: #e2a87e;
-  border: 2px solid #000000;
+  border: 2px groove #000000;
   border-radius: 5px;
   display: none;
   left: 145px;
 }
+@media screen and (max-width: 980px) {
+  aside #sTypeArea {
+    left: 130px;
+  }
+}
 article div div {
-  background-color: #fff266;
+  background: rgba(255, 230, 33, 0.98);
+  /* Old browsers */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+article div div thead {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#959595+0,0d0d0d+46,010101+50,0a0a0a+53,4e4e4e+76,383838+87,1b1b1b+100;Black+Gloss+Pipe */
+  background: #959595;
+  /* Old browsers */
+  /* FF3.6-15 */
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #959595 0%, #0d0d0d 46%, #010101 50%, #0a0a0a 53%, #4e4e4e 76%, #383838 87%, #1b1b1b 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#959595', endColorstr='#1b1b1b', GradientType=0);
+  /* IE6-9 */
+}
+#example {
+  text-overflow: ellipsis;
 }

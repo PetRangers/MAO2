@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     var you = {};
     you.avatar = "";
-
+    $.connection.hub.start();
     $(document).on('click', '.getchat', function () {
         var id = $(this).attr('data-id');
         var name = $(this).attr('data-name');
@@ -134,5 +134,5 @@ $(document).ready(function () {
         }
     });
 
-    $.connection.hub.start();
+    
 });

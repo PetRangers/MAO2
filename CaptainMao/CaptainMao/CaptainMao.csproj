@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -123,6 +123,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
@@ -246,6 +249,8 @@
     <Content Include="Areas\buy\css\StoreCreate.min.css">
       <DependentUpon>StoreCreate.css</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\images\autoicon.png" />
+    <Content Include="Areas\buy\images\go.png" />
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\buy\js\ShoppingCart.js" />
@@ -260,6 +265,17 @@
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
     <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
+    <Content Include="Areas\buy\images\autoicon.png" />
+    <Content Include="Areas\buy\images\go.png" />
+    <Content Include="Areas\buy\images\image_1.jpg" />
+    <Content Include="Areas\buy\images\image_2.jpg" />
+    <Content Include="Areas\buy\images\image_3.jpg" />
+    <Content Include="Areas\buy\images\image_4.jpg" />
+    <Content Include="Areas\buy\images\image_5.jpg" />
+    <Content Include="Areas\buy\images\image_6.jpg" />
+    <Content Include="Areas\WebForm\WebFormUser.aspx" />
+    <Content Include="Areas\WebForm\WebUserCancel.aspx" />
+    <Content Include="Areas\WebForm\WebUserControl1.ascx" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
@@ -285,6 +301,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="css\chat.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
@@ -304,7 +321,6 @@
     <Content Include="images\0DQPb7DHZM.png" />
     <Content Include="images\33725431546_cc653802ce_h.jpg" />
     <Content Include="images\backimg.jpg" />
-
     <Content Include="images\captain1.png" />
     <Content Include="images\captain2.png" />
     <Content Include="images\cat.png" />
@@ -330,7 +346,7 @@
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
     <Content Include="Areas\buy\Views\web.config" />
-    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\Index_I.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
@@ -387,7 +403,6 @@
     <Content Include="Areas\Admin\Views\NormalUser\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\EditWish.cshtml" />
     <Content Include="fonts\GOODDC__.TTF" />
-    <Content Include="Areas\Article\Views\Report\Index.cshtml" />
     <Content Include="Areas\buy\css\shoppingcart.less" />
     <Content Include="Areas\Admin\Views\WebMonitor\Monitor.cshtml" />
     <Content Include="Areas\Admin\Views\NormalUser\Edit.cshtml" />
@@ -397,13 +412,6 @@
     <Content Include="Areas\Admin\Views\Report\Aside.cshtml" />
     <Content Include="Areas\Admin\Views\Report\AdoptionReport.cshtml" />
     <Content Include="Areas\buy\Views\Store\Report.cshtml" />
-    <EntityDeploy Include="Models\MaoModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MaoModel.edmx.diagram">
-      <DependentUpon>MaoModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Hospital\Views\HospitalCRUD\_HospitalSearchCity.cshtml" />
     <Content Include="Areas\Hospital\Views\HospitalCRUD\UpDataGetHospital.cshtml" />
     <Content Include="Areas\Hospital\Views\Hospital\ListToNote.cshtml" />
@@ -415,6 +423,15 @@
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\WebForm\ImageReader.ashx" />
     <Content Include="Areas\WebForm\MerchandisePhoto.ashx" />
+    <EntityDeploy Include="Models\MaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MaoModel.edmx.diagram">
+      <DependentUpon>MaoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\HotMer.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1060,6 +1077,8 @@
     <Content Include="Scripts\plugins\sortable.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
@@ -1132,6 +1151,28 @@
     <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
       <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\WebForm\WebFormUser.aspx.cs">
+      <DependentUpon>WebFormUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebFormUser.aspx.designer.cs">
+      <DependentUpon>WebFormUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.designer.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserControl1.ascx.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserControl1.ascx.designer.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptainMaoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1267,9 +1308,6 @@
     <Compile Include="Models\Type.cs">
       <DependentUpon>MaoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserPet.cs">
-      <DependentUpon>MaoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\WebForm\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1339,7 +1377,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
-    <Folder Include="Areas\Article\Views\Tools\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
     <Folder Include="bin\" />
@@ -1372,7 +1409,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52326</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52326/</IISUrl>
+          <IISUrl>https://localhost:44355/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

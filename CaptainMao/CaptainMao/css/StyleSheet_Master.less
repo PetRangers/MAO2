@@ -61,6 +61,7 @@ body {
     border: none;
     background-color: @color_btn-inverse;
 
+
     .navbar-brand {
         font-size: 4em;
         font-family: Caveat;
@@ -200,6 +201,7 @@ body {
     background-image: url('../images/icon_127820_256.png');
     background-size: 95% 90%;
     background-position: right;
+        /*background-color: rgba(255, 255, 255, 0.00);*/
     background-color: #f9f1d7;
     border-radius: 1000px 500px 500px 1000px;
     text-align: center;
@@ -280,17 +282,22 @@ body {
     bottom: .2%;
     z-index: 799;
     .my_transition(1s,0s);
-    border: none;
+
     background-color: @color_btn-inverse;
+    transform: rotate(0deg);
+    border-radius: 10px;
 
     &:hover, &:focus, &:active, &.active {
         background-color: rgb(51, 122, 183);
         border-radius: 30px;
+        transform: rotate(360deg);
     }
 }
-
+#to-top {
+    display: none;
+    transition: 1s;
+}
 /*左上角下拉選單*/
-
 .social {
     z-index: 881;
     position: fixed;

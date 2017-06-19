@@ -46,7 +46,6 @@ namespace CaptainMao.Models
         public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleCategory> TitleCategories { get; set; }
-        public virtual DbSet<UserPet> UserPets { get; set; }
         public virtual DbSet<FourStore> FourStores { get; set; }
         public virtual DbSet<Merchandise> Merchandises { get; set; }
         public virtual DbSet<Merchandise_Order_View> Merchandise_Order_View { get; set; }
@@ -191,6 +190,19 @@ namespace CaptainMao.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int AddToCartMerchandise_Type_View(Nullable<int> merchandiseID, string user_identity)
+        {
+            var merchandiseIDParameter = merchandiseID.HasValue ?
+                new ObjectParameter("MerchandiseID", merchandiseID) :
+                new ObjectParameter("MerchandiseID", typeof(int));
+    
+            var user_identityParameter = user_identity != null ?
+                new ObjectParameter("user_identity", user_identity) :
+                new ObjectParameter("user_identity", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddToCartMerchandise_Type_View", merchandiseIDParameter, user_identityParameter);
         }
     }
 }

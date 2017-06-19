@@ -163,6 +163,7 @@ body a:hover {
   background-image: url('../images/icon_127820_256.png');
   background-size: 95% 90%;
   background-position: right;
+  /*background-color: rgba(255, 255, 255, 0.00);*/
   background-color: #f9f1d7;
   border-radius: 1000px 500px 500px 1000px;
   text-align: center;
@@ -232,8 +233,10 @@ body a:hover {
   bottom: .2%;
   z-index: 799;
   transition: all 1s 0s ease-in-out;
-  border: none;
   background-color: #443226;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  border-radius: 10px;
 }
 .btn-inverse:hover,
 .btn-inverse:focus,
@@ -241,6 +244,12 @@ body a:hover {
 .btn-inverse.active {
   background-color: #337ab7;
   border-radius: 30px;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+#to-top {
+  display: none;
+  transition: 1s;
 }
 /*左上角下拉選單*/
 .social {
