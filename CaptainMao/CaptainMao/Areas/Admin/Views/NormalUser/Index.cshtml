@@ -93,9 +93,28 @@
         <script type="text/javascript" class="init">
               $(document).ready(function () {
                   $('#example').DataTable({
-                      responsive: true
-                  });
-              });
+                      responsive: true,
+                      "language": {
+    "emptyTable": "無查詢結果",
+    "info":           "顯示第 _START_ 筆到第 _END_ 筆資料，共有 _TOTAL_ 筆資料",
+    "infoEmpty":      "顯示第 0 筆至第 0 筆資料 ，共 0 筆資料",
+    "infoFiltered":   "(由 _MAX_ 筆資料中篩選)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "每次顯示 _MENU_ 筆資料",
+    "loadingRecords": "讀取中...",
+    "processing":     "處理中...",
+    "search":         "查詢:",
+    "zeroRecords":    "無符合的查詢結果",
+    "paginate": {
+        "first":      "第一頁",
+        "last":       "最後一頁",
+        "next":       "下一頁",
+        "previous":   "前一頁"
+        }
+    }
+                  } );
+              } );
         </script>
 
     }

@@ -1,9 +1,64 @@
 ﻿
 @{
-    ViewBag.Title = "Inactivated";
+    ViewBag.Title = "停權中";
 }
 
-<h2>停權中</h2>
+<div class="col-md-8 col-md-offset-2">
+    <div class="box">
+        <div class="box-content" style="font-size:150%;">
+            <h1 class="text-center">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-user fa-stack-1x"></i>
+                    <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                </span>
+            </h1>
+            <h2 class="tag-title text-center">@ViewBag.Title</h2>
+            <hr />
+            <p>
+                您的帳號正在停權狀態。
+            </p>
+            <p>
+                如有疑問，請洽<a href="mailto:captainmao114@gmail.com" class="btn btn-block btn-primary">網站管理員</a></h3>
+            </p>
+        </div>
+    </div>
+</div>
 
-<h3>您的帳號正在停權狀態。如有疑問，請洽<a href="mailto:captainmao114@gmail.com">網站管理員</a></h3>
+@section Style {
+    <style>
+        .box {
+            background: #fff;
+            transition: all 0.2s ease;
+            border: 2px dashed #dadada;
+            margin-top: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background-clip: padding-box;
+            padding: 0 20px 20px 20px;
+            min-height: 340px;
+        }
 
+            .box:hover {
+                border: 2px solid #525C7A;
+            }
+
+            .box tag-title {
+                color: #fff;
+                font-size: 24px;
+                font-weight: 300;
+                text-transform: uppercase;
+            }
+
+            .box .box-content {
+                padding: 16px;
+                border-radius: 0 0 2px 2px;
+                background-clip: padding-box;
+                box-sizing: border-box;
+            }
+
+                .box .box-content p {
+                    color: #515c66;
+                    text-transform: none;
+                }
+    </style>
+}
