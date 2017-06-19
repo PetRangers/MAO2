@@ -54,12 +54,6 @@ namespace CaptainMao.Areas.Admin.Controllers
 
                 setAuth.IsBoardDogMaster = (db.Boards.Where(b => b.BoardName == "狗").First().MasterUserID == u.Id) ? true : false;
                 setAuth.IsBoardCatMaster = (db.Boards.Where(b => b.BoardName == "貓").First().MasterUserID == u.Id) ? true : false;
-                //string boardList = "";
-                //foreach (var b in u.Boards)
-                //{
-                //    boardList += b.BoardName + " ";
-                //}
-                //setAuth.MasterOfBoards = boardList;
 
                 setAuthList.Add(setAuth);
             }
