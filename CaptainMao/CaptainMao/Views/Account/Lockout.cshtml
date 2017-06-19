@@ -3,10 +3,11 @@
     ViewBag.Title = "帳號鎖定";
 }
 
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
     <div class="box">
         <div class="box-content" style="font-size:150%;">
-            <h1 class="tag-title text-center">@ViewBag.Title</h1>
+            <h1 class="text-center"><i class="fa fa-lock fa-5x" aria-hidden="true"></i></h1>
+            <h2 class="tag-title text-center">@ViewBag.Title</h2>
             <hr />
             <p>
                 由於您連續登入失敗次數已達上限，我們將暫時鎖定您的帳號，以防止惡意的登入嘗試。
@@ -15,7 +16,7 @@
                 請稍後再嘗試登入。
             </p>
             <br />
-            <a href="#" class="btn btn-block btn-primary">聯絡網站管理員</a>
+            <a href="mailto:captainmao114@gmail.com" class="btn btn-block btn-primary">聯絡網站管理員</a>
         </div>
     </div>
 </div>
