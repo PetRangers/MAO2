@@ -106,12 +106,12 @@ namespace CaptainMao.Controllers
 
             //Google reCaptcha機器人驗證
             //先註解掉，以方便登入
-            //var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
-            //if (!captChaesponse.Success)
-            //{
-            //    ViewBag.CaptchaErrorMessage = "您未通過reCAPTCHA驗證";
-            //    return View();
-            //}
+            var captChaesponse = JsonConvert.DeserializeObject<reCaptchaResponse>(result);
+            if (!captChaesponse.Success)
+            {
+                ViewBag.CaptchaErrorMessage = "您未通過reCAPTCHA驗證";
+                return View();
+            }
 
             // go ahead and write code to validate username password against database
             //原本Login方法中的帳號驗證

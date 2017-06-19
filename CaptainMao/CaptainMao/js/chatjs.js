@@ -136,3 +136,30 @@ $(document).ready(function () {
 
     $.connection.hub.start();
 });
+
+
+$(function () {
+    var timer;
+    var delay = 3000;
+    $('#shoppingCart').hover(function () {
+        $('#showOrder').css({ "width": "50", "color": "white" }).find("a").css("color", "white")
+
+        clearTimeout(timer);
+    }, function () {
+        timer = setTimeout(function () {            
+            $('#showOrder').css({ "width": "0", "color": "transparent" }).find("a").css("color", "transparent")
+        }, delay);
+    });
+})
+
+
+$(function () {
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > $(window).height()) {
+            $('#to-top').slideDown(500);
+        } else {
+            $('#to-top').slideUp(500);
+        }
+    }
+    )
+})

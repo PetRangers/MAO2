@@ -8,34 +8,40 @@
 }
 
 @section script{
-<script src="~/Scripts/jquery-ui.min.js"></script>
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.Del').on('click', function (e) {
                 e.preventDefault();
                 var targerUrl = $(this).attr('href');
-                $('#dialogForm').dialog({
-                    resizable: false,
-                    height: "auto",
-                    width: 400,
-                    modal: true,
-                }).dialog({
-                    buttons: {
-                        '確定': function () {
-                            window.location.href = targerUrl;
-                        },
-                        '取消': function () {
-                            $(this).dialog('close');
-                        }
-                    }
-                })
+                swal({
+                    title: "確認刪除",
+                    text: "您確定要刪除嗎？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "確認刪除",
+                    confirmButtonClass: "btn-danger",
+                    closeOnConfirm: false
+                },
+                function () {
+                    swal({
+                        title:"確認", 
+                        text: "刪除成功!", 
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonText: "確認",
+                        confirmButtonClass: "btn-success",
+                        closeOnConfirm: false
+                    }, function () {
+                        window.location.href = targerUrl;
+                    });
+                 });
             })
         })
-            
     </script>
     }
 @section style{
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
         .title {
             overflow: hidden;
@@ -118,9 +124,6 @@
     </div>
     <!-------------------articleEnd------------------->
 </article>
-<div id="dialogForm" title="確認刪除" hidden>
-    <p>您確定要刪除嗎？</p>
-</div>
 
 
 

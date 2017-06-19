@@ -191,5 +191,18 @@ namespace CaptainMao.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual int AddToCartMerchandise_Type_View(Nullable<int> merchandiseID, string user_identity)
+        {
+            var merchandiseIDParameter = merchandiseID.HasValue ?
+                new ObjectParameter("MerchandiseID", merchandiseID) :
+                new ObjectParameter("MerchandiseID", typeof(int));
+    
+            var user_identityParameter = user_identity != null ?
+                new ObjectParameter("user_identity", user_identity) :
+                new ObjectParameter("user_identity", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddToCartMerchandise_Type_View", merchandiseIDParameter, user_identityParameter);
+        }
     }
 }

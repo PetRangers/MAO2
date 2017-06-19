@@ -246,6 +246,13 @@ namespace CaptainMao.Areas.Article.Controllers
             db.SaveChanges();
             return RedirectToAction("Poster");
         }
+        //主板刪除
+        public ActionResult DelMaster(int? articleID)
+        {
+            db.Articles.Find(articleID).IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Master");
+        }
         //刪除留言者評論
         public ActionResult DelComment(int? commentID)
         {

@@ -249,6 +249,8 @@
     <Content Include="Areas\buy\css\StoreCreate.min.css">
       <DependentUpon>StoreCreate.css</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\images\autoicon.png" />
+    <Content Include="Areas\buy\images\go.png" />
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\buy\js\ShoppingCart.js" />
@@ -263,6 +265,9 @@
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
     <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
+    <Content Include="Areas\WebForm\WebFormUser.aspx" />
+    <Content Include="Areas\WebForm\WebUserCancel.aspx" />
+    <Content Include="Areas\WebForm\WebUserControl1.ascx" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
     <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
@@ -288,6 +293,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="css\chat.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\main.css" />
@@ -332,7 +338,7 @@
     <Content Include="fonts\Sensations and Qualities.ttf" />
     <Content Include="fonts\fc_.ttf" />
     <Content Include="Areas\buy\Views\web.config" />
-    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\Index_I.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Aside.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Details.cshtml" />
     <Content Include="Areas\Adoption\Views\Adoption\Index.cshtml" />
@@ -416,6 +422,8 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\HotMer.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1061,6 +1069,8 @@
     <Content Include="Scripts\plugins\sortable.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="TEST.aspx" />
     <Content Include="video\Dog-Lovers.mp4" />
     <Content Include="Areas\WebForm\WebForm1.aspx" />
@@ -1132,6 +1142,27 @@
     </Compile>
     <Compile Include="Areas\WebForm\MerchandisePhoto.ashx.cs">
       <DependentUpon>MerchandisePhoto.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebFormUser.aspx.cs">
+      <DependentUpon>WebFormUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebFormUser.aspx.designer.cs">
+      <DependentUpon>WebFormUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserCancel.aspx.designer.cs">
+      <DependentUpon>WebUserCancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserControl1.ascx.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\WebForm\WebUserControl1.ascx.designer.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
     </Compile>
     <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />

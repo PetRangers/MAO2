@@ -25,6 +25,23 @@ namespace CaptainMao.Areas.buy.Controllers
             return View(selectMer);
         }
 
+        public ActionResult Index_I(vmCaID_typeID_stypeID vm)
+        {
+            if (Session["user_identity"] == null)
+            {
+                Session["user_identity"] = Guid.NewGuid().ToString();
+            }
+            IEnumerable<Merchandise> selectMer = fun.Logic_SelectMerchandise(vm);
+            return View(selectMer);
+        }
+
+        public ActionResult HotMer(string seach) {
+
+            return RedirectToAction("Index",fun.Logic_SeachMerchandise(seach));
+        }
+
+
+
         [ChildActionOnly]
         public ActionResult Aside()
         {
