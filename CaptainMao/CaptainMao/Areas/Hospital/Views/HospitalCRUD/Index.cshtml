@@ -7,6 +7,53 @@
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <link rel="stylesheet" type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+<style>
+    #button{
+	text-align:center;
+	/*margin:170px auto;
+	padding: 20px 0px;
+	display:block;*/
+	height:30px;
+	width:175px;
+	
+	cursor:pointer;
+	font-size:25px;
+	color:#F0F0F0;
+	border-radius:10px;
+	border-bottom:4px solid #0045A6;
+	box-shadow: 6px 6px 6px #999;
+	
+	-webkit-user-select: none;        
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	
+	background: -webkit-linear-gradient(#00C8F8, #0067F7);
+    background: -o-linear-gradient(#00C8F8, #0067F7);
+    background: -moz-linear-gradient(#00C8F8, #0067F7);
+    background: linear-gradient(#00C8F8, #0067F7);
+	
+	-webkit-transition: background 0.05s linear;  
+    -moz-transition: background 0.05s linear;  
+    -o-transition: background 0.05s linear;  
+    transition: background 0.05s linear;
+	
+	background-size:1px 200px;
+	
+	transition: all .05s linear;
+}
+
+#button:hover{
+	background-position:100px;
+}
+
+#button:active {
+	box-shadow: 2px 2px 2px #777;
+	border-bottom:1px solid #0045A6;
+	transform: translateY(3px);
+}
+</style>
 
 <script>
     $(document).ready(function () {
@@ -17,16 +64,17 @@
         var clicktbn = $('#HospitalCity').val();
         var clicktbnRace = $('#HospitalPetRace').val();
         var clicktHosName = $('#HosName').val();
+        var clicktHospitalOnView = $('#HospitalOnView').val();
 
 
         $.ajax({
             url: "/Hospital/HospitalCRUD/_HospitalSearchCity",
             type: "POST",
-            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace, 'HosName': clicktHosName },
+            data: { 'CityID': clicktbn, 'CategoryID': clicktbnRace, 'HosName': clicktHosName, 'HospitalOnView': clicktHospitalOnView },
             dataType: "text",
             traditional: true,
             success: function (data) {
-                $('#_HospitalCity').load("/Hospital/HospitalCRUD/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace ,'HosName' : clicktHosName});//路徑增加Hospital
+                $('#_HospitalCity').load("/Hospital/HospitalCRUD/_HospitalSearchCity", { "CityID": clicktbn, 'CategoryID': clicktbnRace, 'HosName': clicktHosName, 'HospitalOnView': clicktHospitalOnView });//路徑增加Hospital
             },
             error: function (XMLHttpRequest) {
                 alert(XMLHttpRequest.responseText);
@@ -46,12 +94,14 @@
         <!-------------------articleOpen------------------->
         <div>
             <!--顏色請自己放在Css內 這只是樣板-->
-            <div style="height:auto;background-color:rgb(178, 179, 250)" class="drawingpin" id="ShowMePlease" name="ShowMePlease">
+            <div style="height:800px ;overflow:auto; background-color :rgb(178, 179, 250)" class="drawingpin" id="ShowMePlease" name="ShowMePlease" >
                 <h4>
                     @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
                     @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
+                    @Html.DropDownList("HospitalOnView", (IEnumerable<SelectListItem>)ViewBag.HospitalOnView)
                     <input type="text"  id="HosName" name="HosName" value=""/>
-                    <input id="" type="button" value="搜尋" onclick="SelectThis()" />
+                    <span id="button" onclick="SelectThis()" >搜尋</span>
+                
                 </h4>
                 <h2>醫院資料</h2>
                 <div id="_HospitalCity" name="_HospitalCity" ></div>
