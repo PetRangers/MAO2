@@ -21,14 +21,14 @@ namespace CaptainMao.Areas.Hospital.Controllers
         {
             var hospitalCitys = from a in DB.Cities select a;
             List<SelectListItem> HospitalText = new List<SelectListItem>();
-            HospitalText.Add(new SelectListItem() { Text ="請選擇城市", Value = "" });
+            HospitalText.Add(new SelectListItem() { Text = "請選擇城市", Value = "" });
             foreach (var b in hospitalCitys)
             { HospitalText.Add(new SelectListItem() { Text = b.CityName, Value = b.CityID.ToString() }); }
             ViewBag.HospitalCity = HospitalText;
 
             var hospitalSearchPetRace = from a in DB.Categories select a;
             List<SelectListItem> HospitalTextRace = new List<SelectListItem>();
-            HospitalTextRace.Add(new SelectListItem() { Text ="請選擇寵物", Value ="" });
+            HospitalTextRace.Add(new SelectListItem() { Text = "請選擇寵物", Value = "" });
             foreach (var b in hospitalSearchPetRace)
             { HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
             ViewBag.HospitalPetRace = HospitalTextRace;
@@ -37,40 +37,38 @@ namespace CaptainMao.Areas.Hospital.Controllers
         }
 
         [HttpPost]
-        public ActionResult _HospitalSearchCity(string CityID ="", string CategoryID = "",string HosName = "")
+        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "")
         {
             var SaveAddressArea = string.IsNullOrWhiteSpace(CityID.ToString()) ? "" : CityID.ToString();
             var SaveCategoryID = string.IsNullOrWhiteSpace(CategoryID.ToString()) ? "" : CategoryID.ToString();
             var SaveHosName = string.IsNullOrWhiteSpace(HosName) ? "" : HosName;
 
-            var _hospitalSearchCity = from a in DB.Hospitals select a;
+            var _hospitalSearchCity = from a in DB.Hospitals where a.OnView=="1" select a;
             if (SaveAddressArea != "")
             {
-                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea && x.OnView == "1");
             }
             if (SaveHosName != "")
             {
-                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName) && x.OnView == "1");
             }
-
-
             if (SaveCategoryID != "")
             {
                 _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      where b.CategoryID.ToString() == SaveCategoryID
+                                      where b.CategoryID.ToString() == SaveCategoryID && a.OnView == "1"
                                       select a;
 
                 if (SaveAddressArea != "")
                 {
-                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea && x.OnView == "1");
                 }
                 if (SaveHosName != "")
                 {
-                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName) && x.OnView == "1");
                 }
             }
-            
+
             //var _hospitalSearchCity = from a in DB.Hospitals
             //join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID                                     
             //where a.AddressArea.ToString() == SaveAddressArea && b.CategoryID.ToString() == SaveCategoryID && a.HospitalName.Contains(SaveHosName)
@@ -81,7 +79,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             ViewBag.Item = _hospitalSearchCity;
 
 
-            return PartialView( _hospitalSearchCity.ToList());
+            return PartialView(_hospitalSearchCity.ToList());
         }
 
         public ActionResult HospitalSearchValue(int HospitalID = 2)
@@ -118,7 +116,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             ViewBag.SetName = SetName;
 
             HospitalModel Model = new HospitalModel();
-            foreach(var aa in hospitalSearchValue)
+            foreach (var aa in hospitalSearchValue)
             {
                 Model = aa;
             }
@@ -149,7 +147,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                 }
                 if (item.Key.Scorce1 == 3)
                 {
-                   S3 = item.Count.ToString();
+                    S3 = item.Count.ToString();
                 }
                 if (item.Key.Scorce1 == 4)
                 {
@@ -190,7 +188,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
 
         //地圖
         public ActionResult Map(int HospitalID = 2)
-        {            
+        {
             return PartialView("~/Areas/Hospital/Views/Hospital/Map.cshtml");
         }
         public ActionResult ListToHospital()
@@ -246,7 +244,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
 
                 var UpdateItem = new CaptainMao.Models.Scorce
                 {
-                    UserID =AspNetUser.NickName,
+                    UserID = AspNetUser.NickName,
                     HospitalID = model.HospitalID,
                     Scorce1 = model.Score,
                     Date = DateTime.Now.ToString(),
