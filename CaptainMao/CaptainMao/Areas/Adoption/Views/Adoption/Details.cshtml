@@ -3,15 +3,61 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
+@section script{
+<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="~/js/chatjs.js"></script>
+<script src="~/js/jquery-ui.min.js"></script>
+<script src="~/Scripts/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
+            $(document).on('click', '.email', function (e) {
+                e.preventDefault();
+
+                var targerUrl = $(this).attr('href');
+
+                swal({
+                    title: "您確定要領養這隻寵物?",
+                    text: "點選確定後，我們會幫您通知這隻寵物的主人，您確定要領養嗎?",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-info",
+                    confirmButtonText: "確認",
+                    closeOnConfirm: false
+                }, function () {
+                    swal({
+                        title: "",
+                        text: "\n寄件成功!",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonText: "確認",
+                        confirmButtonClass: "btn-success",
+                        closeOnConfirm: false
+                    }, function () {
+                        window.location.href = targerUrl;
+                    });
+
+                });
+
+            })
+
+        });
+    </script>
+    }
 @section style{
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
+
     <style>
         img{
             width:500px;
         }
 
-        .row>div{
+        .row>.col-md-6{
             margin-top:50px;
+        }
+
+        .form-group{
             font-size:20px;
         }
     </style>
@@ -101,6 +147,9 @@
                             </div>
                         </div>
                     </div>
+                    @Html.ActionLink("我要領養", "Email", new { id = Model.adoption.AdoptionID }, new { @class = "btn btn-primary email", id = "sendEmail" })
+                    <a class="btn btn-success getchat" data-id="@Model.adoption.AspNetUser.Id" data-name="@Model.adoption.AspNetUser.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =Model.adoption.AspNetUser.Id })">來聯絡我</a>
+
                 </div>
             </div>
         </div>
