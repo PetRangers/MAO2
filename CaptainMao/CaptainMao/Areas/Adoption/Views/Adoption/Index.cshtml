@@ -7,7 +7,7 @@
 }
 
 @section style{
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
 
         #search{
@@ -46,8 +46,12 @@
 }
 
 @section script{
-
+<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="~/js/chatjs.js"></script>
     <script src="~/js/jquery-ui.min.js"></script>
+<script src="~/Scripts/sweetalert.min.js"></script>
+
     <script>
         $(document).ready(function () {
 
@@ -71,34 +75,37 @@
 
             $(document).on('click', '.email', function (e) {
                 e.preventDefault();
-                var dialog = $("#dialog-confirm");
-                dialog.attr("style", "visibility:visible;");
+
                 var targerUrl = $(this).attr('href');
 
-                $("#dialog-confirm").dialog({
-                    resizable: false,
-                    height: "auto",
-                    width: 400,
-                    modal: true
-                }).dialog({
-                    buttons: {
-                        '確定': function () {
-                            window.location.href = targerUrl;
-                        },
-                        '取消': function () {
-                            $(this).dialog('close');
-                        }
-                    }
-                })
+                swal({
+                    title: "您確定要領養這隻寵物?",
+                    text: "點選確定後，我們會幫您通知這隻寵物的主人，您確定要領養嗎?",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-info",
+                    confirmButtonText: "確認",
+                    closeOnConfirm: false
+                }, function () {
+                     swal({
+                        title: "",
+                        text: "\n寄件成功!", 
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonText: "確認",
+                        confirmButtonClass: "btn-success",
+                        closeOnConfirm: false
+                    }, function () {
+                        window.location.href = targerUrl;
+                    });
 
+                });
+           
             })
 
-            $('#cancel').click(function () {
-                $("#dialog-confirm").dialog("close");
-            })
+
         });
     </script>
-
     }
 
 <!--aside側欄 article主欄-->

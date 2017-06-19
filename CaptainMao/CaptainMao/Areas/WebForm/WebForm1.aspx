@@ -23,6 +23,15 @@
             background-color:rgb(242, 242, 169);
         }
 
+        a{
+            text-decoration:none;
+            color:black;
+        }
+            a:hover {
+                text-decoration:none;
+            color:black;
+            }
+
         .drawingpin {
             background-color:rgb(242, 242, 169);
             margin-top: 20px;
@@ -44,13 +53,15 @@
         <div class="col-md-3">            
             <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource1" DataKeyField="AdoptionID">
                 <ItemTemplate>
-                    <div class="drawingpin">
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# "~/Areas/WebForm/ImageReader.ashx?SearchID="+Eval("AdoptionID")%>' />
-                        <h2><%# Eval("Name") %></h2>
-                        <h4>性別: <%# Eval("Sex") %></h4>
-                        <h4>體型: <%# Eval("Build") %></h4>
-                        <h4>最後更新: <%# Eval("PostDate") %></h4>
-                    </div>
+                    <asp:HyperLink ID="HyperLink1" runat="server" Target="_new" NavigateUrl='<%# "~/Adoption/Adoption/Details/"+Eval("AdoptionID") %>'>
+                        <div class="drawingpin">
+                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# "~/Areas/WebForm/ImageReader.ashx?SearchID="+Eval("AdoptionID")%>' />
+                            <h2><%# Eval("Name") %></h2>
+                            <h4>性別: <%# Eval("Sex") %></h4>
+                            <h4>體型: <%# Eval("Build") %></h4>
+                            <h4>最後更新: <%# Eval("PostDate") %></h4>
+                        </div>
+                    </asp:HyperLink>
                 </ItemTemplate>
             </asp:DataList>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="Data Source=192.168.33.36;Initial Catalog=Mao;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Top 5 * FROM [Adoption] ORDER BY [PostDate] DESC"></asp:SqlDataSource>
@@ -58,12 +69,14 @@
         <div class="col-md-3">
             <asp:DataList ID="DataList2" runat="server" DataKeyField="Merchandise_ID" DataSourceID="SqlDataSource2">
                 <ItemTemplate>
-                    <div class="drawingpin">
-                        <asp:Image ID="Image2" runat="server" ImageUrl='<%#"~/Areas/WebForm/MerchandisePhoto.ashx?SearchID="+Eval("Merchandise_ID")%>' />
-                        <h2>產品名稱: <%# Eval("Merchandise_Name") %></h2>
-                        <h4>產品價格: <%# Eval("Merchandise_Price","{0:c0}") %></h4>
-                        <h4>上架時間: <%# Eval("Merchandiser_Editdata") %></h4>
-                    </div>
+                    <asp:HyperLink ID="HyperLink2" runat="server"  Target="_new" NavigateUrl='<%# "~/buy/Shopping/About?Merchandise_ID="+Eval("Merchandise_ID") %>'>
+                        <div class="drawingpin">
+                            <asp:Image ID="Image2" runat="server" ImageUrl='<%#"~/Areas/WebForm/MerchandisePhoto.ashx?SearchID="+Eval("Merchandise_ID")%>' />
+                            <h2>產品名稱: <%# Eval("Merchandise_Name") %></h2>
+                            <h4>產品價格: <%# Eval("Merchandise_Price","{0:c0}") %></h4>
+                            <h4>上架時間: <%# Eval("Merchandiser_Editdata") %></h4>
+                        </div>
+                    </asp:HyperLink>
                 </ItemTemplate>
             </asp:DataList>
             <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="Data Source=192.168.33.36;Initial Catalog=Mao;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Top 5  * FROM ShoppingNetwork.Merchandise ORDER BY [Merchandise_Creatdate] DESC"></asp:SqlDataSource>
@@ -71,11 +84,13 @@
         <div class="col-md-6">
             <asp:DataList ID="DataList3" runat="server" DataKeyField="ArticleID" DataSourceID="SqlDataSource3">
                 <ItemTemplate>
-                    <div class="drawingpin">
-                        <h2>[<%# Eval("TitleCategoryName") %>]<%# Eval("Title") %> - <%# Eval("BoardName") %>板</h2>
-                        <h3>人氣 : <%# Eval("Number") %></h3>
-                        <h3><%# Eval("LastChDateTime") %></h3>
-                    </div>
+                    <asp:HyperLink ID="HyperLink3" runat="server"  Target="_new" NavigateUrl='<%# "~/Article/Article/Show?articleID="+Eval("ArticleID") %>'>
+                        <div class="drawingpin">
+                            <h2>[<%# Eval("TitleCategoryName") %>]<%# Eval("Title") %> - <%# Eval("BoardName") %>板</h2>
+                            <h3>人氣 : <%# Eval("Number") %></h3>
+                            <h3><%# Eval("LastChDateTime") %></h3>
+                        </div>
+                    </asp:HyperLink>
                     <br />
                 </ItemTemplate>
             </asp:DataList>
