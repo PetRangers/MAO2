@@ -22,21 +22,22 @@
                     confirmButtonText: "確認刪除",
                     confirmButtonClass: "btn-danger",
                     closeOnConfirm: false
-                },
-                function () {
-                    swal({
-                        title:"確認", 
-                        text: "刪除成功!", 
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonText: "確認",
-                        confirmButtonClass: "btn-success",
-                        closeOnConfirm: false
-                    }, function () {
+                },function () {
                         window.location.href = targerUrl;
                     });
-                 });
-            })
+            });
+            var bool = $('#del').val();
+            if (bool == "value") {
+                swal({
+                    title: "確認",
+                    text: "刪除成功!",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    confirmButtonClass: "btn-success",
+                    closeOnConfirm: false
+                })
+            }
         })
     </script>
     }
@@ -76,6 +77,7 @@
             </div>
         </div>
         <div style="background-color:burlywood" class="drawingpin">
+            <input type="hidden" value="@TempData["Delete"]" id="del" />
             <table class="table table-bordered table-hover" id="articletable">
                 <thead>
                     <tr>

@@ -244,6 +244,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             db.Articles.Find(articleID).IsDeleted = true;
             db.SaveChanges();
+            TempData["Delete"] = true;
             return RedirectToAction("Poster");
         }
         //主板刪除
@@ -251,6 +252,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             db.Articles.Find(articleID).IsDeleted = true;
             db.SaveChanges();
+            TempData["Delete"] = true;
             return RedirectToAction("Master");
         }
         //刪除留言者評論
@@ -258,6 +260,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             db.Comments.Find(commentID).IsDeleted = true;
             db.SaveChanges();
+            TempData["Delete"] = true;
             return RedirectToAction("Index");
         }
 
