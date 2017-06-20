@@ -5,8 +5,7 @@
 }
 
 @section style{
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
         #delete {
             color: white;
@@ -15,24 +14,32 @@
     </style>
 }
 @section script{
-    <script src="~/js/jquery-ui.min.js"></script>
+<script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
 
-            $('#del').click(function () {
-                var dialog = $("#dialog-confirm");
-                dialog.attr("style", "visibility:visible;")
-                $("#dialog-confirm").dialog({
-                    resizable: false,
-                    height: "auto",
-                    width: 400,
-                    modal: true
+            $('#delete').click(function (e) {
+                e.preventDefault();
+
+                var targerUrl = $(this).attr('href');
+
+                swal({
+                    title: "您確定要刪除?",
+                    text: "您即將刪除這筆領養心願，使用者們將無法在領養列表看到這筆心願，您確定要刪除?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "確認",
+                    closeOnConfirm: false
+                }, function () {
+                    window.location.href = targerUrl;
+
+
                 });
+
             })
 
-            $('#cancel').click(function () {
-                $("#dialog-confirm").dialog("close");
-            })
+
         });
     </script>
 }
@@ -103,7 +110,7 @@
                             @Html.ActionLink("取消", "AdoptionManage", "Adoption", new { }, new { @class = "btn btn-default" })
                         </div>
                         <div class="col-sm-2">
-                            <button type="button" class="btn btn-danger pull-right" id="del">刪除</button>
+                            @Html.ActionLink("刪除", "DeleteWish", "Adoption", new { id = Model.WishID }, new { @class = "btn btn-danger pull-right", id = "delete" })
                         </div>
                     </div>
                                 }
@@ -113,12 +120,4 @@
     </div>
     <!-------------------articleEnd------------------->
 </article>
-<div id="dialog-confirm" title="您確定要刪除?" style="visibility:hidden;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; "></span>您即將刪除這筆領養機會，使用者們將無法在領養列表看到這筆機會，您確定要刪除?</p>
-    <hr />
-    <span>
-        <button type="button" class="btn btn-default pull-right" id="cancel">取消</button>
-        @Html.ActionLink("刪除", "DeleteWish", "Adoption", new { id = Model.WishID }, new { @class = "btn btn-danger pull-right", id = "delete" })
-    </span>
-</div>
 
