@@ -65,8 +65,8 @@ namespace CaptainMao
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "826624713833-5k6m3863i7kehf832tbe2dbdvkt8s563.apps.googleusercontent.com",
-                ClientSecret = "eFoROYm2olBMaVfR3NQs4xTm"
+                ClientId = "131099786555-5gsfi4luv4gqsn9d8cp81cq5m3876q7r.apps.googleusercontent.com",
+                ClientSecret = "PjvtkqqPceG2RZkwGL6gzDOi"
             });
         }
     }

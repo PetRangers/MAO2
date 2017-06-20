@@ -28,11 +28,58 @@
     }
 
 </script>
+<style>
+    #butck {
+        text-align: center;
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #F0F0F0;
+        border-radius: 10px;
+        border-bottom: 4px solid #0045A6;
+        box-shadow: 6px 6px 6px #999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        background: -webkit-linear-gradient(#00C8F8, #0067F7);
+        background: -o-linear-gradient(#00C8F8, #0067F7);
+        background: -moz-linear-gradient(#00C8F8, #0067F7);
+        background: linear-gradient(#00C8F8, #0067F7);
+        -webkit-transition: background 0.05s linear;
+        -moz-transition: background 0.05s linear;
+        -o-transition: background 0.05s linear;
+        transition: background 0.05s linear;
+        background-size: 1px 200px;
+        transition: all .05s linear;
+    }
+
+        #butck:hover {
+            background-position: 100px;
+        }
+
+        #butck:active {
+            box-shadow: 2px 2px 2px #777;
+            border-bottom: 1px solid #0045A6;
+            transform: translateY(3px);
+        }
+
+    label, th, td {
+        font-size: 20px;
+    }
+
+    div p {
+        font-size: 20PX;
+    }
+</style>
+
 
 <!--aside側欄 article主欄-->
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
-    <!-------------------asideOpen------------------->    @*@Html.Partial("Aside")*@    <!-------------------asideEnd------------------->
+    <!-------------------asideOpen------------------->    @Html.Partial("Aside")    <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
     <!-------------------articleOpen------------------->
@@ -41,26 +88,26 @@
         <div style="height:auto;background-color:rgb(178, 179, 250)" class="drawingpin">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>醫院查詢</h2>
-                    <h4>
+                    <h1 style="color:#7c1010">醫院查詢</h1>
+                    <h3 style="text-align:center">
                         @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
-                    </h4>
-                    <h4>
+                    </h3>
+                    <h3 style="text-align:center">
                         @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
-                    </h4>
-                    <h4>
+                    </h3>
+                    <h3 style="text-align:center">
                         <input type="text" id="HosName" name="HosName" value="" />
-                    </h4>
-                    <div>
-                        <input id="" type="button" value="搜尋" onclick="ChangeList()" size="30" />
+                    </h3>
+                    <div style="text-align:center">
+                        <input id="butck" type="button" value="搜尋" onclick="ChangeList()" size="30" />
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="~/Areas/Hospital/Image/S__10584071.jpg" width="500" />
+                    <img src="~/Areas/Hospital/Image/S__10584071.jpg" width="350" />
                 </div>
             </div>
         </div>
-        <div style="overflow:auto;background-color:#b9a1ee" class="drawingpin">
+        <div style="overflow:auto;height:500px ;background-color:#cfc0f1" class="drawingpin">
             <div id="_HospitalCity" name="_HospitalCity">
             </div>
         </div>

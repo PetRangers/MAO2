@@ -73,7 +73,19 @@
                 <td>@_category.HospitalAddress</td>
                 <td>@_category.AddressArea</td>
                 <td>@_category.HospitalPhone</td>
-                <td>@_category.OnView</td>
+                <td>
+                    @{ string OnView = _category.OnView;}
+                    @switch(OnView)
+                    {
+                        case "1":
+                            _category.OnView = "開啟";
+                            break;
+                        case "0":
+                            _category.OnView = "關閉";
+                            break;
+                    }
+                    @_category.OnView
+                </td>
             </tr>
         }
     </tbody>

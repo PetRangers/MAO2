@@ -56,7 +56,7 @@
 
             document.getElementById("Score").value = q;
             document.getElementById("butck").onclick = buttonclick;
-            document.getElementById("butck").style = "display:black";
+            //document.getElementById("butck").style = "display:black float:right";
         }
         function buttonclick() {
             for (var i = 1; i <= 5 ; i++) {
@@ -66,7 +66,7 @@
                 document.getElementById(i + "idimg").src = "/Areas/Hospital/Image/main2.png";
             }
             document.getElementById("idsp").innerHTML = "";
-            document.getElementById("butck").style = "display:none";
+            //document.getElementById("butck").style = "display:none float:right";
         };
 
         $(document).ready(function () {
@@ -97,13 +97,49 @@
 
     </script>
 }
-
 <style>
+    #butck {
+        text-align: center;
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #F0F0F0;
+        border-radius: 10px;
+        border-bottom: 4px solid #0045A6;
+        box-shadow: 6px 6px 6px #999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        background: -webkit-linear-gradient(#00C8F8, #0067F7);
+        background: -o-linear-gradient(#00C8F8, #0067F7);
+        background: -moz-linear-gradient(#00C8F8, #0067F7);
+        background: linear-gradient(#00C8F8, #0067F7);
+        -webkit-transition: background 0.05s linear;
+        -moz-transition: background 0.05s linear;
+        -o-transition: background 0.05s linear;
+        transition: background 0.05s linear;
+        background-size: 1px 200px;
+        transition: all .05s linear;
+    }
+
+        #butck:hover {
+            background-position: 100px;
+        }
+
+        #butck:active {
+            box-shadow: 2px 2px 2px #777;
+            border-bottom: 1px solid #0045A6;
+            transform: translateY(3px);
+        }
+
     label, th, td {
         font-size: 20px;
     }
 
-    p {
+    div p {
         font-size: 20PX;
     }
 </style>
@@ -119,9 +155,8 @@
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
         <div style="overflow:auto;background-color:rgb(178, 179, 250)" class="drawingpin">
-            <h2> @Model.HospitalName</h2>
+            <h1 style="color:#7c1010"> @Model.HospitalName</h1>
             <div class="row">
-
                 <label for="HospitalAddress" class="col-sm-2 control-label">醫院地址</label>
                 <div class="col-sm-10">
                     <p>@Model.HospitalAddress</p>
@@ -184,19 +219,16 @@
             </div>
             @{
             }
-
-
-
         </div>
-        <div style="height:auto;background-color:#b9a1ee" class="drawingpin">
+        <div style="height:auto;background-color:#cfc0f1" class="drawingpin">
             <form method="post" action="~/Hospital/Hospital/ListToNote">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <table>
                             <tr>
-                                <h2 style="">@ViewBag.HospitalName - 評分</h2>
-      <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
-                                <th>我要評分</th>
+                                <h2 style="color:#7c1010">@ViewBag.HospitalName - 評分</h2>
+                                <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
+                                <th style="color:#82460c">我要評分</th>
                             <tr>
                             <tr>
                                 <th>星等</th>
@@ -209,19 +241,20 @@
                                     <input type="hidden" id="Score" name="Score" />
                                 </td>
                             <tr>
+                                <td></td>
                                 <td>
-                                    <input type="button" value="重選星等" onclick="buttonclick()" id="butck"  style="border-right"/>
+                                    <input type="button" value="重選星等" onclick="buttonclick()" id="butck" class="btn btn-primary" style="float:right " />
                                 </td>
                             </tr>
-
-                            <tr>
-                                <th>評語</th>
-                                <td colspan=4>
-                                    <textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea>
-                                </td>
+                            <th>評語</th>
+                            <td colspan=4>
+                                <textarea style="width:300px;height:90px;" id="NoteValue" name="NoteValue"></textarea>
+                            </td>
                             </tr>
                             <tr class="align-center">
-                                <td><input type="submit" value="送出評分" /></td>
+                                <td></td>
+                                <td><input type="submit" value="送出評分" class="btn btn-warning" id="butck" style="float:right" /></td>
+
                             </tr>
                         </table>
 
@@ -229,13 +262,14 @@
         </div>
         <div class="col-sm-4">
 
-            <div id="container" style="height:350px">
+            <div id="container" style="height:350px"></div>
+            <div style="font-size:18px ;color:#8a0f0f;text-align:center" >
+                一星：@ViewBag.S1
+                、二星：@ViewBag.S2
+                、三星：@ViewBag.S3
+                、四星：@ViewBag.S4
+                、五星：@ViewBag.S5
             </div>
-            一星：@ViewBag.S1
-            ,二星：@ViewBag.S2
-            ,三星：@ViewBag.S3
-            ,四星：@ViewBag.S4
-            ,五星：@ViewBag.S5
         </div>
     </div>
 
@@ -245,12 +279,14 @@
         <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
 
         @*//載入評分的清單*@
-        <table class="table table-striped">
-            @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
-        </table>
+        <div style="height:500px ;overflow:auto">
+            <table>
+                @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
+            </table>
+        </div>
     </form>
-    </div>
-    </div>
+
+
     <!-------------------articleEnd------------------->
 </article>
 

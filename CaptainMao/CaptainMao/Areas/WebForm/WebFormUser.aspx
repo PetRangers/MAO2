@@ -10,6 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../buy/css/sweetalert.css" rel="stylesheet" />
     <style>
         body {
             background-color: transparent;
@@ -56,8 +57,19 @@
             </SelectParameters>
         </asp:SqlDataSource>
     </form>
+    <button id="btn1"></button>
+
 </body>
 
 <script src="../../Scripts/jquery-3.1.1.min.js"></script>
 <script src="../../Scripts/bootstrap.min.js"></script>
+<script src="../buy/js/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+            $('#btn1').click(function () {
+                sweetAlert('ok');
+            })
+        })
+    </script>
+
 </html>

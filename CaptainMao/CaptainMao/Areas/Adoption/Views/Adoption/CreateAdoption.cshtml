@@ -10,7 +10,33 @@
         #frm{
             font-size:18px;
         }
+        button{
+            width:100px;
+        }
     </style>
+    }
+
+@section script{
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#demo').click(function () {
+                $('#Name').val('吉米');
+                $('#Sex').val('公');
+                $('#CategoryID').val(6);
+                $('#Build').val('小型');
+                $('#Age').val('幼年');
+                $('#CityID').val(2);
+                $('#Hair').val('黑白');
+                $('#Description').val('我叫吉米，是出生剛滿5個月的小刺蝟，最近在找新家，想知道我的資訊的話，歡迎來聯絡我喔!');
+                //蜜袋鼯
+
+
+            })
+
+        })
+    </script>
     }
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
     <!-------------------asideOpen------------------->
@@ -90,8 +116,11 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">新增</button>
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </div>
+                        <div class="col-sm-2 pull-right">
+                            <button type="button" class="btn btn-info" id="demo">DEMO</button>
                         </div>
                     </div>
                                 }

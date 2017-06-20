@@ -1,4 +1,5 @@
 ﻿using CaptainMao.Areas.Hospital.Models.ViewModel;
+using CaptainMao.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,9 +9,12 @@ using System.Web.Mvc;
 
 namespace CaptainMao.Areas.Hospital.Controllers
 {
+    [AuthorizeMao(Roles ="Admin")]
     public class HospitalCRUDController : Controller
     {
         global::CaptainMao.Models.MaoEntities DB = new CaptainMao.Models.MaoEntities();
+        //刪除
+        
 
         // GET: Hospital/HospitalCRUD
         public ActionResult Aside()
@@ -39,21 +43,26 @@ namespace CaptainMao.Areas.Hospital.Controllers
         }
 
         [HttpPost]
-        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "")
+        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "",string HospitalOnView="")
         {
 
             var SaveAddressArea = string.IsNullOrWhiteSpace(CityID.ToString()) ? "" : CityID.ToString();
             var SaveCategoryID = string.IsNullOrWhiteSpace(CategoryID.ToString()) ? "" : CategoryID.ToString();
             var SaveHosName = string.IsNullOrWhiteSpace(HosName) ? "" : HosName;
+            var SaveHospitalOnView = string.IsNullOrWhiteSpace(HospitalOnView) ? "" : HospitalOnView;
 
             var _hospitalSearchCity = from a in DB.Hospitals select a;
             if (SaveAddressArea != "")
             {
-                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea );
             }
             if (SaveHosName != "")
             {
                 _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+            }
+            if (SaveHospitalOnView != "")
+            {
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.OnView.ToString()==SaveHospitalOnView);
             }
 
 
@@ -61,7 +70,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             {
                 _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      where b.CategoryID.ToString() == SaveCategoryID
+                                      where b.CategoryID.ToString() == SaveCategoryID 
                                       select a;
 
                 if (SaveAddressArea != "")
@@ -71,6 +80,10 @@ namespace CaptainMao.Areas.Hospital.Controllers
                 if (SaveHosName != "")
                 {
                     _hospitalSearchCity = _hospitalSearchCity.Where(x => x.HospitalName.Contains(SaveHosName));
+                }
+                if (SaveHospitalOnView != "")
+                {
+                    _hospitalSearchCity = _hospitalSearchCity.Where(x => x.OnView.ToString() == SaveHospitalOnView);
                 }
             }
 
@@ -114,7 +127,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                                           //join c in DB.Categories on a.CategoryID equals c.CategoryID
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
                                       join c in DB.Categories on b.CategoryID equals c.CategoryID
-                                      where a.HospitalID == HospitalID && a.OnView == "1"
+                                      where a.HospitalID == HospitalID
                                       select new HospitalModel
                                       {
                                           HospitalName = a.HospitalName,
@@ -173,29 +186,13 @@ namespace CaptainMao.Areas.Hospital.Controllers
             { HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
             ViewBag.HospitalPetRace = HospitalTextRace;
 
+            List<SelectListItem> HospitalOnView = new List<SelectListItem>();
+            HospitalOnView.Add(new SelectListItem() { Text = "請選擇狀態", Value = "" });
+            HospitalOnView.Add(new SelectListItem() { Text = "開啟", Value = "1" });
+            HospitalOnView.Add(new SelectListItem() { Text = "關閉", Value = "0" });
+            ViewBag.HospitalOnView = HospitalOnView;
+
             return View();
-            
-            
-
-            //foreach (var b in hospitalSearchPetRace)
-            //{ HospitalTextRace.Add(new SelectListItem() { Text = b.CategoryName, Value = b.CategoryID.ToString() }); }
-            //ViewBag.HospitalPetRace = HospitalTextRace;
-
-            //var hospitalSearchAll = from a in DB.Hospitals
-            //                        join b in DB.Cities on a.AddressArea equals b.CityID
-            //                        join c in DB.Categories on a.CategoryID equals c.CategoryID
-            //                        where a.OnView == "1"
-            //                        select new HospitalModel
-            //                        {
-            //                            HospitalID = a.HospitalID,
-            //                            HospitalName = a.HospitalName,
-            //                            HospitalAddress = a.HospitalAddress,
-            //                            AddressArea = b.CityName,
-            //                            HospitalPhone = a.HospitalPhone,
-            //                            CategoryName = c.CategoryName
-            //                        };
-
-            //return View(hospitalSearchAll.ToList());
         }
 
 
@@ -207,7 +204,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                                     join b in DB.Cities on a.AddressArea equals b.CityID
                                     //join c in DB.HospitalCategoryDetails on a.HospitalID equals c.HospitalID
                                     //join d in DB.Categories on c.CategoryID equals d.CategoryID
-                                    where a.HospitalID == HospitalID && a.OnView == "1"
+                                    where a.HospitalID == HospitalID 
                                     select new HospitalModel
                                     {
                                         HospitalID = a.HospitalID,
@@ -229,7 +226,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                          join b in DB.Cities on a.AddressArea equals b.CityID
                          join c in DB.HospitalCategoryDetails on a.HospitalID equals c.HospitalID
                          join d in DB.Categories on c.CategoryID equals d.CategoryID
-                         where a.HospitalID == HospitalID && a.OnView == "1"
+                         where a.HospitalID == HospitalID 
                          select new HospitalModel
                          {
                              CategoryID = d.CategoryID
@@ -447,6 +444,20 @@ namespace CaptainMao.Areas.Hospital.Controllers
             if (removeHospital.Equals(null))
             { }
             removeHospital.OnView = "0";
+            DB.SaveChanges();
+
+            return RedirectToAction("Index", "HospitalCRUD");
+
+        }
+        //顯示
+        public ActionResult reRemoveHospital(int id = 2)
+        {
+            var removeHospital = (from a in DB.Hospitals
+                                  where a.HospitalID == id
+                                  select a).FirstOrDefault();
+            if (removeHospital.Equals(null))
+            { }
+            removeHospital.OnView = "1";
             DB.SaveChanges();
 
             return RedirectToAction("Index", "HospitalCRUD");
