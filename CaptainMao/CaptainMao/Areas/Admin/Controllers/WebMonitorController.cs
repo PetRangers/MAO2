@@ -24,7 +24,7 @@ namespace CaptainMao.Areas.Admin.Controllers
         public ActionResult loginCount()
         {
             var logins = db.LoginLogs.Select(l=>l.LoginTime).ToList();
-            
+
             List<int> loginDaysAgo = new List<int>();
 
             foreach (var login in logins)
@@ -32,7 +32,7 @@ namespace CaptainMao.Areas.Admin.Controllers
                 int days = (int)((DateTime.UtcNow - login).TotalDays);
                 loginDaysAgo.Add(days);
             }
-            
+
             int[] loginCounts = new int[monitoredDays];
             string[] loginDates = new string[monitoredDays];
             for (int i = 0; i < monitoredDays; i++)
@@ -41,31 +41,46 @@ namespace CaptainMao.Areas.Admin.Controllers
                 loginDates[monitoredDays - i - 1] = DateTime.UtcNow.AddDays(-i).ToShortDateString();
             }
             var loginData = new { loginDates, loginCounts};
-            
+
             return Json(loginData, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult personLoginCount()
         {
-            var logins = (from l in db.LoginLogs
-                         where l.LoginTime>DateTime.UtcNow.AddDays(-monitoredDays)
-                         group l by l.LoginIP into g
-                         select new
-                         {
-                             user=g.Key,
-                             counts = g.Count()
-                         }).ToList();
+            var allUserCount = db.AspNetUsers.Count();
 
-            int[] loginCounts = new int[monitoredDays];
-            string[] user = new string[monitoredDays];
+            var groupedLogins = db.LoginLogs.Select(l=>l).GroupBy(l=>l.UserId).ToList();
+                           
 
-            foreach (var l in logins)
+            int highFreqUsers = 0;
+            int intermediateFreqUsers = 0;
+            int lowFreqUsers = 0;
+            int inactiveUsers = 0;
+
+            foreach (var l in groupedLogins)
             {
-                
+                if (l.Count() >= 10)
+                {
+                    highFreqUsers++;
+                }
+                else if (l.Count() >= 4)
+                {
+                    intermediateFreqUsers++;
+                }
+                else
+                {
+                    lowFreqUsers++;
+                }
             }
-            
-            return Json(logins, JsonRequestBehavior.AllowGet);
-        }
 
+            inactiveUsers = allUserCount - highFreqUsers - intermediateFreqUsers - lowFreqUsers;
+            string[] userCategories = {"高頻使用者(當月登入10次以上)", "中頻使用者(當月登入4至9次)", "低頻使用者(當月登入1至3次)", "不活躍使用者(當月無登入紀錄)" };
+            int[] userCounts ={ highFreqUsers, intermediateFreqUsers, lowFreqUsers, inactiveUsers };
+
+            var userAnalysisResult = new { userCategories, userCounts };
+
+            return Json(userAnalysisResult, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

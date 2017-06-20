@@ -140,6 +140,10 @@ namespace CaptainMao.Areas.Adoption.Controllers
                 flg2 = true;
             }
             ViewBag.flag2 = flg2;
+
+            
+
+
             return View(vm);
         }
 
@@ -194,6 +198,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             db.Adoptions.Remove(adoption);
             db.SaveChanges();
             //dbAdoption.Delete(adoption);
+            TempData["delete"] = true;
             return RedirectToAction("AdoptionManage");
         }
 
@@ -275,6 +280,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             var adoption = db.AdpWishes.Find(id);
             db.AdpWishes.Remove(adoption);
             db.SaveChanges();
+            TempData["delete"] = true;
             return RedirectToAction("AdoptionManage");
         }
         public ActionResult WishJoin(int id)
@@ -311,7 +317,7 @@ namespace CaptainMao.Areas.Adoption.Controllers
             await service.SendAsync(message);
 
             //await UserManager.SendEmailAsync(emailTo.Id, "【毛孩隊長寵物生活網】用戶註冊確認信", emailContent);
-         
+            TempData["email"] = true;
             return RedirectToAction("Index");
         }
 

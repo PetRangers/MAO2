@@ -67,9 +67,9 @@
                     @Html.DisplayFor(modelItem => item.DateRegistered)
                 </td>
                 <td>
-                    @Html.ActionLink("編輯", "Edit", "NormalUser", new { area = "Admin", id = item.Id }, new {  @class= "ui-button ui-widget ui-corner-all" }) 
-                    @Html.ActionLink("詳細", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "ui-button ui-widget ui-corner-all" }) 
                     
+                    @Html.ActionLink("詳細", "Details", "NormalUser", new { area = "Admin", id = item.Id }, new {@class = "ui-button ui-widget ui-corner-all" }) 
+                    @Html.ActionLink("編輯", "Edit", "NormalUser", new { area = "Admin", id = item.Id }, new { @class = "ui-button ui-widget ui-corner-all" }) 
                 </td>
             </tr>
         }

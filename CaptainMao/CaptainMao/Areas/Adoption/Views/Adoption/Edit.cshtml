@@ -20,8 +20,9 @@
 <script src="~/Scripts/sweetalert.min.js"></script>
 
     <script>
-        $(document).ready(function () {
 
+        $(document).ready(function () {
+            
             $(document).on('click', '#delete', function (e) {
                 e.preventDefault();
 
@@ -36,21 +37,15 @@
                     confirmButtonText: "確認",
                     closeOnConfirm: false
                 }, function () {
-                    swal({
-                        title: "",
-                        text: "\n刪除成功!", 
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonText: "確認",
-                        confirmButtonClass: "btn-success",
-                        closeOnConfirm: false
-                    }, function () {
-                        window.location.href = targerUrl;
-                    });
+                    window.location.href = targerUrl;
+                    
 
                 });
             });
+
+            
         });
+
     </script>
 }
 
