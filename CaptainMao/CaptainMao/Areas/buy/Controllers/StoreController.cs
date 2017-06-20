@@ -133,8 +133,5 @@ namespace CaptainMao.Areas.buy.Controllers
             return View(fun.Logic_NewReport(User.Identity.GetUserId()));
         }
              
-
-
-
     }
 }

@@ -43,7 +43,6 @@ body a:hover {
   background-size: cover;
   border: none;
   background-color: #443226;
-  background-color: transparent;
   /*左右下拉標籤*/
 }
 .navbar .navbar-brand {
@@ -164,6 +163,7 @@ body a:hover {
   background-image: url('../images/icon_127820_256.png');
   background-size: 95% 90%;
   background-position: right;
+  /*background-color: rgba(255, 255, 255, 0.00);*/
   background-color: #f9f1d7;
   border-radius: 1000px 500px 500px 1000px;
   text-align: center;

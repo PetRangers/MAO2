@@ -4,9 +4,51 @@
 @{
 //ViewBag.Title = "Main";
 //Layout = "~/Views/Shared/_MaoLayout.cshtml";
-}<style>
-    label, th, td ,text,p{
+}
+<style>
+    #butck {
+        text-align: center;
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
         font-size: 20px;
+        color: #F0F0F0;
+        border-radius: 10px;
+        border-bottom: 4px solid #0045A6;
+        box-shadow: 6px 6px 6px #999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        background: -webkit-linear-gradient(#00C8F8, #0067F7);
+        background: -o-linear-gradient(#00C8F8, #0067F7);
+        background: -moz-linear-gradient(#00C8F8, #0067F7);
+        background: linear-gradient(#00C8F8, #0067F7);
+        -webkit-transition: background 0.05s linear;
+        -moz-transition: background 0.05s linear;
+        -o-transition: background 0.05s linear;
+        transition: background 0.05s linear;
+        background-size: 1px 200px;
+        transition: all .05s linear;
+    }
+
+        #butck:hover {
+            background-position: 100px;
+        }
+
+        #butck:active {
+            box-shadow: 2px 2px 2px #777;
+            border-bottom: 1px solid #0045A6;
+            transform: translateY(3px);
+        }
+
+    label, th, td {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20PX;
     }
 </style>
 <script>
@@ -162,11 +204,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" class="btn btn-default">修改</button>
-                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="隱藏" /></a>
-                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="顯示" /></a>
-                           
-                            @*<button type="submit" class="btn btn-default">刪除</button>*@
+                            <button id="butck" type="submit" class="btn btn-default">修改</button>
+
+                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="隱藏"  id="butck" style="float:right "/></a>
+                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="顯示"  id="butck" style="float:right " /></a>
                         </div>
                     </div>
                 }

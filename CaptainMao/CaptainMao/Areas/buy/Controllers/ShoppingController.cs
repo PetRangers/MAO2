@@ -36,8 +36,7 @@ namespace CaptainMao.Areas.buy.Controllers
         }
 
         public ActionResult HotMer(string seach) {
-
-            return RedirectToAction("Index",fun.Logic_SeachMerchandise(seach));
+            return View("Index",fun.Logic_SeachMerchandise(seach));
         }
 
 
@@ -48,15 +47,17 @@ namespace CaptainMao.Areas.buy.Controllers
             return PartialView(fun.Logic_GetAllCategory());
         }
 
+
+
         public ActionResult About(int Merchandise_ID) {
 
             return View(fun.Logic_GetAllMerchandise(Merchandise_ID));
         }
 
 
-
-
-
+        public ActionResult Hot() {
+            return PartialView();
+        }
 
     }
 }

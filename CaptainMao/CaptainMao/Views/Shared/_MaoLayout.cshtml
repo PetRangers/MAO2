@@ -84,23 +84,23 @@
                                     <ul>
                                         <li class="dropdown-header">毛孩醫院</li>
                                         <li class="divider"></li>
-                                        <li>醫院區域</li>
-                                        <li>寵物種類</li>
+                                        <li>@Html.ActionLink("醫院區域", "HospitalSearchCity", "Hospital", new { area= "Hospital" })</li>
+                                        <li> @Html.ActionLink("寵物種類", "HospitalSearchCity", "Hospital", new { area = "Hospital" })</li>
                                     </ul>
                                 </li>
 
                                 <li class="col-sm-2"></li>
                             </ul>
                         </li>
-                        <li><a href="@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
-                        <li><a href="@Url.Action("index","Shopping",new { area="buy"})" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
-                        <li><a href="@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" class="dropdown-toggle" title="毛孩領養">尋找新家<br /><br />領養專區</a></li>
-                        <li><a href="@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" class="dropdown-toggle" title="毛孩地圖">毛孩醫院<br /><br />查詢專區</a></li>
+                        <li><a href = "@Url.Action("Board","Article",new { area="Article"})" class="dropdown-toggle" title="毛孩討論">七嘴八舌<br /><br />討論專區</a></li>
+                        <li><a href = "@Url.Action("index","Shopping",new { area="buy"})" class="dropdown-toggle" title="毛孩購物">毛孩購物<br /><br />購物專區</a></li>
+                        <li><a href = "@Url.Action("AdoptionManage","Adoption",new { area= "Adoption" })" class="dropdown-toggle" title="毛孩領養">尋找新家<br /><br />領養專區</a></li>
+                        <li><a href = "@Url.Action("HospitalSearchCity","Hospital",new { area="Hospital"})" class="dropdown-toggle" title="毛孩地圖">毛孩醫院<br /><br />查詢專區</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <div id="showOrder"><a href='@Url.Action("Index", "User", new { area = "buy" })' title="我的訂單"><i class="glyphicon glyphicon-list-alt"></i></a></div>
+                        <div id = "showOrder" ><a href='@Url.Action("Index", "User", new { area = "buy" })' title="我的訂單"><i class="glyphicon glyphicon-list-alt"></i></a></div>
                         <li>
-                            <a id="shoppingCart" href="@Url.Action("Index", "ShoppingCart", new { area = "buy" })" title="購物車"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
+                            <a id = "shoppingCart" href="@Url.Action("Index", "ShoppingCart", new { area = "buy" })" title="購物車"><span class="glyphicon glyphicon-shopping-cart"></span><br /><br />shop</a>
                         </li>
                         @Html.Partial("_LoginPartial")
                     </ul>
@@ -109,7 +109,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- 右邊側欄-->
-        <nav id="sidebar-wrapper">
+        <nav id = "sidebar-wrapper" >
             <ul class="sidebar-nav">
 
                 @*<li id="menu-close" class="btn btn-danger hidden-md hidden-lg toggle"><i class="fa fa-times"></i></li>*@
