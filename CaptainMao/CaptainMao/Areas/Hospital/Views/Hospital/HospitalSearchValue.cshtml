@@ -154,7 +154,7 @@
     <!-------------------articleOpen------------------->
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
-        <div style="overflow:auto;background-color:rgb(178, 179, 250)" class="drawingpin">
+        <div style="background-color:rgb(178, 179, 250)" class="drawingpin">
             <h1 style="color:#7c1010"> @Model.HospitalName</h1>
             <div class="row">
                 <label for="HospitalAddress" class="col-sm-2 control-label">醫院地址</label>
@@ -217,60 +217,64 @@
                 <div class="col-sm-10">
                 </div>
             </div>
-            @{
-            }
+            @{Html.RenderPartial("~/Areas/Hospital/Views/Hospital/Map.cshtml", new { HospitalID = Model.HospitalID });}
+
+
         </div>
-        <div style="height:auto;background-color:#cfc0f1" class="drawingpin">
-            <form method="post" action="~/Hospital/Hospital/ListToNote">
-                <div class="row">
-                    <div class="col-sm-7">
-                        <table>
-                            <tr>
-                                <h2 style="color:#7c1010">@ViewBag.HospitalName - 評分</h2>
-                                <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
-                                <th style="color:#82460c">我要評分</th>
-                            <tr>
-                            <tr>
-                                <th>星等</th>
-                                <td>
-                                    <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                                    <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                                    <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                                    <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                                    <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
-                                    <input type="hidden" id="Score" name="Score" />
-                                </td>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <input type="button" value="重選星等" onclick="buttonclick()" id="butck" class="btn btn-primary" style="float:right " />
-                                </td>
-                            </tr>
-                            <th>評語</th>
-                            <td colspan=4>
-                                <textarea style="width:300px;height:90px;" id="NoteValue" name="NoteValue"></textarea>
+
+
+    </div>
+    <div style="height:auto;background-color:#cfc0f1" class="drawingpin">
+        <form method="post" action="~/Hospital/Hospital/ListToNote">
+            <div class="row">
+                <div class="col-sm-7">
+                    <table>
+                        <tr>
+                            <h2 style="color:#7c1010">@ViewBag.HospitalName - 評分</h2>
+                            <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
+                            <th style="color:#82460c">我要評分</th>
+                        <tr>
+                        <tr>
+                            <th>星等</th>
+                            <td>
+                                <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="3idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="4idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <img id="5idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
+                                <input type="hidden" id="Score" name="Score" />
                             </td>
-                            </tr>
-                            <tr class="align-center">
-                                <td></td>
-                                <td><input type="submit" value="送出評分" class="btn btn-warning" id="butck" style="float:right" /></td>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="button" value="重選星等" onclick="buttonclick()" id="butck" class="btn btn-primary" style="float:right " />
+                            </td>
+                        </tr>
+                        <th>評語</th>
+                        <td colspan=4>
+                            <textarea style="width:300px;height:90px;" id="NoteValue" name="NoteValue"></textarea>
+                        </td>
+                        </tr>
+                        <tr class="align-center">
+                            <td></td>
+                            <td><input type="submit" value="送出評分" class="btn btn-warning" id="butck" style="float:right" /></td>
 
-                            </tr>
-                        </table>
+                        </tr>
+                    </table>
 
-            </form>
+        </form>
+    </div>
+    <div class="col-sm-4">
+
+        <div id="container" style="height:350px"></div>
+        <div style="font-size:18px ;color:#8a0f0f;text-align:center">
+            一星：@ViewBag.S1
+            、二星：@ViewBag.S2
+            、三星：@ViewBag.S3
+            、四星：@ViewBag.S4
+            、五星：@ViewBag.S5
         </div>
-        <div class="col-sm-4">
-
-            <div id="container" style="height:350px"></div>
-            <div style="font-size:18px ;color:#8a0f0f;text-align:center" >
-                一星：@ViewBag.S1
-                、二星：@ViewBag.S2
-                、三星：@ViewBag.S3
-                、四星：@ViewBag.S4
-                、五星：@ViewBag.S5
-            </div>
-        </div>
+    </div>
     </div>
 
 
