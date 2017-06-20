@@ -252,6 +252,8 @@
     <Content Include="Areas\buy\css\sweetalert.css" />
     <Content Include="Areas\buy\images\autoicon.png" />
     <Content Include="Areas\buy\images\go.png" />
+    <Content Include="Areas\buy\js\imagesloaded.pkgd.min.js" />
+    <Content Include="Areas\buy\js\jquery.lazyload.js" />
     <Content Include="Areas\buy\js\masonry.pkgd.min.js" />
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />

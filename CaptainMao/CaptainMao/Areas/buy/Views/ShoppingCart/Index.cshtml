@@ -1,39 +1,12 @@
 ﻿@model CaptainMao.Areas.buy.ViewModel.vmShoppingCar_Mer
 @{
-    ViewBag.Title = "Main";
+    ViewBag.Title = "我的購物車";
 }
 @section style{
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
-<link href="~/Areas/buy/css/shoppingcart.css" rel="stylesheet" />
 <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
-    <style>
-        html, body{
-            height: 100%;
-        }
-        aside {
-            cursor:pointer;
-        }
-        article > div > div {
-            margin:0;
-            min-width:600px;
-            min-height:40vh;
-            overflow:hidden;
-        }
-        #cityMap {
-            border-radius:30px;
-        }
-        #spandelete {
-            border-radius:30px;
-            height:30px;
-            width:30px;
-            padding-left:0px;
-            padding-right:0px;
-            padding-top:5px;
-        }
-
-
-    </style>
+<link href="~/Areas/buy/css/shoppingcart.css" rel="stylesheet" />
 }
 <!--aside側欄 article主欄-->
 <div ng-app="MaoApp" ng-controller="MainController">

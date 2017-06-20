@@ -23,3 +23,27 @@ article > div > div button {
   height: 600px;
   width: 100%;
 }
+html,
+body {
+  height: 100%;
+}
+aside {
+  cursor: pointer;
+}
+article > div > div {
+  margin: 0;
+  min-width: 600px;
+  min-height: 40vh;
+  overflow: hidden;
+}
+#cityMap {
+  border-radius: 30px;
+}
+#spandelete {
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 5px;
+}

@@ -1,43 +1,12 @@
 ﻿
 @model IEnumerable<CaptainMao.Models.Merchandise>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "購買首頁";
 
 }
 @section style{
     <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
     <link href="~/Areas/buy/css/shoppingIndex.css" rel="stylesheet" />
-    <style>
-        #img1 {
-            height:200px;
-            width:100%;
-        }
-        h4 {
-            text-align:justify;
-            word-break:break-word;
-            word-break:break-all;
-        }
-        h4 a{
-            color:#000000;
-        }
-        h3 {
-            color: #ca0c0c;
-            font-size: 60px;
-            font-family:Capture it;
-            font-style:italic;
-            padding-left:20px;
-        }
-        .div1{
-            min-width:400px;
-        }
-        .btn1 {
-            position:absolute;
-            right:0px;
-            margin-right:30px;
-            bottom:50px;
-        }
-
-    </style>
 }
 <!--aside側欄 article主欄-->
 
@@ -58,7 +27,7 @@
         @Html.ActionLink(" ", "Index_I", "Shopping", new { @Class = "glyphicon glyphicon-th-list btn btn-primary" })
     </div>
     <!-------------------articleOpen------------------->
-    <div class="div1 row box">
+    <div id="_container">
         @foreach (var _model in Model.OrderByDescending(x => x.Merchandise_Creatdate))
         {
             string url = "";
@@ -73,16 +42,19 @@
             {
                 url = _model.Merchandise_Photo_Address;
             }
-            <div class="drawingpin col-md-4 item">
-                     <img src='@url' class="img-thumbnail" />
+            <div class="drawingpin content_box" >
+                
+                     <img class="lazy" data-original='@url'  />
                      <h4>@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
-                     <h3>
-                         @Html.DisplayFor(c => _model.Merchandise_Price)
-                     </h3>
+
                       <span class="btn1">
                             @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
                             @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
                       </span>
+
+                <h3>
+                    @Html.DisplayFor(c => _model.Merchandise_Price)
+                </h3>
             </div>
         }
     </div>
@@ -98,8 +70,10 @@
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
     <script src='@Url.Content("~/Areas/buy/js/ShoppingIndex.js")'></script>
     <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
-    <script type="text/javascript" src="https://masonry.desandro.com/jquery.masonry.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src='@Url.Content("~/Areas/buy/js/masonry.pkgd.min.js")'></script>
+    <script src='@Url.Content("~/Areas/buy/js/masonry.pkgd.min.js")'></script>
+    <script src='@Url.Content("~/Areas/buy/js/imagesloaded.pkgd.min.js")'></script>
+    <script src='@Url.Content("~/Areas/buy/js/jquery.lazyload.js")'></script>
     <script>
         $(function () {
             $("#seachMer").click(function () {
@@ -109,16 +83,30 @@
                 location.href = seachUrl;
 
             })
-
             if ('@TempData["ok"]' != '') {
                 sweetAlert('@TempData["ok"]');
             }
-
-            $('.box').masonry({
-                itemSelector: 'item',
-            });
-
         })
+
+
+        $(function () {
+            f_masonry();
+            $("img").lazyload({
+                effect: "fadeIn",
+                failurelimit: 40,
+                load: f_masonry,
+            });
+            function f_masonry() {
+                $('#_container').imagesLoaded(function () {
+                    $('#_container').masonry({
+                        itemSelector: '.content_box',
+                        columnWidth: 330,
+                        singleMode: false,
+                        animate: true
+                    });
+                });
+            }
+        });
     </script>
 
 }

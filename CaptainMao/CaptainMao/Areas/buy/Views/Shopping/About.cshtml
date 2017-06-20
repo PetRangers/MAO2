@@ -1,7 +1,6 @@
 ﻿@model CaptainMao.Models.Merchandise
 @{
-    ViewBag.Title = "About";
-    Layout = "~/Views/Shared/_MaoLayout.cshtml";
+    ViewBag.Title = "產品細節";
 }
 
 @section style{
@@ -79,12 +78,11 @@
 
 @section script{
             <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
-            <script src='@Url.Content("~/Areas/buy/js/sweetalert.min.js")'</script>
+            <script src='@Url.Content("~/Areas/buy/js/sweetalert.min.js")'></script>
     <script>
         $(function () {
             $("#btn_addcar").click(function () {
                 sweetAlert('您已加入購物車');
-
             })
         })
     </script>
