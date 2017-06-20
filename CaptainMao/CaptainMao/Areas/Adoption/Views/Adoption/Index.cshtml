@@ -7,38 +7,37 @@
 }
 
 @section style{
-<link href="~/Content/sweetalert.css" rel="stylesheet" />
+    <link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
-
-        #search{
-            background-color:yellow;   
-            padding:10px;
-            font-size:20px
+        #search {
+            background-color: yellow;
+            padding: 10px;
+            font-size: 20px;
         }
 
-        #search button{
-            width:100px;
-            margin:10px;
-            font-size:20px
+            #search button {
+                width: 100px;
+                margin: 10px;
+                font-size: 20px;
+            }
+
+
+        #display {
+            background-color: burlywood;
+            padding-top: 50px;
         }
 
+            #display > .row > div > div {
+                height: 480px;
+                font-size: 20px;
+            }
 
-        #display{
-            background-color:burlywood;
-            padding-top:50px;
-        }
+            #display img {
+                height: 250px;
+            }
 
-        #display > .row > div > div {
-            height: 480px;
-            font-size:20px;
-        }
-
-        #display img {
-            height: 250px;
-        }
-
-        .petName{
-             overflow: hidden;
+        .petName {
+            overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
@@ -46,14 +45,28 @@
 }
 
 @section script{
-<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-<script src="/signalr/hubs"></script>
-<script src="~/js/chatjs.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/js/chatjs.js"></script>
     <script src="~/js/jquery-ui.min.js"></script>
-<script src="~/Scripts/sweetalert.min.js"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
 
     <script>
+
+
         $(document).ready(function () {
+            var bool = $('#delEmail').val();
+            if (bool == 'True') {
+                swal({
+                    title: "",
+                    text: "\n寄件成功!",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    confirmButtonClass: "btn-success",
+                    closeOnConfirm: false
+                })
+            }
 
             $('#txtsearch').change(function () {
                 var txt = $(this).val();
@@ -71,42 +84,30 @@
                     return result;
                 });
             });
-            
 
-            $(document).on('click', '.email', function (e) {
-                e.preventDefault();
 
-                var targerUrl = $(this).attr('href');
+        $(document).on('click', '.email', function (e) {
+            e.preventDefault();
 
-                swal({
-                    title: "您確定要領養這隻寵物?",
-                    text: "點選確定後，我們會幫您通知這隻寵物的主人，您確定要領養嗎?",
-                    type: "info",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-info",
-                    confirmButtonText: "確認",
-                    closeOnConfirm: false
-                }, function () {
-                     swal({
-                        title: "",
-                        text: "\n寄件成功!", 
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonText: "確認",
-                        confirmButtonClass: "btn-success",
-                        closeOnConfirm: false
-                    }, function () {
-                        window.location.href = targerUrl;
-                    });
+            var targerUrl = $(this).attr('href');
 
-                });
-           
-            })
+            swal({
+                title: "您確定要領養這隻寵物?",
+                text: "點選確定後，我們會幫您通知這隻寵物的主人，您確定要領養嗎?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-info",
+                confirmButtonText: "確認",
+                closeOnConfirm: false
+            }, function () {
+                window.location.href = targerUrl;
+            });
+        })
 
 
         });
     </script>
-    }
+}
 
 <!--aside側欄 article主欄-->
 
@@ -116,6 +117,7 @@
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
+    <input type="hidden" id="delEmail" value="@TempData["email"]" />
     <!-------------------articleOpen------------------->
     <div>
         <div id="search" class="drawingpin">
@@ -125,30 +127,30 @@
                     <button class="btn btn-default" id="CateSearch" data-target="#cateSearch" data-toggle="modal">
                         @if (ViewBag.category != null)
                         {
-                            @ViewBag.category
+                        @ViewBag.category
                         }
                         else
                         {
-                            @:寵物類別
+                        @:寵物類別
                 }
                     </button>
                     <button class="btn btn-default" id="CitySearch" data-target="#citySearch" data-toggle="modal">
                         @if (ViewBag.city != null)
                         {
-                            @ViewBag.city
+                        @ViewBag.city
                         }
                         else
                         {
-                            @:居住城市
+                        @:居住城市
                 }
                     </button>
                 </div>
                 <div class="col-md-6">
                     @using (Html.BeginForm("Index", "Adoption", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
-                        <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
-                        <input type="text" id="txtsearch" name="txtsearch" />
-                        <a href=@Url.Action("Index","Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
+                    <label for="txtsearch" class="control-label">關鍵字搜尋: </label>
+                    <input type="text" id="txtsearch" name="txtsearch" />
+                    <a href=@Url.Action("Index","Adoption",new { search = "", categoryid = Request.QueryString["categoryid"], cityid = Request.QueryString["cityid"] }) id="searchStart" class="btn btn-default">搜尋</a>
                     }
                 </div>
             </div>
@@ -172,7 +174,7 @@
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-success getchat" data-id="@adoption.AspNetUser.Id" data-name="@adoption.AspNetUser.NickName" data-img="@Url.Action("GetUserImage","Adoption",new { id =adoption.AspNetUser.Id })">來聯絡我</a>
-                                    @Html.ActionLink("我要領養", "Email", new { id =adoption.AdoptionID }, new { @class = "btn btn-primary email", id = "sendEmail" })
+                                    @Html.ActionLink("我要領養", "Email", new { id = adoption.AdoptionID }, new { @class = "btn btn-primary email", id = "sendEmail" })
                                     @Html.ActionLink("詳細資料", "Details", new { id = adoption.AdoptionID }, new { @class = "btn btn-info" })
                                 </div>
                             </div>

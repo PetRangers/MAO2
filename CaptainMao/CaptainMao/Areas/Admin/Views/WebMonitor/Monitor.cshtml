@@ -3,6 +3,22 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading col-sm-12">
+            <h4>訪問者統計</h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-6">
+                <canvas id="myChart1" width="200" height="100"></canvas>
+            </div>
+            <div class="col-sm-6">
+                <canvas id="myChart2" width="200" height="100"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading col-sm-12">
             <h4>訪問者來源</h4>
         </div>
         <div class="panel-body">
@@ -16,100 +32,168 @@
     </div>
 </div>
 
-<br/>
-<br/>
-<div class="row">
-    
-    
-</div>
 
-<div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading col-sm-12">
-            <h4>訪問者統計</h4>
-        </div>
-        <div class="panel-body">
-            <div class="col-sm-6">
-                <p>
-                    <a href="http://s11.flagcounter.com/more/v3d"><img src="http://s11.flagcounter.com/count2/v3d/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-                </p>
-                <p>
-                    <script type="text/javascript" src="//ra.revolvermaps.com/0/0/0.js?i=0qw0uf2o1dk&amp;d=3&amp;p=0&amp;b=1&amp;w=293&amp;g=2&amp;f=arial&amp;fs=13&amp;r=0&amp;c0=000000&amp;c1=0006ff&amp;c2=9d8b63&amp;ic0=0&amp;ic1=0" async="async"></script>
-                </p>
-            </div>
-            <div class="col-sm-6">
-                <canvas id="myChart" width="200" height="100"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
 
-@section Script{
-<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
+      @section Script{
+      <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
     <script>
-         @*var data = [];
         $(document).ready(function () {
 
             GetReportData();
 
             function GetReportData() {
                 $.ajax({
-                    url: '@Url.Action("GetAdoptionReport")',
+                    url: '@Url.Action("loginCount")',
                     type: 'POST',
-                    //成功之後，會收到Server端返回的資料，也就是自訂的型別ReportData
-                    //有兩個屬性可以用
-                    success: function (datas) {
-                        $.each(datas, function (idx, adp) {
-                            $.each(adp, function (index, value) {
-                                data.push([value.CategoryName, value.Share])
-                            })
+                    success: function (data) {
+                        //指定圖表顯示位置
+                        var ctx = document.getElementById("myChart1");
 
-                        })
+                        var myChart1 = new Chart(ctx,    {
+                                type: 'line',
+                                data: {
+                                    labels: data.loginDates,
+                                    datasets: [{
+                                        label: '過去30天登入人次統計',
+                                        data: data.loginCounts,
+                                        backgroundColor: 'rgba(32, 200, 85, 0.2)',
+                                        borderColor: 'rgba(32, 200, 85,1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }],
+                                        xAxes: [{
+                                            gridLines: {
+                                                display:false
+                                            }
+                                        }]
+                                    }
+                                }
+                            }
 
-                        chart.series[0].data = data;
-                        $('#container').highcharts(chart);
+                            );
                     },
                     cache: false
                 })
-            }*@
-
-        var ctx = document.getElementById("myChart");
-
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['a', 'b', 'c','d','e','f'],
-                datasets: [{
-                    label: '登入人數統計',
-                    data: [1,2,3,4,5,6],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                }
             }
-        });
+
+            $.ajax({
+                    url: '@Url.Action("personLoginCount")',
+                    type: 'POST',
+                    success: function (data) {
+                        //指定圖表顯示位置
+                        var ctx2 = document.getElementById("myChart2");
+                        var myDoughnutChart = new Chart(ctx2, {
+                            type: 'doughnut',
+                            data: {
+                                labels: data.userCategories,
+                                datasets: [{
+                                    label: '過去30天會員登入頻率分類',
+                                    data: data.userCounts,
+                                    backgroundColor: [
+                                        'rgba(255,60, 60, 1)',
+                                        'rgba(255, 200, 30, 1)',
+                                        'rgba(80, 80, 180, 1)',
+                                        'rgba(200, 200, 200, 1)',
+                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                responsive: true
+            }
+                        });
+                        
+                    },
+                    cache: false
+                })
+            
+        })
+     
+
+
+
+       
+        //var config = {
+        //    type: 'pie',
+        //    data: {
+        //        datasets: [{
+        //            data: [
+        //                randomScalingFactor(),
+        //                randomScalingFactor(),
+        //                randomScalingFactor(),
+        //                randomScalingFactor(),
+        //                randomScalingFactor(),
+        //            ],
+        //            backgroundColor: [
+        //                window.chartColors.red,
+        //                window.chartColors.orange,
+        //                window.chartColors.yellow,
+        //                window.chartColors.green,
+        //                window.chartColors.blue,
+        //            ],
+        //            label: 'Dataset 1'
+        //        }],
+        //        labels: [
+        //            "Red",
+        //            "Orange",
+        //            "Yellow",
+        //            "Green",
+        //            "Blue"
+        //        ]
+        //    },
+        //    options: {
+        //        responsive: true
+        //    }
+        //};
+
+        //window.onload = function () {
+        //    var ctx = document.getElementById("chart-area").getContext("2d");
+        //    window.myPie = new Chart(ctx, config);
+        //};
+
+        //document.getElementById('randomizeData').addEventListener('click', function () {
+        //    config.data.datasets.forEach(function (dataset) {
+        //        dataset.data = dataset.data.map(function () {
+        //            return randomScalingFactor();
+        //        });
+        //    });
+
+        //    window.myPie.update();
+        //});
+
+        //var colorNames = Object.keys(window.chartColors);
+        //document.getElementById('addDataset').addEventListener('click', function () {
+        //    var newDataset = {
+        //        backgroundColor: [],
+        //        data: [],
+        //        label: 'New dataset ' + config.data.datasets.length,
+        //    };
+
+        //    for (var index = 0; index < config.data.labels.length; ++index) {
+        //        newDataset.data.push(randomScalingFactor());
+
+        //        var colorName = colorNames[index % colorNames.length];;
+        //        var newColor = window.chartColors[colorName];
+        //        newDataset.backgroundColor.push(newColor);
+        //    }
+
+        //    config.data.datasets.push(newDataset);
+        //    window.myPie.update();
+        //});
+
+        //document.getElementById('removeDataset').addEventListener('click', function () {
+        //    config.data.datasets.splice(0, 1);
+        //    window.myPie.update();
+        //});
+
 </script>
     }

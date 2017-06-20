@@ -1,8 +1,7 @@
 ﻿@model CaptainMao.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>使用其他服務登入。</h4>
-<hr />
+
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0) {

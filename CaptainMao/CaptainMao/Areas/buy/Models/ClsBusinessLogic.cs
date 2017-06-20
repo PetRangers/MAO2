@@ -44,7 +44,7 @@ namespace CaptainMao.Areas.buy.Models
         }
 
         public IEnumerable<Merchandise> Logic_SeachMerchandise(string seach) {
-            var x = _merchandise.GetAll().Where(c => c.Merchandise_Name == seach);
+            var x = _merchandise.GetAll().Where(c => c.Merchandise_Name.Contains(seach));
             return x;
         }
         /*寵物分類回傳*/

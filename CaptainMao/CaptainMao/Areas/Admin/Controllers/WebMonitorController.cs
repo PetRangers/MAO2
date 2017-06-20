@@ -14,42 +14,73 @@ namespace CaptainMao.Areas.Admin.Controllers
         // GET: Admin/WebMonitor
         public ActionResult Monitor()
         {
-            //string[] xAxis = new string[]{"a", "b", "c", "d", "e", "f" };
-            //ViewBag.xAxis[0] = "a";
-            //ViewBag.xAxis[1] = "b";
-            //ViewBag.xAxis[2] = "c";
-            //ViewBag.xAxis[3] = "d";
-            //ViewBag.xAxis[4] = "e";
-            //ViewBag.xAxis[5] = "f";
-
-            //int[] yAxis = new int[]{2, 4, 6, 7, 5, 1 };
-            //ViewBag.yAxis[0] = 1;
-            //ViewBag.yAxis[1] = 2;
-            //ViewBag.yAxis[2] = 3;
-            //ViewBag.yAxis[3] = 4;
-            //ViewBag.yAxis[4] = 5;
-            //ViewBag.yAxis[5] = 6;
-
-
             return View();
         }
+
+        //以下是網站流量相關統計的方法
+        //設定監測登入人數的天數
+        public const int monitoredDays=30;
 
         public ActionResult loginCount()
         {
             var logins = db.LoginLogs.Select(l=>l.LoginTime).ToList();
-            
-            List<int> loginWeeksAgo = new List<int>();
+
+            List<int> loginDaysAgo = new List<int>();
 
             foreach (var login in logins)
             {
-                int weeks = (int)(((DateTime.UtcNow - login).TotalDays)/7);
-                loginWeeksAgo.Add(weeks);
+                int days = (int)((DateTime.UtcNow - login).TotalDays);
+                loginDaysAgo.Add(days);
             }
-            int[] loginCounts = {0, 0, 0, 0, 0, 0, 0, 0};
 
+            int[] loginCounts = new int[monitoredDays];
+            string[] loginDates = new string[monitoredDays];
+            for (int i = 0; i < monitoredDays; i++)
+            {
+                loginCounts[monitoredDays - i - 1] = loginDaysAgo.Count(x => x == i);
+                loginDates[monitoredDays - i - 1] = DateTime.UtcNow.AddDays(-i).ToShortDateString();
+            }
+            var loginData = new { loginDates, loginCounts};
 
+            return Json(loginData, JsonRequestBehavior.AllowGet);
+        }
 
-            return Json(loginWeeksAgo);
+        public ActionResult personLoginCount()
+        {
+            var allUserCount = db.AspNetUsers.Count();
+
+            var groupedLogins = db.LoginLogs.Select(l=>l).GroupBy(l=>l.UserId).ToList();
+                           
+
+            int highFreqUsers = 0;
+            int intermediateFreqUsers = 0;
+            int lowFreqUsers = 0;
+            int inactiveUsers = 0;
+
+            foreach (var l in groupedLogins)
+            {
+                if (l.Count() >= 10)
+                {
+                    highFreqUsers++;
+                }
+                else if (l.Count() >= 4)
+                {
+                    intermediateFreqUsers++;
+                }
+                else
+                {
+                    lowFreqUsers++;
+                }
+            }
+
+            inactiveUsers = allUserCount - highFreqUsers - intermediateFreqUsers - lowFreqUsers;
+            string[] userCategories = {"高頻使用者(當月登入10次以上)", "中頻使用者(當月登入4至9次)", "低頻使用者(當月登入1至3次)", "不活躍使用者(當月無登入紀錄)" };
+            int[] userCounts ={ highFreqUsers, intermediateFreqUsers, lowFreqUsers, inactiveUsers };
+
+            var userAnalysisResult = new { userCategories, userCounts };
+
+            return Json(userAnalysisResult, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
