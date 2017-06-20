@@ -1,6 +1,6 @@
 ﻿@model CaptainMao.Areas.Admin.Models.NormalUserDetailViewModel
 
-<h2>會員詳細資料</h2>
+<h2>會員詳細資料 @Html.ActionLink("編輯", "Edit", "NormalUser", new { area = "Admin", id =Model.Id }, new { @class = "btn btn-info" }) </h2>
 
 <div id="user-profile-2" class="user-profile">
     <div class="tabbable">
