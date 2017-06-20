@@ -220,18 +220,18 @@
             @{
             }
         </div>
-        <div style="height:auto;background-color:#b9a1ee" class="drawingpin">
+        <div style="height:auto;background-color:#cfc0f1" class="drawingpin">
             <form method="post" action="~/Hospital/Hospital/ListToNote">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <table>
                             <tr>
-                                <h2  style="color:#7c1010">@ViewBag.HospitalName - 評分</h2>
+                                <h2 style="color:#7c1010">@ViewBag.HospitalName - 評分</h2>
                                 <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
-                                <th style="color:#dc6f06">我要評分</th>
+                                <th style="color:#82460c">我要評分</th>
                             <tr>
                             <tr>
-                                <th  style="color:#dc6f06">星等</th>
+                                <th>星等</th>
                                 <td>
                                     <img id="1idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
                                     <img id="2idimg" src="~/Areas/Hospital/Image/main2.png" style="width:100px" />
@@ -246,9 +246,9 @@
                                     <input type="button" value="重選星等" onclick="buttonclick()" id="butck" class="btn btn-primary" style="float:right " />
                                 </td>
                             </tr>
-                            <th  style="color:#dc6f06">評語</th>
+                            <th>評語</th>
                             <td colspan=4>
-                                <textarea style="width:400px;height:100px;" id="NoteValue" name="NoteValue"></textarea>
+                                <textarea style="width:300px;height:90px;" id="NoteValue" name="NoteValue"></textarea>
                             </td>
                             </tr>
                             <tr class="align-center">
@@ -262,13 +262,14 @@
         </div>
         <div class="col-sm-4">
 
-            <div id="container" style="height:350px" >
+            <div id="container" style="height:350px"></div>
+            <div style="font-size:18px ;color:#8a0f0f;text-align:center" >
+                一星：@ViewBag.S1
+                、二星：@ViewBag.S2
+                、三星：@ViewBag.S3
+                、四星：@ViewBag.S4
+                、五星：@ViewBag.S5
             </div>
-            一星：@ViewBag.S1
-            ,二星：@ViewBag.S2
-            ,三星：@ViewBag.S3
-            ,四星：@ViewBag.S4
-            ,五星：@ViewBag.S5
         </div>
     </div>
 
@@ -278,12 +279,14 @@
         <input type="hidden" id="HospitalID" name="HospitalID" value="@ViewBag.HospitalID" />
 
         @*//載入評分的清單*@
-        <table class="table table-striped" >
-            @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
-        </table>
+        <div style="height:500px ;overflow:auto">
+            <table>
+                @Html.Action("ShowThisNote", "Hospital", new { HospitalID = @ViewBag.HospitalID })
+            </table>
+        </div>
     </form>
-    </div>
-    </div>
+
+
     <!-------------------articleEnd------------------->
 </article>
 

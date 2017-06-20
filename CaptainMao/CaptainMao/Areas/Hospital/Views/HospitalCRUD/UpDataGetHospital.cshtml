@@ -99,7 +99,7 @@
     <div>
         <!--顏色請自己放在Css內 這只是樣板-->
         <div style="height:auto;background-color:rgb(178, 179, 250)" class="drawingpin">
-            <h2>產品分類修改</h2>
+            <h1 style="color:#7c1010">產品分類修改</h1>
             <form method="post" action="~/HospitalCRUD/UpDataHospital" class="form-horizontal" onsubmit="return checkForm(this);">
                 @foreach (var Item in Model)
                 {
@@ -207,7 +207,7 @@
                             <button id="butck" type="submit" class="btn btn-default">修改</button>
 
                             <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="隱藏"  id="butck" style="float:right "/></a>
-                            <a href="@Url.Action("RemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="顯示"  id="butck" style="float:right " /></a>
+                            <a href="@Url.Action("reRemoveHospital","HospitalCRUD",new { id = Item.HospitalID })"><input type="button" value="顯示"  id="butck" style="float:right " /></a>
                         </div>
                     </div>
                 }

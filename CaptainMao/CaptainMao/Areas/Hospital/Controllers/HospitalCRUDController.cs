@@ -1,4 +1,5 @@
 ﻿using CaptainMao.Areas.Hospital.Models.ViewModel;
+using CaptainMao.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,9 +9,12 @@ using System.Web.Mvc;
 
 namespace CaptainMao.Areas.Hospital.Controllers
 {
+    [AuthorizeMao(Roles ="Admin")]
     public class HospitalCRUDController : Controller
     {
         global::CaptainMao.Models.MaoEntities DB = new CaptainMao.Models.MaoEntities();
+        //刪除
+        
 
         // GET: Hospital/HospitalCRUD
         public ActionResult Aside()
@@ -440,6 +444,20 @@ namespace CaptainMao.Areas.Hospital.Controllers
             if (removeHospital.Equals(null))
             { }
             removeHospital.OnView = "0";
+            DB.SaveChanges();
+
+            return RedirectToAction("Index", "HospitalCRUD");
+
+        }
+        //顯示
+        public ActionResult reRemoveHospital(int id = 2)
+        {
+            var removeHospital = (from a in DB.Hospitals
+                                  where a.HospitalID == id
+                                  select a).FirstOrDefault();
+            if (removeHospital.Equals(null))
+            { }
+            removeHospital.OnView = "1";
             DB.SaveChanges();
 
             return RedirectToAction("Index", "HospitalCRUD");
