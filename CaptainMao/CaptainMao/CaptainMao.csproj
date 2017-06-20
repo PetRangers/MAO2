@@ -266,6 +266,8 @@
     <Content Include="Areas\buy\Views\Store\Index.cshtml" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764.jpg" />
     <Content Include="Areas\Hospital\Image\Cats_Angels_Kittens_487764001.jpg" />
+    <Content Include="Areas\Hospital\Image\mai.png" />
+    <Content Include="Areas\Hospital\Image\main2.png" />
     <Content Include="Areas\Hospital\Image\S__10584071.jpg" />
     <Content Include="Areas\buy\images\image_1.jpg" />
     <Content Include="Areas\buy\images\image_2.jpg" />
