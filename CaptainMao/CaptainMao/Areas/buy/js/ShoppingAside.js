@@ -67,7 +67,7 @@ function f1(e) {
     }
 
     function Success() {
-        alert("已將您的商品加入購物車");
+        sweetAlert('您已加入購物車');
     }
 
 

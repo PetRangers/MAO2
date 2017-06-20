@@ -432,6 +432,7 @@
     </Content>
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\Hot.cshtml" />
+    <Content Include="fonts\Capture it.ttf" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -65,11 +65,11 @@
 <script src="../../Scripts/bootstrap.min.js"></script>
 <script src="../buy/js/sweetalert.min.js"></script>
     <script>
-        $(function () {
-            $('#btn1').click(function () {
-                sweetAlert('ok');
-            })
-        })
+        //$(function () {
+        //    $('#btn1').click(function () {
+        //        sweetAlert('ok');
+        //    })
+        //})
     </script>
 
 </html>

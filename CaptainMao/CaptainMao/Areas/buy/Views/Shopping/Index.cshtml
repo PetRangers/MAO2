@@ -5,9 +5,39 @@
 
 }
 @section style{
+    <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
     <link href="~/Areas/buy/css/shoppingIndex.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <style>
+        #img1 {
+            height:200px;
+            width:100%;
+        }
+        h4 {
+            text-align:justify;
+            word-break:break-word;
+            word-break:break-all;
+        }
+        h4 a{
+            color:#000000;
+        }
+        h3 {
+            color: #ca0c0c;
+            font-size: 60px;
+            font-family:Capture it;
+            font-style:italic;
+            padding-left:20px;
+            position:relative;
+        }
+        .div1{
+            min-width:400px;
+        }
+        .btn1 {
+            position:absolute;
+            right:0px;
+            margin-right:30px;
+            bottom:50px;
+        }
+    </style>
 }
 <!--aside側欄 article主欄-->
 
@@ -17,10 +47,10 @@
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
-
     <span class="col-lg-12">
         @Html.Action("Hot")
     </span>
+
     <div class="col-lg-12">
         <input />
         <button id="seachMer" Class="glyphicon glyphicon glyphicon-search btn btn-primary"></button>
@@ -28,58 +58,58 @@
         @Html.ActionLink(" ", "Index_I", "Shopping", new { @Class = "glyphicon glyphicon-th-list btn btn-primary" })
     </div>
     <!-------------------articleOpen------------------->
-    <div class="col-lg-12">
-        @foreach (var _model in Model)
+    <div class="div1 col-lg-12">
+        @foreach (var _model in Model.OrderByDescending(x => x.Merchandise_Creatdate))
         {
-                string url = "";
-                try
+            string url = "";
+            try
+            {
+                if (_model.Merchandise_Photo.Length > 0)
                 {
-                    if (_model.Merchandise_Photo.Length > 0)
-                    {
-                        url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
-                    }
+                    url = Url.Action("PixbyID", "zPublicFunction", new { id = _model.Merchandise_ID });
                 }
-                catch
-                {
-                    url = _model.Merchandise_Photo_Address;
-                }
-            <div class="drawingpin col-sm-4">
+            }
+            catch
+            {
+                url = _model.Merchandise_Photo_Address;
+            }
+            <div class="drawingpin col-md-4">
                 <div class="row">
-                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</div><div class="col-xs-6"><img src='@url' class="img-thumbnail" widdiv="300" height="300" /></div>
+                    <div class="col-xs-12">
+                        <img id="img1" src='@url' class="img-thumbnail" />
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_ID)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_ID)</div>
+                    <h4 class="col-xs-12">@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
                 </div>
-                <div class="row">
-                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</div><div class="col-xs-6">@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</div>
+                <div>
+                    <h3 class="row">
+                        @Html.DisplayFor(c => _model.Merchandise_Price)
+                    </h3>
+                    <span class="btn1">
+                        @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
+                        @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                    </span>
                 </div>
-                <div class="row">
-                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Price)</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-4">@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</div><div class="col-xs-6">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</div>
-                </div>
-                <div class="pull-right">@Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })</div>
             </div>
-                    }
+        }
     </div>
 
     <!-------------------articleEnd------------------->
 </article>
 
+
+
 @section script{
     <!--aside-->
+    <script src='@Url.Content("~/Areas/buy/js/sweetalert.min.js")'></script>
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
     <script src='@Url.Content("~/Areas/buy/js/ShoppingIndex.js")'></script>
     <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+
 
     <script>
-        if ('@TempData["ok"]' != '') {
-            alert('@TempData["ok"]');
-        }
+
         $(function () {
             $("#seachMer").click(function () {
                 var seachMer = $(this).parent().children().first().val();
@@ -88,15 +118,12 @@
                 location.href = seachUrl;
 
             })
+
+            if ('@TempData["ok"]' != '') {
+                sweetAlert('@TempData["ok"]');
+            }
         })
 
     </script>
 
-<script type="text/javascript" class="init">
-              $(document).ready(function () {
-                  $('#example').DataTable({
-                      responsive: true
-                  });
-              });
-</script>
 }

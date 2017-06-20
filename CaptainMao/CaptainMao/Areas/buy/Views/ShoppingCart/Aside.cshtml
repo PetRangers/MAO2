@@ -2,15 +2,17 @@
     <div class="panel-heading">
         訂購流程
     </div>
-    <ul id="JsonTypes" class="list-group">
+    <ul class="list-group">
         <li class="list-group-item">
-            @Html.ActionLink("商品確認", "index")
+            <a ng-click="gotodiv1()">商品確認</a>
+            
         </li>
         <li class="list-group-item">
-            @Html.ActionLink("送貨地點", "index")
+            <a ng-click="gotodiv2()">送貨地點</a>
+            
         </li>
         <li class="list-group-item">
-            @Html.ActionLink("訂單成立", "Create")
+            <a ng-click="gotodiv3()">訂單成立</a>
         </li>
     </ul>
 
