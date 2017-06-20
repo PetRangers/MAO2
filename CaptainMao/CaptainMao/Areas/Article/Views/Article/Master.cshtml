@@ -105,7 +105,12 @@
                                 <a href="@Url.Action("Show","Article",new { area="Article",articleID=@item.ArticleID})"><p class="title">@Html.DisplayFor(a => item.Title)</p></a>
                             </td>
                             <td>@Html.DisplayFor(a => item.AspNetUser.NickName)</td>
-                            <td>@Html.DisplayFor(a => item.Comments.Count) / @Html.DisplayFor(a => item.Number)</td>
+                            <td>
+                                @{
+                                    var count = item.Comments.Where(a => a.IsDeleted==false).Count();
+                                }
+                                @Html.DisplayFor(a => count) / @Html.DisplayFor(a => item.Number)
+                            </td>
                             <td>@Html.DisplayFor(a => item.LastChDateTime)</td>
                             <td>@Html.ActionLink("修改", "Edit", new { articleID = item.ArticleID }, new { @class = "btn btn-info glyphicon glyphicon-pencil" })</td>
                             <td>@Html.ActionLink("刪除", "DelMaster", new { articleID = item.ArticleID }, new { @class = "btn btn-danger glyphicon glyphicon-remove Del" })</td>

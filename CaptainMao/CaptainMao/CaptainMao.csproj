@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44355</IISExpressSSLPort>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -313,9 +313,6 @@
     </Content>
     <Content Include="css\video.css" />
     <Content Include="favicon.ico" />
-    <Content Include="files\1fabec0335901a37a1aae9037d955749.png" />
-    <Content Include="files\F12_Refresh_36x108.png" />
-    <Content Include="files\Radio1.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\0DQPb7DHZM.png" />
@@ -1380,6 +1377,7 @@
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
     <Folder Include="bin\" />
+    <Folder Include="files\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

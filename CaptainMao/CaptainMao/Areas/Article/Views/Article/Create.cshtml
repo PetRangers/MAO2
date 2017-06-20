@@ -8,6 +8,7 @@
 
 @section script{
 <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script>
         $(function () {
             CKEDITOR.replace('content', {
@@ -17,6 +18,12 @@
             });
             $('#valiCode').bind('click', function () {
                 this.src = "GetValidateCode?&time=" + (new Date()).getTime();
+            })
+            $('#demo').click(function () {
+                $('.boardid').val(1);
+                $('.titlecateid').val(3);
+                $('.title').val('我喜歡動物!');
+                CKEDITOR.instances.content.setData('<p style="text-align: center;"><img alt="" src="http://maoup.com.tw/wp-content/uploads/2017/03/170307-1.png" style="width: 400px; height: 300px;" /></p><br/><p style="text-align: center;"><span style="font-size:14px;">呼～天氣冷颼颼，趕快讓毛孩洗個舒服的熱水澡&epsilon;٩(๑&gt; ₃ &lt;)۶з且慢！你知道狗狗貓貓洗澡的水溫不能太高嗎？洗澡水溫如果太高，反而可能讓毛孩的皮膚越洗越糟糕(((ﾟДﾟ;)))毛起來這就來說分明！</span></p>');
             })
         });
     </script>
@@ -57,7 +64,7 @@
                             @{
                                 var boardcategories = new SelectList(ViewBag.datas2, "BoardID", "BoardName");
                             }
-                            @Html.DropDownListFor(c => c.BoardID, boardcategories, "請選擇", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownListFor(c => c.BoardID, boardcategories, "請選擇", htmlAttributes: new { @class = "form-control boardid" })
                             @Html.ValidationMessageFor(model => model.BoardID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -68,7 +75,7 @@
                             @{
                                 var titlecategories = new SelectList(ViewBag.datas, "TitleCategoryID", "TitleCategoryName");
                             }
-                            @Html.DropDownListFor(c => c.TitleCategoryID, titlecategories, "請選擇", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownListFor(c => c.TitleCategoryID, titlecategories, "請選擇", htmlAttributes: new { @class = "form-control titlecateid" })
                             @Html.ValidationMessageFor(model => model.TitleCategoryID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -76,7 +83,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control title", autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -84,7 +91,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.ContentText, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.ContentText, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "content", @name = "content" } })
+                            @Html.EditorFor(model => model.ContentText, new { htmlAttributes = new { @class = "form-control content", autocomplete = "off", id = "content", @name = "content" } })
                             @Html.ValidationMessageFor(model => model.ContentText, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -108,6 +115,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="送出" class="btn btn-default" />
+                            <input type="button" class="btn btn-primary" id="demo" value="Demo" />
                         </div>
                     </div>
                 </div>
