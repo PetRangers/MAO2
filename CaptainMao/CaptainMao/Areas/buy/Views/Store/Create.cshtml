@@ -5,6 +5,17 @@
 }
 @section style{
 <link href="~/Areas/buy/css/StoreCreate.css" rel="stylesheet" />
+    <style>
+        #Merimg {
+            width:100%;
+            border-radius:30px;
+            border:none;
+        }
+
+        .drawingpin:nth-child(2) {
+            margin-top:10px;   
+        }
+    </style>
     }
 
 <!--aside側欄 article主欄-->
@@ -26,46 +37,62 @@
 
         using (Html.BeginForm((string)@ViewBag.Form, "Store", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
         {
-            <div class="drawingpin col-sm-5">
+            <div class="col-sm-5">
+                <div class="drawingpin">
+                    <img id="Merimg" alt="圖片" src='@Url.Action("PixbyID", "zPublicFunction", new { id = Model._Merchandise.Merchandise_ID })' />
+                </div>
+                <div class="drawingpin">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.EditorFor(c => c._Merchandise.Merchandise_Description, new { htmlAttributes = new { placeholder = "請輸入描述", @class = "form-control", id = "textarea1" } })
+                            @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="drawingpin col-sm-6">
                 <div class="form-group">
                     @Html.LabelFor(c => c._Merchandise.Merchandise_Photo, new { @class = "col-sm-2 control-label" })
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                         <input class="form-control" type="file" placeholder="請選擇圖片" name="photo" id="photo" />
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(c => c._Merchandise.Merchandise_Name, new { @class = "col-sm-2 control-label" })
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                         @Html.EditorFor(c => c._Merchandise.Merchandise_Name, new { htmlAttributes = new { placeholder = "請輸入商品名稱", @class = "form-control" } })
                         @Html.ValidationMessageFor(p => p._Merchandise.Merchandise_Name)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(c=>c._Merchandise.Merchandise_Fitness,new { @class="col-sm-2 control-label"})
-                    <div class="col-sm-8">
-                        @Html.EditorFor(c=>c._Merchandise.Merchandise_Fitness,new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
                     @Html.HiddenFor(c => c._Merchandise.Merchandise_Creatdate)
                     @Html.HiddenFor(c => c._Merchandise.Merchandise_ID)
-                    @Html.HiddenFor(c=>c._Merchandise.Merchandise_Photo)
-                </div>
-                <div class="form-group">
+                    @Html.HiddenFor(c => c._Merchandise.Merchandise_Photo)
+
                     <div>
                         @Html.LabelFor(c => c._Category.First().CategoryName, new { @class = "col-sm-2 control-label" })
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         @{
                             SelectList select = new SelectList(Model._Category, "CategoryID", "CategoryName");
                         }
-                        
                         @Html.DropDownListFor(c => c._Merchandise.CategoryID, select, new { @class = "form-control", id = "_Category" })
                     </div>
+                    @Html.LabelFor(c => c._Merchandise.Merchandise_Fitness, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-1">
+                        @Html.EditorFor(c => c._Merchandise.Merchandise_Fitness, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                 </div>
-                <div class="drawingpin">
-                    <img id="Merimg" src='@Url.Action("PixbyID", "zPublicFunction", new { id = Model._Merchandise.Merchandise_ID})'/>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(c => c._Merchandise.Merchandise_Price, new { @class = "col-sm-2 control-label" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.EditorFor(c => c._Merchandise.Merchandise_Price, new { htmlAttributes = new { placeholder = "請輸入金額", @class = "form-control" } })
+                        @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Price)
+                    </div>
                 </div>
-            </div>
-            <div class="drawingpin col-sm-6">
+
                 <div class="form-group" id="checkboxlist">
                     @*判斷是否重複*@
                     @{string typeName = "";}
@@ -76,43 +103,29 @@
                             typeName = x.Type.Type_Name;<hr />
                             @Html.LabelFor(c => x.Type.Type_Name, x.Type.Type_Name, new { @class = "col-sm-2  control-label" })
                         }
-
                         <label>
                             <input type="checkbox" name="sType_ID" value=@x.sType_ID />
                             @x.sType_Name
                         </label>
                     }
-
                 </div>
                 @Html.ValidationMessageFor(c => c.sType_ID)
+                @{
+                    var stringX = @ViewBag.Form == "Create" ? "建立" : "修改";
+                }
+                <button type="submit" class="pull-right btn btn-primary">@stringX</button>
+
             </div>
-                <div class="drawingpin col-sm-11">
-                    <div class="form-group">
-                        @Html.LabelFor(c => c._Merchandise.Merchandise_Price, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-8">
-                            @Html.EditorFor(c => c._Merchandise.Merchandise_Price, new { htmlAttributes = new { placeholder = "請輸入金額", @class = "form-control" } })
-                            @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Price)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(c => c._Merchandise.Merchandise_Description, new { @class = "col-sm-2 control-label" })
-                        <div class="col-sm-8">
-                            @Html.EditorFor(c => c._Merchandise.Merchandise_Description, new { htmlAttributes = new { placeholder = "請輸入描述", @class = "form-control", id = "textarea1" } })
-                            @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Description)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="col-sm-offset-2 btn btn-primary">@ViewBag.Form</button>
-                    </div>
-                </div>
-                            }
-                        }
 
-
+        }
+   }
     <!-------------------articleEnd------------------->
-
-
 </article>
+
+
+
+
+
 
 
 

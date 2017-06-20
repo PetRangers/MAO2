@@ -26,6 +26,7 @@
             font-family:Capture it;
             font-style:italic;
             padding-left:20px;
+            position:relative;
         }
         .div1{
             min-width:400px;
@@ -58,7 +59,7 @@
         @Html.ActionLink(" ", "Index_I", "Shopping", new { @Class = "glyphicon glyphicon-th-list btn btn-primary" })
     </div>
     <!-------------------articleOpen------------------->
-    <div class="div1 row box">
+    <div class="div1 col-lg-12">
         @foreach (var _model in Model.OrderByDescending(x => x.Merchandise_Creatdate))
         {
             string url = "";
@@ -73,16 +74,24 @@
             {
                 url = _model.Merchandise_Photo_Address;
             }
-            <div class="drawingpin col-md-4 item">
-                     <img src='@url' class="img-thumbnail" />
-                     <h4>@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
-                     <h3>
-                         @Html.DisplayFor(c => _model.Merchandise_Price)
-                     </h3>
-                      <span class="btn1">
-                            @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
-                            @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
-                      </span>
+            <div class="drawingpin col-md-4">
+                <div>
+                    <div class="col-xs-12">
+                        <img id="img1" src='@url' class="img-thumbnail" />
+                    </div>
+                </div>
+                <div>
+                    <h4 class="col-xs-12">@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
+                </div>
+                <div>
+                    <h3>
+                        @Html.DisplayFor(c => _model.Merchandise_Price)
+                    </h3>
+                    <span class="btn1">
+                        @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
+                        @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                    </span>
+                </div>
             </div>
         }
     </div>
@@ -98,8 +107,8 @@
     <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
     <script src='@Url.Content("~/Areas/buy/js/ShoppingIndex.js")'></script>
     <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
-    <script type="text/javascript" src="https://masonry.desandro.com/jquery.masonry.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+
     <script>
         $(function () {
             $("#seachMer").click(function () {
@@ -114,11 +123,8 @@
                 sweetAlert('@TempData["ok"]');
             }
 
-            $('.box').masonry({
-                itemSelector: 'item',
-            });
-
         })
+
     </script>
 
 }

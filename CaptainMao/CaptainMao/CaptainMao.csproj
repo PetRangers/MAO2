@@ -17,7 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -252,6 +252,7 @@
     <Content Include="Areas\buy\css\sweetalert.css" />
     <Content Include="Areas\buy\images\autoicon.png" />
     <Content Include="Areas\buy\images\go.png" />
+    <Content Include="Areas\buy\js\masonry.pkgd.min.js" />
     <Content Include="Areas\buy\js\ShoppingAside.js" />
     <Content Include="Areas\buy\js\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\buy\js\ShoppingCart.js" />
@@ -429,6 +430,7 @@
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\Hot.cshtml" />
     <Content Include="fonts\Capture it.ttf" />
+    <Content Include="Areas\buy\Views\Shopping\Index - 複製.cshtml" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

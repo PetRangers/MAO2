@@ -8,36 +8,52 @@
 <link href="~/Areas/buy/css/shoppingcart.css" rel="stylesheet" />
 <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
     <style>
-            html, body{
-                height: 100%;
-                }
-
-        article > div > div {
-        margin:100vh 0;
-        min-width:600px;
-        
+        html, body{
+            height: 100%;
         }
+        aside {
+            cursor:pointer;
+        }
+        article > div > div {
+            margin:0;
+            min-width:600px;
+            min-height:40vh;
+            overflow:hidden;
+        }
+        #cityMap {
+            border-radius:30px;
+        }
+        #spandelete {
+            border-radius:30px;
+            height:30px;
+            width:30px;
+            padding-left:0px;
+            padding-right:0px;
+            padding-top:5px;
+        }
+
+
     </style>
 }
 <!--aside側欄 article主欄-->
-<span ng-app="MaoApp" ng-controller="MainController">
+<div ng-app="MaoApp" ng-controller="MainController">
     <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
         <!-------------------asideOpen------------------->
         @Html.Action("Aside")
         <!-------------------asideEnd------------------->
     </aside>
-    <article class="col-lg-9 col-sm-11">
+    <article  class="col-lg-9 col-sm-11">
         <!-------------------articleOpen------------------->
         <div class="col-lg-12">
             <!--顏色請自己放在Css內 這只是樣板-->
-            <div name="div1" style="background-color:#fff266" class="drawingpin">
+            <div id="div1" style="background-color:#fff266" class="drawingpin">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr class="info">
-                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.Store_Name)</th>
-                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
-                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
-                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.Merchandise_Photo)</th>
+                            <th class="col-lg-1">@Html.DisplayNameFor(c => c.Store_Name)</th>
+                            <th class="col-lg-1">@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
+                            <th class="col-lg-4">@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
+                            <th class="col-lg-1">@Html.DisplayNameFor(c => c.Merchandise_Photo)</th>
                             <th class="col-lg-1">@Html.DisplayNameFor(c => c.Merchandise_Price)</th>
                             <th class="col-lg-3">
                                 <div class="col-lg-5">@Html.DisplayNameFor(c => c.merchandise_Volume)</div>
@@ -47,47 +63,53 @@
                     </thead>
                     <tbody>
                         <tr class="warning" ng-repeat="item in items">
-                            <td class="col-lg-2"><span class="ng-hide">{{item.cartID}}</span> {{item.Store_Name}} </td>
-                            <td class="col-lg-2">{{ item.Merchandise_ID}}</td>
-                            <td class="col-lg-2">{{item.Merchandise_Name}}</td>
-
-                            <td class="col-lg-2" ng-if="item.Merchandise_Photo != null "> <img ng-src="data:image/JPEG;base64,{{item.Merchandise_Photo}}" height="80" width="80" class="img-circle" /></td>
+                            <td class="col-lg-1"><span class="ng-hide">{{item.cartID}}</span> {{item.Store_Name}} </td>
+                            <td class="col-lg-1">{{ item.Merchandise_ID}}</td>
+                            <td class="col-lg-4">{{item.Merchandise_Name}}</td>
+                            <td class="col-lg-1" ng-if="item.Merchandise_Photo != null "> <img ng-src="data:image/JPEG;base64,{{item.Merchandise_Photo}}" height="80" width="80" class="img-circle" /></td>
                             <td class="col-lg-2" ng-if="item.Merchandise_Photo == null "> <img ng-src="{{item.Merchandise_Photo_Address}}" height="80" width="80" class="img-circle" /></>
                             <td class="col-lg-1">{{item.Merchandise_Price }}</td>
                             <td class="col-lg-3">
                                 <div class="col-lg-5">@Html.EditorFor(c => c.merchandise_Volume, new { htmlAttributes = new { ng_model = "item.merchandise_Volume", max = 100, min = 1, ng_change = "myFunchang(item)" } })</div>
-                                <div class="col-lg-5"> {{item.merchandise_Volume*item.Merchandise_Price}}  <span ng-click="myFunDelete(item)" class="btn btn-danger glyphicon glyphicon-remove"></span></div>
+                                <div class="col-lg-5">
+                                    {{item.merchandise_Volume*item.Merchandise_Price}}
+                                </div>
+                                <span id="spandelete" ng-click="myFunDelete(item)" class="btn btn-danger glyphicon glyphicon-remove"></span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-primary">總計:{{getTotal()}}  下一步</button>
+                <button class="btn btn-primary" ng-click="gotodiv2()">總計:{{getTotal()}}  下一步</button>
             </div>
+            <div></div>
 
-            <span name="div2"></span>
-            <div id="divMap" style="background-color:burlywood" class="drawingpin">
-                <div class="row">
-                    <div class="panel  panel-primary col-lg-5">
-                        @{
-                        SelectList select = new SelectList(ViewBag.city, "CityID", "CityName");
-                        }
-                        <div class="page-header">請選擇預定寄貨縣市 @Html.DropDownList("Citys", select)</div>
-                        <ul id="cityselect" class="panel-body"></ul>
-                        您預計送達的商店為:<div class="UserAddress"></div>
+            <div id="div2" style="padding-top:10vh">
+                <div id="divMap" style="background-color:burlywood" class="drawingpin">
+                    <div class="row">
+                        <div class="panel  panel-primary col-lg-5">
+                            @{
+                                SelectList select = new SelectList(ViewBag.city, "CityID", "CityName");
+                            }
+                            <div class="page-header">請選擇預定寄貨縣市 @Html.DropDownList("Citys", select)</div>
+                            <ul id="cityselect" class="panel-body"></ul>
+                            您預計送達的商店為:<div class="UserAddress"></div>
+                        </div>
+                        <div class="col-lg-7">
+                            <iframe id="cityMap" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
+                                    src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
+                        </div>
                     </div>
-
-                    <div class="col-lg-7">
-                        <iframe id="cityMap" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
-                                src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市新生南路三段90號&z=16&output=embed&t='></iframe>
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" ng-click="gotodiv3()">下一步</button>
                     </div>
                 </div>
-                <div class="row">
-                    <button class="btn btn-primary pull-right">下一步</button>
-                </div>
+
             </div>
 
 
-            <div name="div3" style="height:700px;background-color:#ffbe86" class="drawingpin">
+            <div> </div>
+            <div></div>
+            <div id="div3" style="height:700px;background-color:#ffbe86" class="drawingpin">
                 @using (Html.BeginForm("CreateOrder", "ShoppingCart", FormMethod.Get, new { @class = "form-horizontal" }))
             {
             <div class="col-lg-4">
@@ -99,7 +121,7 @@
                 <label readonly="readonly" class="UserAddress"></label>
                 <input name="FourStore" type="hidden" id="UserAddressID" />
             </div>
-            <div>您的商品</div>
+            <div >您的商品</div>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -132,7 +154,7 @@
         </div>
         <!-------------------articleEnd------------------->
     </article>
-</span>
+</div>
 
 
 @section script
@@ -143,8 +165,9 @@
 
     <script>
 
-            var app = angular.module('MaoApp', []);
-            app.controller('MainController',function ($scope, $http) {
+        var app = angular.module('MaoApp', []);
+
+        app.controller('MainController', function ($scope, $http, $location, $anchorScroll) {
                 //抓訂單實體網址
                 var httpurl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "PublicAPI" }, "https")';
                 loadData();
@@ -199,7 +222,24 @@
                     }
                     return total;
                 }
+                $scope.gotodiv1 = function () {
+                    $location.hash('div1');
+                    $anchorScroll();
+                }
+                $scope.gotodiv2 = function () {
+                    $location.hash('div2');
+                    $anchorScroll();
+                }
+                $scope.gotodiv3 = function () {
+                    $location.hash('div3');
+                    $anchorScroll();
+                }
+
             });
+
+     
+
+
 
     </script>
 }
