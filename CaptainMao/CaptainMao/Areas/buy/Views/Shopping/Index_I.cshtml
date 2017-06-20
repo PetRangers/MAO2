@@ -8,6 +8,7 @@
     <link href="~/Areas/buy/css/shoppingIndex.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
 }
 <!--aside側欄 article主欄-->
 
@@ -20,6 +21,7 @@
     <div class="col-lg-12">
         @Html.ActionLink(" ", "Index", "Shopping", new { @Class = "glyphicon glyphicon-th btn btn-primary" })
         @Html.ActionLink(" ", "Index_I", "Shopping", new { @Class = "glyphicon glyphicon-th-list btn btn-primary" })
+
     </div>
     <!-------------------articleOpen------------------->
     <div class="col-lg-12">
@@ -64,7 +66,7 @@
                         <th class="col-sm-2">@Html.DisplayFor(c => _model.Merchandise_Creatdate)</th>
                         <th class="col-sm-1">
 
-                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                            @Ajax.ActionLink("加入", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new {  @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
 
                         </th>
                     </tr>
@@ -80,25 +82,50 @@
 
 @section script{
     <!--aside-->
-    <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
     <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+    <script src='@Url.Content("~/Areas/buy/js/sweetalert.min.js")'></script>
+    <script src='@Url.Content("~/Areas/buy/js/ShoppingAside.js")' ></script>
+
+
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
 
 
     <script>
-        if ('@TempData["ok"]' != '') {
-            alert('@TempData["ok"]');
-        }
+        $(function () {
+            if ('@TempData["ok"]' != '') {
+                sweetAlert('@TempData["ok"]');
+            }
+        })
+
     </script>
-
-
 <script type="text/javascript" class="init">
               $(document).ready(function () {
                   $('#example').DataTable({
-                      responsive: true
+                      responsive: true,
+                      "language": {
+    "emptyTable": "無查詢結果",
+    "info":           "顯示第 _START_ 筆到第 _END_ 筆資料，共有 _TOTAL_ 筆資料",
+    "infoEmpty":      "顯示第 0 筆至第 0 筆資料 ，共 0 筆資料",
+    "infoFiltered":   "(由 _MAX_ 筆資料中篩選)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "每次顯示 _MENU_ 筆資料",
+    "loadingRecords": "讀取中...",
+    "processing":     "處理中...",
+    "search":         "查詢:",
+    "zeroRecords":    "無符合的查詢結果",
+    "paginate": {
+        "first":      "第一頁",
+        "last":       "最後一頁",
+        "next":       "下一頁",
+        "previous":   "前一頁"
+        }
+    }
+
                   });
               });
 </script>
+
 }

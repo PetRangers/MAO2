@@ -6,6 +6,7 @@
 
 @section style{
     <link href="~/Areas/buy/css/shoppingIndex.css" rel="stylesheet" />
+    <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
 }
 <!--aside側欄 article主欄-->
 
@@ -18,64 +19,73 @@
 
     <!-------------------articleOpen------------------->
     <div class="col-lg-12">
-        <div class="drawingpin">
-            <table>
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_ID)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Name)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Price)</th>
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Photo)</th>
-  
-                        
-                        @if ( Model.Merchandiser_Editdata != null)
+        
+                <div class="col-lg-5 drawingpin">
+                    @{
+                        string url = "";
+                        try
                         {
-                            <th>@Html.DisplayNameFor(c => c.Merchandiser_Editdata)</th>
-                        }
-                        else
-                        {
-                            <th>@Html.DisplayNameFor(c => c.Merchandise_Creatdate)</th>
-                        }
-                        <th>@Html.DisplayNameFor(c => c.Merchandise_Description)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Html.DisplayFor(c => c.Merchandise_ID)</td>
-                        <td>@Html.DisplayFor(c => c.Merchandise_Name)</td>
-                        <td>@Html.DisplayFor(c => c.Merchandise_Price)</td>
-                        @{
-                            string url = "";
-                            try
+                            if (Model.Merchandise_Photo.Length > 0)
                             {
-                                if (Model.Merchandise_Photo.Length > 0)
-                                {
-                                    url = Url.Action("PixbyID", "zPublicFunction", new { id = Model.Merchandise_ID });
-                                }
-                            }
-                            catch
-                            {
-                                url = Model.Merchandise_Photo_Address;
+                                url = Url.Action("PixbyID", "zPublicFunction", new { id = Model.Merchandise_ID });
                             }
                         }
+                        catch
+                        {
+                            url = Model.Merchandise_Photo_Address;
+                        }
+                    }
+                    <img src='@url' class="img-responsive" width="500" height="500" />
+                </div>
+                <div class="col-lg-5 drawingpin">
+                    <div class="row">
+                        <div class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandise_ID)</div>
+                        <div>@Html.DisplayFor(c => c.Merchandise_ID)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandise_Name)</div>
+                        <div>@Html.DisplayFor(c => c.Merchandise_Name)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandise_Price)</div>
+                        <div>@Html.DisplayFor(c => c.Merchandise_Price)</div>
+                    </div>
 
-                        <td><img src='@url' class="img-circle" width="500" /></td>
-
+                    <div class="row">
                         @if (Model.Merchandiser_Editdata != null)
                         {
-                            <td>@Html.DisplayFor(c => c.Merchandiser_Editdata)</td>
+                            <div class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandiser_Editdata)</div><div>@Html.DisplayFor(c => c.Merchandiser_Editdata)</div>
                         }
                         else
                         {
-                            <td>@Html.DisplayFor(c => c.Merchandise_Creatdate)</td>
+                            <div  class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandise_Creatdate)</div><div>@Html.DisplayFor(c => c.Merchandise_Creatdate)</div>
                         }
-                        <td>@Html.DisplayFor(c => c.Merchandise_Description)</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            @Html.ActionLink("加入購物車", "AddCar", "Shopping", new { Merchandise_ID = Model.Merchandise_ID }, new { @class = "btn btn-primary" })
-            <button class = "btn btn-primary" onclick="history.back()">回上一頁</button>
-        </div>
+                    </div>
+                    <div class="col-lg-offset-5">
+                        @Ajax.ActionLink("加入購物車", null, "api/PublicAPI", new { Merchandise_ID = Model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new {id="btn_addcar", @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                        <button class="btn btn-primary" onclick="javascript:history.back()">回上一頁</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">@Html.DisplayNameFor(c => c.Merchandise_Description)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">@Html.DisplayFor(c => c.Merchandise_Description)</div>
+                    </div>
+                </div>
+
     </div>
 </article>
+
+
+@section script{
+            <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")'></script>
+            <script src='@Url.Content("~/Areas/buy/js/sweetalert.min.js")'</script>
+    <script>
+        $(function () {
+            $("#btn_addcar").click(function () {
+                sweetAlert('您已加入購物車');
+
+            })
+        })
+    </script>
+    }

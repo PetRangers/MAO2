@@ -60,7 +60,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             BoardViewModel board = new BoardViewModel();
             string imgpath = "";
-            board.article = db.Articles.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(6);
+            board.article = db.Articles.Where(a => a.IsDeleted != true).OrderByDescending(a => a.Number).Take(9);
             
             foreach (var item in board.article)
             {
@@ -396,6 +396,11 @@ namespace CaptainMao.Areas.Article.Controllers
         public ActionResult GetArticle()
         {
 
+            return View();
+        }
+        public ActionResult Demo()
+        {
+            
             return View();
         }
     }
