@@ -95,18 +95,19 @@
         <div>
             <!--顏色請自己放在Css內 這只是樣板-->
             <div style="height:800px ;overflow:auto; background-color :rgb(178, 179, 250)" class="drawingpin" id="ShowMePlease" name="ShowMePlease" >
-                <h4>
+                <h1 style="color:#7c1010">醫院資料</h1>
+                <h3 style="text-align:center">
+
                     @Html.DropDownList("HospitalCity", (IEnumerable<SelectListItem>)ViewBag.HospitalCity)
                     @Html.DropDownList("HospitalPetRace", (IEnumerable<SelectListItem>)ViewBag.HospitalPetRace)
                     @Html.DropDownList("HospitalOnView", (IEnumerable<SelectListItem>)ViewBag.HospitalOnView)
-                    <input type="text"  id="HosName" name="HosName" value=""/>
-                    <span id="button" onclick="SelectThis()" >搜尋</span>
-                
-                </h4>
-                <h2>醫院資料</h2>
+                    <input type="text" id="HosName" name="HosName" value="" />
+                    <span id="button" onclick="SelectThis()">搜尋</span>
+                </h3>
+           
                 <div id="_HospitalCity" name="_HospitalCity" ></div>
             </div>
-            <div style="height:950px;background-color:#b9a1ee" class="drawingpin">
+            <div style="height:950px;background-color:#cfc0f1" class="drawingpin">
                 <div id="_HospitalUPDate" name="_HospitalUPDate"></div>
              
             </div>

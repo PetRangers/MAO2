@@ -2,60 +2,28 @@
 @{
     ViewBag.Title = "ShowThisNote";
 }
-@section Script{
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
-    <script type="text/javascript" class="init">
-              $(document).ready(function () {
-                  $('#example').DataTable({
-                      responsive: true,
-                      "language": {
-    "emptyTable": "無查詢結果",
-    "info":           "顯示第 _START_ 筆到第 _END_ 筆資料，共有 _TOTAL_ 筆資料",
-    "infoEmpty":      "顯示第 0 筆至第 0 筆資料 ，共 0 筆資料",
-    "infoFiltered":   "(由 _MAX_ 筆資料中篩選)",
-    "infoPostFix":    "",
-    "thousands":      ",",
-    "lengthMenu":     "每次顯示 _MENU_ 筆資料",
-    "loadingRecords": "讀取中...",
-    "processing":     "處理中...",
-    "search":         "查詢:",
-    "zeroRecords":    "無符合的查詢結果",
-    "paginate": {
-        "first":      "第一頁",
-        "last":       "最後一頁",
-        "next":       "下一頁",
-        "previous":   "前一頁"
-        }
-    }
-                  } );
-              } );
-    </script>
-
-}
-
 
 @*<h2>ShowThisNote</h2>*@
-<table id="example" class="display" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>評分者</th>
-            <th>評語</th>
-            <th>星等</th>
-            <th>評分時間</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-            {
+<div>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
             <tr>
-                <td>@item.AspNetUser.NickName</td>
-                <td>@item.NoteValue</td>
-                <td>@item.Scorce1</td>
-                <td>@item.Date</td>
+                <th style="color:#dc6f06">評分者</th>
+                <th style="color:#dc6f06">評語</th>
+                <th style="color:#dc6f06">星等</th>
+                <th style="color:#dc6f06">評分時間</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AspNetUser.NickName</td>
+                    <td>@item.NoteValue</td>
+                    <td>@item.Scorce1</td>
+                    <td>@item.Date</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
