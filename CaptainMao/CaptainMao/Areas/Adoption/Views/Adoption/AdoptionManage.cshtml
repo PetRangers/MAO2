@@ -3,8 +3,31 @@
     ViewBag.Title = "AdoptionManage";
     Layout = "~/Views/Shared/_MaoLayout.cshtml";
 }
+@section script
+{
+<script src="~/Scripts/sweetalert.min.js"></script>
 
+    <script>
+        var bool = $('#delCheck').val();
+        $(document).ready(function () {
+            if (bool == 'True') {
+                swal({
+                    title: "",
+                    text: "\n刪除成功!",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    confirmButtonClass: "btn-success",
+                    closeOnConfirm: false
+                })
+            }
+        })
+    </script>
+
+    }
 @section style{
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
+
     <style>
         #search {
             background-color: yellow;
@@ -52,6 +75,7 @@
     <!-------------------asideEnd------------------->
 </aside>
 <article class="col-lg-9 col-sm-11">
+    <input type="hidden" id="delCheck" value="@TempData["delete"]" />
     <!-------------------articleOpen------------------->
     <div>
         <div id="search" class="drawingpin">
