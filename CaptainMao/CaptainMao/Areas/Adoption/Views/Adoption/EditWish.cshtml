@@ -7,6 +7,9 @@
 @section style{
 <link href="~/Content/sweetalert.css" rel="stylesheet" />
     <style>
+        #frm{
+            font-size:18px;
+        }
         #delete {
             color: white;
             margin-right: 5px;
@@ -56,8 +59,8 @@
     <div class="thumbnail drawingpin">
         <h2>修改收養機會: @Html.DisplayFor(a => a.WishID)</h2>
         <div class="row">
-            <div class="col-md-7">
-                @using (Html.BeginForm("EditWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            <div class="col-md-8">
+                @using (Html.BeginForm("EditWish", "Adoption", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "frm" }))
                 {
                     <div class="form-group">
                         @Html.HiddenFor(a => a.WishID)
@@ -115,7 +118,7 @@
                     </div>
                                 }
             </div>
-            <div class="col-md-5"></div>
+            <div class="col-md-4"></div>
         </div>
     </div>
     <!-------------------articleEnd------------------->
