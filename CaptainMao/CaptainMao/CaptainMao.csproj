@@ -231,6 +231,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\drawingpin.css">
+      <DependentUpon>drawingpin.less</DependentUpon>
+    </Content>
+    <Content Include="css\drawingpin.min.css">
+      <DependentUpon>drawingpin.css</DependentUpon>
+    </Content>
     <Content Include="Areas\buy\css\shoppingcart.css">
       <DependentUpon>shoppingcart.less</DependentUpon>
     </Content>
@@ -330,6 +336,10 @@
     <Content Include="images\catdog.png" />
     <Content Include="images\catdog2.png" />
     <Content Include="images\drawingpin.png" />
+    <Content Include="images\drawingpin2.png" />
+    <Content Include="images\drawingpin3.png" />
+    <Content Include="images\drawingpin4.png" />
+    <Content Include="images\drawingpin5.png" />
     <Content Include="images\icon_127820_256.png" />
     <Content Include="images\nav.png" />
     <Content Include="images\navbar.png" />
@@ -434,7 +444,7 @@
     <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
     <Content Include="Areas\buy\Views\Shopping\Hot.cshtml" />
     <Content Include="fonts\Capture it.ttf" />
-    <Content Include="Areas\buy\Views\Shopping\Index - 複製.cshtml" />
+    <Content Include="css\drawingpin.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

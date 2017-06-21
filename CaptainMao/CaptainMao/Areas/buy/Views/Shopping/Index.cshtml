@@ -43,18 +43,16 @@
                 url = _model.Merchandise_Photo_Address;
             }
             <div class="drawingpin content_box" >
-                
-                     <img class="lazy" data-original='@url'  />
-                     <h4>@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
-
-                      <span class="btn1">
-                            @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
-                            @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
-                      </span>
-
+                 <img class="lazy img-thumbnail" data-original='@url'  />
+                 <h4>@Html.ActionLink(_model.Merchandise_Name, "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, null)</h4>
                 <h3>
                     @Html.DisplayFor(c => _model.Merchandise_Price)
+                    <span class="btn1 pull-right">
+                        @Html.ActionLink(" ", "About", "Shopping", new { Merchandise_ID = _model.Merchandise_ID }, new { @class = "btn btn-primary glyphicon glyphicon-align-justify" })
+                        @Ajax.ActionLink(" ", null, "api/PublicAPI", new { Merchandise_ID = _model.Merchandise_ID, area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "Success" }, new { @class = "btn btn-primary glyphicon glyphicon-shopping-cart" })
+                    </span>
                 </h3>
+
             </div>
         }
     </div>
