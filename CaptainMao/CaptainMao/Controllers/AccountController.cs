@@ -153,10 +153,10 @@ namespace CaptainMao.Controllers
                     {
                         return RedirectToAction("Index", "Store", new { area = "buy" });
                     }
-                    if (userRole.Contains("Admin"))
-                    {
-                        return RedirectToAction("Index", "NormalUser", new { area = "Admin" });
-                    }
+                    //if (userRole.Contains("Admin"))
+                    //{
+                    //    return RedirectToAction("Index", "NormalUser", new { area = "Admin" });
+                    //}
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
