@@ -60,7 +60,7 @@
                 <div class="form-group">
                     @Html.LabelFor(c => c._Merchandise.Merchandise_Name, new { @class = "col-sm-2 control-label" })
                     <div class="col-sm-9">
-                        @Html.EditorFor(c => c._Merchandise.Merchandise_Name, new { htmlAttributes = new { placeholder = "請輸入商品名稱", @class = "form-control" } })
+                        @Html.EditorFor(c => c._Merchandise.Merchandise_Name, new { htmlAttributes = new {id="MerName", placeholder = "請輸入商品名稱", @class = "form-control" } })
                         @Html.ValidationMessageFor(p => p._Merchandise.Merchandise_Name)
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         @Html.LabelFor(c => c._Merchandise.Merchandise_Price, new { @class = "col-sm-2 control-label" })
                     </div>
                     <div class="col-sm-6">
-                        @Html.EditorFor(c => c._Merchandise.Merchandise_Price, new { htmlAttributes = new { placeholder = "請輸入金額", @class = "form-control" } })
+                        @Html.EditorFor(c => c._Merchandise.Merchandise_Price, new { htmlAttributes = new { id="MerPrice",placeholder = "請輸入金額", @class = "form-control" } })
                         @Html.ValidationMessageFor(c => c._Merchandise.Merchandise_Price)
                     </div>
                 </div>
@@ -109,25 +109,20 @@
                         </label>
                     }
                 </div>
+
+
                 @Html.ValidationMessageFor(c => c.sType_ID)
                 @{
                     var stringX = @ViewBag.Form == "Create" ? "建立" : "修改";
                 }
                 <button type="submit" class="pull-right btn btn-primary">@stringX</button>
-
+                <button id="Demo" class="btn btn-primary pull-right">Demo</button>
             </div>
 
         }
    }
     <!-------------------articleEnd------------------->
 </article>
-
-
-
-
-
-
-
 
 
 @section script{
@@ -139,9 +134,43 @@
         </script>
         }
     }
-
+    
 <script>console.log(@ViewBag.Message)</script>
 <script src="~/Areas/buy/js/storeCreateIndex.js"></script>
 <script src="~/Areas/buy/js/jquery.validate.js"></script>
 <script src="~/Areas/buy/js/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $(function () {
+            $("#Demo").click(function () {
+                $("#MerName").val("107T-雙層巴士-寵物推車");
+                $("#MerPrice").val("5950");
+                var strQ = "雙層座艙，獨立空間，多隻寵物一同出遊也能優雅閒適\n"+
+                                    "改良式網格設計，維持上下座艙空氣流通與良好視野\n"+
+                                        "|   組裝簡單快速，不用工具也能輕鬆搞定\n"+
+                                        "|   獨家3秒收合設計，收納不占空間\n"+
+                                        "|   可提式手把，方便好提，不費力\n"+
+                                        "|   安全收合鉤，固定緊密折合的車身，防止意外發生\n"+
+                                        "|   三段式旋轉手把，可調整高度，不論男女老少都可以優雅推車\n"+
+                                        "|   固定塑膠托盤，可放置飲料與小物品\n"+
+                                        "|   可調式安全扣環，防止寶貝跳出車台，維護寶貝外出時的安全\n"+
+                                        "|   保潔墊質感柔軟光滑，冬暖夏涼，附拉鍊可輕鬆拆洗，保持座艙清潔與寶貝健康\n"+
+                                        "|   座布皆可拆洗，隨時保持座艙乾淨舒適\n"+
+                                        "|   後置物籃，零食、玩具、繩索等物品一次收納\n"+
+                                        "|   大型發泡外輪，與地面保持最佳高度，運轉靜音，減少崎嶇路面對寶貝造成的不適感\n"+
+                                        "|   前輪可360度旋轉，方向控制流暢靈活\n"+
+                                        "|   前輪固定裝置，在崎嶇路面也可固定前進，減低輪子磨損\n"+
+                                        "|   可剎式後輪，斜坡停車最安全\n"+
+                                        "材質：600-丹尼聚酯纖維、尼龍和鐵管\n"+
+                                        "規格\n"+
+                                        "最大載重：25公斤\n"+
+                                        "車身淨重：9公斤\n"+
+                                        "展開尺寸：62 x 60 x 104 公分 \n"+
+                                        "折合尺寸：84 x 60 x 30.5 公分 \n"+
+                                        "上座艙尺寸：50 x 33 x 27 公分 \n"+
+                                        "下座艙尺寸：53 x 33 x 27 公分\n" ;
+                $("#textarea1").val(strQ)
+            })
+        })
+    </script>
+
 }
