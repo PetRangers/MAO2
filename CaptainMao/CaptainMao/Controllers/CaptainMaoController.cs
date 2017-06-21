@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CaptainMao.Controllers
 {
-    [RequireHttps]
+   
     public class CaptainMaoController : Controller
     {
         // GET: CaptainMao
