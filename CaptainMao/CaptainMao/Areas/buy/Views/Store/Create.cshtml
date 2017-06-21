@@ -37,7 +37,7 @@
 
         using (Html.BeginForm((string)@ViewBag.Form, "Store", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
         {
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="drawingpin">
                     <img id="Merimg" alt="圖片" src='@Url.Action("PixbyID", "zPublicFunction", new { id = Model._Merchandise.Merchandise_ID })' />
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="drawingpin col-sm-6">
+            <div class="drawingpin col-sm-8">
                 <div class="form-group">
                     @Html.LabelFor(c => c._Merchandise.Merchandise_Photo, new { @class = "col-sm-2 control-label" })
                     <div class="col-sm-9">
@@ -72,14 +72,14 @@
                     <div>
                         @Html.LabelFor(c => c._Category.First().CategoryName, new { @class = "col-sm-2 control-label" })
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         @{
                             SelectList select = new SelectList(Model._Category, "CategoryID", "CategoryName");
                         }
                         @Html.DropDownListFor(c => c._Merchandise.CategoryID, select, new { @class = "form-control", id = "_Category" })
                     </div>
                     @Html.LabelFor(c => c._Merchandise.Merchandise_Fitness, new { @class = "col-sm-2 control-label" })
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                         @Html.EditorFor(c => c._Merchandise.Merchandise_Fitness, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
@@ -141,7 +141,8 @@
 <script src="~/Areas/buy/js/jquery.validate.unobtrusive.js"></script>
     <script>
         $(function () {
-            $("#Demo").click(function () {
+            $("#Demo").click(function (e) {
+                e.preventDefault();
                 $("#MerName").val("107T-雙層巴士-寵物推車");
                 $("#MerPrice").val("5950");
                 var strQ = "雙層座艙，獨立空間，多隻寵物一同出遊也能優雅閒適\n"+

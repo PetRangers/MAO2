@@ -10,10 +10,10 @@
   background-image: url("../images/drawingpin3.png");
 }
 .drawingpin:nth-child(6n+4) {
-  border-radius: 0px 0px 0px 5px;
+  border-radius: 0px 0px 0px 50px;
   background-image: url("../images/drawingpin5.png");
 }
 .drawingpin:nth-child(6n+5) {
-  border-radius: 0px 5px 0px 15px;
+  border-radius: 0px 50px 0px 15px;
   background-image: url("../images/drawingpin4.png");
 }

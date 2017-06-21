@@ -8,11 +8,14 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
     <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
     <style>
+        .drawingpin {
+            background-color:#ffd800;
+        }
         .danger {
             background-color: #6b6366;
         }
         tbody input {
-            width:200px;
+            /*width:200px;*/
         }
     </style>
 }
@@ -27,15 +30,15 @@
 
     <!-------------------articleOpen------------------->
     <div class="col-lg-12">
-        <div style="background-color:#fff266;" class="drawingpin">
-                <table id="example" cellspacing="0"  width="100%" class="display nowrap">
+        <div  class="drawingpin">
+                <table id="example" cellspacing="0"  width="100%" class="display nowrap table table-striped table-bordered table-hover">
                     <thead>
-                        <tr>
-                            <th class="col-lg-1">@Html.DisplayNameFor(c => c.First().Merchandise_ID).ToHtmlString()</th>
+                        <tr class="warning">
+                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.First().Merchandise_ID).ToHtmlString()</th>
                             <th class="col-lg-1">@Html.DisplayNameFor(c => c.First().Merchandise_Photo)</th>
                             <th class="col-lg-3">@Html.DisplayNameFor(c => c.First().Merchandise_Name)</th>
                             <th class="col-lg-1">@Html.DisplayNameFor(c => c.First().Merchandise_Price)</th>
-                            <th class="col-lg-1">@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</th>
+                            <th class="col-lg-2">@Html.DisplayNameFor(c => c.First().Merchandise_Fitness)</th>
                             <th>@Html.DisplayNameFor(c => c.First().Merchandise_Creatdate)</th>
                             <th></th>
                         </tr>
@@ -44,7 +47,7 @@
                         @foreach (var _model in Model)
                     {
                       <tr @( _model.Merchandise_Fitness ? String.Empty : "class=danger" )>
-                                <td class="col-lg-1">@Html.DisplayFor(c => _model.Merchandise_ID)</td>
+                                <td class="col-lg-2">@Html.DisplayFor(c => _model.Merchandise_ID)</td>
                                 @{
                                     string url = "";
                                     try
@@ -62,7 +65,7 @@
                                 <td class="col-lg-1"><img src='@url' class="img-circle" width="80" height="80" /></td>
                                 <td class="col-lg-3">@Html.DisplayFor(c => _model.Merchandise_Name)</td>
                                 <td class="col-lg-1">@Html.DisplayFor(c => _model.Merchandise_Price)</td>
-                                <td class="col-lg-1">@Html.DisplayFor(c => _model.Merchandise_Fitness, new { disabled = "true" })</td>
+                                <td class="col-lg-2">@Html.DisplayFor(c => _model.Merchandise_Fitness, new { disabled = "true" })</td>
                                 <td>@Html.DisplayFor(c => _model.Merchandise_Creatdate)</td>
                                 <td>
                                     <button id="btnEdit" class="btn btn-primary">快速修改</button>
@@ -94,10 +97,17 @@
                     function () {
                         switch(num){
                             case 1:
-                                var newtd = $('<input />').attr({ "size": "50" ,"maxlength":"50"}).val($(this).text());
+                                var newtd = $('<input />').attr({ "width": "50", "maxlength": "50" }).val($(this).text());
                                 break;
                             case 2:
-                                var newtd = $('<input />').attr({'size':'5','type':'number'}).val($(this).text().substr(3));
+                                var mer = $(this).text().substr(3);
+                                var mer2 = mer.split(",");
+                                var merstr ="";
+                                    $.each(mer2, function (ind, val) {
+                                        merstr = merstr +val
+                                })
+                
+                                    var newtd = $('<input />').attr({ 'type': 'number' }).val(merstr);
                                 break;
                             case 3:
                                 $(this).children().removeAttr('disabled');
@@ -132,7 +142,7 @@
     }
 </script>
 
-<script type="text/javascript" class="init">
+@*<script type="text/javascript" class="init">
               $(document).ready(function () {
                   $('#example').DataTable({
                       responsive: true,
@@ -157,5 +167,5 @@
                       }
                   });
               });
-</script>
+</script>*@
 }
