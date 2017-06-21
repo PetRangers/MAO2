@@ -84,6 +84,11 @@ namespace CaptainMao.Areas.Article.Controllers
 
         public ActionResult Create()
         {
+            var userid = User.Identity.GetUserId();
+            if (userid == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             ViewBag.datas = db.TitleCategories.ToList();
             ViewBag.datas2 = db.Boards.ToList();
             return View();
@@ -136,6 +141,11 @@ namespace CaptainMao.Areas.Article.Controllers
         }
         public ActionResult Comment(int? articleID)
         {
+            var userid = User.Identity.GetUserId();
+            if (userid == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "" });
+            }
             ViewBag.articleid = articleID;
             return View();
         }
@@ -143,6 +153,7 @@ namespace CaptainMao.Areas.Article.Controllers
         [HttpPost]
         public ActionResult Comment(CaptainMao.Models.Comment comment)
         {
+            
             if (ModelState.IsValid)
             {
                 try

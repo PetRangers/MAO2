@@ -1,4 +1,5 @@
 ﻿@model CaptainMao.Models.Comment
+@using BotDetect.Web.Mvc;
 
 @{
     ViewBag.Title = "討論區";
@@ -16,8 +17,17 @@
                 skin: "bootstrapck",
                 filebrowserImageBrowseUrl: "@Url.Action("CKEditorImageFileManager", "Article")"
             });
+            $('#valiCode').bind('click', function () {
+                this.src = "GetValidateCode?&time=" + (new Date()).getTime();
+            })
+            $('#demo').click(function () {
+                CKEDITOR.instances.content.setData('<p><span style="font-size:14px;">最可愛的狗狗當然是自己家的！但是……</span></p><p style="padding: 0px; margin: 0px 0px 10px; outline: none; list-style: none; border: 0px none; box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Droid Sans&quot;, 微軟正黑體, &quot;Microsoft JhengHei&quot;, Arial, Verdana, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">長得那麼可愛為什麼體味會如此驚人？！(゜皿。)</p>');
+            })
         }); 
     </script>
+}
+@section style{
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 }
 
 <aside class="col-lg-1 col-lg-offset-1 col-sm-1">
@@ -39,6 +49,9 @@
 
             @using (Html.BeginForm("Comment","Article",FormMethod.Post,new { novaildate = "novalidate" }))
             {
+                MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+                exampleCaptcha.CodeLength = 4;
+
                 @Html.HiddenFor(a=>a.ArticleID,new { ViewBag.articleid })
                 @Html.AntiForgeryToken()
                 <div class="form-horizontal">
@@ -53,7 +66,24 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
+                            @Html.Captcha(exampleCaptcha)
+                            <br />
+                            <label>請輸入驗證碼</label>
+                            @Html.TextBox("CaptchaCode", null, new { placeholder = "請輸入驗證碼" })
+                            @Html.ValidationMessage("CaptchaCode")
+                            @{
+                                if (Request.HttpMethod == "Post" && ViewData.ModelState.IsValid)
+                                {
+                                    <span class="correct">Correct!</span>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="送出" class="btn btn-default" />
+                            <input type="button" class="btn btn-primary" id="demo" value="Demo" />
                         </div>
                     </div>
                 </div>

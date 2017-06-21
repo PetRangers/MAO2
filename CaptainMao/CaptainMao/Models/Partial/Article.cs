@@ -19,7 +19,7 @@ namespace CaptainMao.Models
             [DisplayName("動物種類")]
             public int BoardID { get; set; }
 
-            [DisplayName("發文者")]
+            [DisplayName("發文")]
             public Nullable<int> PosterID { get; set; }
 
             [Required(ErrorMessage = "請輸入{0}")]
