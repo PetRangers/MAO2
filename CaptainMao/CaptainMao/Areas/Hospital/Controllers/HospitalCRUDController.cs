@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace CaptainMao.Areas.Hospital.Controllers
 {
-    [AuthorizeMao(Roles ="Admin")]
+    [AuthorizeMao(Roles = "Admin")]
     public class HospitalCRUDController : Controller
     {
         global::CaptainMao.Models.MaoEntities DB = new CaptainMao.Models.MaoEntities();
         //刪除
-        
+
 
         // GET: Hospital/HospitalCRUD
         public ActionResult Aside()
@@ -43,7 +43,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
         }
 
         [HttpPost]
-        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "",string HospitalOnView="")
+        public ActionResult _HospitalSearchCity(string CityID = "", string CategoryID = "", string HosName = "", string HospitalOnView = "")
         {
 
             var SaveAddressArea = string.IsNullOrWhiteSpace(CityID.ToString()) ? "" : CityID.ToString();
@@ -54,7 +54,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             var _hospitalSearchCity = from a in DB.Hospitals select a;
             if (SaveAddressArea != "")
             {
-                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea );
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.AddressArea.ToString() == SaveAddressArea);
             }
             if (SaveHosName != "")
             {
@@ -62,7 +62,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             }
             if (SaveHospitalOnView != "")
             {
-                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.OnView.ToString()==SaveHospitalOnView);
+                _hospitalSearchCity = _hospitalSearchCity.Where(x => x.OnView.ToString() == SaveHospitalOnView);
             }
 
 
@@ -70,7 +70,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             {
                 _hospitalSearchCity = from a in DB.Hospitals
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-                                      where b.CategoryID.ToString() == SaveCategoryID 
+                                      where b.CategoryID.ToString() == SaveCategoryID
                                       select a;
 
                 if (SaveAddressArea != "")
@@ -90,41 +90,13 @@ namespace CaptainMao.Areas.Hospital.Controllers
             ViewBag.Item = _hospitalSearchCity;
             return PartialView(_hospitalSearchCity.ToList());
 
-            //string chack = string.IsNullOrEmpty(CityID.ToString()) ? "1" : CityID.ToString();
-            //var _hospitalSearchCity = from a in DB.Hospitals
-            //                          join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
-            //                          join c in DB.Cities on a.AddressArea equals c.CityID
-            //                          join d in DB.Categories on b.CategoryID equals d.CategoryID
-            //                          where a.AddressArea == CityID && b.CategoryID == CategoryID && a.OnView == "1"
-            //                          select new HospitalModel
-            //                          {
-            //                              HospitalID = a.HospitalID,
-            //                              HospitalName = a.HospitalName,
-            //                              HospitalAddress = a.HospitalAddress,
-            //                              AddressArea = c.CityName,
-            //                              HospitalPhone = a.HospitalPhone,
-            //                              BusinessHours = a.BusinessHours,
-            //                              CategoryList = d.CategoryName,
-            //                              OnView=a.OnView
-            //                          };
-
-
-            //foreach(var Item in _hospitalSearchCity)
-            //{
-            //    Item.CategoryList += Item.CategoryName;
-            //}
-            
-            //ViewBag.Item = _hospitalSearchCity;
-            
-            //return PartialView(_hospitalSearchCity.ToList());
         }
 
         public ActionResult HospitalSearchValue(int HospitalID = 2)
         {
 
             var hospitalSearchValue = from a in DB.Hospitals
-                                          //join b in DB.Cities on a.AddressArea equals b.CityID
-                                          //join c in DB.Categories on a.CategoryID equals c.CategoryID
+
                                       join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID
                                       join c in DB.Categories on b.CategoryID equals c.CategoryID
                                       where a.HospitalID == HospitalID
@@ -204,7 +176,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                                     join b in DB.Cities on a.AddressArea equals b.CityID
                                     //join c in DB.HospitalCategoryDetails on a.HospitalID equals c.HospitalID
                                     //join d in DB.Categories on c.CategoryID equals d.CategoryID
-                                    where a.HospitalID == HospitalID 
+                                    where a.HospitalID == HospitalID
                                     select new HospitalModel
                                     {
                                         HospitalID = a.HospitalID,
@@ -226,7 +198,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                          join b in DB.Cities on a.AddressArea equals b.CityID
                          join c in DB.HospitalCategoryDetails on a.HospitalID equals c.HospitalID
                          join d in DB.Categories on c.CategoryID equals d.CategoryID
-                         where a.HospitalID == HospitalID 
+                         where a.HospitalID == HospitalID
                          select new HospitalModel
                          {
                              CategoryID = d.CategoryID
@@ -328,7 +300,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
                 deleteThis = item;
                 DB.HospitalCategoryDetails.Remove(deleteThis);
             }
-            
+
 
 
             //利用迴圈，上傳第二章關係表單
@@ -346,15 +318,6 @@ namespace CaptainMao.Areas.Hospital.Controllers
             //都確認後新增醫院表單資料
             DB.Entry(NewHospital).State = EntityState.Modified;
             DB.SaveChanges();
-            //try
-            //{
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
-
             return RedirectToAction("Index", "Hospital/HospitalCRUD");
         }
         //新增
@@ -430,7 +393,7 @@ namespace CaptainMao.Areas.Hospital.Controllers
             }
             catch (Exception ex)
             {
-                
+
             }
 
             return RedirectToAction("Index", "Hospital/HospitalCRUD");

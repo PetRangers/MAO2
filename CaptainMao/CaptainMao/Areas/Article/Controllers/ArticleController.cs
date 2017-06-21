@@ -273,7 +273,7 @@ namespace CaptainMao.Areas.Article.Controllers
             CKEditorFuncNum = (CKEditorFuncNum == null) ? string.Empty : CKEditorFuncNum.Trim();
             ViewData["CKEditorFuncNum"] = CKEditorFuncNum;
 
-            DirectoryInfo dirInfo = new DirectoryInfo(Server.MapPath("~/files/"));
+            DirectoryInfo dirInfo = new DirectoryInfo(Server.MapPath("\\images\\"));
             var searchFiles = dirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories)
                 .Where(o => o.Extension.ToLower().Equals(".jpg") || o.Extension.ToLower().Equals(".gif") || o.Extension.ToLower().Equals(".png"));
 
@@ -281,7 +281,7 @@ namespace CaptainMao.Areas.Article.Controllers
             fileDatas = searchFiles.OrderByDescending(o => o.LastWriteTime).Select(o =>
             {
                 var fileName = Path.GetFileName(o.FullName);
-                string fullFileName = string.Format("~/files/{0}", fileName);
+                string fullFileName = string.Format("\\images\\{0}", fileName);
                 return fullFileName;
             }).ToList();
             return View(fileDatas);
@@ -299,7 +299,7 @@ namespace CaptainMao.Areas.Article.Controllers
                 return Json(new { error = "No file selected.", errorkeys = new string[0] });
             }
             string errorMessage = "You have faced errors in {0} files.";
-            string root = Server.MapPath("~/files/");
+            string root = Server.MapPath("\\images\\");
             List<string> errorKeys = new List<string>();
             List<Tuple<string, string>> files = new List<Tuple<string, string>>();
             if (file != null && file.Count() > 0)
@@ -320,7 +320,7 @@ namespace CaptainMao.Areas.Article.Controllers
                     try
                     {
                         fileItem.SaveAs(Path.Combine(root, fileName + fileExtension));
-                        files.Add(new Tuple<string, string>(Url.Content("~/files/"), fileName + fileExtension));
+                        files.Add(new Tuple<string, string>(Url.Content("\\images\\"), fileName + fileExtension));
                     }
                     catch (Exception)
                     {
@@ -349,7 +349,7 @@ namespace CaptainMao.Areas.Article.Controllers
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 return Json(new { IsSuccess = false, Message = "File name must input." });
-            string root = Server.MapPath("~/files/");
+            string root = Server.MapPath("\\images\\");
             DirectoryInfo dirInfo = new DirectoryInfo(root);
             var checkFiles = dirInfo.GetFiles(fileName);
             if (checkFiles != null && checkFiles.Count() > 0)

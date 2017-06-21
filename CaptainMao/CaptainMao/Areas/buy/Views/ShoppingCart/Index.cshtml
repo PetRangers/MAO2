@@ -7,6 +7,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
 <link href="~/Areas/buy/css/sweetalert.css" rel="stylesheet" />
 <link href="~/Areas/buy/css/shoppingcart.css" rel="stylesheet" />
+    <style>
+        input {
+        
+        }
+
+    </style>
 }
 <!--aside側欄 article主欄-->
 <div ng-app="MaoApp" ng-controller="MainController">
@@ -43,7 +49,7 @@
                             <td class="col-lg-2" ng-if="item.Merchandise_Photo == null "> <img ng-src="{{item.Merchandise_Photo_Address}}" height="80" width="80" class="img-circle" /></>
                             <td class="col-lg-1">{{item.Merchandise_Price }}</td>
                             <td class="col-lg-3">
-                                <div class="col-lg-5">@Html.EditorFor(c => c.merchandise_Volume, new { htmlAttributes = new { ng_model = "item.merchandise_Volume", max = 100, min = 1, ng_change = "myFunchang(item)" } })</div>
+                                <div class="col-lg-5">@Html.EditorFor(c => c.merchandise_Volume, new { htmlAttributes = new {style= "width:50px", ng_model = "item.merchandise_Volume", max = 100, min = 1, ng_change = "myFunchang(item)" } })</div>
                                 <div class="col-lg-5">
                                     {{item.merchandise_Volume*item.Merchandise_Price}}
                                 </div>

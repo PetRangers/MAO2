@@ -69,13 +69,6 @@ namespace CaptainMao.Areas.Hospital.Controllers
                 }
             }
 
-            //var _hospitalSearchCity = from a in DB.Hospitals
-            //join b in DB.HospitalCategoryDetails on a.HospitalID equals b.HospitalID                                     
-            //where a.AddressArea.ToString() == SaveAddressArea && b.CategoryID.ToString() == SaveCategoryID && a.HospitalName.Contains(SaveHosName)
-            //select a;
-
-            //LINQ Expression 語法     
-
             ViewBag.Item = _hospitalSearchCity;
 
 
