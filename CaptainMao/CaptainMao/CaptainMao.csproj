@@ -17,8 +17,7 @@
     <AssemblyName>CaptainMao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44355</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -232,6 +231,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Mao.mdf" />
+    <Content Include="App_Data\Mao_log.ldf">
+      <DependentUpon>Mao.mdf</DependentUpon>
+    </Content>
     <Content Include="css\drawingpin.css">
       <DependentUpon>drawingpin.less</DependentUpon>
     </Content>
@@ -440,6 +443,10 @@
     <Content Include="Areas\Admin\Views\NormalUser\_EditNormalUser.cshtml" />
     <Content Include="Areas\WebForm\ImageReader.ashx" />
     <Content Include="Areas\WebForm\MerchandisePhoto.ashx" />
+    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
+    <Content Include="Areas\buy\Views\Shopping\Hot.cshtml" />
+    <Content Include="fonts\Capture it.ttf" />
+    <Content Include="css\drawingpin.less" />
     <EntityDeploy Include="Models\MaoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MaoModel.Designer.cs</LastGenOutput>
@@ -447,10 +454,6 @@
     <Content Include="Models\MaoModel.edmx.diagram">
       <DependentUpon>MaoModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\buy\Views\Shopping\Index.cshtml" />
-    <Content Include="Areas\buy\Views\Shopping\Hot.cshtml" />
-    <Content Include="fonts\Capture it.ttf" />
-    <Content Include="css\drawingpin.less" />
     <None Include="Properties\PublishProfiles\CaptainMao.pubxml" />
     <Content Include="Models\MaoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1394,7 +1397,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Adoption\Views\Shared\" />
     <Folder Include="Areas\buy\Views\PublicFunction\" />
     <Folder Include="Areas\Hospital\Views\Shared\" />
